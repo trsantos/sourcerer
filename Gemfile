@@ -37,5 +37,6 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Gems for testing
 gem 'minitest-reporters'
 gem 'mini_backtrace'
