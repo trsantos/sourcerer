@@ -51,3 +51,6 @@ gem 'mini_backtrace'
 
 # Foundation
 gem 'foundation-rails'
+
+# Others
+gem 'byebug'
