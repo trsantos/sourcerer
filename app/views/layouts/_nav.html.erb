@@ -1,4 +1,4 @@
-<nav class="top-bar" data-topbar>
+<nav class="top-bar" data-topbar data-no-turbolink>
     <ul class="title-area">
 	<li class="name">
 	    <h1><%= link_to "Reader", root_path, id: "logo" %></h1>
@@ -11,7 +11,20 @@
 	<ul class="right">
 	    <li><%= link_to "Home",   root_path  %></li>
 	    <li><%= link_to "About",  about_path %></li>
-	    <li><%= link_to "Log in", '#' %></li>
+	    <% if logged_in? %>
+		<li><%= link_to "Users", '#' %></li>
+		<li class="has-dropdown">
+		    <%= link_to current_user.name, '#' %>
+		    <ul class="dropdown">
+			<li><%= link_to "Profile", current_user %></li>
+			<li><%= link_to "Settings", '#' %></li>
+			<li class="divider"></li>
+			<li><%= link_to "Log out", logout_path, method: "delete" %></li>
+		    </ul>
+		</li>
+	    <% else %>
+		<li><%= link_to "Log in", login_path %></li>
+	    <% end %>
 	</ul>
     </section>
 </nav>

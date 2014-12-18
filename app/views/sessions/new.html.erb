@@ -1,0 +1,27 @@
+<% provide(:title, "Log in") %>
+<header>
+    <h2>Log in</h2>
+</header>
+
+<div class="row">
+    <div class="medium-8 medium-offset-2">
+	<%= form_for(:session, url: login_path) do |f| %>
+
+	    <%= f.label :email %>
+	    <%= f.text_field :email %>
+
+	    <%= f.label :password %>
+	    <%= f.password_field :password %>
+
+	    <%= f.label :remember_me do %>
+		<%= f.check_box :remember_me %>
+		<span>Remember me on this computer</span>
+	    <% end %>
+
+
+	    <%= f.submit "Log in", class: "button expand" %>
+	<% end %>
+
+	<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+</div>
