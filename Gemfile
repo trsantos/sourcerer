@@ -9,6 +9,9 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'bcrypt'
 gem 'foundation-rails'
+gem 'faker'
+gem 'will_paginate'
+gem 'will_paginate-foundation'
 gem 'sdoc', group: :doc
 
 group :development, :test do

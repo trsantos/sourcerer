@@ -6,3 +6,11 @@ footer {
 header {
   text-align: center;
 }
+
+.users {
+  list-style: none;
+  li {
+    padding: 10px 0;
+    border-bottom: 1px solid lightgray;
+  }
+}
