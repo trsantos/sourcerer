@@ -1,5 +1,5 @@
 <% if @user.errors.any? %>
-    <div data-alert class="alert-box alert" id="error-explanation">
+    <div data-alert class="alert-box alert">
 	The form contains <%= pluralize(@user.errors.count, "error") %>.
     </div>
     <ul>
