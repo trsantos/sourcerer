@@ -12,6 +12,7 @@ gem 'foundation-rails'
 gem 'faker'
 gem 'will_paginate'
 gem 'will_paginate-foundation'
+gem 'feedjira'
 gem 'sdoc', group: :doc
 
 group :development, :test do

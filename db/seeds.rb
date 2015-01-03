@@ -14,7 +14,7 @@ User.create!(name:  "Example User",
              activated: true,
              activated_at: Time.zone.now)
 
-99.times do |n|
+10.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
@@ -24,4 +24,16 @@ User.create!(name:  "Example User",
                password_confirmation: password,
                activated: true,
                activated_at: Time.zone.now)
+end
+
+Feed.create!(title: "Example Feed",
+             feed_url: "http://feed.rss",
+             site_url: "http://www.rubyonrails.org")
+feed = Feed.first
+5.times do
+  description = Faker::Lorem.sentence(30)
+  title = Faker::Lorem.sentence(5)
+  feed.entries.create!(title: title,
+                       description: description,
+                       pub_date: Time.zone.now)
 end

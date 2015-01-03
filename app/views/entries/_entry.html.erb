@@ -1,0 +1,18 @@
+<article id="entry-<%= entry.id %>">
+    <header class="title">
+	<h4><strong><%= link_to entry.title, entry.url, target: "_blank" %></strong></h4>
+    </header>
+    <% if entry.description %>
+	<p class="description">
+	    <%= sanitize entry.description[0..350], tags: ["a"] %>
+	    <% if (entry.description.length > 350) %>
+		&hellip;
+	    <% end %>
+	</p>
+    <% end %>
+    <footer>
+	<time datetime="<%= entry.pub_date %>">
+	    <small>Posted <%= time_ago_in_words(entry.pub_date) %> ago.</small>
+	</time>
+    </footer>
+</article>

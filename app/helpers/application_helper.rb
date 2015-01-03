@@ -8,4 +8,12 @@ module ApplicationHelper
     end
   end
 
+  def app_header_class
+    base = "app-header"
+    if params[:controller] == "feeds"
+      base + " show-for-medium-up header-in-feeds-controller"
+    else
+      base
+    end
+  end
 end

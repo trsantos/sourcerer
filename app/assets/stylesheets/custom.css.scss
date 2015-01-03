@@ -1,16 +1,22 @@
-footer {
-  width: 100%;
-  text-align: center;
-}
-
-header {
-  text-align: center;
-}
-
 .users {
   list-style: none;
   li {
     padding: 10px 0;
     border-bottom: 1px solid lightgray;
+  }
+}
+
+.header-in-feeds-controller {
+  border-bottom: 1px solid #008CBA;
+}
+
+header h2, #home {
+  text-align: center;
+}
+
+article {
+  margin-top: 1.7rem;
+  .description, p {
+    margin-bottom: 0px;
   }
 }

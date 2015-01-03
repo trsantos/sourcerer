@@ -1,0 +1,33 @@
+<% provide(:title, @feed.title) %>
+
+<header class="feed-header">
+    <div class="sticky">
+	<nav class="top-bar" data-topbar data-no-turbolink>
+	    <ul class="title-area">
+		<li class="name">
+		    <h1><%= link_to content_tag(:strong, @feed.title), @feed.site_url, target: "_blank" %></h1>
+		</li>
+		<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+	    </ul>
+	    <section class="top-bar-section">
+		<ul class="right">
+		    <li><%= link_to "Star", '#' %></li>
+	    	    <li><%= link_to "Edit", '#' %></li>
+		    <li><%= link_to "Unfollow", '#' %></li>
+		    <li class="divider"></li>
+		    <li><%= link_to "Next feed", '#' %></li>
+		</ul>
+	    </section>
+	</nav>
+    </div>
+</header>
+
+<div class="row">
+    <div class="small-10 small-offset-1 collums">
+	<% if @feed.entries.any? %>
+	    <%= render @entries %>
+	<% else %>
+	    <p>This feed has no items :(</p>
+	<% end %>
+    </div>
+</div>
