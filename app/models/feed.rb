@@ -4,6 +4,9 @@ class Feed < ActiveRecord::Base
 
   def update
     fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
+    if fj_feed.is_a? Integer
+      return
+    end
     entries = fj_feed.entries
     self.entries.destroy_all
     4.times do |n|
