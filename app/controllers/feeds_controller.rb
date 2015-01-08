@@ -1,7 +1,18 @@
 class FeedsController < ApplicationController
+  include ApplicationHelper
+  
+  before_action :logged_in_user, only: [:index]
+  
+  def index
+    @feeds = Feed.all.paginate(page: params[:page])
+  end
+
   def show
     @feed = Feed.find(params[:id])
     @feed.update
+    if logged_in? and current_user.following?(@feed)
+      Subscription.find_by(feed_id: @feed.id).update_attribute(:visited_at, Time.zone.now)
+    end
     @entries = @feed.entries
   end
 

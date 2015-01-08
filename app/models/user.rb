@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :subscriptions, dependent: :destroy
+  has_many :feeds, through: :subscriptions
+  
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -66,6 +69,21 @@ class User < ActiveRecord::Base
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  # Follow a feed
+  def follow(feed)
+    subscriptions.create(feed_id: feed.id)
+  end
+
+  # Unfollow a feed
+  def unfollow(feed)
+    subscriptions.find_by(feed_id: feed.id).destroy
+  end
+
+  # True if current user is following the given feed
+  def following?(feed)
+    feeds.include?(feed)
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229025804) do
+ActiveRecord::Schema.define(version: 20150105111536) do
 
   create_table "entries", force: :cascade do |t|
     t.text     "title"
@@ -35,6 +35,21 @@ ActiveRecord::Schema.define(version: 20141229025804) do
   end
 
   add_index "feeds", ["feed_url"], name: "index_feeds_on_feed_url", unique: true
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "feed_id"
+    t.text     "title"
+    t.text     "site_url"
+    t.datetime "visited_at"
+    t.boolean  "starred",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id"
+  add_index "subscriptions", ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

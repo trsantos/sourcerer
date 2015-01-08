@@ -1,5 +1,8 @@
 class Feed < ActiveRecord::Base
+  # has_many :subscriptions, dependent: :destroy
+  # has_many :users, through: :subscriptions
   has_many :entries, dependent: :destroy
+  
   validates :feed_url, presence: true, uniqueness: true
 
   def update
@@ -17,7 +20,7 @@ class Feed < ActiveRecord::Base
     # entries = fj_feed.entries
     entries = fj_feed.entries.sort_by { |e| e.published }.reverse
     self.entries.destroy_all
-    4.times do |n|
+    5.times do |n|
       if entries[n]
         self.entries.create(title:       entries[n].title,
                             description: entries[n].content   || entries[n].summary,

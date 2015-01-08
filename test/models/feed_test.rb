@@ -27,4 +27,13 @@ class FeedTest < ActiveSupport::TestCase
       @feed.destroy
     end
   end
+
+  test "user should follow and unfollow a feed" do
+    user = users(:thiago)
+    assert_not user.following?(@feed)
+    user.follow(@feed)
+    assert user.following?(@feed)
+    user.unfollow(@feed)
+    assert_not user.following?(@feed)
+  end
 end
