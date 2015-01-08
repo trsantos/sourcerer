@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
 
   # Follow a feed
   def follow(feed)
-    subscriptions.create(feed_id: feed.id)
+    subscriptions.create(feed_id: feed.id, visited_at: Time.zone.now)
   end
 
   # Unfollow a feed

@@ -30,9 +30,10 @@ class FeedsController < ApplicationController
     @feed = Feed.new(title:    fj_feed.title,
                      feed_url: url,
                      site_url: fj_feed.url)
-    if Feed.find_by(feed_url: url)
-      flash.now[:info] = "Feed is already in the database."
-      render 'new'
+    f = Feed.find_by(feed_url: url)
+    if f
+      # flash.now[:info] = "Feed is already in the database."
+      redirect_to f
     elsif
       @feed.save
       redirect_to @feed
