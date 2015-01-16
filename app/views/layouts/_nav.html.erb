@@ -2,7 +2,11 @@
     <nav class="top-bar" data-topbar data-no-turbolink>
 	<ul class="title-area">
 	    <li class="name">
-		<h1><%= link_to "Reader", root_path, id: "logo" %></h1>
+		<% if logged_in? %>
+		    <h1><%= link_to "Reader", next_path, id: "logo" %></h1>
+		<% else %>
+		    <h1><%= link_to "Reader", root_path, id: "logo" %></h1>
+		<% end %>
 	    </li>
 	    <li class="toggle-topbar menu-icon">
 		<a href="#"><span></span></a>
@@ -16,8 +20,8 @@
 			<li><%= link_to "Feeds", feeds_path %></li>
 			<li class="divider"></li>
 		    <% end %>
-		    <li><%= link_to "New feed", new_feed_path %>
-		    <li class="divider"></li>
+		    <li><%= link_to "Following", subscriptions_path %></li>
+		    <li><%= link_to "Add feed", new_feed_path %>
 		    <li class="has-dropdown">
 			<%= link_to current_user.name.split.first, '#' %>
 			<ul class="dropdown">

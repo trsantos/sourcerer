@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :feeds,		  only: [:index, :new, :create, :show]
-  resources :subscriptions,       only: [:create, :edit, :update, :destroy]
+  resources :subscriptions,       only: [:index, :create, :edit, :update, :destroy]
   get 'next' => 'subscriptions#next'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -4,6 +4,10 @@ class SubscriptionsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update, :destroy]
 
+  def index
+    @subscriptions = current_user.subscriptions.paginate(page: params[:page])
+  end
+
   def create
     feed = Feed.find(params[:feed_id])
     current_user.follow(feed)
