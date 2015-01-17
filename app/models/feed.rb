@@ -6,8 +6,6 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    # I don't now if I should make this a controller action...
-
     # wait 1 hour between updates
     return if self.updated_at > 1.hour.ago and self.entries.count > 0
 
@@ -16,11 +14,15 @@ class Feed < ActiveRecord::Base
     # stop if feed coudn't be fetched
     return if fj_feed.is_a? Integer
 
+    # update feed itself
+    self.title = fj_feed.title
+    self.site_url = fj_feed.feed_url
+
     # update entries
-    # entries = fj_feed.entries
-    entries = fj_feed.entries.sort_by { |e| e.published }.reverse
+    entries = fj_feed.entries
+    # entries = fj_feed.entries.sort_by { |e| e.published }.reverse
     self.entries.destroy_all
-    5.times do |n|
+    4.times do |n|
       if entries[n]
         self.entries.create(title:       entries[n].title,
                             description: entries[n].content   || entries[n].summary,

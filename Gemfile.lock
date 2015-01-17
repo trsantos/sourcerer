@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/feedbin/opml_saw.git
+  revision: 61d8c2dd3d46e9cae38178754469dd9da7c8bd6a
+  branch: master
+  specs:
+    opml_saw (0.0.2)
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -36,7 +44,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    ansi (1.4.3)
+    ansi (1.5.0)
     arel (6.0.0)
     bcrypt (3.1.9)
     binding_of_caller (0.7.2)
@@ -196,6 +204,7 @@ DEPENDENCIES
   jquery-rails
   mini_backtrace
   minitest-reporters
+  opml_saw!
   pg
   rails
   rails_12factor

@@ -21,22 +21,7 @@ class FeedsController < ApplicationController
   
   def create
     url = params[:feed][:feed_url]
-    fj_feed = Feedjira::Feed.fetch_and_parse url
-    if fj_feed.is_a? Integer
-      flash.now[:alert] = "Feed does not exist or could not be fetched."
-      render 'new'
-      return
-    end
-    @feed = Feed.new(title:    fj_feed.title,
-                     feed_url: url,
-                     site_url: fj_feed.url)
-    f = Feed.find_by(feed_url: url)
-    if f
-      # flash.now[:info] = "Feed is already in the database."
-      redirect_to f
-    elsif
-      @feed.save
-      redirect_to @feed
-    end
+    feed = Feed.find_by(feed_url: url) || Feed.create(feed_url: url)
+    redirect_to feed
   end
 end
