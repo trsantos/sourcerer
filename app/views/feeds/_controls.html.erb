@@ -11,10 +11,10 @@
 			    method: :patch %></li>
 	<% end %>
 	<li><%= link_to "Edit", edit_subscription_path(sub) %></li>
-	<li><%= link_to "Unfollow", subscription_path(sub), method: :delete %></li>
+	<li><%= link_to "Unsubscribe", subscription_path(sub), method: :delete %></li>
     <% else %>
-	<li><%= link_to "Follow", subscriptions_path(feed_id: @feed.id), method: :post %></li>
+	<li><%= link_to "Subscribe", subscriptions_path(feed_id: @feed.id), method: :post %></li>
     <% end %>
     <li class="divider"></li>
-    <li><%= link_to "Next feed", next_path %></li>
+    <li><%= link_to content_tag(:strong, "Next feed"), next_path %></li>
 <% end %>

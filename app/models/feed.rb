@@ -7,7 +7,7 @@ class Feed < ActiveRecord::Base
 
   def update
     # wait 1 hour between updates
-    return if self.updated_at > 1.hour.ago and self.entries.count > 0
+    return if self.updated_at > 6.hour.ago and self.entries.count > 0
 
     fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
 
@@ -16,7 +16,7 @@ class Feed < ActiveRecord::Base
 
     # update feed itself
     self.title = fj_feed.title
-    self.site_url = fj_feed.feed_url
+    self.site_url = fj_feed.url
 
     # update entries
     entries = fj_feed.entries
@@ -26,7 +26,7 @@ class Feed < ActiveRecord::Base
       if entries[n]
         self.entries.create(title:       entries[n].title,
                             description: entries[n].content   || entries[n].summary,
-                            pub_date:    entries[n].published || Time.zone.now,
+                            pub_date:    find_pub_date(entries[n].published),
                             url:         entries[n].url)
       end
     end
@@ -34,5 +34,13 @@ class Feed < ActiveRecord::Base
     # mark feed as updated
     self.updated_at = Time.zone.now
     self.save
+  end
+
+  def find_pub_date(date)
+    if date.nil? or date > Time.zone.now
+      Time.zone.now
+    else
+      date
+    end
   end
 end

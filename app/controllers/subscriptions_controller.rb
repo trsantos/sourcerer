@@ -33,18 +33,16 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    current_user.subscriptions.shuffle.each do |s|
-      f = s.feed
-      f.update
-      if s.updated?
-        redirect_to f
-        return
-      end
+    fav = Subscription.where("user_id = ? AND starred = ?", current_user.id, true)
+    normal = Subscription.where("user_id = ? AND starred = ?", current_user.id, false)
+    p = rand
+    if p < 0.7
+      redirect_to get_updated_subscription(fav) || get_updated_subscription(normal) || root_url
+    else
+      redirect_to get_updated_subscription(normal) || get_updated_subscription(fav) || root_url
     end
-    redirect_to root_url
-    return
   end
-
+  
   private
 
   def sub_params
@@ -54,5 +52,16 @@ class SubscriptionsController < ApplicationController
   def correct_user
     @user = User.find(Subscription.find(params[:id]).user_id)
     redirect_to root_url unless current_user?(@user) or current_user.admin?
+  end
+
+  def get_updated_subscription(slist)
+    slist.shuffle.each do |s|
+      f = s.feed
+      f.update
+      if s.updated?
+        return f
+      end
+    end
+    return nil
   end
 end

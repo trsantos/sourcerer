@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def app_header_class
-    base = "app-header"
+    base = "app-header contain-to-grid"
     if params[:controller] == "feeds" && params[:action] == "show"
       base + " show-for-medium-up header-in-feeds-controller"
     else
@@ -24,5 +24,9 @@ module ApplicationHelper
       flash[:alert] = "Please log in."
       redirect_to login_url
     end
+  end
+
+  def find_or_create_feed(url)
+    Feed.find_by(feed_url: url) || Feed.create(feed_url: url)
   end
 end

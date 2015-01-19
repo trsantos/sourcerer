@@ -1,11 +1,14 @@
-<% provide(:title, @feed.title) %>
+<% provide(:title, sanitize(@feed.title)) %>
 
 <header class="feed-header">
-    <div class="sticky">
+    <div class="sticky contain-to-grid">
 	<nav class="top-bar" data-topbar data-no-turbolink>
 	    <ul class="title-area">
 		<li class="name">
-		    <h1><%= link_to content_tag(:strong, @feed.title), @feed.site_url, target: "_blank" %></h1>
+		    <h1>
+			<img src="http://www.google.com/s2/favicons?domain=<%= sub_url(@feed) %>" class="favicon" />
+			<%= link_to content_tag(:strong, sub_title(@feed)), sub_url(@feed), class: "feed-title", target: "_blank" %>
+		    </h1>
 		</li>
 		<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 	    </ul>
@@ -23,7 +26,7 @@
 	<% if @feed.entries.any? %>
 	    <%= render @entries %>
 	<% else %>
-	    <p>This feed has no items :(</p>
+	    <p>Feed has no items :(</p>
 	<% end %>
     </div>
 </div>

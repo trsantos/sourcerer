@@ -1,5 +1,5 @@
 <%= content_tag :header, class: app_header_class do %>
-    <nav class="top-bar" data-topbar data-no-turbolink>
+    <nav class="top-bar" data-topbar data-options="is_hover: false" data-no-turbolink>
 	<ul class="title-area">
 	    <li class="name">
 		<% if logged_in? %>
@@ -20,7 +20,7 @@
 			<li><%= link_to "Feeds", feeds_path %></li>
 			<li class="divider"></li>
 		    <% end %>
-		    <li><%= link_to "Following", subscriptions_path %></li>
+		    <li><%= link_to "Subscriptions", subscriptions_path %></li>
 		    <li><%= link_to "Add feed", new_feed_path %>
 		    <li class="has-dropdown">
 			<%= link_to current_user.name.split.first, '#' %>

@@ -7,10 +7,10 @@
     <div class="medium-8 medium-offset-2">
 	<%= form_for(@subscription) do |f| %>
 	    <%= f.label :title %>
-	    <%= f.text_field :title %>
+	    <%= f.text_field :title, placeholder: @subscription.feed.title %>
 
 	    <%= f.label :site_url %>
-	    <%= f.text_field :site_url %>
+	    <%= f.text_field :site_url, placeholder: @subscription.feed.site_url %>
 
 	    <%= f.submit "Save changes", class: "button expand" %>
 	<% end %>

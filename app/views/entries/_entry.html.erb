@@ -1,11 +1,11 @@
 <article id="entry-<%= entry.id %>">
     <header class="title">
-	<h4><strong><%= link_to entry.title, entry.url, target: "_blank" %></strong></h4>
+	<h4><strong><%= link_to sanitize(entry.title), entry.url, target: "_blank" %></strong></h4>
     </header>
     <% if entry.description %>
 	<p class="description">
-	    <%#= sanitize entry.description[0..350], tags: ["a"] %>
-	    <%= strip_tags entry.description[0..350] %>
+	    <%= sanitize entry.description[0..350], tags: ["a"] %>
+	    <%#= strip_tags entry.description[0..350] %>
 	    <% if (entry.description.length > 350) %>
 		&hellip;
 	    <% end %>

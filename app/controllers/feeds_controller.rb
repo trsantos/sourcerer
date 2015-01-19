@@ -11,7 +11,7 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
     @feed.update
     if logged_in? and current_user.following?(@feed)
-      Subscription.find_by(feed_id: @feed.id).update_attribute(:visited_at, Time.zone.now)
+      current_user.subscriptions.find_by(feed_id: @feed.id).update_attribute(:visited_at, Time.zone.now)
     end
     @entries = @feed.entries
   end
@@ -21,7 +21,7 @@ class FeedsController < ApplicationController
   
   def create
     url = params[:feed][:feed_url]
-    feed = Feed.find_by(feed_url: url) || Feed.create(feed_url: url)
+    feed = find_or_create_feed(url)
     redirect_to feed
   end
 end

@@ -6,6 +6,6 @@ class Subscription < ActiveRecord::Base
   validates :feed_id, presence: true
 
   def updated?
-    return self.feed.entries.first.pub_date > self.visited_at
+    return self.visited_at.nil? || (self.feed.entries.first.pub_date > self.visited_at)
   end
 end

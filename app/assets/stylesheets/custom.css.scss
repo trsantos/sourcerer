@@ -1,22 +1,31 @@
 .users, .feeds {
-  list-style: none;
-  li {
-    padding: 10px 0;
-    border-bottom: 1px solid lightgray;
-  }
+    list-style: none;
+    li {
+	padding: 10px 0;
+	border-bottom: 1px solid lightgray;
+    }
 }
 
 .header-in-feeds-controller {
-  border-bottom: 1px solid #008CBA;
+    border-bottom: 1px solid #074E68;
 }
 
 header h2, #home {
-  text-align: center;
+    text-align: center;
 }
 
 article {
-  margin-top: 1.7rem;
-  .description, p {
-    margin-bottom: 0px;
-  }
+    margin-top: 1.7rem;
+    .description, p {
+	margin-bottom: 0px;
+    }
+}
+
+.favicon {
+    margin-bottom: 3px;
+    margin-left: 15px;
+}
+
+.favicon, .feed-title {
+    display: inline !important;
 }
