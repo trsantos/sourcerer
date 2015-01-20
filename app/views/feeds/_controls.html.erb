@@ -4,17 +4,20 @@
 	<% if sub.starred %>
 	    <li><%= link_to "Unstar",
 		            subscription_path(sub, subscription: { starred: false }),
-			    method: :patch %></li>
+			    method: :patch,
+		            class: "button control" %></li>
 	<% else %>
 	    <li><%= link_to "Star",
 		            subscription_path(sub, subscription: { starred: true }),
-			    method: :patch %></li>
+			    method: :patch,
+		            class: "button control" %></li>
 	<% end %>
-	<li><%= link_to "Edit", edit_subscription_path(sub) %></li>
-	<li><%= link_to "Unsubscribe", subscription_path(sub), method: :delete %></li>
+	<li><%= link_to "Edit", edit_subscription_path(sub), class: "button control" %></li>
+	<li><%= link_to "Unsubscribe", subscription_path(sub), method: :delete, class: "button control" %></li>
     <% else %>
-	<li><%= link_to "Subscribe", subscriptions_path(feed_id: @feed.id), method: :post %></li>
+	<li><%= link_to "Subscribe", subscriptions_path(feed_id: @feed.id), method: :post, class: "button control" %></li>
     <% end %>
-    <li class="divider"></li>
-    <li><%= link_to content_tag(:strong, "Next feed"), next_path %></li>
+    <li id="next">
+	<%= link_to content_tag(:strong, "Next feed"), next_path, class: "button" %>
+    </li>
 <% end %>

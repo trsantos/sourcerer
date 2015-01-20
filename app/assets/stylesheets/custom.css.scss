@@ -21,11 +21,32 @@ article {
     }
 }
 
-.favicon {
-    margin-bottom: 3px;
-    margin-left: 15px;
-}
-
 .favicon, .feed-title {
     display: inline !important;
+}
+
+.feed-header {
+    .top-bar {
+	height: 60px;
+    }
+    a {
+	margin-top: 8px;
+    }
+    h1 a {
+	font-size: 1.7rem;
+	line-height: 60px;
+    }
+    .favicon {
+	margin-bottom: 9px;
+	margin-left: 15px;
+    }
+    .control {
+	background: transparent !important;
+	&:hover {
+	    background: #272727 !important;
+	}
+    }
+    #next {
+	margin-right: 15px;
+    }
 }
