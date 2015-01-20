@@ -6,10 +6,6 @@
     }
 }
 
-.header-in-feeds-controller {
-    border-bottom: 1px solid #074E68;
-}
-
 header h2, #home {
     text-align: center;
 }
@@ -51,5 +47,14 @@ article {
 	a:hover {
 	    background: #272727;
 	}
+    }
+}
+
+#app-header {
+    .top-bar, .contain-to-grid, a {
+	background-color: #222;
+    }
+    a:hover {
+	background-color: #272727;
     }
 }
