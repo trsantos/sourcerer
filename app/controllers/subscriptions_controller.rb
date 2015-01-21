@@ -36,7 +36,7 @@ class SubscriptionsController < ApplicationController
     fav = Subscription.where("user_id = ? AND starred = ?", current_user.id, true)
     normal = Subscription.where("user_id = ? AND starred = ?", current_user.id, false)
     p = rand
-    if p < 0.7
+    if p < 0.8
       redirect_to get_updated_subscription(fav) || get_updated_subscription(normal) || root_url
     else
       redirect_to get_updated_subscription(normal) || get_updated_subscription(fav) || root_url

@@ -18,6 +18,9 @@ class Feed < ActiveRecord::Base
     self.title = fj_feed.title
     self.site_url = fj_feed.url
 
+    # return if feed has not changed entries
+    return if fj_entries.first.url == self.entries.first.url
+
     # update entries
     entries = fj_feed.entries
     # entries = fj_feed.entries.sort_by { |e| find_pub_date(e.published) }.reverse
