@@ -7,7 +7,7 @@ class Feed < ActiveRecord::Base
 
   def update
     # wait 1 hour between updates
-    return if self.updated_at > 3.hour.ago and self.entries.count > 0
+    return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
 
