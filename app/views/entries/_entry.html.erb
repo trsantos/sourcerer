@@ -4,8 +4,8 @@
     </header>
     <% if entry.description %>
 	<p class="description">
-	    <%= sanitize entry.description[0..350], tags: ["a"] %>
-	    <%#= strip_tags entry.description[0..350] %>
+	    <%#= sanitize entry.description[0..350], tags: ["a"] %>
+	    <%= strip_tags entry.description[0..350] %>
 	    <% if (entry.description.length > 350) %>
 		&hellip;
 	    <% end %>
