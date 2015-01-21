@@ -3,14 +3,13 @@
     <h2>Your subscriptions (<%= current_user.subscriptions.count %>)</h2>
 </header>
 
-<%= will_paginate renderer: FoundationPagination::Rails %>
-
 <div class="row">
     <div class="medium-10 medium-offset-1">
+	<%= will_paginate renderer: FoundationPagination::Rails %>
+
 	<ul class="feeds no-bullet">
 	    <%= render @subscriptions %>
 	</ul>
+	<%= will_paginate renderer: FoundationPagination::Rails %>
     </div>
 </div>
-
-<%= will_paginate renderer: FoundationPagination::Rails %>
