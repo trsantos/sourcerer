@@ -20,7 +20,7 @@ class Feed < ActiveRecord::Base
 
     # return if feed has not changed entries
     # an ugly hack for HN, Hoover and pg
-    return if fj_feed.entries.first.url == self.entries.last.url
+    return if self.entries.last and fj_feed.entries.first and (fj_feed.entries.first.url == self.entries.last.url)
 
     # update entries
     entries = fj_feed.entries
