@@ -26,7 +26,7 @@
 	<% if @feed.entries.any? %>
 	    <%= render @entries %>
 	<% else %>
-	    <p>The feed <%= @feed.url %> has no items :(</p>
+	    <p>The feed <%= @feed.feed_url %> has no items :(</p>
 	<% end %>
     </div>
 </div>
