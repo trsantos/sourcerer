@@ -19,7 +19,7 @@ class Feed < ActiveRecord::Base
     self.site_url = fj_feed.url
 
     # return if feed has not changed entries
-    return if fj_entries.first.url == self.entries.first.url
+    return if fj_feed.entries.first.url == self.entries.first.url
 
     # update entries
     entries = fj_feed.entries
