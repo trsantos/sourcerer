@@ -1,4 +1,6 @@
 class Feed < ActiveRecord::Base
+  include ActionView::Helpers::SanitizeHelper
+
   # has_many :subscriptions, dependent: :destroy
   # has_many :users, through: :subscriptions
   has_many :entries, dependent: :destroy
@@ -30,7 +32,7 @@ class Feed < ActiveRecord::Base
       if entries[n]
         description = entries[n].content || entries[n].summary
         self.entries.create(title:       entries[n].title,
-                            description: filter_paragraphs(description),
+                            description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
                             image:       find_image(description),
                             url:         entries[n].url)
@@ -42,10 +44,7 @@ class Feed < ActiveRecord::Base
     self.save
   end
 
-  def filter_paragraphs(description)
-    doc = Nokogiri::HTML description
-    return doc.css('p').to_a.join(' ')
-  end
+  private
 
   def find_pub_date(date)
     if date.nil? or date > Time.zone.now
@@ -69,7 +68,11 @@ class Feed < ActiveRecord::Base
       if value.include? "http://a57.foxnews.com/media.foxbusiness.com"
         value.sub!('121/68', '640/360')
       end
-      return value unless value.include? "feedburner" or value.include? "pml.png"
+      unless value.include? "feedburner" or
+            value.include? "pml.png" or
+            value.include? "mf.gif"
+        return value
+      end
     end
     return nil
   end
