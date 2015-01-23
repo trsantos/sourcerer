@@ -28,5 +28,6 @@
 	<% else %>
 	    <p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
 	<% end %>
+	<small>Feed: <%= @feed.feed_url %></small>
     </div>
 </div>
