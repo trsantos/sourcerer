@@ -1,16 +1,33 @@
 <article id="entry-<%= entry.id %>">
     <header class="title">
-	<h5><strong><%= link_to sanitize(entry.title), entry.url, target: "_blank" %></strong></h5>
+	<h5>
+	    <strong><%= link_to sanitize(entry.title), entry.url, target: "_blank" %></strong>
+	</h5>
     </header>
-    <% if entry.description %>
-	<p class="description">
-	    <%#= sanitize entry.description[0..350], tags: ["a"] %>
-	    <%= sanitize(strip_tags(entry.description[0..350])) %>
-	    <% if (entry.description.length > 350) %>
-		&hellip;
+    <div class="row">
+	<% if entry.image %>
+	    <% if entry.description.blank? %>
+		<div class="medium-12 columns">
+		    <%= image_tag entry.image, class: "thumb" %>
+		</div>
+	    <% else %>
+		<div class="medium-3 columns">
+		    <%= image_tag entry.image, class: "thumb" %>
+		</div>
+		<div class="medium-9 columns">
+		    <p class="description">
+			<%= sanitize entry.description %>
+		    </p>
+		</div>
 	    <% end %>
-	</p>
-    <% end %>
+	<% else %>
+	    <div class="medium-12 columns">
+		<p class="description">
+		    <%= sanitize entry.description %>
+		</p>
+	    </div>
+	<% end %>
+    </div>
     <footer>
 	<time datetime="<%= entry.pub_date %>">
 	    <small>Posted <%= time_ago_in_words(entry.pub_date) %> ago.</small>

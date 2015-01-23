@@ -30,7 +30,7 @@ article {
     }
     h1 {
 	overflow: hidden;
-	width: 650px;
+	width: 470px;
 	height: 60px;
     }
     h1 a {
@@ -62,4 +62,29 @@ article {
     a:hover {
 	background-color: #272727;
     }
+}
+
+.thumb {
+    border: 1px solid #eee;
+    border-radius: 3px;
+#    margin-right: auto;
+#    margin-left: auto;
+#    display: block;
+#    max-height: 200px;
+}
+
+.description {
+    max-height: 4.8rem;
+    overflow: hidden;
+}
+
+/* main { */
+/*     background-color: #fbfbfb; */
+/*     .entries { */
+/* 	background-color: #fff; */
+/*     } */
+/* } */
+
+body {
+    background-color: #fcfcfc !important;
 }

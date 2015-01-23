@@ -21,12 +21,12 @@
     </div>
 </header>
 
-<div class="row">
+<div class="row entries">
     <div class="small-10 small-offset-1 collums">
 	<% if @feed.entries.any? %>
 	    <%= render @entries %>
 	<% else %>
-	    <p>The <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
+	    <p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
 	<% end %>
     </div>
 </div>
