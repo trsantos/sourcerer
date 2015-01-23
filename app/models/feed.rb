@@ -17,6 +17,9 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail",
                                                  :value => :url,
                                                  :as => :image)
+    Feedjira::Feed.add_common_feed_entry_element("media:content",
+                                                 :value => :url,
+                                                 :as => :image)
     fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
 
     # stop if feed coudn't be fetched
