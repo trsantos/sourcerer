@@ -28,6 +28,7 @@
 	<% else %>
 	    <p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
 	<% end %>
-	<small>Feed: <%= @feed.feed_url %></small>
+	<small>Feed url: <%= link_to @feed.feed_url, @feed.feed_url %> | </small>
+	<small><%= link_to "Open on feedly", "http://feedly.com/i/subscription/feed/" + @feed.feed_url %></small>
     </div>
 </div>

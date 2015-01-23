@@ -11,6 +11,12 @@ class Feed < ActiveRecord::Base
     # wait 2 hours between updates
     return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
+    Feedjira::Feed.add_common_feed_entry_element("enclosure",
+                                                 :value => :url,
+                                                 :as => :image)
+    Feedjira::Feed.add_common_feed_entry_element("media:thumbnail",
+                                                 :value => :url,
+                                                 :as => :image)
     fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
 
     # stop if feed coudn't be fetched
@@ -34,7 +40,7 @@ class Feed < ActiveRecord::Base
         self.entries.create(title:       entries[n].title,
                             description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
-                            image:       find_image(description),
+                            image:       find_image(description) || entries[n].image,
                             url:         entries[n].url)
       end
     end
