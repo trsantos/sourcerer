@@ -37,7 +37,7 @@ class Feed < ActiveRecord::Base
     entries = fj_feed.entries
     # entries = fj_feed.entries.sort_by { |e| find_pub_date(e.published) }.reverse
     self.entries.destroy_all
-    4.times do |n|
+    5.times do |n|
       if entries[n]
         description = entries[n].content || entries[n].summary
         self.entries.create(title:       entries[n].title,
