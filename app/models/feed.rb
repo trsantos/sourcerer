@@ -8,7 +8,6 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    # wait 2 hours between updates
     return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure",
@@ -22,20 +21,15 @@ class Feed < ActiveRecord::Base
                                                  :as => :image)
     fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
 
-    # stop if feed coudn't be fetched
     return if fj_feed.is_a? Integer
 
-    # update feed itself
     self.title = fj_feed.title
     self.site_url = fj_feed.url
 
-    # return if feed has not changed entries
-    # an ugly hack for HN, Hoover and pg
+    # return if feed has not changed entries. an ugly hack for HN, Hoover and pg
     return if self.entries.last and fj_feed.entries.first and (fj_feed.entries.first.url == self.entries.last.url)
 
-    # update entries
     entries = fj_feed.entries
-    # entries = fj_feed.entries.sort_by { |e| find_pub_date(e.published) }.reverse
     self.entries.destroy_all
     5.times do |n|
       if entries[n]
@@ -48,7 +42,6 @@ class Feed < ActiveRecord::Base
       end
     end
 
-    # mark feed as updated
     self.updated_at = Time.zone.now
     self.save
   end
@@ -68,8 +61,9 @@ class Feed < ActiveRecord::Base
     img = doc.css('img').first
     if img
       value = img.attributes['src'].value
-      # this should use a regex
-      if value.first == '/' and value[1] != '/'
+      if value.start_with? '//'
+        value = "http:" + value
+      elsif value.start_with? '/'
         parse = URI.parse(self.feed_url)
         value = parse.scheme + '://' + parse.host + value
       end
