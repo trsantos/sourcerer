@@ -21,17 +21,17 @@ article {
     display: inline !important;
 }
 
-.favicon {
-    background-color: white;
-    padding: 2px;
-}
+/* .favicon { */
+/*     background-color: white; */
+/*     padding: 2px; */
+/* } */
 
 .feed-header {
     .contain-to-grid {
 	box-shadow: 0px 3px 2px -1px #aaa;
     }
     .top-bar, .contain-to-grid, a {
-#	background-color: #E2E2E2;
+	background-color: #E2E2E2;
     }
     .top-bar {
 	height: 60px;
@@ -47,7 +47,7 @@ article {
     h1 a {
 	font-size: 1.7rem;
 	line-height: 60px;
-#	color: #222 !important;
+	color: #222 !important;
     }
     .favicon {
 	margin-bottom: 9px;
@@ -55,24 +55,24 @@ article {
     }
     .control {
 	background: transparent !important;
-#	color: #222 !important;
+	color: #222 !important;
 	&:hover {
-#	    background: #C8C8C8 !important;
-	    background: #272727 !important;
+	    background: #C8C8C8 !important;
+#	    background: #272727 !important;
 	}
     }
     #next {
 	margin-right: 15px;
 	a {
-#	    background: #0070A0;
+	    background: #0070A0;
 	}
 	a:hover {
-#	    background: #005C7A;
-	    background: #272727;
+	    background: #005C7A;
+#	    background: #272727;
 	}
     }
     .top-bar-section ul li {
-#	background-color: #e2e2e2 !important;
+	background-color: #e2e2e2 !important;
     }
 }
 
