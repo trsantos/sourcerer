@@ -98,7 +98,8 @@ article {
 }
 
 .description {
-    max-height: 4.8rem;
+    # n * 1.6 gives n lines
+    max-height: 6.4rem;
     overflow: hidden;
 }
 
