@@ -28,7 +28,7 @@ article {
 
 .feed-header {
     .contain-to-grid {
-	box-shadow: 0px 2px 3px #aaa;
+	box-shadow: 0px 3px 2px -1px #aaa;
     }
     .top-bar, .contain-to-grid, a {
 #	background-color: #E2E2E2;
@@ -100,13 +100,6 @@ article {
     max-height: 4.8rem;
     overflow: hidden;
 }
-
-/* main { */
-/*     background-color: #fbfbfb; */
-/*     .entries { */
-/*     background-color: #fff; */
-/*     } */
-/* } */
 
 body {
     background-color: #fcfcfc !important;
