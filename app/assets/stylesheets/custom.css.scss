@@ -22,10 +22,17 @@ article {
 }
 
 .favicon {
-#    background-color: #fff;
+    background-color: white;
+    padding: 2px;
 }
 
 .feed-header {
+    .contain-to-grid {
+	box-shadow: 0px 2px 3px #aaa;
+    }
+    .top-bar, .contain-to-grid, a {
+#	background-color: #E2E2E2;
+    }
     .top-bar {
 	height: 60px;
     }
@@ -40,6 +47,7 @@ article {
     h1 a {
 	font-size: 1.7rem;
 	line-height: 60px;
+#	color: #222 !important;
     }
     .favicon {
 	margin-bottom: 9px;
@@ -47,21 +55,32 @@ article {
     }
     .control {
 	background: transparent !important;
+#	color: #222 !important;
 	&:hover {
+#	    background: #C8C8C8 !important;
 	    background: #272727 !important;
 	}
     }
     #next {
 	margin-right: 15px;
-	a:hover {
-	    background: #272727;
+	a {
+#	    background: #0070A0;
 	}
+	a:hover {
+#	    background: #005C7A;
+	}
+    }
+    .top-bar-section ul li {
+#	background-color: #e2e2e2 !important;
     }
 }
 
 #app-header {
     .top-bar, .contain-to-grid, a {
 	background-color: #222;
+    }
+    a {
+	color: #fcfcfc;
     }
     a:hover {
 	background-color: #272727;
@@ -85,7 +104,7 @@ article {
 /* main { */
 /*     background-color: #fbfbfb; */
 /*     .entries { */
-/* 	background-color: #fff; */
+/*     background-color: #fff; */
 /*     } */
 /* } */
 
