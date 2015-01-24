@@ -71,6 +71,9 @@ class Feed < ActiveRecord::Base
       if value.include? "http://a57.foxnews.com/media.foxbusiness.com"
         value.sub!('121/68', '640/360')
       end
+      if value.include? "http://a57.foxnews.com/global.fncstatic.com"
+        value.sub!('60/60', '640/360')
+      end
       unless value.include? "feedburner" or
             value.include? "pml.png" or
             value.include? "mf.gif"
