@@ -31,7 +31,7 @@ class Feed < ActiveRecord::Base
 
     entries = fj_feed.entries
     self.entries.destroy_all
-    5.times do |n|
+    4.times do |n|
       if entries[n]
         description = entries[n].content || entries[n].summary
         self.entries.create(title:       entries[n].title,
