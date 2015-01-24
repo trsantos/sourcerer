@@ -98,7 +98,7 @@ article {
 }
 
 .description {
-    # n * 1.6 gives n lines
+    /* n x 1.6 gives n lines */
     max-height: 6.4rem;
     overflow: hidden;
 }
