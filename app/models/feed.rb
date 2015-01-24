@@ -26,12 +26,12 @@ class Feed < ActiveRecord::Base
     self.title = fj_feed.title
     self.site_url = fj_feed.url
 
-    # return if feed has not changed entries. an ugly hack for HN, Hoover and pg
+    # feed has not changed entries. an ugly hack for HN, Hoover and pg
     return if self.entries.last and fj_feed.entries.first and (fj_feed.entries.first.url == self.entries.last.url)
 
     entries = fj_feed.entries
     self.entries.destroy_all
-    4.times do |n|
+    50.times do |n|
       if entries[n]
         description = entries[n].content || entries[n].summary
         self.entries.create(title:       entries[n].title,
@@ -76,7 +76,9 @@ class Feed < ActiveRecord::Base
       end
       unless value.include? "feedburner" or
             value.include? "pml.png" or
-            value.include? "mf.gif"
+            value.include? "mf.gif" or
+            value.include? "fsdn.com" or
+            value.include? "pixel.wp.com"
         return value
       end
     end
