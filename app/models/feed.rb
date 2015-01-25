@@ -110,6 +110,8 @@ class Feed < ActiveRecord::Base
         img.sub!('csz/news/tmb', 'gfx/news')
       elsif img.include? "theatlantic.com"
         img.sub!('thumb', 'lead')
+      elsif img.include? "mtvnimages.com"
+        img.sub!('width=150&height=150', 'width=1440&height=810')
       end
 
       # discard some silly images
