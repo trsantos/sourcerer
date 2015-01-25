@@ -124,6 +124,8 @@ class Feed < ActiveRecord::Base
         img.sub!('small', 'full-lnd')
       elsif img.include? "graphics8.nytimes.com"
         img.sub!('moth', 'master675')
+      elsif img.include? "kotaku.com.br"
+        img.sub!('-205x115', '')
       end
 
       # discard some silly images
@@ -139,6 +141,7 @@ class Feed < ActiveRecord::Base
             img.include? 'twitter16.png' or
             img.include? 'uol-jogos-600px.jpg' or
             img.include? 'gif;base64' or
+            img.include? 'icon_' or
             img.ends_with? 'ogv' or
             img.ends_with? 'mp4'
         return img
