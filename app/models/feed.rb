@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    return if self.updated_at > 2.hour.ago and self.entries.count > 0
+    #return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure",
                                                  :value => :url,
@@ -112,6 +112,8 @@ class Feed < ActiveRecord::Base
         img.sub!('thumb', 'lead')
       elsif img.include? "mtvnimages.com"
         img.sub!('width=150&height=150', 'width=1440&height=810')
+      elsif img.include? "fifa.com"
+        img.sub!('small', 'full-lnd')
       end
 
       # discard some silly images
