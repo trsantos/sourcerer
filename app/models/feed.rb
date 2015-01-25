@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    #return if self.updated_at > 2.hour.ago and self.entries.count > 0
+    return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure",
                                                  :value => :url,
@@ -38,7 +38,7 @@ class Feed < ActiveRecord::Base
         self.entries.create(title:       entries[n].title,
                             description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
-                            image:       process_image(entries[n].image || find_image_from_desc(description)) || process_image(find_og_image(entries[n].url)),
+                            image:       process_image(entries[n].image || find_image_from_desc(description), :desc) || process_image(find_og_image(entries[n].url), :og),
                             url:         entries[n].url)
       end
     end
@@ -59,6 +59,9 @@ class Feed < ActiveRecord::Base
 
   def find_og_image(url)
     ENV['SSL_CERT_FILE'] = "/home/thiago/cacert.pem"
+    if url.include? "bbc.co.uk"
+      url = url[0..url.index('#')-1]
+    end
     begin
       doc = Nokogiri::HTML(open(URI::escape(url.strip), :allow_redirections => :safe))
     rescue OpenURI::HTTPError
@@ -81,8 +84,13 @@ class Feed < ActiveRecord::Base
     return nil
   end
 
-  def process_image(img)
+  def process_image(img, from = :desc)
     if img
+
+      # force open graph image
+      if (from == :desc) && (img.include? "bbcimg.co.uk")
+        return nil
+      end
 
       if img.start_with? '//'
         img = "http:" + img
@@ -111,9 +119,11 @@ class Feed < ActiveRecord::Base
       elsif img.include? "theatlantic.com"
         img.sub!('thumb', 'lead')
       elsif img.include? "mtvnimages.com"
-        img.sub!('width=150&height=150', 'width=1440&height=810')
+        img.sub!('width=150&height=150', 'width=640&height=360')
       elsif img.include? "fifa.com"
         img.sub!('small', 'full-lnd')
+      elsif img.include? "graphics8.nytimes.com"
+        img.sub!('moth', 'master675')
       end
 
       # discard some silly images
@@ -127,6 +137,8 @@ class Feed < ActiveRecord::Base
             img.include? 'icon308px.png' or
             img.include? '48x48/facebook.png' or
             img.include? 'twitter16.png' or
+            img.include? 'uol-jogos-600px.jpg' or
+            img.include? 'gif;base64' or
             img.ends_with? 'ogv' or
             img.ends_with? 'mp4'
         return img
