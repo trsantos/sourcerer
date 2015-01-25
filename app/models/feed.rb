@@ -38,7 +38,7 @@ class Feed < ActiveRecord::Base
         self.entries.create(title:       entries[n].title,
                             description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
-                            image:       process_image(find_image_from_desc(description) || entries[n].image) || process_image(find_og_image(entries[n].url)),
+                            image:       process_image(entries[n].image || find_image_from_desc(description)) || process_image(find_og_image(entries[n].url)),
                             url:         entries[n].url)
       end
     end
@@ -108,6 +108,8 @@ class Feed < ActiveRecord::Base
         img.sub!('icone', '')
       elsif img.include? "phys.org"
         img.sub!('csz/news/tmb', 'gfx/news')
+      elsif img.include? "theatlantic.com"
+        img.sub!('thumb', 'lead')
       end
 
       # discard some silly images
