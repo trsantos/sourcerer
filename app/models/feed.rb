@@ -19,6 +19,7 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element("media:content",
                                                  :value => :url,
                                                  :as => :image)
+
     fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
 
     return if fj_feed.is_a? Integer
@@ -37,7 +38,7 @@ class Feed < ActiveRecord::Base
         self.entries.create(title:       entries[n].title,
                             description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
-                            image:       find_image(description) || entries[n].image,
+                            image:       process_image(find_image_from_desc(description) || entries[n].image) || process_image(find_og_image(entries[n].url)),
                             url:         entries[n].url)
       end
     end
@@ -56,30 +57,73 @@ class Feed < ActiveRecord::Base
     end
   end
 
-  def find_image(description)
+  def find_og_image(url)
+    ENV['SSL_CERT_FILE'] = "/home/thiago/cacert.pem"
+    begin
+      doc = Nokogiri::HTML(open(URI::escape(url.strip), :allow_redirections => :safe))
+    rescue OpenURI::HTTPError
+      return nil
+    end
+    image = doc.css("meta[property='og:image']").first
+    if image
+      return image.attributes['content'].value
+    else
+      return nil
+    end
+  end
+
+  def find_image_from_desc(description)
     doc = Nokogiri::HTML description
     img = doc.css('img').first
     if img
-      value = img.attributes['src'].value
-      if value.start_with? '//'
-        value = "http:" + value
-      elsif value.start_with? '/'
+      return img.attributes['src'].value
+    end
+    return nil
+  end
+
+  def process_image(img)
+    if img
+
+      if img.start_with? '//'
+        img = "http:" + img
+      elsif img.start_with? '/'
         parse = URI.parse(self.feed_url)
-        value = parse.scheme + '://' + parse.host + value
+        img = parse.scheme + '://' + parse.host + img
       end
-      # hack to increase size of Stossel's images
-      if value.include? "http://a57.foxnews.com/media.foxbusiness.com"
-        value.sub!('121/68', '640/360')
+
+      # hacks to increase some images
+      if img.include? "media.foxbusiness.com"
+        img.sub!('121/68', '640/360')
+      elsif img.include? "global.fncstatic.com"
+        img.sub!('60/60', '640/360')
+      elsif img.include? "uefa.com"
+        img.sub!('s5', 's2')
+      elsif img.include? "s2.glbimg.com"
+        img = "http://" + img[img.index("s.glbim")..-1]
+      elsif img.include? "gsmarena.com"
+        img.sub!('thumb.jpg', 'gsmarena_001.jpg')
+      elsif img.include? "goal.com"
+        img.sub!('thumb', 'heroa')
+      elsif img.include? "info.abril"
+        img.sub!('icone', '')
+      elsif img.include? "phys.org"
+        img.sub!('csz/news/tmb', 'gfx/news')
       end
-      if value.include? "http://a57.foxnews.com/global.fncstatic.com"
-        value.sub!('60/60', '640/360')
-      end
-      unless value.include? "feedburner" or
-            value.include? "pml.png" or
-            value.include? "mf.gif" or
-            value.include? "fsdn.com" or
-            value.include? "pixel.wp.com"
-        return value
+
+      # discard some silly images
+      unless img.include? 'feedburner' or
+            img.include? 'pml.png' or
+            img.include? 'mf.gif' or
+            img.include? 'fsdn' or
+            img.include? 'pixel.wp' or
+            img.include? 'gravatar' or
+            img.include? 'default-thumbnail' or
+            img.include? 'icon308px.png' or
+            img.include? '48x48/facebook.png' or
+            img.include? 'twitter16.png' or
+            img.ends_with? 'ogv' or
+            img.ends_with? 'mp4'
+        return img
       end
     end
     return nil

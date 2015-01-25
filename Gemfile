@@ -16,6 +16,7 @@ gem 'will_paginate'
 gem 'will_paginate-foundation'
 gem 'feedjira'
 gem 'opml_saw', :git => "git://github.com/feedbin/opml_saw.git", :branch => "master"
+gem 'open_uri_redirections'
 gem 'sdoc', group: :doc
 
 group :development, :test do
