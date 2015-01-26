@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-#    return if self.updated_at > 2.hour.ago and self.entries.count > 0
+    return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -22,7 +22,7 @@ class Feed < ActiveRecord::Base
     self.site_url = fj_feed.url
 
     # feed has not changed entries. an ugly hack for HN, Hoover and pg
-#    return if self.entries.last and fj_feed.entries.first and (fj_feed.entries.first.url == self.entries.last.url)
+    return if self.entries.last and fj_feed.entries.first and (fj_feed.entries.first.url == self.entries.last.url)
 
     entries = fj_feed.entries
     self.entries.destroy_all
