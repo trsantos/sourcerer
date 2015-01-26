@@ -10,15 +10,9 @@ class Feed < ActiveRecord::Base
   def update
     return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
-    Feedjira::Feed.add_common_feed_entry_element("enclosure",
-                                                 :value => :url,
-                                                 :as => :image)
-    Feedjira::Feed.add_common_feed_entry_element("media:thumbnail",
-                                                 :value => :url,
-                                                 :as => :image)
-    Feedjira::Feed.add_common_feed_entry_element("media:content",
-                                                 :value => :url,
-                                                 :as => :image)
+    Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
+    Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
+    Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
 
     fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
 
@@ -133,6 +127,8 @@ class Feed < ActiveRecord::Base
         img.sub!('-150x150', '')
       elsif img.include? "gizmodo.uol.com"
         img.sub!('-320x180', '')
+      elsif img.include? "scientificamerican.com"
+        img.sub!('_small', '')
       elsif img.include? "assets.rollingstone.com"
         img.sub!('small_square', 'large_rect')
         img.sub!('100x100', '1401x788')
@@ -146,6 +142,7 @@ class Feed < ActiveRecord::Base
             img.include? 'pixel.wp' or
             img.include? 'gravatar' or
             img.include? 'default-thumbnail' or
+            img.include? 'facebook-icon' or
             img.include? 'icon308px.png' or
             img.include? '48x48/facebook.png' or
             img.include? 'twitter16.png' or
