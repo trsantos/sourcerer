@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @subscriptions = current_user.subscriptions.paginate(page: params[:page])
+    @subscriptions = current_user.subscriptions
   end
 
   def create
