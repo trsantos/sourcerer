@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    return if self.updated_at > 2.hour.ago and self.entries.count > 0
+    return if self.updated_at > 8.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -32,7 +32,7 @@ class Feed < ActiveRecord::Base
         self.entries.create(title:       entries[n].title,
                             description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
-                            image:       process_image(entries[n].image || find_image_from_desc(description)),# || process_image(find_og_image(entries[n].url), :og),
+                            image:       process_image(entries[n].image || find_image_from_desc(description)) || process_image(find_og_image(entries[n].url), :og),
                             url:         entries[n].url)
       end
     end
@@ -96,13 +96,16 @@ class Feed < ActiveRecord::Base
         img = parse.scheme + '://' + parse.host + img
       end
 
-      # hacks to increase some images
+      # hacks to increase some images. i should use a regex for wordpress images
+
+      # fox
       if img.include? "media.foxbusiness.com"
         img.sub!('121/68', '640/360')
       elsif img.include? "global.fncstatic.com"
         img.sub!('60/60', '640/360')
       elsif img.include? "uefa.com"
         img.sub!('s5', 's1')
+      # globo
       elsif img.include? "s2.glbimg.com"
         img = "http://" + img[(img.index("glbimg", 20)-2)..-1]
       elsif img.include? "gsmarena.com"
@@ -127,12 +130,20 @@ class Feed < ActiveRecord::Base
         img.sub!('-205x113', '')
       elsif img.include? "xda-developers.com"
         img.sub!('-150x150', '')
+      # tom's hardware
       elsif img.include? "bestofmicro.com"
         img.sub!('rc_120x90', 'w_600')
       elsif img.include? "gizmodo.uol.com"
         img.sub!('-320x180', '')
       elsif img.include? "scientificamerican.com"
         img.sub!('_small', '')
+      # motorola
+      elsif img.include? "bp.blogspot.com"
+        img.sub!('s72-c', 's1600')
+      elsif img.include? "news.sciencemag.org"
+        img.sub!('styles/square_60x60', '')
+      elsif img.include? "gigaom2.files.wordpress.com"
+        img.sub!('?quality=80&strip=all&w=150', '?strip=all&w=600')
       elsif img.include? "assets.rollingstone.com"
         img.sub!('small_square', 'large_rect')
         img.sub!('100x100', '1401x788')
@@ -155,7 +166,8 @@ class Feed < ActiveRecord::Base
             img.include? 'icon308px.png' or
             img.include? '48x48/facebook.png' or
             img.include? 'twitter16.png' or
-            img.include? 'merval-blog' or
+            img.include? 'merval-' or
+            img.include? 'freepress-icon.png' or
             img.include? 'uol-jogos-600px.jpg' or
             img.include? 'gif;base64' or
             img.include? 'logo' or
@@ -163,6 +175,7 @@ class Feed < ActiveRecord::Base
             img.include? 'valor-big' or
             img.include? 'avatar_f7d737dfdd73_64' or
             img.include? 'home_pensmall' or
+            img.include? 'og.png' or
             img.include? 'gv_og_logo' or
             img.include? 'outbrain-place-holder' or
             img.include? 'ITworld-logo300x300' or
