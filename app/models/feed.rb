@@ -153,6 +153,8 @@ class Feed < ActiveRecord::Base
             img.include? 'valor-big' or
             img.include? 'home_pensmall' or
             img.include? 'gv_og_logo' or
+            img.include? 'outbrain-place-holder' or
+            img.include? 'ITworld-logo300x300' or
             img.ends_with? 'ogv' or
             img.ends_with? 'mp4'
         return img
