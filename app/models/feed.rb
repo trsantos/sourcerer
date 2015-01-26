@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    return if self.updated_at > 2.hour.ago and self.entries.count > 0
+#    return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -22,7 +22,7 @@ class Feed < ActiveRecord::Base
     self.site_url = fj_feed.url
 
     # feed has not changed entries. an ugly hack for HN, Hoover and pg
-    return if self.entries.last and fj_feed.entries.first and (fj_feed.entries.first.url == self.entries.last.url)
+#    return if self.entries.last and fj_feed.entries.first and (fj_feed.entries.first.url == self.entries.last.url)
 
     entries = fj_feed.entries
     self.entries.destroy_all
@@ -104,7 +104,7 @@ class Feed < ActiveRecord::Base
       elsif img.include? "uefa.com"
         img.sub!('s5', 's1')
       elsif img.include? "s2.glbimg.com"
-        img = "http://" + img[img.index("s.glbim")..-1]
+        img = "http://" + img[(img.index("glbimg", 20)-2)..-1]
       elsif img.include? "gsmarena.com"
         img = get_gsmarena_image(img)
       elsif img.include? "goal.com"
@@ -121,10 +121,13 @@ class Feed < ActiveRecord::Base
         img.sub!('small', 'full-lnd')
       elsif img.include? "graphics8.nytimes.com"
         img.sub!('moth', 'master675')
+        img.sub!('thumbStandard', 'articleInline')
       elsif img.include? "kotaku.com.br" or img.include? "trivela.uol.com.br"
         img.sub!('-205x115', '')
       elsif img.include? "xda-developers.com"
         img.sub!('-150x150', '')
+      elsif img.include? "bestofmicro.com"
+        img.sub!('rc_120x90', 'w_600')
       elsif img.include? "gizmodo.uol.com"
         img.sub!('-320x180', '')
       elsif img.include? "scientificamerican.com"
@@ -140,9 +143,13 @@ class Feed < ActiveRecord::Base
             img.include? 'mf.gif' or
             img.include? 'fsdn' or
             img.include? 'pixel.wp' or
+            img.include? '-facebook' or
+            img.include? 'img_facebook' or
+            img.include? 'fb_' or
             img.include? 'gravatar' or
             img.include? 'default-thumbnail' or
             img.include? 'facebook-icon' or
+            img.include? 'Logo' or
             img.include? 'icon308px.png' or
             img.include? '48x48/facebook.png' or
             img.include? 'twitter16.png' or
