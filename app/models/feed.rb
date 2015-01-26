@@ -86,6 +86,9 @@ class Feed < ActiveRecord::Base
 
   def process_image(img, from = :desc)
     if img
+      if img.blank?
+        return nil
+      end
 
       # force open graph image
       if (from == :desc) && (img.include? "bbcimg.co.uk")
@@ -109,7 +112,7 @@ class Feed < ActiveRecord::Base
       elsif img.include? "s2.glbimg.com"
         img = "http://" + img[img.index("s.glbim")..-1]
       elsif img.include? "gsmarena.com"
-        img.sub!('thumb.jpg', 'gsmarena_001.jpg')
+        img = get_gsmarena_image(img)
       elsif img.include? "goal.com"
         img.sub!('thumb', 'heroa')
       elsif img.include? "info.abril"
@@ -126,6 +129,8 @@ class Feed < ActiveRecord::Base
         img.sub!('moth', 'master675')
       elsif img.include? "kotaku.com.br"
         img.sub!('-205x115', '')
+      elsif img.include? "xda-developers.com"
+        img.sub!('-150x150', '')
       end
 
       # discard some silly images
@@ -142,11 +147,24 @@ class Feed < ActiveRecord::Base
             img.include? 'uol-jogos-600px.jpg' or
             img.include? 'gif;base64' or
             img.include? 'icon_' or
+            img.include? 'valor-big' or
+            img.include? 'home_pensmall' or
             img.ends_with? 'ogv' or
             img.ends_with? 'mp4'
         return img
       end
     end
     return nil
+  end
+
+  def get_gsmarena_image(img)
+    3.times do |n|
+      temp = img.sub('thumb.jpg', 'gsmarena_00' + n.to_s + '.jpg')
+      url = URI.parse(temp)
+      if Net::HTTP.new(url.host, url.port).request_head(url.path).code == "200"
+        return temp
+      end
+    end
+    return img
   end
 end

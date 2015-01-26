@@ -27,9 +27,6 @@ article {
 }
 
 .feed-header {
-    .top-bar, .contain-to-grid, a {
-#	background-color: #E2E2E2;
-    }
     .top-bar {
 	height: 60px;
     }
@@ -44,7 +41,6 @@ article {
     h1 a {
 	font-size: 1.7rem;
 	line-height: 60px;
-#	color: #222 !important;
     }
     .favicon {
 	margin-bottom: 9px;
@@ -52,24 +48,15 @@ article {
     }
     .control {
 	background: transparent !important;
-#	color: #222 !important;
 	&:hover {
-#	    background: #C8C8C8 !important;
 	    background: #272727 !important;
 	}
     }
     #next {
 	margin-right: 15px;
-	a {
-#	    background: #0070A0;
-	}
 	a:hover {
-#	    background: #005C7A;
 	    background: #272727;
 	}
-    }
-    .top-bar-section ul li {
-#	background-color: #e2e2e2 !important;
     }
 }
 
@@ -86,7 +73,6 @@ article {
 }
 
 .thumb {
-    border: 1px solid #e2e2e2;
     border-radius: 3px;
 }
 
@@ -99,10 +85,9 @@ article {
 body {
     background-color: #fcfcfc !important;
     .entries {
-	background-color: #fff !important;
+	background-color: #fefefe !important;
 	border: 1px solid #d3d3d3;
 	padding-bottom: 15px;
 	border-top: 0px;
-	border-radius: 0 0 5px 5px;
     }
 }
