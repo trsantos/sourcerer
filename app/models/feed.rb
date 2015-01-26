@@ -108,7 +108,7 @@ class Feed < ActiveRecord::Base
       elsif img.include? "global.fncstatic.com"
         img.sub!('60/60', '640/360')
       elsif img.include? "uefa.com"
-        img.sub!('s5', 's2')
+        img.sub!('s5', 's1')
       elsif img.include? "s2.glbimg.com"
         img = "http://" + img[img.index("s.glbim")..-1]
       elsif img.include? "gsmarena.com"
@@ -154,6 +154,7 @@ class Feed < ActiveRecord::Base
             img.include? 'gif;base64' or
             img.include? 'icon_' or
             img.include? 'valor-big' or
+            img.include? 'avatar_f7d737dfdd73_64' or
             img.include? 'home_pensmall' or
             img.include? 'gv_og_logo' or
             img.include? 'outbrain-place-holder' or
