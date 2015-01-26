@@ -152,6 +152,7 @@ class Feed < ActiveRecord::Base
             img.include? 'merval-blog' or
             img.include? 'uol-jogos-600px.jpg' or
             img.include? 'gif;base64' or
+            img.include? 'logo' or
             img.include? 'icon_' or
             img.include? 'valor-big' or
             img.include? 'avatar_f7d737dfdd73_64' or
