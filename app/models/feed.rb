@@ -127,10 +127,12 @@ class Feed < ActiveRecord::Base
         img.sub!('small', 'full-lnd')
       elsif img.include? "graphics8.nytimes.com"
         img.sub!('moth', 'master675')
-      elsif img.include? "kotaku.com.br"
+      elsif img.include? "kotaku.com.br" or img.include? "trivela.uol.com.br"
         img.sub!('-205x115', '')
       elsif img.include? "xda-developers.com"
         img.sub!('-150x150', '')
+      elsif img.include? "gizmodo.uol.com"
+        img.sub!('-320x180', '')
       elsif img.include? "assets.rollingstone.com"
         img.sub!('small_square', 'large_rect')
         img.sub!('100x100', '1401x788')
@@ -155,6 +157,7 @@ class Feed < ActiveRecord::Base
             img.include? 'gv_og_logo' or
             img.include? 'outbrain-place-holder' or
             img.include? 'ITworld-logo300x300' or
+            img.include? 'og-ft-logo-large' or
             img.ends_with? 'ogv' or
             img.ends_with? 'mp4'
         return img
