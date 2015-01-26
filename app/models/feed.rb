@@ -131,6 +131,9 @@ class Feed < ActiveRecord::Base
         img.sub!('-205x115', '')
       elsif img.include? "xda-developers.com"
         img.sub!('-150x150', '')
+      elsif img.include? "assets.rollingstone.com"
+        img.sub!('small_square', 'large_rect')
+        img.sub!('100x100', '1401x788')
       end
 
       # discard some silly images
