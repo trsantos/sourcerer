@@ -162,6 +162,7 @@ class Feed < ActiveRecord::Base
             img.include? 'ITworld-logo300x300' or
             img.include? 'og-ft-logo-large' or
             img.ends_with? 'ogv' or
+            img.ends_with? 'mp3' or
             img.ends_with? 'mp4'
         return img
       end
