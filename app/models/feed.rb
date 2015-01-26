@@ -32,7 +32,7 @@ class Feed < ActiveRecord::Base
         self.entries.create(title:       entries[n].title,
                             description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
-                            image:       process_image(entries[n].image || find_image_from_desc(description), :desc) || process_image(find_og_image(entries[n].url), :og),
+                            image:       process_image(entries[n].image || find_image_from_desc(description)),# || process_image(find_og_image(entries[n].url), :og),
                             url:         entries[n].url)
       end
     end
@@ -124,6 +124,7 @@ class Feed < ActiveRecord::Base
         img.sub!('thumbStandard', 'articleInline')
       elsif img.include? "kotaku.com.br" or img.include? "trivela.uol.com.br"
         img.sub!('-205x115', '')
+        img.sub!('-205x113', '')
       elsif img.include? "xda-developers.com"
         img.sub!('-150x150', '')
       elsif img.include? "bestofmicro.com"
@@ -149,6 +150,7 @@ class Feed < ActiveRecord::Base
             img.include? 'gravatar' or
             img.include? 'default-thumbnail' or
             img.include? 'facebook-icon' or
+            img.include? 'estadao.gif' or
             img.include? 'Logo' or
             img.include? 'icon308px.png' or
             img.include? '48x48/facebook.png' or
