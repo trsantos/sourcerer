@@ -5,23 +5,21 @@
 	</h5>
     </header>
     <div class="row">
-	<% if entry.image %>
-	    <% if entry.description.blank? %>
-		<div class="medium-12 columns">
-		    <%= image_tag entry.image, class: "thumb" %>
-		</div>
-	    <% else %>
-		<div class="medium-3 columns">
-		    <%= image_tag entry.image, class: "thumb" %>
-		</div>
-		<div class="medium-9 columns">
-		    <p class="description">
-			<%= sanitize entry.description %>
-		    </p>
-		</div>
-	    <% end %>
+	<% if entry.description.blank? and entry.image? %>
+	    <div class="small-12 columns">
+		<%= image_tag entry.image, class: "thumb" %>
+	    </div>
+	<% elsif entry.image %>
+	    <div class="medium-3 columns">
+		<%= image_tag entry.image, class: "thumb" %>
+	    </div>
+	    <div class="medium-9 columns">
+		<p class="description">
+		    <%= sanitize entry.description %>
+		</p>
+	    </div>
 	<% else %>
-	    <div class="medium-12 columns">
+	    <div class="small-12 columns"
 		<p class="description">
 		    <%= sanitize entry.description %>
 		</p>

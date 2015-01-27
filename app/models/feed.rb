@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    return if self.updated_at > 8.hour.ago and self.entries.count > 0
+    return if self.updated_at > 12.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -161,6 +161,7 @@ class Feed < ActiveRecord::Base
             img.include? 'gravatar' or
             img.include? 'default-thumbnail' or
             img.include? 'facebook-icon' or
+            img.include? 'ptq.gif' or
             img.include? 'estadao.gif' or
             img.include? 'Logo' or
             img.include? 'icon308px.png' or
