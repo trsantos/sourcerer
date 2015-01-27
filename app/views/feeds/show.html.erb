@@ -45,7 +45,9 @@
 		    <p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
 		<% end %>
 		<small>Feed url: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %></small>
-		<%= link_to "Next feed", next_path, class: "button show-for-small-only", id: "small-next" %>
+		<div data-no-turbo-link>
+		    <%= link_to "Next feed", next_path, class: "button show-for-small-only", id: "small-next" %>
+		</div>
 	    </div>
 	</div>
 	<a class="exit-off-canvas"></a>
