@@ -22,7 +22,7 @@
 <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
 	<nav class="tab-bar show-for-small-only">
-	    <section class="middle tab-bar-section">
+	    <section class="tab-bar-section">
 		<h1 class="title">
 		    <img src="http://www.google.com/s2/favicons?domain=<%= sub_url(@feed) %>" class="favicon" />
 		    <%= link_to sub_title(@feed), sub_url(@feed), class: "feed-title", target: "_blank" %>
@@ -48,6 +48,7 @@
 		<%= link_to "Next feed", next_path, class: "button show-for-small-only", id: "small-next" %>
 	    </div>
 	</div>
+	<a class="exit-off-canvas"></a>
     </div>
 </div>
 </header>
