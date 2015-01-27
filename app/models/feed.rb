@@ -18,11 +18,16 @@ class Feed < ActiveRecord::Base
 
     return if fj_feed.is_a? Integer
 
+    # return if feed has not changed
+    if self.entries.first and fj_feed.entries.first
+      if (fj_feed.entries.first.url == self.entries.last.url) ||
+         (fj_feed.entries.first.url == self.entries.first.url)
+        return
+      end
+    end
+
     self.title = fj_feed.title
     self.site_url = fj_feed.url
-
-    # feed has not changed entries. an ugly hack for HN, Hoover and pg
-    return if self.entries.last and fj_feed.entries.first and (fj_feed.entries.first.url == self.entries.last.url)
 
     entries = fj_feed.entries
     self.entries.destroy_all
@@ -59,6 +64,10 @@ class Feed < ActiveRecord::Base
     begin
       doc = Nokogiri::HTML(open(URI::escape(url.strip), :allow_redirections => :safe))
     rescue OpenURI::HTTPError
+      return nil
+    rescue Errno::ETIMEDOUT
+      return nil
+    rescue Net::ReadTimeout
       return nil
     end
     image = doc.css("meta[property='og:image']").first
@@ -177,6 +186,7 @@ class Feed < ActiveRecord::Base
             img.include? 'avatar_f7d737dfdd73_64' or
             img.include? 'home_pensmall' or
             img.include? 'og.png' or
+            img.include? '317440_166677713423072_1150762807_n.jpg' or
             img.include? 'gv_og_logo' or
             img.include? 'outbrain-place-holder' or
             img.include? 'ITworld-logo300x300' or
