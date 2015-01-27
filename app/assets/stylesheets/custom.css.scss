@@ -58,6 +58,15 @@ article {
 	    background: #272727;
 	}
     }
+    .small-control {
+	margin-top: 8px;
+	a {
+	    margin-top: 0px;
+	    &:hover {
+		background: #272727 !important;
+	    }
+	}
+    }
 }
 
 #app-header {
