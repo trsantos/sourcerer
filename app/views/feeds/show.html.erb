@@ -1,33 +1,53 @@
 <% provide(:title, sanitize(@feed.title)) %>
 
-<header class="feed-header">
-    <div class="sticky contain-to-grid">
-	<nav class="top-bar" data-topbar data-no-turbolink>
-	    <ul class="title-area">
-		<li class="name">
-		    <h1>
-			<img src="http://www.google.com/s2/favicons?domain=<%= sub_url(@feed) %>" class="favicon" />
-			<%= link_to sub_title(@feed), sub_url(@feed), class: "feed-title", target: "_blank" %>
-		    </h1>
-		</li>
-		<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+<div class="feed-header sticky contain-to-grid hide-for-small">
+    <nav class="top-bar" data-topbar data-no-turbolink>
+	<ul class="title-area">
+	    <li class="name">
+		<h1>
+		    <img src="http://www.google.com/s2/favicons?domain=<%= sub_url(@feed) %>" class="favicon" />
+		    <%= link_to sub_title(@feed), sub_url(@feed), class: "feed-title", target: "_blank" %>
+		</h1>
+	    </li>
+	    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+	</ul>
+	<section class="top-bar-section">
+	    <ul class="right">
+		<%= render 'controls' %>
 	    </ul>
-	    <section class="top-bar-section">
-		<ul class="right">
-		    <%= render 'controls' %>
-		</ul>
+	</section>
+    </nav>
+</div>
+
+<div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+	<nav class="tab-bar show-for-small-only">
+	    <section class="middle tab-bar-section">
+		<h1 class="title">
+		    <img src="http://www.google.com/s2/favicons?domain=<%= sub_url(@feed) %>" class="favicon" />
+		    <%= link_to sub_title(@feed), sub_url(@feed), class: "feed-title", target: "_blank" %>
+		</h1>
+	    </section>
+	    <section class="right">
+		<a href="#" class="right-off-canvas-toggle menu-icon"><span></span></a>
 	    </section>
 	</nav>
-    </div>
-</header>
-
-<div class="row entries">
-    <div class="small-10 small-offset-1 collums">
-	<small>Feed url: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %></small>
-	<% if @feed.entries.any? %>
-	    <%= render @entries %>
-	<% else %>
-	    <p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
-	<% end %>
+	<aside class="right-off-canvas-menu show-for-small-only">
+	    <ul class="off-canvas-list">
+		<%= render 'offcanvas_controls' %>
+	    </ul>
+	</aside>
+	<div class="row entries">
+	    <div class="small-10 small-offset-1 collums">
+		<% if @feed.entries.any? %>
+		    <%= render @entries %>
+		<% else %>
+		    <p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
+		<% end %>
+		<small>Feed url: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %></small>
+		<%= link_to "Next feed", next_path, class: "button show-for-small-only", id: "small-next" %>
+	    </div>
+	</div>
     </div>
 </div>
+</header>
