@@ -14,24 +14,24 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
 
-    fj_feed = Feedjira::Feed.fetch_and_parse self.feed_url
+    feed = Feedjira::Feed.fetch_and_parse self.feed_url
 
-    return if fj_feed.is_a? Integer
+    return if feed.is_a? Integer
 
-    self.updated_at = Time.zone.now
+    self.update_attribute(:updated_at, Time.zone.now)
 
     # return if feed has not changed
-    if self.entries.first and fj_feed.entries.first
-      if (fj_feed.entries.first.url == self.entries.last.url) ||
-         (fj_feed.entries.first.url == self.entries.first.url)
+    if self.entries.first and feed.entries.first
+      if (feed.entries.first.url == self.entries.last.url) ||
+         (feed.entries.first.url == self.entries.first.url)
         return
       end
     end
 
-    self.title = fj_feed.title
-    self.site_url = fj_feed.url
+    self.update_attributes(title:    feed.title,
+                           site_url: feed.url)
 
-    entries = fj_feed.entries
+    entries = feed.entries
     self.entries.destroy_all
     4.times do |n|
       if entries[n]
@@ -43,7 +43,6 @@ class Feed < ActiveRecord::Base
                             url:         entries[n].url)
       end
     end
-#    self.save
   end
 
   private
@@ -57,10 +56,10 @@ class Feed < ActiveRecord::Base
   end
 
   def find_og_image(url)
-    ENV['SSL_CERT_FILE'] = "/home/thiago/cacert.pem"
-    if url.include? "bbc.co.uk"
-      url = url[0..url.index('#')-1]
-    end
+    # ENV['SSL_CERT_FILE'] = "/home/thiago/cacert.pem"
+    # if url.include? "bbc.co.uk"
+    #   url = url[0..url.index('#')-1]
+    # end
     begin
       doc = Nokogiri::HTML(open(URI::escape(url.strip), :allow_redirections => :safe))
     rescue StandardError

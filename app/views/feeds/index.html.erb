@@ -1,9 +1,7 @@
 <% provide(:title, 'All feeds') %>
 <header>
-    <h2>All feeds</h2>
+    <h2>All feeds (<%= Feed.count %>)</h2>
 </header>
-
-<%= will_paginate renderer: FoundationPagination::Rails %>
 
 <div class="row">
     <div class="medium-10 medium-offset-1">
@@ -12,5 +10,3 @@
 	</ul>
     </div>
 </div>
-
-<%= will_paginate renderer: FoundationPagination::Rails %>
