@@ -27,6 +27,9 @@ module ApplicationHelper
   end
 
   def find_or_create_feed(url)
+    unless url.start_with?('http:') or url.start_with?('https:')
+      url = 'http://' + url
+    end
     Feed.find_by(feed_url: url) || Feed.create(feed_url: url)
   end
 end

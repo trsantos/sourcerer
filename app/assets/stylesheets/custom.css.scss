@@ -11,7 +11,7 @@ header h2, #home {
 }
 
 article {
-    margin-top: 1.7rem;
+    margin-top: 1.6rem;
     .description, p {
 	margin-bottom: 0px;
     }
@@ -79,7 +79,7 @@ article {
 
 .description {
     /* n x 1.6 gives n lines */
-    max-height: 6.4rem;
+    max-height: 4.8rem;
     overflow: hidden;
 }
 
