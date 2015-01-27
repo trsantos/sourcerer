@@ -63,11 +63,7 @@ class Feed < ActiveRecord::Base
     end
     begin
       doc = Nokogiri::HTML(open(URI::escape(url.strip), :allow_redirections => :safe))
-    rescue OpenURI::HTTPError
-      return nil
-    rescue Errno::ETIMEDOUT
-      return nil
-    rescue Net::ReadTimeout
+    rescue StandardError
       return nil
     end
     image = doc.css("meta[property='og:image']").first
