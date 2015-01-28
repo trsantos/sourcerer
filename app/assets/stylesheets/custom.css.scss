@@ -26,49 +26,63 @@ article {
     padding: 2px;
 }
 
-.feed-header {
-    .top-bar {
-	height: 60px;
+@media only screen and (min-width: 40.063em) {
+    main {
+	margin-top: 45px;
     }
-    a {
-	margin-top: 8px;
-    }
-    h1 {
-	overflow: hidden;
-	max-width: 470px;
-    }
-    h1 a {
-	font-size: 1.7rem;
-	line-height: 60px;
-    }
-    .favicon {
-	margin-bottom: 9px;
-	margin-left: 15px;
-    }
-    .control {
-	background: transparent !important;
-	&:hover {
-	    background: #272727 !important;
+    .feed-header {
+	margin-top: 45px;
+	.top-bar {
+	    height: 60px;
 	}
-    }
-    #next {
-	margin-right: 15px;
-	a:hover {
-	    background: #272727;
+	a {
+	    margin-top: 8px;
+	}
+	h1 {
+	    overflow: hidden;
+	    max-width: 470px;
+	}
+	h1 a {
+	    font-size: 1.7rem;
+	    line-height: 60px;
+	}
+	.favicon {
+	    margin-bottom: 9px;
+	    margin-left: 15px;
+	}
+	.control {
+	    background: transparent !important;
+	    &:hover {
+		background: #272727 !important;
+	    }
+	}
+	#next {
+	    margin-right: 15px;
+	    a:hover {
+		background: #272727;
+	    }
 	}
     }
 }
 
-.small-feed-header {
-    .favicon {
-	margin-bottom: 3px;
-	margin-left: 15px;
+@media only screen and (max-width: 40em) {
+    .small-feed-header {
+	.favicon {
+	    margin-bottom: 3px;
+	    margin-left: 15px;
+	}
+	.controls a:hover {
+	    background: #272727 !important;
+	}
+	#next:hover {
+	    background: #0078A0 !important;
+	}
     }
-    .controls a:hover {
-	background: #272727 !important;
+    #img-and-desc {
+	margin-top: 10px;
     }
-    #next:hover {
-	background: #0078A0 !important;
+    #feed-title {
+	font-weight: bold;
     }
 }
 
@@ -99,14 +113,5 @@ body {
 	border: 1px solid #d3d3d3;
 	padding-bottom: 15px;
 	border-top: 0px;
-    }
-}
-
-@media only screen and (max-width: 40em) {
-    #img-and-desc {
-	margin-top: 10px;
-    }
-    #feed-title {
-	font-weight: bold;
     }
 }

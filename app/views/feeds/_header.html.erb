@@ -1,8 +1,4 @@
-<% if size == :small %>
-<div class="small-feed-header fixed show-for-small-only">
-<% else %>
-<div class="feed-header sticky contain-to-grid hide-for-small">
-<% end %>
+<div class="small-feed-header feed-header fixed contain-to-grid">
     <nav class="top-bar" data-topbar data-no-turbolink>
 	<ul class="title-area">
 	    <li class="name">
@@ -15,11 +11,12 @@
 	</ul>
 	<section class="top-bar-section">
 	    <ul class="right controls">
-	    <% if size == :small %>
+	    <div class="show-for-small-only">
 		<%= render partial: 'controls', :locals => { :size => :small } %>
-	    <% else %>
+	    </div>
+	    <div class="hide-for-small">
 		<%= render partial: 'controls', :locals => { :size => :large } %>
-	    <% end %>
+	    </div>
 	</section>
     </nav>
 </div>

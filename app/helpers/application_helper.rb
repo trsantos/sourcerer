@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def app_header_class
-    base = "contain-to-grid"
+    base = "contain-to-grid fixed"
     if params[:controller] == "feeds" && params[:action] == "show"
       base + " show-for-medium-up header-in-feeds-controller"
     else
