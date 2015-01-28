@@ -36,7 +36,6 @@ article {
     h1 {
 	overflow: hidden;
 	max-width: 470px;
-	height: 60px;
     }
     h1 a {
 	font-size: 1.7rem;
@@ -58,23 +57,24 @@ article {
 	    background: #272727;
 	}
     }
-    .small-control {
-	margin-top: 8px;
-	a {
-	    margin-top: 0px;
-	    &:hover {
-		background: #272727 !important;
-	    }
-	}
+}
+
+.small-feed-header {
+    .favicon {
+	margin-bottom: 3px;
+	margin-left: 15px;
+    }
+    .controls a:hover {
+	background: #272727 !important;
+    }
+    #next:hover {
+	background: #0078A0 !important;
     }
 }
 
 #app-header {
     .top-bar, .contain-to-grid, a {
 	background-color: #222;
-    }
-    a {
-	color: #fcfcfc;
     }
     a:hover {
 	background-color: #272727;
@@ -99,18 +99,5 @@ body {
 	border: 1px solid #d3d3d3;
 	padding-bottom: 15px;
 	border-top: 0px;
-    }
-}
-
-.off-canvas-wrap {
-    .feed-title {
-	color: #fff;
-    }
-    #small-next {
-	margin-top: 10px;
-	margin-bottom: 0px;
-    }
-    .favicon {
-	margin-bottom: 2px;
     }
 }
