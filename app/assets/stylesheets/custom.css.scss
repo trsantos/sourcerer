@@ -17,13 +17,19 @@ article {
     }
 }
 
-.favicon, #feed-title {
-    display: inline !important;
+#favicon, #feed-title {
+    display: inline-block !important;
 }
 
-.favicon {
+#favicon {
     background-color: white;
     padding: 2px;
+}
+
+#feed-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @media only screen and (min-width: 40.063em) {
@@ -35,40 +41,48 @@ article {
 	.top-bar {
 	    height: 60px;
 	}
-	a {
-	    margin-top: 8px;
-	}
 	h1 {
 	    overflow: hidden;
-	    max-width: 470px;
 	}
 	h1 a {
 	    font-size: 1.7rem;
 	    line-height: 60px;
 	}
-	.favicon {
-	    margin-bottom: 9px;
+	#favicon {
+	    vertical-align: middle;
+	    margin-bottom: 52px;
 	    margin-left: 15px;
 	}
 	.control {
+	    margin-top: 8px;
 	    background: transparent !important;
 	    &:hover {
 		background: #272727 !important;
 	    }
 	}
 	#next {
+	    margin-top: 8px;
 	    margin-right: 15px;
 	    a:hover {
 		background: #272727;
 	    }
 	}
+	#feed-title {
+	    max-width: 390px;
+	}
+    }
+}
+
+@media only screen and (min-width: 64.063em) {
+    #feed-title {
+	max-width: 630px !important;
     }
 }
 
 @media only screen and (max-width: 40em) {
     .small-feed-header {
-	.favicon {
-	    margin-bottom: 3px;
+	#favicon {
+	    margin-bottom: 37px;
 	    margin-left: 15px;
 	}
 	.controls a:hover {
