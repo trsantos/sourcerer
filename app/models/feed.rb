@@ -67,10 +67,10 @@ class Feed < ActiveRecord::Base
     end
     image = doc.css("meta[property='og:image']").first
     if image
-      return image.attributes['content'].value
-    else
-      return nil
+      img = image.attributes['content'].value
+      return img unless img.include? 'logo' or img.include? 'Logo'
     end
+    return nil
   end
 
   def find_image_from_desc(description)
