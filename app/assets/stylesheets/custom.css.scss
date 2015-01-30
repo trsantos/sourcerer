@@ -90,8 +90,12 @@ article {
     body {
 	background-color: #eee !important;
     }
+    .feed-header {
+	box-shadow: 0px 1px 2px gray;
+    }
 }
 
+/* Small */
 @media only screen and (max-width: 40em) {
     .small-feed-header {
 	#favicon {
@@ -125,9 +129,6 @@ article {
     }
 }
 
-.feed-header {
-    box-shadow: 0px 1px 2px gray;
-}
 #app-header header {
     box-shadow: 0px 1px 2px #333;
 }
@@ -151,5 +152,5 @@ article {
 article {
     padding-bottom: 0.6rem;
     padding-top: 0.4rem;
-    border-bottom: 1px dotted #ddd;
+    border-bottom: 1px dotted gray;
 }
