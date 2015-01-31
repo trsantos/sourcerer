@@ -99,12 +99,13 @@ class Feed < ActiveRecord::Base
       unless img.include? 'feedburner' or
             img.include? 'pml.png' or
             img.include? 'mf.gif' or
+            img.include? 'ptq.gif' or
             img.include? 'twitter16.png' or
             img.include? 'application-pdf.png' or
             img.include? 'gif;base64' or
             img.include? 'icon_' or
+            img.include? '.mp3' or
             img.ends_with? 'ogv' or
-            img.ends_with? 'mp3' or
             img.ends_with? 'mp4'
         return img
       end
