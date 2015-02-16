@@ -1,8 +1,10 @@
 <% provide(:title, sanitize(@feed.title)) %>
 
-<% if @feed.entries.any? %>
-    <%= render @entries %>
-<% else %>
-    <p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
-<% end %>
-<small>Feed url: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %></small>
+<div class="feed-entries">
+    <% if @feed.entries.any? %>
+	<%= render @entries %>
+    <% else %>
+	<p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
+    <% end %>
+    <small>Feed url: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %></small>
+</div>

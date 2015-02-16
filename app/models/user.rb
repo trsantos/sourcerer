@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
+  include ApplicationHelper
+
   has_many :subscriptions, dependent: :destroy
   has_many :feeds, through: :subscriptions
+  has_many :topics
   
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
@@ -75,6 +78,13 @@ class User < ActiveRecord::Base
   def follow(feed)
     unless following?(feed)
       subscriptions.create(feed_id: feed.id)
+    end
+  end
+
+  # Follow all feeds from given topic. Ugly code
+  def follow_topic(topic)
+    get_feeds(topic).each do |url|
+      follow(find_or_create_feed(url))
     end
   end
 

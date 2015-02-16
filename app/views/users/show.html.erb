@@ -1,5 +1,14 @@
 <% provide(:title, @user.name) %>
-<h1>
-    <%= gravatar_for @user %>
-    <%= @user.name %>
-</h1>
+
+<h2>Hello, <%= @user.name.split.first %></h2>
+
+<p>Please, select the topics you want to follow:</p>
+
+<%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
+    <% Topic.all.each do |t| %>
+	<%= f.check_box t.topic %> <%= t.topic %> <br/>
+    <% end %>
+    <%= f.submit "Follow topics", class: "button" %>
+<% end %>
+
+<p>If you have an OPML file, you can <%= link_to "import it", new_opml_path %> too.</p>

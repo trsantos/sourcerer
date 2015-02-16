@@ -4,11 +4,12 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.where(activated: true).paginate(page: params[:page])
+    @users = User.where(activated: true)
   end
 
   def show
     @user = User.find(params[:id])
+    @topics = Topic.all
     redirect_to root_url and return unless @user.activated?
   end
   
@@ -45,6 +46,15 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
     redirect_to users_url
+  end
+
+  def update_topics
+    @user = User.find(params[:id])
+    params[:topic].each do |t, v|
+      current_user.follow_topic(t) if v == '1'
+    end
+    flash[:info] = "Topics updated. Happy reading!"
+    redirect_to next_path
   end
 
   private

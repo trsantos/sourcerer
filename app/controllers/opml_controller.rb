@@ -14,6 +14,7 @@ class OpmlController < ApplicationController
     opml.feeds.each do |f|
       current_user.follow(find_or_create_feed(f[:xml_url]))
     end
+    flash[:info] = "OPML file imported. Happy reading!"
     redirect_to next_path
   end
 end

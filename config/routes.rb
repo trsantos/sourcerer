@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :users do
     member do
-      get :feeds
+      patch 'update_topics'
     end
   end
   resources :account_activations, only: [:edit]

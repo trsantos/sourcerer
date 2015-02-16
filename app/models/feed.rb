@@ -33,13 +33,14 @@ class Feed < ActiveRecord::Base
 
     entries = feed.entries
     self.entries.destroy_all
-    4.times do |n|
+    5.times do |n|
       if entries[n]
         description = entries[n].content || entries[n].summary
         self.entries.create(title:       entries[n].title,
                             description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
                             image:       process_image(entries[n].image || find_image_from_desc(description)),
+#                            image:       process_image(find_image_from_desc(description) || entries[n].image),
                             url:         entries[n].url)
       end
     end
@@ -61,7 +62,8 @@ class Feed < ActiveRecord::Base
     #   url = url[0..url.index('#')-1]
     # end
     begin
-      doc = Nokogiri::HTML(open(URI::escape(url.strip), :allow_redirections => :safe))
+#      doc = Nokogiri::HTML(open(URI::escape(url.strip), :allow_redirections => :safe))
+      doc = Nokogiri::HTML(open(URI::escape(url.strip)))
     rescue StandardError
       return nil
     end
@@ -82,7 +84,7 @@ class Feed < ActiveRecord::Base
     return nil
   end
 
-  def process_image(img, from = :desc)
+  def process_image(img)
     if img
       if img.blank?
         return nil
