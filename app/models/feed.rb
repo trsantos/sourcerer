@@ -100,6 +100,7 @@ class Feed < ActiveRecord::Base
       # discard some silly images
       unless img.include? 'feedburner' or
             img.include? 'pml.png' or
+            img.include? 'blank.gif' or
             img.include? 'mf.gif' or
             img.include? 'ptq.gif' or
             img.include? 'twitter16.png' or
