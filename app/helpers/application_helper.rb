@@ -33,30 +33,46 @@ module ApplicationHelper
   end
 
   def get_feeds(t)
-    if t == "Technology"
-      return ["http://www.theverge.com/rss/index.xml",
-              "http://www.engadget.com/rss.xml",
-              "http://feeds.gawker.com/lifehacker/full",
-              "http://readwrite.com/rss.xml",
-              "http://techcrunch.com/feed/",
-              "http://feeds.gawker.com/gizmodo/full",
-              "http://www.wired.com/feed/",
-              "http://feeds.mashable.com/Mashable",
-              "http://feeds.arstechnica.com/arstechnica/index/",
-              "http://rss.slashdot.org/Slashdot/slashdot"]
+    if t == "Computers"
+      return [
+        "http://techcrunch.com/feed/",
+        "http://www.wired.com/feed/",
+        "http://feeds2.feedburner.com/ziffdavis/pcmag/breakingnews",
+        "http://feeds2.feedburner.com/techradar/allnews",
+        "http://feeds.arstechnica.com/arstechnica/index/"
+      ]
     elsif t == "News"
-      return ["http://rss.cnn.com/rss/edition.rss",
-              "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-              "http://www.npr.org/rss/rss.php?id=1001",
-              "http://feeds.abcnews.com/abcnews/topstories",
-              "http://feeds.bbci.co.uk/news/rss.xml",
-              "http://feeds.feedburner.com/foxnews/latest",
-              "http://feeds.reuters.com/reuters/topNews",
-              "http://www.theguardian.com/uk/rss",
-              "http://rssfeeds.usatoday.com/usatoday-NewsTopStories",
-              "http://time.com/feed/"]
-    elsif t == "Sports"
-      return []
+      return [
+        "http://rss.news.yahoo.com/rss/topstories",
+        "http://rss.cnn.com/rss/cnn_topstories.rss",
+        "http://www.huffingtonpost.com/feeds/index.xml",
+        "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+        "http://www.theguardian.com/uk/rss"
+      ]
+    elsif t == "Business"
+      return [
+        "http://feeds.wsjonline.com/wsj/xml/rss/3_7011.xml",
+        "http://www.newslookup.com/rss/business/bloomberg.rss",
+        "http://feeds.reuters.com/reuters/topNews",
+        "http://rss.cnn.com/rss/money_topstories.rss",
+        "http://feeds.marketwatch.com/marketwatch/topstories/"
+      ]
+    elsif t == "Games"
+      return [
+        "http://feeds.ign.com/ign/games-all",
+        "http://store.steampowered.com/feeds/news.xml",
+        "http://news.xbox.com/feed/stories",
+        "http://feeds.feedburner.com/psblog",
+        "http://www.gamespot.com/feeds/mashup/"
+      ]
+    elsif t == "Science"
+      return [
+        "http://www.livescience.com/home/feed/site.xml",
+        "http://feeds.sciencedaily.com/sciencedaily",
+        "http://feeds.nationalgeographic.com/ng/News/News_Main",
+        "http://phys.org/rss-feed/breaking/",
+        "http://www.theguardian.com/science/rss"
+      ]
     else
       return []
     end
