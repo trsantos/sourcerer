@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    return if self.updated_at > 8.hour.ago and self.entries.count > 0
+    return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -21,12 +21,12 @@ class Feed < ActiveRecord::Base
     self.update_attribute(:updated_at, Time.zone.now)
 
     # return if feed has not changed
-    if self.entries.first and feed.entries.first
-      if (feed.entries.first.url == self.entries.last.url) ||
-         (feed.entries.first.url == self.entries.first.url)
-        return
-      end
-    end
+    # if self.entries.first and feed.entries.first
+    #   if (feed.entries.first.url == self.entries.last.url) ||
+    #      (feed.entries.first.url == self.entries.first.url)
+    #     return
+    #   end
+    # end
 
     self.update_attributes(title:    feed.title,
                            site_url: feed.url)
@@ -40,7 +40,6 @@ class Feed < ActiveRecord::Base
                             description: sanitize(strip_tags(description)),
                             pub_date:    find_pub_date(entries[n].published),
                             image:       process_image(entries[n].image || find_image_from_desc(description)),
-#                            image:       process_image(find_image_from_desc(description) || entries[n].image),
                             url:         entries[n].url)
       end
     end
@@ -102,6 +101,7 @@ class Feed < ActiveRecord::Base
             img.include? 'pml.png' or
             img.include? 'blank.gif' or
             img.include? 'mf.gif' or
+            img.include? 'mercola.com/aggbug.aspx' or
             img.include? 'ptq.gif' or
             img.include? 'twitter16.png' or
             img.include? 'application-pdf.png' or

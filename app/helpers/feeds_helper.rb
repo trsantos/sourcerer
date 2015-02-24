@@ -19,5 +19,18 @@ module FeedsHelper
     end
     return feed.site_url
   end
+
+  def get_favicon(url)
+    return "http://www.google.com/s2/favicons?domain=" + url
+
+    # Maybe I shouldn't depend on Google here...
+    favicon_url = url + "favicon.ico"
+    f =  URI.parse(favicon_url)
+    if Net::HTTP.new(f.host, f.port).request_head(f.path).code == "200"
+      f.to_s
+    else
+      "http://www.google.com/s2/favicons?domain=" + url
+    end
+  end
   
 end
