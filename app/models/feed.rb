@@ -20,13 +20,13 @@ class Feed < ActiveRecord::Base
 
     self.update_attribute(:updated_at, Time.zone.now)
 
-    # return if feed has not changed
-    # if self.entries.first and feed.entries.first
-    #   if (feed.entries.first.url == self.entries.last.url) ||
-    #      (feed.entries.first.url == self.entries.first.url)
-    #     return
-    #   end
-    # end
+    # return if feed has not changed. when does it fail?
+    if self.entries.first and feed.entries.first
+      if (feed.entries.first.url == self.entries.last.url) ||
+         (feed.entries.first.url == self.entries.first.url)
+        return
+      end
+    end
 
     self.update_attributes(title:    feed.title,
                            site_url: feed.url)

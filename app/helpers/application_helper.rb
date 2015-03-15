@@ -77,7 +77,7 @@ module ApplicationHelper
       return [
         "http://feeds.feedburner.com/ArchDaily",
         "http://www.dwell.com/articles/feed",
-        "http://www.feed43.com/2385028168887674.xml",
+        "http://www.architecturaldigest.com/feed/rss/architecture-design.rss.xml",
         "http://archinect.com/feed/home",
         "http://www.domusweb.it/bin/domusweb/rss?country=en"
       ]
