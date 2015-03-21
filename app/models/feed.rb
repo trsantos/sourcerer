@@ -97,6 +97,9 @@ class Feed < ActiveRecord::Base
             img.include? 'ptq.gif' or
             img.include? 'twitter16.png' or
             img.include? 'sethsblog' or
+            img.include? 'assets.feedblitz.com/i/' or
+            img.include? '/heads/' or
+            img.include? 'smile.png' or
             img.include? 'application-pdf.png' or
             img.include? 'gif;base64' or
             img.include? 'abrirpdf.png' or
