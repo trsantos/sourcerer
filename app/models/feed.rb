@@ -91,6 +91,7 @@ class Feed < ActiveRecord::Base
       unless img.include? 'feedburner' or
             img.include? 'pml.png' or
             img.include? 'blank.gif' or
+            img.include? 'rc.img' or
             img.include? 'mf.gif' or
             img.include? 'mercola.com/aggbug.aspx' or
             img.include? 'ptq.gif' or
@@ -98,11 +99,16 @@ class Feed < ActiveRecord::Base
             img.include? 'sethsblog' or
             img.include? 'application-pdf.png' or
             img.include? 'gif;base64' or
+            img.include? 'abrirpdf.png' or
+            img.include? 'gravatar.com/avatar' or
             img.include? 'nojs.php' or
             img.include? 'icon_' or
+            img.include? 'gplus-16.png' or
+            img.include? 'logo' or
+            img.include? 'usatoday-newstopstories' or
             img.include? '.mp3' or
-            img.ends_with? 'ogv' or
-            img.ends_with? 'mp4'
+            img.include? '.mp4' or
+            img.include? '.ogv'
         return img
       end
     end
