@@ -57,7 +57,7 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, description)
-    if entry.image
+    if filter_image(entry.image)
       return entry.image
     else
       return find_image_from_desc(description)
