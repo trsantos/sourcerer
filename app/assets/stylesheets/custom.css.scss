@@ -179,8 +179,12 @@ article {
 }
 
 .thumb, .thumb-small {
-    #   border: 1px solid #eee;
+#   border: 1px solid #eee;
     border-radius: 3px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+#   margin-top: -33%;
 }
 
 .description {

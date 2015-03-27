@@ -109,6 +109,7 @@ class Feed < ActiveRecord::Base
             img.include? 'icon_' or
             img.include? 'gplus-16.png' or
             img.include? 'logo' or
+            img.include? 'webkit-fake-url' or
             img.include? 'usatoday-newstopstories' or
             img.include? '.mp3' or
             img.include? '.mp4' or
