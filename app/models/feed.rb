@@ -22,7 +22,7 @@ class Feed < ActiveRecord::Base
 
     # return if feed has not changed. when does it fail?
     if self.entries.first and feed.entries.first
-      if (feed.entries.first.url == self.entries.last.url) &&
+      if (feed.entries.last.url == self.entries.last.url) &&
          (feed.entries.first.url == self.entries.first.url)
         return
       end
@@ -75,49 +75,48 @@ class Feed < ActiveRecord::Base
   end
 
   def filter_image(img)
-    if img
-      if img.blank?
-        return nil
-      end
-
-      if img.start_with? '//'
-        img = "http:" + img
-      elsif img.start_with? '/'
-        parse = URI.parse(self.feed_url)
-        img = parse.scheme + '://' + parse.host + img
-      end
-
-      # discard some silly images
-      unless img.include? 'feedburner' or
-            img.include? 'pml.png' or
-            img.include? 'blank.gif' or
-            img.include? 'rc.img' or
-            img.include? 'mf.gif' or
-            img.include? 'mercola.com/aggbug.aspx' or
-            img.include? 'ptq.gif' or
-            img.include? 'twitter16.png' or
-            img.include? 'sethsblog' or
-            img.include? 'assets.feedblitz.com/i/' or
-            img.include? '/heads/' or
-            img.include? '/share/' or
-            img.include? 'smile.png' or
-            img.include? 'application-pdf.png' or
-            img.include? 'gif;base64' or
-            img.include? 'abrirpdf.png' or
-            img.include? 'gravatar.com/avatar' or
-            img.include? 'nojs.php' or
-            img.include? 'icon_' or
-            img.include? 'gplus-16.png' or
-            img.include? 'logo' or
-            img.include? 'webkit-fake-url' or
-            img.include? 'usatoday-newstopstories' or
-            img.include? '.mp3' or
-            img.include? '.mp4' or
-            img.include? '.ogv'
-        return img
-      end
+    if img.null? || img.blank?
+      return nil
     end
-    return nil
-  end
+
+    if img.start_with? '//'
+      img = "http:" + img
+    elsif img.start_with? '/'
+      parse = URI.parse(self.feed_url)
+      img = parse.scheme + '://' + parse.host + img
+    end
+
+    # discard silly images
+    if img.include? 'feedburner' or
+      img.include? 'pml.png' or
+      img.include? 'blank.gif' or
+      img.include? 'rc.img' or
+      img.include? 'mf.gif' or
+      img.include? 'mercola.com/aggbug.aspx' or
+      img.include? 'ptq.gif' or
+      img.include? 'twitter16.png' or
+      img.include? 'sethsblog' or
+      img.include? 'assets.feedblitz.com/i/' or
+      img.include? '/heads/' or
+      img.include? '/share/' or
+      img.include? 'smile.png' or
+      img.include? 'application-pdf.png' or
+      img.include? 'gif;base64' or
+      img.include? 'abrirpdf.png' or
+      img.include? 'gravatar.com/avatar' or
+      img.include? 'nojs.php' or
+      img.include? 'icon_' or
+      img.include? 'gplus-16.png' or
+      img.include? 'logo' or
+      img.include? 'webkit-fake-url' or
+      img.include? 'usatoday-newstopstories' or
+      img.include? '.mp3' or
+      img.include? '.mp4' or
+      img.include? '.ogv'
+      return nil
+    else
+      return img
+    end
+end
 
 end
