@@ -75,7 +75,7 @@ class Feed < ActiveRecord::Base
   end
 
   def filter_image(img)
-    if img.null? || img.blank?
+    if img.nil? || img.blank?
       return nil
     end
 
