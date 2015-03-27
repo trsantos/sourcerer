@@ -1,11 +1,12 @@
 class SubscriptionsController < ApplicationController
   include ApplicationHelper
+  include FeedsHelper
   
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @subscriptions = current_user.subscriptions
+    @subscriptions = current_user.subscriptions.sort_by { |s| sub_title(s.feed) }
   end
 
   def create

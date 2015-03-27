@@ -116,6 +116,7 @@ class Feed < ActiveRecord::Base
       img.include? 'a2t2.img' or
       img.include? '.mp3' or
       img.include? '.mp4' or
+      img.include? '.pdf' or
       img.include? '.ogv'
       return nil
     else
