@@ -21,12 +21,12 @@ class Feed < ActiveRecord::Base
     self.update_attribute(:updated_at, Time.zone.now)
 
     # return if feed has not changed. when does it fail?
-    if self.entries.first and feed.entries.first
-      if (feed.entries.last.url == self.entries.last.url) &&
-         (feed.entries.first.url == self.entries.first.url)
-        return
-      end
-    end
+    # if self.entries.first and feed.entries.first
+    #   if (feed.entries.last.url == self.entries.last.url) &&
+    #      (feed.entries.first.url == self.entries.first.url)
+    #     return
+    #   end
+    # end
 
     self.update_attributes(title:    feed.title,
                            site_url: feed.url || feed.feed_url)
@@ -110,6 +110,10 @@ class Feed < ActiveRecord::Base
       img.include? 'logo' or
       img.include? 'webkit-fake-url' or
       img.include? 'usatoday-newstopstories' or
+      img.include? 'a2.img' or
+      img.include? 'ach.img' or
+      img.include? 'a2t.img' or
+      img.include? 'a2t2.img' or
       img.include? '.mp3' or
       img.include? '.mp4' or
       img.include? '.ogv'
