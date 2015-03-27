@@ -7,5 +7,5 @@
 	<p>This <%= link_to "feed", @feed.feed_url %> could not be fetched or has no items.</p>
     <% end %>
     <small>Feed url: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %></small>
-    <%= link_to "Next feed", next_path, class: "show-for-small-only button expand next-button" %>
+    <%#= link_to "Next feed", next_path, class: "show-for-small-only button expand next-button" %>
 </div>

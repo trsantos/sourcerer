@@ -22,7 +22,7 @@ class Feed < ActiveRecord::Base
 
     # return if feed has not changed. when does it fail?
     if self.entries.first and feed.entries.first
-      if (feed.entries.first.url == self.entries.last.url) ||
+      if (feed.entries.first.url == self.entries.last.url) &&
          (feed.entries.first.url == self.entries.first.url)
         return
       end
@@ -33,7 +33,7 @@ class Feed < ActiveRecord::Base
 
     entries = feed.entries
     self.entries.destroy_all
-    4.times do |n|
+    5.times do |n|
       if entries[n]
         entry = entries[n]
         description = entry.content || entry.summary
@@ -99,6 +99,7 @@ class Feed < ActiveRecord::Base
             img.include? 'sethsblog' or
             img.include? 'assets.feedblitz.com/i/' or
             img.include? '/heads/' or
+            img.include? '/share/' or
             img.include? 'smile.png' or
             img.include? 'application-pdf.png' or
             img.include? 'gif;base64' or
