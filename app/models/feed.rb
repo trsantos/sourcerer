@@ -90,6 +90,7 @@ class Feed < ActiveRecord::Base
     if img.include? 'feedburner' or
       img.include? 'pml.png' or
       img.include? '.gif' or
+      img.include? '.tiff' or
       img.include? 'rc.img' or
       img.include? 'mf.gif' or
       img.include? 'mercola.com/aggbug.aspx' or
