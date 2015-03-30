@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    return if self.updated_at > 12.hour.ago and self.entries.count > 0
+    return if self.updated_at > 24.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -89,7 +89,7 @@ class Feed < ActiveRecord::Base
     # discard silly images
     if img.include? 'feedburner' or
       img.include? 'pml.png' or
-      img.include? 'blank.gif' or
+      img.include? '.gif' or
       img.include? 'rc.img' or
       img.include? 'mf.gif' or
       img.include? 'mercola.com/aggbug.aspx' or
@@ -114,6 +114,7 @@ class Feed < ActiveRecord::Base
       img.include? 'ach.img' or
       img.include? 'a2t.img' or
       img.include? 'a2t2.img' or
+      img.include? 'subscribe.jpg' or
       img.include? '.mp3' or
       img.include? '.mp4' or
       img.include? '.pdf' or
