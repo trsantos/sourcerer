@@ -84,6 +84,9 @@ class Feed < ActiveRecord::Base
     elsif img.start_with? '/'
       parse = URI.parse(self.feed_url)
       img = parse.scheme + '://' + parse.host + img
+    elsif img.start_with? '../'
+      parse = URI.parse(self.feed_url)
+      img = parse.scheme + '://' + parse.host + img[2..-1]
     end
 
     # discard silly images
