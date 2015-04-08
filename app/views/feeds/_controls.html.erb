@@ -1,35 +1,35 @@
 <% if size == :small %>
     <% class_string = "" %>
 <% else %>
-    <% class_string = "button control" %>
+    <% class_string = "button feed-button" %>
 <% end %>
 
 <% if logged_in? %>
     <% if current_user.following?(@feed) %>
-	<% sub = current_user.subscriptions.find_by(feed_id: @feed.id) %>
-	<% if sub.starred %>
-	    <li><%= link_to "Unstar",
-		            subscription_path(sub, subscription: { starred: false }),
+	<% s = current_user.subscriptions.find_by(feed_id: @feed.id) %>
+	<% if s.starred %>
+	    <li><%= link_to "★",
+		            subscription_path(s, subscription: { starred: false }),
 			    method: :patch,
 		            class: class_string %></li>
 	<% else %>
-	    <li><%= link_to "Star",
-		            subscription_path(sub, subscription: { starred: true }),
+	    <li><%= link_to "☆",
+		            subscription_path(s, subscription: { starred: true }),
 			    method: :patch,
 		            class: class_string %></li>
 	<% end %>
-	<li><%= link_to "Edit", edit_subscription_path(sub), class: class_string %></li>
-	<li><%= link_to "Unsubscribe", subscription_path(sub), method: :delete, class: class_string %></li>
+	<li><%= link_to "Edit", edit_subscription_path(s), class: class_string %></li>
+	<li><%= link_to "Unfollow", subscription_path(s), method: :delete, class: class_string %></li>
     <% else %>
-	<li><%= link_to "Subscribe", subscriptions_path(feed_id: @feed.id), method: :post, class: class_string %></li>
+	<li><%= link_to "Follow", subscriptions_path(feed_id: @feed.id), method: :post, class: class_string %></li>
     <% end %>
     <% if size == :small %>
 	<li class="active">
-	    <%= link_to "Next feed", next_path, id: "next" %>
+	    <%= link_to "Next page", next_path, id: "next" %>
 	</li>
     <% else %>
 	<li id="next">
-	    <%= link_to "Next feed", next_path, class: "button" %>
+	    <%= link_to "Next page", next_path, class: "button" %>
 	</li>
     <% end %>
 <% end %>

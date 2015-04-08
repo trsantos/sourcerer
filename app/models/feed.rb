@@ -85,7 +85,7 @@ class Feed < ActiveRecord::Base
       parse = URI.parse(self.feed_url)
       img = parse.scheme + '://' + parse.host + img
     elsif img.start_with? '../'
-      parse = URI.parse(self.feed_url)
+      parse = URI.parse(self.url)
       img = parse.scheme + '://' + parse.host + img[2..-1]
     end
 
@@ -119,6 +119,7 @@ class Feed < ActiveRecord::Base
       img.include? 'a2t.img' or
       img.include? 'a2t2.img' or
       img.include? 'subscribe.jpg' or
+      img.include? 'transparent.png' or
       img.include? '.mp3' or
       img.include? '.mp4' or
       img.include? '.pdf' or

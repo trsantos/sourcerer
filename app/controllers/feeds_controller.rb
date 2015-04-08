@@ -4,7 +4,7 @@ class FeedsController < ApplicationController
   before_action :logged_in_user, only: [:index]
   
   def index
-    @feeds = Feed.all
+    @feeds = Feed.all.sort_by { |f| f.title || "" }
   end
 
   def show
