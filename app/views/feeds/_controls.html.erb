@@ -19,9 +19,9 @@
 		            class: class_string %></li>
 	<% end %>
 	<li><%= link_to "Edit", edit_subscription_path(s), class: class_string %></li>
-	<li><%= link_to "Unfollow", subscription_path(s), method: :delete, class: class_string %></li>
+	<li><%= link_to "Unsubscribe", subscription_path(s), method: :delete, class: class_string %></li>
     <% else %>
-	<li><%= link_to "Follow", subscriptions_path(feed_id: @feed.id), method: :post, class: class_string %></li>
+	<li><%= link_to "Subscribe", subscriptions_path(feed_id: @feed.id), method: :post, class: class_string %></li>
     <% end %>
     <% if size == :small %>
 	<li class="active">
