@@ -35,6 +35,12 @@ article {
 
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
+    .top-bar {
+	max-width: 54rem !important;
+    }
+    .row {
+	max-width: 45rem !important;
+    }
     .main-content {
 	padding-top: 10px;
     }
@@ -201,4 +207,8 @@ article {
 .alert-box {
     margin-bottom: 0px !important;
     text-align: center;
+}
+
+.entry-title a {
+    color: #111;
 }
