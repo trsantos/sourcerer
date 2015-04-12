@@ -31,7 +31,7 @@ class Feed < ActiveRecord::Base
                            site_url:   feed.url || feed.feed_url,
                            updated_at: Time.zone.now)
 
-    entries = feed.entries
+    entries = feed.entries[0..10]
     self.entries.destroy_all
     entries.each do |entry|
       description = entry.content || entry.summary
@@ -113,6 +113,7 @@ class Feed < ActiveRecord::Base
       img.include? 'usatoday-newstopstories' or
       img.include? 'a2.img' or
       img.include? 'ach.img' or
+      img.include? '/comments/' or
       img.include? 'a2t.img' or
       img.include? 'a2t2.img' or
       img.include? 'subscribe.jpg' or
