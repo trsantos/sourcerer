@@ -185,8 +185,13 @@ article {
 }
 
 .thumb, .thumb-small {
-    border: 1px solid #eee;
+#    border: 1px solid #eee;
     border-radius: 3px;
+}
+
+.crop {
+    border: 1px solid #eee;
+#    border-radius: 3px;
 }
 
 .description {

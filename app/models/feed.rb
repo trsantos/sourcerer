@@ -18,9 +18,8 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    self.update_attribute(:updated_at, Time.zone.now)
-
-    # return if feed has not changed. when does it fail?
+    # return if feed has not changed. the second test is there because
+    # feeds appear in reverse order when they all have the same date
     if self.entries.first and feed.entries.first
       if (feed.entries.first.url == self.entries.first.url) ||
          (feed.entries.first.url == self.entries.last.url)
@@ -28,21 +27,19 @@ class Feed < ActiveRecord::Base
       end
     end
 
-    self.update_attributes(title:    feed.title,
-                           site_url: feed.url || feed.feed_url)
+    self.update_attributes(title:      feed.title,
+                           site_url:   feed.url || feed.feed_url,
+                           updated_at: Time.zone.now)
 
     entries = feed.entries
     self.entries.destroy_all
-    5.times do |n|
-      if entries[n]
-        entry = entries[n]
-        description = entry.content || entry.summary
-        self.entries.create(title:       entry.title,
-                            description: sanitize(strip_tags(description)),
-                            pub_date:    find_pub_date(entry.published),
-                            image:	 find_image(entry, description),
-                            url:         entry.url)
-      end
+    entries.each do |entry|
+      description = entry.content || entry.summary
+      self.entries.create(title:       entry.title,
+                          description: sanitize(strip_tags(description)),
+                          pub_date:    find_pub_date(entry.published),
+                          image:       find_image(entry, description),
+                          url:         entry.url)
     end
   end
 
