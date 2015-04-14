@@ -15,10 +15,10 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
 
     begin
+      self.update_attribute(:updated_at, Time.zone.now)
       feed = Feedjira::Feed.fetch_and_parse self.feed_url
     rescue Rack::Timeout::RequestTimeoutError
       puts 'Timeout when fetching feed ' + self.id.to_s
-      self.update_attribute(:updated_at, Time.zone.now)
       return
     end
 
@@ -34,8 +34,7 @@ class Feed < ActiveRecord::Base
     end
 
     self.update_attributes(title:      feed.title,
-                           site_url:   feed.url || feed.feed_url,
-                           updated_at: Time.zone.now)
+                           site_url:   feed.url || feed.feed_url)
 
     entries = feed.entries[0..10]
     self.entries.destroy_all
