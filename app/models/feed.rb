@@ -14,7 +14,11 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
 
-    feed = Feedjira::Feed.fetch_and_parse self.feed_url
+    begin
+      feed = Feedjira::Feed.fetch_and_parse self.feed_url
+    rescue
+      puts 'Feed ' + feed.id
+    end
 
     return if feed.is_a? Integer
 
