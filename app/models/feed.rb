@@ -18,6 +18,7 @@ class Feed < ActiveRecord::Base
       feed = Feedjira::Feed.fetch_and_parse self.feed_url
     rescue Rack::Timeout::RequestTimeoutError
       puts 'Timeout when fetching feed ' + self.id.to_s
+      self.update_attribute(:updated_at, Time.zone.now)
       return
     end
 
