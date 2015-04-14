@@ -17,7 +17,7 @@ class Feed < ActiveRecord::Base
     begin
       feed = Feedjira::Feed.fetch_and_parse self.feed_url
     rescue Rack::Timeout::RequestTimeoutError
-      puts 'Feed ' + feed.id
+      puts 'Feed ' + self.id
     end
 
     return if feed.is_a? Integer
