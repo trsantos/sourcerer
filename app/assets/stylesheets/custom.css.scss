@@ -107,6 +107,7 @@ article {
 	overflow: hidden;
 	max-height: 4.8rem;
 	border-radius: 3px;
+#	border: 1px solid #eee;
     }
     .desc-with-img {
 	padding-left: 1.875rem !important;
@@ -115,6 +116,10 @@ article {
     .description {
 	/* n x 1.6 gives n lines */
 	max-height: 3.2rem;
+    }
+    .thumb, .thumb-small {
+        margin: 0px auto;
+	display: block;
     }
 }
 
@@ -165,6 +170,9 @@ article {
 	/* n x 1.6 gives n lines */
 	max-height: 3.2rem;
     }
+    .thumb, .thumb-small {
+#	border: 1px solid #eee;
+    }
 }
 
 .next-button {
@@ -185,8 +193,8 @@ article {
 }
 
 .thumb, .thumb-small {
-#    border: 1px solid #eee;
     border-radius: 3px;
+#border: 1px solid #eee;
 }
 
 .crop {
