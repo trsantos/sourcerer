@@ -1,15 +1,16 @@
+<% if old_entry? entry %>
+    <% old = "old" %>
+<% else %>
+    <% old = "" %>
+<% end %>
+
 <article id="entry-<%= entry.id %>">
-    <% if old_entry? entry %>
-	<% old = "old-entry" %>
-    <% else %>
-	<% old = "" %>
-    <% end %>
     <header class="entry-title <%= old %>">
 	<h6>
 	    <strong><%= link_to sanitize(entry.title), entry.url, target: "_blank" %></strong>
 	</h6>
     </header>
-    <div class="row entry-content">
+    <div class="row">
 	<% if entry.description.blank? and entry.image? %>
 	    <div class="small-12 columns">
 		<%= image_tag entry.image, class: "thumb" %>
@@ -19,19 +20,19 @@
 		<%= image_tag entry.image, class: "thumb-small" %>
 	    </div>
 	    <div class="medium-10 columns desc-with-img">
-		<p class="description <%= old %>">
+		<p class="description">
 		    <%= sanitize entry.description %>
 		</p>
 	    </div>
 	<% else %>
 	    <div class="small-12 columns">
-		<p class="description <%= old %>">
+		<p class="description">
 		    <%= sanitize entry.description %>
 		</p>
 	    </div>
 	<% end %>
     </div>
-    <footer class="<%= old %>">
+    <footer>
 	<time datetime="<%= entry.pub_date %>">
 	    <small>Posted <%= time_ago_in_words(entry.pub_date) %> ago.</small>
 	</time>
