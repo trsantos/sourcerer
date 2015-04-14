@@ -36,7 +36,7 @@ class Feed < ActiveRecord::Base
     self.update_attributes(title:      feed.title,
                            site_url:   feed.url || feed.feed_url)
 
-    entries = feed.entries[0..5]
+    entries = feed.entries[0..4]
     self.entries.destroy_all
     entries.each do |entry|
       description = entry.content || entry.summary
