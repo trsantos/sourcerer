@@ -215,9 +215,9 @@ article {
 }
 
 .entry-title a {
-    color: #111;
+    color: #000;
 }
 
-.old-entry a {
-    color: #888;
+.old-entry small, .old-entry a, .entry-content .old-entry {
+    color: #777;
 }
