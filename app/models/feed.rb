@@ -24,19 +24,10 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    # return if feed has not changed. the second test is there because
-    # feeds appear in reverse order when they all have the same date
-    if self.entries.first and feed.entries.first
-      if (feed.entries.first.url == self.entries.first.url) ||
-         (feed.entries.first.url == self.entries.last.url)
-        return
-      end
-    end
-
     self.update_attributes(title:      feed.title,
                            site_url:   feed.url || feed.feed_url)
 
-    entries = feed.entries[0..9]
+    entries = feed.entries.first(10)
     self.entries.destroy_all
     entries.each do |entry|
       description = entry.content || entry.summary
@@ -131,6 +122,6 @@ class Feed < ActiveRecord::Base
     else
       return img
     end
-end
+  end
 
 end
