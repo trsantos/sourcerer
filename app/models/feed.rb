@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    return if self.updated_at > 2.hour.ago and self.entries.count > 0
+    #   return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -24,10 +24,14 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
+    entries = feed.entries.first(10)
+
+    if !new? entries
+      return
+    end
+
     self.update_attributes(title:      feed.title,
                            site_url:   feed.url || feed.feed_url)
-
-    entries = feed.entries.first(10)
     self.entries.destroy_all
     entries.each do |entry|
       description = entry.content || entry.summary
@@ -40,6 +44,17 @@ class Feed < ActiveRecord::Base
   end
 
   private
+
+  def new?(entries)
+    begin
+      if (self.entries[0].url == entries[0].url) and
+         (self.entries[1].url == entries[1].url)
+        return false
+      end
+    rescue
+    end
+    return true
+  end
 
   def find_pub_date(date)
     if date.nil? or date > Time.zone.now
