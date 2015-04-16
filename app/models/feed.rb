@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    return if self.updated_at > 24.hour.ago and self.entries.count > 0
+    return if self.updated_at > 2.hour.ago and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -26,7 +26,7 @@ class Feed < ActiveRecord::Base
 
     entries = feed.entries.first(5)
 
-    if !new? entries
+    unless new? entries
       return
     end
 
@@ -47,7 +47,7 @@ class Feed < ActiveRecord::Base
 
   def new?(entries)
     begin
-      # sometimes there is some top post from the far future.
+      # sometimes there is some top post from the far future...
       # checking the second one increases the chance of getting it right
       if self.entries[1].url == entries[1].url
         return false
