@@ -24,7 +24,7 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    entries = feed.entries.first(10)
+    entries = feed.entries.first(5)
 
     if !new? entries
       return
@@ -47,8 +47,9 @@ class Feed < ActiveRecord::Base
 
   def new?(entries)
     begin
-      if (self.entries[0].url == entries[0].url) and
-         (self.entries[1].url == entries[1].url)
+      # sometimes there is some top post from the far future.
+      # checking the second one increases the chance of getting it right
+      if self.entries[1].url == entries[1].url
         return false
       end
     rescue
