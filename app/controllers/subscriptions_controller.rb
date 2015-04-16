@@ -38,9 +38,15 @@ class SubscriptionsController < ApplicationController
     normal = Subscription.where("user_id = ? AND starred = ?", current_user.id, false)
     p = rand
     if p < 0.8
-      redirect_to get_updated_subscription(fav) || get_updated_subscription(normal) || root_url
+      s = get_updated_subscription(fav) || get_updated_subscription(normal)
     else
-      redirect_to get_updated_subscription(normal) || get_updated_subscription(fav) || root_url
+      s = get_updated_subscription(normal) || get_updated_subscription(fav)
+    end
+    if s
+      redirect_to s
+    else
+      flash[:info] = "You have no updated feeds. Check back later!"
+      redirect_to root_url
     end
   end
   
