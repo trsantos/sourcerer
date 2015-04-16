@@ -105,7 +105,9 @@ article {
 	margin-left: 0.9375rem !important;
 	padding-left: 0px !important;
 	overflow: hidden;
-	max-height: 4.8rem;
+	#max-height: 4.8rem;
+	/* 16:9 */
+	max-height: 3.69140625rem;
 	border-radius: 3px;
 #	border: 1px solid #eee;
     }
