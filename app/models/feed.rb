@@ -24,7 +24,7 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    entries = feed.entries
+    entries = feed.entries.first(5)
 
     unless new? entries
       return
@@ -125,6 +125,8 @@ class Feed < ActiveRecord::Base
       img.include? 'icon_' or
       img.include? 'gplus-16.png' or
       img.include? 'logo' or
+      img.include? 'avw.php' or
+      img.include? 'tmn-test' or
       img.include? 'webkit-fake-url' or
       img.include? 'usatoday-newstopstories' or
       img.include? 'a2.img' or

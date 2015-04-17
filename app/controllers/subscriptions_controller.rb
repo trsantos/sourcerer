@@ -34,8 +34,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    fav = Subscription.where("user_id = ? AND starred = ?", current_user.id, true)
-    normal = Subscription.where("user_id = ? AND starred = ?", current_user.id, false)
+    # the interval for visits should be configurable
+    fav    = Subscription.where("user_id = ? AND starred = ? AND visited_at < ?",
+                                current_user.id, true, 1.day.ago)
+    normal = Subscription.where("user_id = ? AND starred = ? AND visited_at < ?",
+                                current_user.id, false, 1.day.ago)
     p = rand
     if p < 0.8
       s = get_updated_subscription(fav) || get_updated_subscription(normal)
