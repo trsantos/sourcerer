@@ -24,7 +24,7 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    entries = feed.entries.first(5)
+    entries = feed.entries.first(10)
 
     unless new? entries
       return
@@ -131,6 +131,7 @@ class Feed < ActiveRecord::Base
       img.include? 'subscribe.jpg' or
       img.include? 'transparent.png' or
       img.include? '.mp3' or
+      img.include? '.m4a' or
       img.include? '.mp4' or
       img.include? '.pdf' or
       img.include? '.ogv'
