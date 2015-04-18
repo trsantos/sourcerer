@@ -230,3 +230,7 @@ article {
 .old a {
     color: #888;
 }
+
+html.turbolinks-progress-bar::before {
+    background-color: #00A6EC !important;
+}
