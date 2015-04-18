@@ -24,6 +24,7 @@ $(function(){
 	}
     });
     $(window).scrollTop(0);
+    $("#go-to-top")[0].click();
 });
 
 // $(function(){ $(document).foundation(); })
