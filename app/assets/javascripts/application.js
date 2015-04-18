@@ -13,10 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require turbolinks
 //= require_tree .
 
-window.onload = function(){
-    $(document).foundation();
-};
-
-//= require turbolinks
+$(function(){
+    $(document).foundation({
+	topbar : {
+	    scrolltop: false
+	}
+    });
+});
+$(function(){ $(document).scrollTop(); });
