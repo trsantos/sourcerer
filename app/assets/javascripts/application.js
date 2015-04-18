@@ -23,7 +23,7 @@ $(function(){
 	    scrolltop: false
 	}
     });
-    window.scrollTo(0, 0);
+    $(window).scrollTop(0);
 });
 
 // $(function(){ $(document).foundation(); })
