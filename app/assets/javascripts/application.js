@@ -17,7 +17,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(function () {
+$(function(){
     $(document).foundation({
 	topbar : {
 	    scrolltop: false
@@ -25,6 +25,6 @@ $(function () {
     });
 });
 
-$(function () {
+$(document).on('page:load', function(){
     window.scrollTo(0, 0);
 });
