@@ -23,10 +23,3 @@ $(function(){
 	}
     });
 });
-
-var ready;
-ready = function() {
-    window.scrollTo(0, 0);
-};
-$(document).ready(ready);
-$(document).on('page:load', ready);
