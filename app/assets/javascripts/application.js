@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
@@ -23,8 +22,4 @@ $(function(){
 	    scrolltop: false
 	}
     });
-});
-
-$(document).on('page:load', function(){
-    window.scrollTo(0, 0);
 });
