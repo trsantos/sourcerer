@@ -35,7 +35,7 @@ class SubscriptionsController < ApplicationController
 
   def next
     # the interval for visits should be configurable
-    interval = 1.day.ago
+    interval = 2.hour.ago
     fav    = Subscription.where("user_id = ? AND starred = ? AND visited_at < ?",
                                 current_user.id, true,  interval)
     normal = Subscription.where("user_id = ? AND starred = ? AND visited_at < ?",
