@@ -11,20 +11,19 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
 //= require_tree .
 
-$(function(){
-    $(document).foundation({
-	topbar : {
-	    scrolltop: false
-	}
-    });
-    $(window).scrollTop(0);
-    $("#go-to-top")[0].click();
-});
+// broken on Firefox for Android
+// $(function(){
+//     $(document).foundation({
+// 	topbar : {
+// 	    scrolltop: false
+// 	}
+//     });
+//     $(window).scrollTop(0);
+// });
 
-// $(function(){ $(document).foundation(); })
+$(function(){ $(document).foundation(); })
