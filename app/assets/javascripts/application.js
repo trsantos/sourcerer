@@ -16,14 +16,13 @@
 //= require turbolinks
 //= require_tree .
 
-// broken on Firefox for Android
-// $(function(){
-//     $(document).foundation({
-// 	topbar : {
-// 	    scrolltop: false
-// 	}
-//     });
-//     $(window).scrollTop(0);
-// });
+broken on Firefox for Android
+$(function(){
+    $(document).foundation({
+	topbar : {
+	    scrolltop: false
+	}
+    });
+});
 
-$(function(){ $(document).foundation(); })
+// $(function(){ $(document).foundation(); })
