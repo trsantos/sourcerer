@@ -16,12 +16,12 @@
 //= require turbolinks
 //= require_tree .
 
-$(function(){
-    $(document).foundation({
-	topbar : {
-	    scrolltop: false
-	}
-    });
-});
+// $(function(){
+//     $(document).foundation({
+// 	topbar : {
+// 	    scrolltop: false
+// 	}
+//     });
+// });
 
-// $(function(){ $(document).foundation(); })
+$(function(){ $(document).foundation(); })
