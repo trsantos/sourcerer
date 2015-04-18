@@ -24,6 +24,6 @@ $(function(){
     });
 });
 
-$(document).on('page:change', function(){
+$(document).on('page:load', function(){
     window.scrollTop(0, 0);
 });
