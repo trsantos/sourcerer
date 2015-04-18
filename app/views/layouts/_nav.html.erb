@@ -1,4 +1,4 @@
-<div id="app-header" data-no-turbolink>
+<div id="app-header">
     <%= content_tag :header, class: "contain-to-grid" + in_feeds_show do %>
 	<nav class="top-bar" data-topbar data-options="is_hover: false">
 	    <ul class="title-area">
@@ -13,7 +13,7 @@
 		    <a href="#"><span></span></a>
 		</li>
 	    </ul>
-	    <section class="top-bar-section">
+	    <section class="top-bar-section" data-no-turbolink>
 		<ul class="right">
 		    <% if logged_in? %>
 			<% if current_user.admin? %>
