@@ -16,7 +16,6 @@
 //= require turbolinks
 //= require_tree .
 
-broken on Firefox for Android
 $(function(){
     $(document).foundation({
 	topbar : {
