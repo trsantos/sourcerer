@@ -23,3 +23,7 @@ $(function(){
 	}
     });
 });
+
+$(document).on('page:change', function(){
+    window.scrollTop(0, 0);
+});
