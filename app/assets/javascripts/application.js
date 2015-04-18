@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
@@ -24,4 +25,12 @@
 //     });
 // });
 
-$(function(){ $(document).foundation(); })
+$(function(){
+    Turbolinks.enableProgressBar();
+    $(document).on("page:before-change", function () { $(window).scrollTop(0) });
+    $(document).foundation({
+	topbar : {
+	    scrolltop: false
+	}
+    });
+});
