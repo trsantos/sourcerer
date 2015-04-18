@@ -3,6 +3,6 @@
 <header>
     <h2>Your subscriptions (<%= current_user.subscriptions.count %>)</h2>
 </header>
-<ul class="feeds no-bullet">
+<ul class="feeds no-bullet" data-no-turbolink>
     <%= render @subscriptions %>
 </ul>
