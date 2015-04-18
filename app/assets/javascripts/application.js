@@ -23,6 +23,7 @@ $(function(){
 	    scrolltop: false
 	}
     });
+    window.scrollTo(0, 0);
 });
 
 // $(function(){ $(document).foundation(); })
