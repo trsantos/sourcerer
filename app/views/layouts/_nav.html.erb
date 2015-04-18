@@ -1,4 +1,4 @@
-<div id="app-header">
+<div id="app-header" data-no-turbolink>
     <%= content_tag :header, class: "contain-to-grid" + in_feeds_show do %>
 	<nav class="top-bar" data-topbar data-options="is_hover: false">
 	    <ul class="title-area">
@@ -21,7 +21,7 @@
 			    <li><%= link_to "Feeds", feeds_path %></li>
 			    <li class="divider"></li>
 			<% end %>
-			<li><%= link_to "Subscriptions", subscriptions_path, 'data-no-turbolink' => true %></li>
+			<li><%= link_to "Subscriptions", subscriptions_path %></li>
 			<li><%= link_to "Add feed", new_feed_path %>
 			    <li class="has-dropdown">
 				<%= link_to current_user.name.split.first, '#' %>
