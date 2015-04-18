@@ -23,4 +23,4 @@ $(function(){
 	}
     });
 });
-$(function(){ $(document).scrollTop(); });
+window.scrollTo(0, 0);
