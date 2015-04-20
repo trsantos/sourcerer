@@ -2,13 +2,9 @@
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
-	<h1 data-no-turbolink>
+	<h1>
           <img src="<%= get_favicon(sub_url(@feed)) %>" id="favicon" />
-	  <%= link_to sub_title(@feed),
-	  sub_url(@feed),
-	  id: "feed-title",
-	  target: "_blank",
-	  data: { keybinding: 'h' } %>
+	  <%= link_to sub_title(@feed), sub_url(@feed), id: "feed-title", target: "_blank" %>
 	</h1>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
