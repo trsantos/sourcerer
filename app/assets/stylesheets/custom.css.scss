@@ -106,14 +106,17 @@ article {
 	padding-left: 0px !important;
 	overflow: hidden;
 	/* 16:9 */
-#	max-height: 3.69140625rem;
-	max-height: 4.8rem;
+	max-height: 3.69140625rem;
 	border-radius: 3px;
 #	border: 1px solid #eee;
     }
     .desc-with-img {
 	padding-left: 1.875rem !important;
 	margin-left: -0.9375rem;
+    }
+    .description {
+	/* n x 1.6 gives n lines */
+	max-height: 3.2rem;
     }
 }
 
@@ -160,6 +163,10 @@ article {
     .main-content {
 	padding-top: 10px;
     }
+    .description {
+	/* n x 1.6 gives n lines */
+	max-height: 4.8rem;
+    }
     .thumb, .thumb-small {
 #	border: 1px solid #eee;
     }
@@ -193,8 +200,6 @@ article {
 }
 
 .description {
-    /* n x 1.6 gives n lines */
-    max-height: 4.8rem;
     overflow: hidden;
 }
 
