@@ -4,7 +4,11 @@
       <li class="name">
 	<h1>
           <img src="<%= get_favicon(sub_url(@feed)) %>" id="favicon" />
-	  <%= link_to sub_title(@feed), sub_url(@feed), id: "feed-title", target: "_blank" %>
+	  <%= link_to sub_title(@feed),
+	  sub_url(@feed),
+	  id: "feed-title",
+	  target: "_blank",
+	  data: { keybinding: 'h' } %>
 	</h1>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
