@@ -110,7 +110,7 @@ article {
 #	max-height: 3.2rem;
 #	max-height: 4.8rem;
 	border-radius: 3px;
-	border: 1px solid #eee;
+#	border: 1px solid #eee;
     }
     .desc-with-img {
 	padding-left: 1.875rem !important;
@@ -120,6 +120,10 @@ article {
 	/* n x 1.6 gives n lines */
 	max-height: 3.2rem;
 #	max-height: 4.8rem;
+    }
+    .thumb-small {
+	display: block;
+	margin: auto;
     }
 }
 
