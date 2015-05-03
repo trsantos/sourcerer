@@ -11,7 +11,7 @@ gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder'
 gem 'bcrypt'
-gem 'foundation-rails'
+gem 'foundation-rails', '5.5.1.2'
 gem 'faker'
 gem 'mousetrap-rails'
 gem 'feedjira'
@@ -37,3 +37,6 @@ group :production do
   gem 'rack-timeout'
   gem 'unicorn', '4.8.3'
 end
+
+gem 'sprockets', '3.0.1'
+gem 'mime-types', '2.4.3'
