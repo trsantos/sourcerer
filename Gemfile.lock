@@ -205,4 +205,4 @@ DEPENDENCIES
   sqlite3
   turbolinks
   uglifier
-  unicorn (= 4.8.3)
+  unicorn
