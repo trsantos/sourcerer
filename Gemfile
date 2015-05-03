@@ -35,7 +35,7 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
   gem 'rack-timeout'
-  gem 'unicorn', '4.8.3'
+  gem 'unicorn'
 end
 
 gem 'sprockets', '3.0.1'
