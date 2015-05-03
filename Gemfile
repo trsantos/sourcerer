@@ -39,4 +39,3 @@ group :production do
 end
 
 gem 'sprockets', '3.0.1'
-gem 'mime-types', '2.4.3'
