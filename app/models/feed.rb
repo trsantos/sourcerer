@@ -28,7 +28,7 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    entries = feed.entries.first(10)
+    entries = feed.entries.first(5)
 
     unless new? entries
       return
@@ -118,6 +118,7 @@ class Feed < ActiveRecord::Base
       img.include? 'twitter16.png' or
       img.include? 'sethsblog' or
       img.include? 'assets.feedblitz.com/i/' or
+      img.include? 'wirecutter-deals' or
       img.include? '/heads/' or
       img.include? '/share/' or
       img.include? 'smile.png' or
