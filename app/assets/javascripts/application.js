@@ -18,20 +18,10 @@
 //= require turbolinks
 //= require_tree .
 
-// $(function(){
-//     $(document).foundation({
-// 	topbar : {
-// 	    scrolltop: false
-// 	}
-//     });
-// });
-
 $(function(){
     Turbolinks.enableProgressBar();
     $(document).on("page:before-change", function () { $(window).scrollTop(0) });
-    $(document).foundation({
-	topbar : {
-	    scrolltop: false
-	}
-    });
+    $(document).foundation(
+		// {topbar : { scrolltop: false	}}
+	);
 });
