@@ -1,23 +1,26 @@
 <div class="feed-header sticky contain-to-grid">
-  <nav class="top-bar" data-topbar>
-    <ul class="title-area">
-      <li class="name">
-	<h1>
-          <img src="<%= get_favicon(sub_url(@feed)) %>" id="favicon" />
-	  <%= link_to sub_title(@feed), sub_url(@feed), id: "feed-title", target: "_blank" %>
-	</h1>
-      </li>
-      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-    </ul>
-    <section class="top-bar-section">
-      <ul class="right controls">
-        <div class="show-for-small-only">
-	  <%= render partial: 'controls', :locals => { :size => :small } %>
-	</div>
-	<div class="show-for-medium-up">
-	  <%= render partial: 'controls', :locals => { :size => :large } %>
-	</div>
-      </ul>
-    </section>
-  </nav>
+	<nav class="top-bar" data-topbar>
+		<ul class="title-area">
+			<li class="name">
+				<h1>
+					<img src="<%= get_favicon(sub_url(@feed)) %>" id="favicon" />
+					<%= link_to sub_title(@feed),
+					sub_url(@feed),
+					id: "feed-title",
+					target: "_blank" %>
+				</h1>
+			</li>
+			<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+		</ul>
+		<section class="top-bar-section">
+			<ul class="right controls">
+				<div class="show-for-small-only">
+					<%= render partial: 'controls', :locals => { :size => :small } %>
+				</div>
+				<div class="show-for-medium-up">
+					<%= render partial: 'controls', :locals => { :size => :large } %>
+				</div>
+			</ul>
+		</section>
+	</nav>
 </div>
