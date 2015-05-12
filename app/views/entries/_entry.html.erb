@@ -6,9 +6,9 @@
 
 <article id="entry-<%= entry.id %>">
     <header class="entry-title <%= old %>">
-	<h6>
+	<h5>
 	    <strong><%= link_to sanitize(entry.title), entry.url, target: "_blank" %></strong>
-	</h6>
+	</h5>
     </header>
     <div class="row">
 	<% if entry.description.blank? and entry.image? %>

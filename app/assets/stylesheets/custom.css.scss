@@ -1,8 +1,8 @@
 .users, .feeds {
     list-style: none;
     li {
-	padding: 10px 0;
-	border-bottom: 1px dotted lightgray;
+		padding: 10px 0;
+		border-bottom: 1px dotted lightgray;
     }
 }
 
@@ -12,7 +12,7 @@ header h2, #home {
 
 article {
     .description, p {
-	margin-bottom: 0px;
+		margin-bottom: 0px;
     }
 }
 
@@ -21,8 +21,8 @@ article {
 }
 
 #favicon {
-#    background-color: white;
-#    padding: 0px;
+	#    background-color: white;
+	#    padding: 0px;
     height: 16px;
     width: 16px;
 }
@@ -36,141 +36,141 @@ article {
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
     .top-bar {
-	max-width: 54rem !important;
+		max-width: 54rem !important;
     }
     .row {
-	max-width: 45rem !important;
+		max-width: 45rem !important;
     }
     .main-content {
-	padding-top: 10px;
+		padding-top: 10px;
     }
     .feed-header {
-#	box-shadow: 0px 1px 2px gray;
-	border-bottom: 1px solid lightgray;
-#	z-index: 1 !important;
-#	margin-top: 45px;
-	background-color: #eee !important;
-	.top-bar {
-	    height: 60px;
-	    background-color: inherit;
-	    li {
-		background-color: inherit;
-		a {
-		    color: black !important;
+		#	box-shadow: 0px 1px 2px gray;
+		border-bottom: 1px solid lightgray;
+		#	z-index: 1 !important;
+		#	margin-top: 45px;
+		background-color: #eee !important;
+		.top-bar {
+			height: 60px;
+			background-color: inherit;
+			li {
+				background-color: inherit;
+				a {
+					color: black !important;
+				}
+			}
 		}
-	    }
-	}
-	h1 a {
-	    font-size: 1.6rem;
-	    line-height: 60px;
-	    color: black !important;
-	}
-	#favicon {
-	    /* this is broken on webkit */
-	    margin-bottom: 52px;
-	    margin-left: 15px;
-	}
-	.feed-button, #next {
-	    margin-top: 8px;
-	}
-	.feed-button {
-	    background: transparent !important;
-	    &:hover {
-		background: #dedede !important;
-	    }
-	}
-	#next {
-	    margin-right: 15px;
-	    a {
-		background-color: #0070A0 !important;
-		color: white !important;
-	    }
-	    a:hover {
-		background-color: #004B6B !important;
-		background: #272727;
-	    }
-	}
-	#feed-title {
-	    max-width: 400px;
-	}
+		h1 a {
+			font-size: 1.6rem;
+			line-height: 60px;
+			color: black !important;
+		}
+		#favicon {
+			/* this is broken on webkit */
+			margin-bottom: 52px;
+			margin-left: 15px;
+		}
+		.feed-button, #next {
+			margin-top: 8px;
+		}
+		.feed-button {
+			background: transparent !important;
+			&:hover {
+				background: #dedede !important;
+			}
+		}
+		#next {
+			margin-right: 15px;
+			a {
+				background-color: #0070A0 !important;
+				color: white !important;
+			}
+			a:hover {
+				background-color: #004B6B !important;
+				background: #272727;
+			}
+		}
+		#feed-title {
+			max-width: 400px;
+		}
     }
     .crop {
-	padding-right: 0px !important;
-	margin-left: 0.9375rem !important;
-	padding-left: 0px !important;
-	overflow: hidden;
-	/* 16:9 */
-#	max-height: 3.69140625rem;
-#	max-height: 3.2rem;
-	max-height: 6.4rem;
-	border-radius: 3px;
-#	border: 1px solid #eee;
+		padding-right: 0px !important;
+		margin-left: 0.9375rem !important;
+		padding-left: 0px !important;
+		overflow: hidden;
+		/* 16:9 */
+		#	max-height: 3.69140625rem;
+		#	max-height: 3.2rem;
+		max-height: 6.4rem;
+		border-radius: 3px;
+		#	border: 1px solid #eee;
     }
     .desc-with-img {
-	padding-left: 1.875rem !important;
-	margin-left: -0.9375rem;
+		padding-left: 1.875rem !important;
+		margin-left: -0.9375rem;
     }
     .description {
-	margin-top: -5px;
-	/* n x 1.6 gives n lines */
-	max-height: 3.2rem;
-#	max-height: 4.8rem;
+		margin-top: -5px;
+		/* n x 1.6 gives n lines */
+		#max-height: 3.2rem;
+		max-height: 4.8rem;
     }
     .thumb-small {
-	display: block;
-#	margin: auto;
+		display: block;
+		#	margin: auto;
     }
 }
 
 /* large screens */
 @media only screen and (min-width: 64.063em) {
     #feed-title {
-	max-width: 500px !important;
+		max-width: 500px !important;
     }
     .main-content {
-#	padding-top: 0.6rem !important;
-	padding-bottom: 1rem;
+		#	padding-top: 0.6rem !important;
+		padding-bottom: 1rem;
         margin: 15px auto !important;
         border: 1px solid lightgray;
-#	border-top: 0px;
-#	border-radius: 0px 0px 3px 3px;
+		#	border-top: 0px;
+		#	border-radius: 0px 0px 3px 3px;
         box-shadow: 0px 0px 3px 1px lightgray;
-	background-color: white;
+		background-color: white;
     }
     body {
-	background-color: #ddd !important;
+		background-color: #ddd !important;
     }
 }
 
 /* Small */
 @media only screen and (max-width: 40em) {
     .feed-header {
-	#favicon {
-	    margin-bottom: 37px;
-	    margin-left: 15px;
-	}
-	.controls a:hover {
-	    background: #272727 !important;
-	}
-	#next:hover {
-	    background: #0078A0 !important;
-	}
+		#favicon {
+			margin-bottom: 37px;
+			margin-left: 15px;
+		}
+		.controls a:hover {
+			background: #272727 !important;
+		}
+		#next:hover {
+			background: #0078A0 !important;
+		}
     }
     .desc-with-img {
-	margin-top: 8px;
+		margin-top: 8px;
     }
     #feed-title {
-#	font-weight: bold;
+		#	font-weight: bold;
     }
     .main-content {
-	padding-top: 10px;
+		padding-top: 10px;
     }
     .description {
-	/* n x 1.6 gives n lines */
-	max-height: 4.8rem;
+		/* n x 1.6 gives n lines */
+		max-height: 4.8rem;
     }
     .thumb, .thumb-small {
-#	border: 1px solid #eee;
+		#	border: 1px solid #eee;
     }
 }
 
@@ -180,25 +180,25 @@ article {
 
 #app-header {
     a:hover {
-	background-color: #272727;
+		background-color: #272727;
     }
     .dropdown {
-#	z-index: 2;
+		#	z-index: 2;
     }
 }
 
 #app-header header {
-#    box-shadow: 0px 1px 2px #eee;
+	#    box-shadow: 0px 1px 2px #eee;
 }
 
 .thumb, .thumb-small {
     border-radius: 3px;
-#border: 1px solid #eee;
+	#border: 1px solid #eee;
 }
 
 .crop {
-#    border: 1px solid #eee;
-#    border-radius: 3px;
+	#    border: 1px solid #eee;
+	#    border-radius: 3px;
 }
 
 .description {
@@ -206,8 +206,8 @@ article {
 }
 
 .main-content {
-#    padding-top: 10px;
-#    background-color: #fff !important;
+	#    padding-top: 10px;
+	#    background-color: #fff !important;
 }
 
 article {
