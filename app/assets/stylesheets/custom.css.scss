@@ -91,7 +91,7 @@ article {
 			}
 		}
 		#feed-title {
-			max-width: 400px;
+			max-width: 430px;
 			#font-weight: bold;
 		}
     }
@@ -105,7 +105,7 @@ article {
 		#	max-height: 3.2rem;
 		max-height: 6.4rem;
 		border-radius: 3px;
-		border: 1px solid #eee;
+		#border: 1px solid #eee;
     }
     .desc-with-img {
 		padding-left: 1.875rem !important;
@@ -126,7 +126,7 @@ article {
 /* large screens */
 @media only screen and (min-width: 64.063em) {
     #feed-title {
-		max-width: 500px !important;
+		max-width: 530px !important;
     }
     .main-content {
 		#	padding-top: 0.6rem !important;
