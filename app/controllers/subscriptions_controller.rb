@@ -34,7 +34,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    interval = 8.hour.ago
+    interval = 1.hour.ago
     fav      = Subscription.where("user_id = ? AND starred = ? AND visited_at < ?", current_user.id,  true, interval)
     normal   = Subscription.where("user_id = ? AND starred = ? AND visited_at < ?", current_user.id, false, interval)
     p = rand
