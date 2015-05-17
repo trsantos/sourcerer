@@ -6,30 +6,44 @@
 
 <% if logged_in? %>
     <% if current_user.following?(@feed) %>
-	<% s = current_user.subscriptions.find_by(feed_id: @feed.id) %>
-	<% if s.starred %>
-	    <li><%= link_to "★",
-		    subscription_path(s, subscription: { starred: false }),
-			method: :patch,
-		    class: class_string %></li>
-	<% else %>
-	    <li><%= link_to "☆",
-		    subscription_path(s, subscription: { starred: true }),
-			method: :patch,
-		    class: class_string %></li>
-	<% end %>
-	<li><%= link_to "Edit", edit_subscription_path(s), class: class_string %></li>
-	<li><%= link_to "Unsubscribe", subscription_path(s), method: :delete, class: class_string %></li>
+		<% s = current_user.subscriptions.find_by(feed_id: @feed.id) %>
+		<% if s.starred %>
+			<li>
+				<%= link_to "★",
+				subscription_path(s, subscription: { starred: false }),
+				method: :patch,
+				class: class_string %>
+			</li>
+		<% else %>
+			<li>
+				<%= link_to "☆",
+				subscription_path(s, subscription: { starred: true }),
+				method: :patch,
+				class: class_string %>
+			</li>
+		<% end %>
+		<li><%= link_to "Edit", edit_subscription_path(s), class: class_string %></li>
+		<li>
+			<%= link_to "Unsubscribe",
+			subscription_path(s),
+			method: :delete,
+			class: class_string %>
+		</li>
     <% else %>
-	<li><%= link_to "Subscribe", subscriptions_path(feed_id: @feed.id), method: :post, class: class_string %></li>
+		<li>
+			<%= link_to "Subscribe",
+			subscriptions_path(feed_id: @feed.id),
+			method: :post,
+			class: class_string %>
+		</li>
     <% end %>
     <% if size == :small %>
-	<li class="active">
-	    <%= link_to "Next feed", next_path, id: "next" %>
-	</li>
+		<li class="active">
+			<%= link_to "Next feed", next_path, id: "next" %>
+		</li>
     <% else %>
-	<li id="next">
-	    <%= link_to "Next feed", next_path, class: "button", data: { keybinding: 'n' } %>
-	</li>
+		<li id="next" class="active">
+			<%= link_to "Next feed", next_path, class: "button", data: { keybinding: 'n' } %>
+		</li>
     <% end %>
 <% end %>
