@@ -16,15 +16,11 @@ class Feed < ActiveRecord::Base
 
     begin
       self.update_attribute(:updated_at, Time.zone.now)
-      t = Thread.new do
-        Thread.current["feed"] = Feedjira::Feed.fetch_and_parse self.feed_url
-      end
-      t.join
+      feed = Feedjira::Feed.fetch_and_parse self.feed_url
     rescue Rack::Timeout::RequestTimeoutError
       puts 'Timeout when fetching feed ' + self.id.to_s
       return
     end
-    feed = t["feed"]
 
     return if feed.is_a? Integer
 
