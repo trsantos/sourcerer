@@ -34,10 +34,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    fav      = Subscription.where("user_id = ? AND starred = ?", current_user.id,  true)
-    normal   = Subscription.where("user_id = ? AND starred = ?", current_user.id, false)
-    s = get_updated_subscription(fav) || get_updated_subscription(normal)
-    if s
+    id       = current_user.id
+    interval = 8.hour.ago
+    query    = "user_id = ? AND starred = ? AND visited_at = ?"
+    fav      = Subscription.where(query, id, true)
+    normal   = Subscription.where(query, id, false)
+    if s = get_updated_subscription(fav) || get_updated_subscription(normal)
       redirect_to s
     else
       flash[:info] = "You have no updated feeds. Check back later!"
