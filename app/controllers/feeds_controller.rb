@@ -15,6 +15,10 @@ class FeedsController < ApplicationController
   end
 
   def new
+    if params[:feed]
+      feed = find_or_create_feed(params[:feed])
+      redirect_to feed
+    end
   end
   
   def create

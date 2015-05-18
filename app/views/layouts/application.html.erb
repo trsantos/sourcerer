@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<title><%= full_title(yield(:title)) %></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<title><%= full_title(yield(:title)) %></title>
 
-	<%= stylesheet_link_tag    'application' %>
-	<%= javascript_include_tag 'vendor/modernizr' %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-	<%= csrf_meta_tags %>
+		<%= stylesheet_link_tag    'application' %>
+		<%= javascript_include_tag 'vendor/modernizr' %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
     </head>
     <body>
-	<%= render 'layouts/nav' %>
-	<main>
-	    <% if params[:controller] == "feeds" && params[:action] == "show" %>
-		<%= render partial: 'feeds/header' %>
-	    <% end %>
+		<%= render 'layouts/nav' %>
+		<main>
+			<% if params[:controller] == "feeds" && params[:action] == "show" %>
+				<%= render partial: 'feeds/header' %>
+			<% end %>
 
-	    <% flash.each do |message_type, message| %>
-		<%= content_tag(:div, message, class: "alert-box #{message_type}") %>
-	    <% end %>
+			<% flash.each do |message_type, message| %>
+				<%= content_tag(:div, message, class: "alert-box #{message_type}") %>
+			<% end %>
 
-	    <div class="row main-content">
-		<div class="small-10 small-offset-1">
-		    <%= yield %>
-		</div>
-	    </div>
-	</main>
-	<%#= debug(params) if Rails.env.development? %>
+			<div class="row main-content">
+				<div class="small-10 small-offset-1">
+					<%= yield %>
+				</div>
+			</div>
+		</main>
+		<%= debug(params) if Rails.env.development? %>
     </body>
 </html>
