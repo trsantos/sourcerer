@@ -35,7 +35,7 @@ class SubscriptionsController < ApplicationController
 
   def next
     id       = current_user.id
-    interval = 8.hour.ago
+    interval = 2.hour.ago
     query    = "user_id = ? AND starred = ? AND visited_at < ?"
     fav      = Subscription.where(query, id, true,  interval)
     normal   = Subscription.where(query, id, false, interval)
