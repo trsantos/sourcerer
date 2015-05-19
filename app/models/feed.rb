@@ -25,7 +25,7 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    entries = feed.entries.first(10)
+    entries = feed.entries.first(5)
 
     unless new? entries
       return
@@ -78,7 +78,7 @@ class Feed < ActiveRecord::Base
     begin
       doc = Nokogiri::HTML description
       doc.css('img').each do |img|
-        # it seems that we can get an img with no src attribute...
+        # it seems that sometimes we can get an img with no src attribute...
         if actual_image = filter_image(img.attributes['src'].value)
           return actual_image
         end
