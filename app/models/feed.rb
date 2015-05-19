@@ -14,8 +14,9 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
 
+    self.update_attribute(:updated_at, Time.zone.now)
+
     begin
-      self.update_attribute(:updated_at, Time.zone.now)
       feed = Feedjira::Feed.fetch_and_parse self.feed_url
     rescue Rack::Timeout::RequestTimeoutError
       puts 'Timeout when fetching feed ' + self.id.to_s
@@ -24,7 +25,7 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    entries = feed.entries.first(5)
+    entries = feed.entries.first(10)
 
     unless new? entries
       return
