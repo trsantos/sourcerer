@@ -61,10 +61,9 @@ class SubscriptionsController < ApplicationController
   def get_updated_subscription(slist = Subscription.all)
     update_all
     slist.shuffle.each do |s|
-      f = s.feed
-      f.update
+      #s.feed.update
       if s.updated?
-        return f
+        return s.feed
       end
     end
     return nil
