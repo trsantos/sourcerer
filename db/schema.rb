@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150131133201) do
+ActiveRecord::Schema.define(version: 20150520000429) do
 
   create_table "entries", force: :cascade do |t|
     t.text     "title"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 20150131133201) do
   add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id"
   add_index "subscriptions", ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
+
+  create_table "topic_subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "topic_subscriptions", ["topic_id"], name: "index_topic_subscriptions_on_topic_id"
+  add_index "topic_subscriptions", ["user_id"], name: "index_topic_subscriptions_on_user_id"
 
   create_table "topics", force: :cascade do |t|
     t.string   "topic"
