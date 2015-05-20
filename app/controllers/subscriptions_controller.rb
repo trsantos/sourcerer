@@ -59,6 +59,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_updated_subscription(slist = Subscription.all)
+    update_all
     slist.shuffle.each do |s|
       f = s.feed
       f.update
@@ -69,13 +70,10 @@ class SubscriptionsController < ApplicationController
     return nil
   end
 
-  def update_all_subscriptions
+  def update_all
     last_update = current_user.subscriptions_updated_at
     if last_update.nil? or last_update < Feed.update_interval
-      current_user.subscriptions_updated_at = Time.zone.now
-      Subscription.all.each do |s|
-        s.feed.update
-      end
+      current_user.delay.update_all_subscriptions
     end
   end
 

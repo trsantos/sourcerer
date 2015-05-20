@@ -115,6 +115,13 @@ class User < ActiveRecord::Base
     return topics.include?(topic)
   end
 
+  def update_all_subscriptions
+    self.subscriptions.each do |s|
+      s.feed.update
+    end
+    self.update_attribute(:subscriptions_updated_at, Time.zone.now)
+  end
+
   private
 
   # Converts email to all lower-case.
@@ -127,4 +134,5 @@ class User < ActiveRecord::Base
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
+
 end
