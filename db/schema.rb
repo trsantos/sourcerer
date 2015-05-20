@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520201124) do
+ActiveRecord::Schema.define(version: 20150520211805) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20150520201124) do
     t.boolean  "starred",    default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.boolean  "from_topic", default: false
   end
 
   add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id"

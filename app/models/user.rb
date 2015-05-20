@@ -76,9 +76,9 @@ class User < ActiveRecord::Base
   end
 
   # Follow a feed
-  def follow(feed)
+  def follow(feed, from_topic: false)
     unless following?(feed)
-      subscriptions.create(feed_id: feed.id)
+      subscriptions.create(feed_id: feed.id, from_topic: :from_topic)
     end
   end
 
@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
   def follow_topic(topic)
     self.topics += [topic]
     get_feeds(topic).each do |url|
-      follow(find_or_create_feed(url))
+      follow(find_or_create_feed(url), from_topic: true)
     end
     #topic.feeds.each do |f|
     #  follow(f)
@@ -107,7 +107,11 @@ class User < ActiveRecord::Base
 
   def unfollow_topic(topic)
     get_feeds(topic).each do |url|
-      unfollow(find_or_create_feed(url))
+      f = find_or_create_feed(url)
+      s = self.subscriptions.find_by(feed_id: f.id)
+      if s and s.from_topic
+        unfollow(f)
+      end
     end
   end
 
