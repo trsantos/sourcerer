@@ -7,8 +7,12 @@ class Feed < ActiveRecord::Base
   
   validates :feed_url, presence: true, uniqueness: true
 
+  def self.update_interval
+    2.hours.ago
+  end
+
   def update
-    return if self.updated_at > 1.hour.ago and self.entries.count > 0
+    return if self.updated_at > Feed.update_interval and self.entries.count > 0
 
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -35,7 +39,7 @@ class Feed < ActiveRecord::Base
                            site_url:   feed.url || feed.feed_url)
     self.entries.destroy_all
     entries.each do |entry|
-      description = entry.content || entry.summary
+      description = entry.content || entry.summary || ""
       self.entries.create(title:       entry.title,
                           description: sanitize(strip_tags(description)).first(300),
                           pub_date:    find_pub_date(entry.published),

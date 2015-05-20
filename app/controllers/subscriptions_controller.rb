@@ -35,10 +35,10 @@ class SubscriptionsController < ApplicationController
 
   def next
     id       = current_user.id
-    #interval = 2.hour.ago
-    query    = "user_id = ? AND starred = ?"# AND visited_at < ?"
-    fav      = Subscription.where(query, id, true)#,  interval)
-    normal   = Subscription.where(query, id, false)#, interval)
+    interval = Feed.update_interval
+    query    = "user_id = ? AND starred = ? AND visited_at < ?"
+    fav      = Subscription.where(query, id, true,  interval)
+    normal   = Subscription.where(query, id, false, interval)
     if s = get_updated_subscription(fav) || get_updated_subscription(normal)
       redirect_to s
     else
@@ -67,6 +67,16 @@ class SubscriptionsController < ApplicationController
       end
     end
     return nil
+  end
+
+  def update_all_subscriptions
+    last_update = current_user.subscriptions_updated_at
+    if last_update.nil? or last_update < Feed.update_interval
+      current_user.subscriptions_updated_at = Time.zone.now
+      Subscription.all.each do |s|
+        s.feed.update
+      end
+    end
   end
 
 end
