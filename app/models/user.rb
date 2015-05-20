@@ -75,10 +75,10 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
-  # Follow a feed
-  def follow(feed, from_topic: false)
+  # Follow a feed. Last arg should be a hash
+  def follow(feed, from_topic = false)
     unless following?(feed)
-      subscriptions.create(feed_id: feed.id, from_topic: :from_topic)
+      subscriptions.create(feed_id: feed.id, from_topic: from_topic)
     end
   end
 
@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
   def follow_topic(topic)
     self.topics += [topic]
     get_feeds(topic).each do |url|
-      follow(find_or_create_feed(url), from_topic: true)
+      follow(find_or_create_feed(url), true)
     end
     #topic.feeds.each do |f|
     #  follow(f)
