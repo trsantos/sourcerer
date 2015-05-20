@@ -51,8 +51,15 @@ class UsersController < ApplicationController
 
   def update_topics
     @user = User.find(params[:id])
+    current_user.topics = []
     params[:topic].each do |t, v|
-      current_user.follow_topic(t) if v == '1'
+      # This is so ugly... :(
+      t = Topic.find_by(topic: t)
+      if v == '1'
+        current_user.follow_topic(t)
+      else
+        current_user.unfollow_topic(t)
+      end
     end
     flash[:info] = "Topics updated. Happy reading!"
     redirect_to next_path

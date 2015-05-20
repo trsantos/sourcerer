@@ -82,13 +82,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Follow all feeds from given topic. Ugly code
-  def follow_topic(topic)
-    get_feeds(topic).each do |url|
-      follow(find_or_create_feed(url))
-    end
-  end
-
   # Unfollow a feed
   def unfollow(feed)
     subscriptions.find_by(feed_id: feed.id).destroy
@@ -97,6 +90,22 @@ class User < ActiveRecord::Base
   # True if current user is following the given feed
   def following?(feed)
     feeds.include?(feed)
+  end
+
+  def follow_topic(topic)
+    self.topics += [topic]
+    get_feeds(topic).each do |url|
+      follow(find_or_create_feed(url))
+    end
+    #topic.feeds.each do |f|
+    #  follow(f)
+    #end
+  end
+
+  def unfollow_topic(topic)
+    get_feeds(topic).each do |url|
+      unfollow(find_or_create_feed(url))
+    end
   end
 
   private

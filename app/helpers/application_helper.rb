@@ -32,7 +32,8 @@ module ApplicationHelper
     Feed.find_by(feed_url: url) || Feed.create(feed_url: url)
   end
 
-  def get_feeds(t)
+  def get_feeds(topic)
+    t = topic.topic
     if t == "Computers"
       return [
         "http://techcrunch.com/feed/",
