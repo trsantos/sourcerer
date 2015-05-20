@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def self.update_interval
-    2.hours.ago
+    1.hour.ago
   end
 
   def update
