@@ -58,7 +58,7 @@ class SubscriptionsController < ApplicationController
     redirect_to root_url unless current_user?(@user) or current_user.admin?
   end
 
-  def get_updated_subscription(slist)
+  def get_updated_subscription(slist = Subscription.all)
     slist.shuffle.each do |s|
       f = s.feed
       f.update
@@ -68,4 +68,5 @@ class SubscriptionsController < ApplicationController
     end
     return nil
   end
+
 end

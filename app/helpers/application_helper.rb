@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def full_title(page_title = '')
     base_title = "Sourcerer"
     if page_title.empty?
@@ -116,4 +117,5 @@ module ApplicationHelper
       return []
     end
   end
+
 end

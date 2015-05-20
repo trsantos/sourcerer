@@ -37,7 +37,7 @@ class Feed < ActiveRecord::Base
     entries.each do |entry|
       description = entry.content || entry.summary
       self.entries.create(title:       entry.title,
-                          description: sanitize(strip_tags(description)),
+                          description: sanitize(strip_tags(description)).first(300),
                           pub_date:    find_pub_date(entry.published),
                           image:       find_image(entry, description),
                           url:         entry.url)

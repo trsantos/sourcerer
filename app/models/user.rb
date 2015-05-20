@@ -84,7 +84,10 @@ class User < ActiveRecord::Base
 
   # Unfollow a feed
   def unfollow(feed)
-    subscriptions.find_by(feed_id: feed.id).destroy
+    s = subscriptions.find_by(feed_id: feed.id)
+    if s
+      s.destroy
+    end
   end
 
   # True if current user is following the given feed
@@ -106,6 +109,10 @@ class User < ActiveRecord::Base
     get_feeds(topic).each do |url|
       unfollow(find_or_create_feed(url))
     end
+  end
+
+  def following_topic?(topic)
+    return topics.include?(topic)
   end
 
   private
