@@ -5,6 +5,10 @@ class Subscription < ActiveRecord::Base
   validates :user_id, presence: true
   validates :feed_id, presence: true
 
+  def self.visit_interval
+    8.hours.ago
+  end
+
   def updated?
     # if a feed has been visited but, at a later date, it is fetched and contains no
     # entries, there will be no pud_date to check and we will consider it as not
@@ -23,7 +27,4 @@ class Subscription < ActiveRecord::Base
     return false
   end
 
-  def self.visit_interval
-    5.hours.ago
-  end
 end
