@@ -4,7 +4,7 @@
     <% if @feed.entries.any? %>
 		<%= render @entries %>
     <% else %>
-		<p>This feed could not be fetched or has no items.</p>
+		<p>This feed has no items.</p>
     <% end %>
     <small class="feed-url">Feed url: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %></small>
     <%#= link_to "Next feed", next_path, class: "show-for-small-only button expand next-button" %>
