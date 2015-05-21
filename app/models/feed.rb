@@ -29,7 +29,8 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    entries = feed.entries.first(5)
+    # This REALLY should be configurable by the user
+    entries = feed.entries.first(10)
 
     unless new? entries
       return
