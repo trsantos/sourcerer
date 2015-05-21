@@ -101,11 +101,11 @@ article {
 		padding-left: 0px !important;
 		overflow: hidden;
 		/* 16:9 */
-		#	max-height: 3.69140625rem;
-		#	max-height: 3.2rem;
+		#max-height: 3.69140625rem;
+		#max-height: 3.2rem;
 		max-height: 6.4rem;
 		border-radius: 3px;
-		#border: 1px solid #eee;
+		border: 1px solid #eee;
     }
     .desc-with-img {
 		padding-left: 1.875rem !important;
@@ -119,7 +119,8 @@ article {
     }
     .thumb-small {
 		display: block;
-		#	margin: auto;
+		#border: 1px solid #eee;
+		margin: auto;
     }
 	.entry-title a {
 		font-size: 1.0625rem;
@@ -230,7 +231,7 @@ article {
 }
 
 .old a {
-    color: #888;
+    color: #777;
 }
 
 html.turbolinks-progress-bar::before {
