@@ -7,7 +7,7 @@
 <article id="entry-<%= entry.id %>">
     <header class="entry-title <%= old %>">
 		<h5>
-			<strong><%= link_to sanitize(entry.title), entry.url, target: "_blank" %></strong>
+			<%= link_to sanitize(entry.title), entry.url, target: "_blank" %>
 		</h5>
     </header>
     <div class="row">

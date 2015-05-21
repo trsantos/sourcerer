@@ -165,7 +165,7 @@ article {
 		margin-top: 8px;
     }
     #feed-title {
-		#	font-weight: bold;
+		#font-weight: bold;
     }
     .main-content {
 		padding-top: 10px;
@@ -175,7 +175,7 @@ article {
 		max-height: 4.8rem;
     }
     .thumb, .thumb-small {
-		#	border: 1px solid #eee;
+		#border: 1px solid #eee;
     }
 }
 
@@ -227,7 +227,8 @@ article {
 }
 
 .entry-title a, .feed-url a {
-    color: #222;
+	color: #111;
+	font-weight: bold;
 }
 
 .old a {
