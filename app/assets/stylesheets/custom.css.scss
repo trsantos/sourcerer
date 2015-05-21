@@ -122,9 +122,6 @@ article {
 		#border: 1px solid #eee;
 		margin: auto;
     }
-	.entry-title a {
-		font-size: 1.0625rem;
-	}
 }
 
 /* large screens */
@@ -226,8 +223,13 @@ article {
     text-align: center;
 }
 
-.entry-title a, .feed-url a {
+.feed-url a {
 	color: #111;
+}
+
+.entry-title a {
+	color: #111;
+	font-size: 1.0625rem;
 	font-weight: bold;
 }
 
