@@ -10,7 +10,8 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    @feed.update
+    # Ugly line...
+    @feed.update if @feed.entries.empty? or @feed.updated_at < Feed.update_interval
     @entries = @feed.entries
   end
 
