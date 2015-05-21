@@ -60,7 +60,6 @@ class SubscriptionsController < ApplicationController
   def get_updated_subscription(list)
     update_all
     list.shuffle.each do |s|
-      #s.feed.update
       if s.updated?
         return s.feed
       end

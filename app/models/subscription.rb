@@ -10,10 +10,15 @@ class Subscription < ActiveRecord::Base
     # entries, there will be no pud_date to check and we will consider it as not
     # updated. this is what the check for the first item does
     return self.visited_at.nil? ||
-           (self.feed.entries.first && (self.feed.entries.first.pub_date > self.visited_at))
+           ((self.visited_at < 5.hours.ago) &&
+            (self.feed.entries.first && (self.feed.entries.first.pub_date > self.visited_at)))
   end
 
   def self.update_interval
+    2.hours.ago
+  end
+
+  def self.visit_interval
     5.hours.ago
   end
 end
