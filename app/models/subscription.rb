@@ -12,4 +12,8 @@ class Subscription < ActiveRecord::Base
     return self.visited_at.nil? ||
            (self.feed.entries.first && (self.feed.entries.first.pub_date > self.visited_at))
   end
+
+  def self.update_interval
+    5.hours.ago
+  end
 end

@@ -70,7 +70,7 @@ class SubscriptionsController < ApplicationController
 
   def update_all
     last_update = current_user.subscriptions_updated_at
-    if last_update.nil? or last_update < Feed.update_interval
+    if last_update.nil? or last_update < Subscription.update_interval
       current_user.delay.update_all_subscriptions
     end
   end
