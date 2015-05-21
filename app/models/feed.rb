@@ -14,11 +14,11 @@ class Feed < ActiveRecord::Base
   def update
     return if self.updated_at > Feed.update_interval and self.entries.count > 0
 
+    self.update_attribute(:updated_at, Time.zone.now)
+
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
-
-    self.update_attribute(:updated_at, Time.zone.now)
 
     begin
       feed = Feedjira::Feed.fetch_and_parse self.feed_url
@@ -29,7 +29,7 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    entries = feed.entries.first(5)
+    entries = feed.entries.first(10)
 
     unless new? entries
       return

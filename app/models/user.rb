@@ -120,10 +120,10 @@ class User < ActiveRecord::Base
   end
 
   def update_all_subscriptions
+    self.update_attribute(:subscriptions_updated_at, Time.zone.now)
     self.subscriptions.each do |s|
       s.feed.update
     end
-    self.update_attribute(:subscriptions_updated_at, Time.zone.now)
   end
 
   private

@@ -9,13 +9,18 @@ class Subscription < ActiveRecord::Base
     # if a feed has been visited but, at a later date, it is fetched and contains no
     # entries, there will be no pud_date to check and we will consider it as not
     # updated. this is what the check for the first item does
-    return self.visited_at.nil? ||
-           ((self.visited_at < 5.hours.ago) &&
-            (self.feed.entries.first && (self.feed.entries.first.pub_date > self.visited_at)))
-  end
-
-  def self.update_interval
-    2.hours.ago
+    if self.visited_at.nil?
+      return true
+    end
+    begin
+      if self.visited_at < Subscription.visit_interval
+        if self.feed.entries.first.pub_date > self.visited_at
+          return true
+        end
+      end
+    rescue
+    end
+    return false
   end
 
   def self.visit_interval
