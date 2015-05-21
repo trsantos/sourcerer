@@ -34,10 +34,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    id       = current_user.id
-    query    = "user_id = ? AND starred = ?"
-    fav      = Subscription.where(query, id, true)
-    normal   = Subscription.where(query, id, false)
+    update_all
+    fav    = current_user.subscriptions.where("starred = ?", true)
+    normal = current_user.subscriptions.where("starred = ?", false)
     if s = get_updated_subscription(fav) || get_updated_subscription(normal)
       redirect_to s
     else
@@ -58,7 +57,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_updated_subscription(list)
-    update_all
     list.shuffle.each do |s|
       if s.updated?
         return s.feed
