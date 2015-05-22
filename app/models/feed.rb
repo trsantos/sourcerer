@@ -72,9 +72,9 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, description)
-    return filter_image(find_og_image(entry.url)) ||
-           filter_image(entry.image) ||
-           filter_image(find_image_from_description(description))
+    return process_image(find_og_image(entry.url)) ||
+           process_image(entry.image) ||
+           process_image(find_image_from_description(description))
   end
 
   def find_image_from_description(description)
@@ -88,13 +88,13 @@ class Feed < ActiveRecord::Base
 
   def find_og_image(url)
     begin
-      doc = Nokogiri::HTML(open(url))
+      doc = Nokogiri::HTML(open(URI::escape(url.strip)))
       return doc.css("meta[property='og:image']").first.attributes['content'].value
     rescue
     end
   end
 
-  def filter_image(img)
+  def process_image(img)
     if img.nil? || img.blank?
       return nil
     end
@@ -109,6 +109,10 @@ class Feed < ActiveRecord::Base
       img = parse.scheme + '://' + parse.host + img[2..-1]
     end
 
+    return filter_image(img)
+  end
+
+  def filter_image(img)
     # discard silly images
     if img.include? 'feedburner' or
       img.include? 'pml.png' or
@@ -132,6 +136,7 @@ class Feed < ActiveRecord::Base
       img.include? 'nojs.php' or
       img.include? 'icon_' or
       img.include? 'gplus-16.png' or
+      img.include? 'uol-jogos-600px' or
       img.include? 'logo' or
       img.include? 'avw.php' or
       img.include? 'tmn-test' or
