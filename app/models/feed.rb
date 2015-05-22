@@ -72,22 +72,14 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, description)
-    if filter_image(entry.image)
-      return entry.image
-    else
-      return find_image_from_description(description)
-    end
+    return filter_image(entry.image) ||
+           filter_image(find_image_from_description(description))
   end
 
   def find_image_from_description(description)
     begin
       doc = Nokogiri::HTML description
-      doc.css('img').each do |img|
-        # it seems that sometimes we can get an img with no src attribute...
-        if current_image = filter_image(img.attributes['src'].value)
-          return current_image
-        end
-      end
+      return doc.css('img').first.attributes['src'].value
     rescue
     end
     return nil
