@@ -6,7 +6,7 @@ class Subscription < ActiveRecord::Base
   validates :feed_id, presence: true
 
   def self.visit_interval
-    24.hours.ago
+    16.hour.ago
   end
 
   def updated?

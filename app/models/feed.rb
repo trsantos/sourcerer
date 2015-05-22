@@ -1,14 +1,13 @@
 class Feed < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
 
-  # has_many :subscriptions, dependent: :destroy
   # has_many :users, through: :subscriptions
   has_many :entries, dependent: :destroy
   
   validates :feed_url, presence: true, uniqueness: true
 
   def self.update_interval
-    8.hour.ago
+    2.hour.ago
   end
 
   def update
@@ -29,39 +28,25 @@ class Feed < ActiveRecord::Base
 
     return if feed.is_a? Integer
 
-    # This REALLY should be configurable by the user
-    entries = feed.entries.first(10)
+    self.update_attributes(title:    feed.title,
+                           site_url: feed.url || feed.feed_url)
 
-    unless new? entries
-      return
+    feed.entries.first(10).each do |e|
+      unless self.entries.find_by(url: e.url)
+        description = e.content || e.summary || ""
+        self.entries.create(title:       e.title,
+                            description: sanitize(strip_tags(description)).first(300),
+                            pub_date:    find_pub_date(e.published),
+                            image:       find_image(e, description),
+                            url:         e.url)
+      end
     end
 
-    self.update_attributes(title:      feed.title,
-                           site_url:   feed.url || feed.feed_url)
-    self.entries.destroy_all
-    entries.each do |entry|
-      description = entry.content || entry.summary || ""
-      self.entries.create(title:       entry.title,
-                          description: sanitize(strip_tags(description)).first(300),
-                          pub_date:    find_pub_date(entry.published),
-                          image:       find_image(entry, description),
-                          url:         entry.url)
-    end
+    self.entries = self.entries.first(10)
+
   end
 
   private
-
-  def new?(entries)
-    begin
-      # sometimes there is some top post from the far future...
-      # checking the second one increases the chance of getting it right
-      if self.entries[1].url == entries[1].url
-        return false
-      end
-    rescue
-    end
-    return true
-  end
 
   def find_pub_date(date)
     if date.nil? or date > Time.zone.now
@@ -72,9 +57,9 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, description)
-    return process_image(find_og_image(entry.url)) ||
-           process_image(entry.image) ||
-           process_image(find_image_from_description(description))
+    return process_image(entry.image) ||
+           process_image(find_image_from_description(description)) ||
+           process_image(find_og_image(entry.url))
   end
 
   def find_image_from_description(description)
