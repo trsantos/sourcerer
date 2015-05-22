@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   include ApplicationHelper
 
-  has_many :topic_subscriptions
+  has_many :topic_subscriptions, dependent: :destroy
   has_many :topics, through: :topic_subscriptions
-  has_many :subscriptions
+
+  has_many :subscriptions, dependent: :destroy
   has_many :feeds, through: :subscriptions
   
   attr_accessor :remember_token, :activation_token, :reset_token
