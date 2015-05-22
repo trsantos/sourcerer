@@ -139,6 +139,8 @@ class Feed < ActiveRecord::Base
       img.include? 'logo' or
       img.include? 'avw.php' or
       img.include? 'tmn-test' or
+      img.include? 'square_60x60' or
+      img.include? '-ipad-h' or
       img.include? 'webkit-fake-url' or
       img.include? '/img/oglobo.jpg' or
       img.include? 'beacon' or
