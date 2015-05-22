@@ -10,6 +10,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
+    #@feed.update
     @entries = @feed.entries
   end
 

@@ -22,17 +22,6 @@ class Feed < ActiveRecord::Base
 
   private
 
-  def update_entries(feed)
-    self.update_attributes(title:    feed.title,
-                           site_url: feed.url || feed.feed_url)
-    feed.entries.first(10).each do |e|
-      unless self.entries.find_by(url: e.url)
-        insert_entry(e)
-      end
-    end
-    self.entries = self.entries.first(10)
-  end
-
   def parse_feed
     begin
       setup_fj
@@ -41,6 +30,18 @@ class Feed < ActiveRecord::Base
       puts 'Timeout when fetching feed ' + self.id.to_s
     end
     return 0
+  end
+
+  def update_entries(feed)
+    #self.entries.destroy_all
+    self.update_attributes(title:    feed.title,
+                           site_url: feed.url || feed.feed_url)
+    feed.entries.first(10).each do |e|
+      unless self.entries.find_by(url: e.url)
+        insert_entry(e)
+      end
+    end
+    self.entries = self.entries.first(10)
   end
 
   def setup_fj
@@ -72,23 +73,6 @@ class Feed < ActiveRecord::Base
            process_image(find_og_image(entry.url))
   end
 
-  def find_image_from_description(description)
-    begin
-      doc = Nokogiri::HTML description
-      return doc.css('img').first.attributes['src'].value
-    rescue
-    end
-    return nil
-  end
-
-  def find_og_image(url)
-    begin
-      doc = Nokogiri::HTML(open(URI::escape(url.strip.split(/#|\?/).first)))
-      return doc.css("meta[property='og:image']").first.attributes['content'].value
-    rescue
-    end
-  end
-
   def process_image(img)
     if img.nil? || img.blank?
       return nil
@@ -105,6 +89,23 @@ class Feed < ActiveRecord::Base
     end
 
     return filter_image(img)
+  end
+
+  def find_image_from_description(description)
+    begin
+      doc = Nokogiri::HTML description
+      return doc.css('img').first.attributes['src'].value
+    rescue
+    end
+    return nil
+  end
+
+  def find_og_image(url)
+    begin
+      doc = Nokogiri::HTML(open(URI::escape(url.strip.split(/#|\?/).first)))
+      return doc.css("meta[property='og:image']").first.attributes['content'].value
+    rescue
+    end
   end
 
   def filter_image(img)
@@ -139,6 +140,7 @@ class Feed < ActiveRecord::Base
       img.include? 'avw.php' or
       img.include? 'tmn-test' or
       img.include? 'webkit-fake-url' or
+      img.include? '/img/oglobo.jpg' or
       img.include? 'beacon' or
       img.include? 'usatoday-newstopstories' or
       img.include? 'a2.img' or
