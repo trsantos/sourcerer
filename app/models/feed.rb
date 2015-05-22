@@ -129,6 +129,7 @@ class Feed < ActiveRecord::Base
       img.include? '/heads/' or
       img.include? '/share/' or
       img.include? 'smile.png' or
+      img.include? 'blank.' or
       img.include? 'application-pdf.png' or
       img.include? 'gif;base64' or
       img.include? 'abrirpdf.png' or
