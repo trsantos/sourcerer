@@ -34,6 +34,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
+    update_all
     fav    = current_user.subscriptions.where("starred = ?", true)
     normal = current_user.subscriptions.where("starred = ?", false)
     if s = get_updated_subscription(fav) || get_updated_subscription(normal)
@@ -62,6 +63,14 @@ class SubscriptionsController < ApplicationController
       end
     end
     return nil
+  end
+
+  def update_all
+    last_update = current_user.subscriptions_updated_at
+    if last_update.nil? or last_update < Feed.update_interval
+      current_user.update_attribute(:subscriptions_updated_at, Time.zone.now)
+      current_user.delay.update_all_subscriptions
+    end
   end
 
 end
