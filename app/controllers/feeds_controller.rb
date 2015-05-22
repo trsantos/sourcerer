@@ -10,8 +10,6 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    # This should be done on background
-    @feed.update
     @entries = @feed.entries
   end
 

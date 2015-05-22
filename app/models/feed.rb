@@ -12,41 +12,51 @@ class Feed < ActiveRecord::Base
 
   def update
     return if self.updated_at > Feed.update_interval and self.entries.count > 0
-
     self.update_attribute(:updated_at, Time.zone.now)
 
-    Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
-    Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
-    Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
-
-    begin
-      feed = Feedjira::Feed.fetch_and_parse self.feed_url
-    rescue Rack::Timeout::RequestTimeoutError
-      puts 'Timeout when fetching feed ' + self.id.to_s
-      return
-    end
-
+    feed = parse_feed
     return if feed.is_a? Integer
 
-    self.update_attributes(title:    feed.title,
-                           site_url: feed.url || feed.feed_url)
-
-    feed.entries.first(10).each do |e|
-      unless self.entries.find_by(url: e.url)
-        description = e.content || e.summary || ""
-        self.entries.create(title:       e.title,
-                            description: sanitize(strip_tags(description)).first(300),
-                            pub_date:    find_pub_date(e.published),
-                            image:       find_image(e, description),
-                            url:         e.url)
-      end
-    end
-
-    self.entries = self.entries.first(10)
-
+    update_entries(feed)
   end
 
   private
+
+  def update_entries(feed)
+    self.update_attributes(title:    feed.title,
+                           site_url: feed.url || feed.feed_url)
+    feed.entries.first(10).each do |e|
+      unless self.entries.find_by(url: e.url)
+        insert_entry(e)
+      end
+    end
+    self.entries = self.entries.first(10)
+  end
+
+  def parse_feed
+    begin
+      setup_fj
+      return Feedjira::Feed.fetch_and_parse self.feed_url
+    rescue Rack::Timeout::RequestTimeoutError
+      puts 'Timeout when fetching feed ' + self.id.to_s
+    end
+    return 0
+  end
+
+  def setup_fj
+    Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
+    Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
+    Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
+  end
+
+  def insert_entry(e)
+    description = e.content || e.summary || ""
+    self.entries.create(title:       e.title,
+                        description: sanitize(strip_tags(description)).first(300),
+                        pub_date:    find_pub_date(e.published),
+                        image:       find_image(e, description),
+                        url:         e.url)
+  end
 
   def find_pub_date(date)
     if date.nil? or date > Time.zone.now
@@ -73,7 +83,7 @@ class Feed < ActiveRecord::Base
 
   def find_og_image(url)
     begin
-      doc = Nokogiri::HTML(open(URI::escape(url.strip)))
+      doc = Nokogiri::HTML(open(URI::escape(url.strip.split(/#|\?/).first)))
       return doc.css("meta[property='og:image']").first.attributes['content'].value
     rescue
     end
@@ -108,10 +118,12 @@ class Feed < ActiveRecord::Base
       img.include? 'mercola.com/aggbug.aspx' or
       img.include? 'ptq.gif' or
       img.include? 'twitter16.png' or
+      img.include? 'bbcimg.co.uk' or
       img.include? 'sethsblog' or
       img.include? 'assets.feedblitz.com/i/' or
       img.include? 'wirecutter-deals' or
       img.include? '/heads/' or
+      img.include? 'phys.org/newman/csz/news/tmb' or
       img.include? '/share/' or
       img.include? 'smile.png' or
       img.include? 'blank.' or
@@ -134,7 +146,9 @@ class Feed < ActiveRecord::Base
       img.include? '/comments/' or
       img.include? 'a2t.img' or
       img.include? 'a2t2.img' or
+      img.include? 'default-thumbnail' or
       img.include? 'subscribe.jpg' or
+      img.include? 'forbes_' or
       img.include? 'transparent.png' or
       img.include? '.mp3' or
       img.include? '.m4a' or
