@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def self.update_interval
-    2.hour.ago
+    8.hour.ago
   end
 
   def update
@@ -134,7 +134,7 @@ class Feed < ActiveRecord::Base
       img.include? 'abrirpdf.png' or
       img.include? 'gravatar.com/avatar' or
       img.include? 'nojs.php' or
-      img.include? 'icon_' or
+      img.include? 'icon' or
       img.include? 'gplus-16.png' or
       img.include? 'uol-jogos-600px' or
       img.include? 'logo' or
