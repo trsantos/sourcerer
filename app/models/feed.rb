@@ -72,7 +72,8 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, description)
-    return filter_image(entry.image) ||
+    return filter_image(find_og_image(entry.url)) ||
+           filter_image(entry.image) ||
            filter_image(find_image_from_description(description))
   end
 
@@ -83,6 +84,14 @@ class Feed < ActiveRecord::Base
     rescue
     end
     return nil
+  end
+
+  def find_og_image(url)
+    begin
+      doc = Nokogiri::HTML(open(url))
+      return doc.css("meta[property='og:image']").first.attributes['content'].value
+    rescue
+    end
   end
 
   def filter_image(img)
