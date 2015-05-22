@@ -10,7 +10,8 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    #@feed.update
+    # Urgent: This update should be done on background using AJAX
+    @feed.update
     @entries = @feed.entries
   end
 
