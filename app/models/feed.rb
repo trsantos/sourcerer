@@ -72,9 +72,8 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, description)
-    return process_image(entry.image) ||
+    return entry.image ||
            process_image(find_image_from_description(description))
-           #process_image(find_og_image(entry.url))
   end
 
   def process_image(img)

@@ -121,12 +121,16 @@ class User < ActiveRecord::Base
   end
 
   def update_subscriptions
+    count = 0
     [true, false].each do |star|
       subs = self.subscriptions.where("updated_at < ? AND starred = ?", Feed.update_interval, star)
       subs.shuffle.each do |s|
         s.update_attribute(:updated_at, Time.zone.now)
         s.feed.update
-        return if s.updated?
+        if s.updated?
+          count += 1
+          return if count == 2
+        end
       end
     end
   end
