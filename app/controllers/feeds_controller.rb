@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
   include ApplicationHelper
   
-  before_action :logged_in_user, only: [:index]
+  before_action :logged_in_user, only: [:index, :show, :new, :create]
   after_action  :mark_subscription_as_visited, only: [:show]
   
   def index
@@ -10,6 +10,14 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
+    # TODO: Since we're not updating feeds with no users, display
+    #       some message saying that the feed will be updated normally
+    #       if the user start following it.
+    if @feed.created_at > Feed.update_interval
+      # TODO: Use Ajax to reload the page when the fetch is done.
+      flash.now[:info] = "You've just added a new feed to Sourcerer! We're going to fetch it shortly but you may subscribe to it right now and everything will be fine. This is going to be fixed soon..."
+      @feed.delay.update
+    end
     @entries = @feed.entries
   end
 

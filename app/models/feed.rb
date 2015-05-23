@@ -6,20 +6,23 @@ class Feed < ActiveRecord::Base
   
   validates :feed_url, presence: true, uniqueness: true
 
-  after_create :update
-
   def self.update_interval
-    2.hour.ago
+    2.hours.ago
   end
 
-  def update
-    return if self.updated_at > Feed.update_interval and self.entries.count > 0
+  def update(update_interval = Feed.update_interval)
+    # Continue the update only if the feed was just created or if
+    # its last update was a long time ago...
+    unless (self.created_at > Feed.update_interval) or (self.updated_at < update_interval)
+      return
+    end
+
     self.update_attribute(:updated_at, Time.zone.now)
 
     feed = parse_feed
     return if feed.is_a? Integer
 
-    update_entries(feed)
+    update_entries feed
   end
 
   private
@@ -35,15 +38,14 @@ class Feed < ActiveRecord::Base
   end
 
   def update_entries(feed)
-    #self.entries.destroy_all
     self.update_attributes(title:    feed.title,
                            site_url: feed.url || feed.feed_url)
-    feed.entries.first(10).each do |e|
+    feed.entries.first(5).each do |e|
       unless self.entries.find_by(url: e.url)
         insert_entry(e)
       end
     end
-    self.entries = self.entries.first(10)
+    self.entries = self.entries.first(5)
   end
 
   def setup_fj
