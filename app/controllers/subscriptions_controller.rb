@@ -34,15 +34,13 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    update_all
-    fav    = current_user.subscriptions.where("starred = ?", true)
-    normal = current_user.subscriptions.where("starred = ?", false)
-    if s = get_updated_subscription(fav) || get_updated_subscription(normal)
-      redirect_to s
-    else
-      flash[:info] = "You have no updated feeds. Check back later!"
-      redirect_to root_url
+    current_user.delay.update_subscriptions
+    subs = current_user.subscriptions.order(starred: :desc, updated_at: :desc)
+    subs.each do |s|
+      redirect_to s.feed and return if s.updated?
     end
+    flash[:info] = "You have no updated feeds. Check back later!"
+    redirect_to root_url
   end
   
   private
@@ -54,23 +52,6 @@ class SubscriptionsController < ApplicationController
   def correct_user
     @user = User.find(Subscription.find(params[:id]).user_id)
     redirect_to root_url unless current_user?(@user) or current_user.admin?
-  end
-
-  def get_updated_subscription(list)
-    list.shuffle.each do |s|
-      if s.updated?
-        return s.feed
-      end
-    end
-    return nil
-  end
-
-  def update_all
-    last_update = current_user.subscriptions_updated_at
-    if last_update.nil? or last_update < Subscription.visit_interval
-      current_user.update_attribute(:subscriptions_updated_at, Time.zone.now)
-      current_user.delay.update_all_subscriptions
-    end
   end
 
 end

@@ -12,7 +12,7 @@ class OpmlController < ApplicationController
     opml = OpmlSaw::Parser.new(contents)
     opml.parse
     opml.feeds.each do |f|
-      current_user.follow(find_or_create_feed(f[:xml_url]))
+      current_user.follow(Feed.find_or_create_by(feed_url: process_url(f[:xml_url])))
     end
     flash[:info] = "OPML file imported. Happy reading!"
     redirect_to next_path

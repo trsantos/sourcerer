@@ -23,14 +23,14 @@ class FeedsController < ApplicationController
 
   def new
     if params[:feed]
-      feed = find_or_create_feed(params[:feed])
+      feed = Feed.find_or_create_by(feed_url: process_url(params[:feed]))
       redirect_to feed
     end
   end
   
   def create
     url = params[:feed][:feed_url]
-    feed = find_or_create_feed(url)
+    feed = Feed.find_or_create_by(feed_url: process_url(url))
     redirect_to feed
   end
 

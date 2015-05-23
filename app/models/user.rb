@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   def follow_topic(topic)
     self.topics += [topic]
     get_feeds(topic).each do |url|
-      follow(find_or_create_feed(url), true)
+      follow(Feed.find_or_create_by(feed_url: url), true)
     end
     #topic.feeds.each do |f|
     #  follow(f)
@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
 
   def unfollow_topic(topic)
     get_feeds(topic).each do |url|
-      f = find_or_create_feed(url)
+      f = Feed.find_or_create_by(feed_url: url)
       s = self.subscriptions.find_by(feed_id: f.id)
       if s and s.from_topic
         unfollow(f)
@@ -120,9 +120,14 @@ class User < ActiveRecord::Base
     return topics.include?(topic)
   end
 
-  def update_all_subscriptions
-    self.subscriptions.each do |s|
-      s.feed.delay.update
+  def update_subscriptions
+    [true, false].each do |star|
+      subs = self.subscriptions.where("updated_at < ? AND starred = ?", Feed.update_interval, star)
+      subs.shuffle.each do |s|
+        s.update_attribute(:updated_at, Time.zone.now)
+        s.feed.update
+        return if s.updated?
+      end
     end
   end
 
