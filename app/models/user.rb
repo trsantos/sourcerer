@@ -122,7 +122,7 @@ class User < ActiveRecord::Base
 
   def update_all_subscriptions
     self.subscriptions.each do |s|
-      s.feed.update
+      s.feed.delay.update
     end
   end
 

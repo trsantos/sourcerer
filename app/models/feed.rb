@@ -73,8 +73,8 @@ class Feed < ActiveRecord::Base
 
   def find_image(entry, description)
     return process_image(entry.image) ||
-           process_image(find_image_from_description(description)) ||
-           process_image(find_og_image(entry.url))
+           process_image(find_image_from_description(description))
+           #process_image(find_og_image(entry.url))
   end
 
   def process_image(img)
@@ -120,15 +120,12 @@ class Feed < ActiveRecord::Base
       img.include? '.tiff' or
       img.include? 'rc.img' or
       img.include? 'mf.gif' or
-      img.include? 'mercola.com/aggbug.aspx' or
       img.include? 'ptq.gif' or
       img.include? 'twitter16.png' or
-      img.include? 'bbcimg.co.uk' or
       img.include? 'sethsblog' or
       img.include? 'assets.feedblitz.com/i/' or
       img.include? 'wirecutter-deals' or
       img.include? '/heads/' or
-      img.include? 'phys.org/newman/csz/news/tmb' or
       img.include? '/share/' or
       img.include? 'smile.png' or
       img.include? 'blank.' or
@@ -143,7 +140,6 @@ class Feed < ActiveRecord::Base
       img.include? 'logo' or
       img.include? 'avw.php' or
       img.include? 'tmn-test' or
-      img.include? 'square_60x60' or
       img.include? '-ipad-h' or
       img.include? 'webkit-fake-url' or
       img.include? '/img/oglobo.jpg' or
@@ -151,9 +147,7 @@ class Feed < ActiveRecord::Base
       img.include? 'usatoday-newstopstories' or
       img.include? 'a2.img' or
       img.include? 'ach.img' or
-      img.include? 'cnn/dam' or
       img.include? '/comments/' or
-      img.include? '/90x68/' or
       img.include? 'a2t.img' or
       img.include? 'a2t2.img' or
       img.include? 'default-thumbnail' or
