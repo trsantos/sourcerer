@@ -147,6 +147,7 @@ class Feed < ActiveRecord::Base
       img.include? 'a2.img' or
       img.include? 'ach.img' or
       img.include? '/comments/' or
+      img.include? '/smilies/' or
       img.include? 'a2t.img' or
       img.include? 'a2t2.img' or
       img.include? 'default-thumbnail' or
