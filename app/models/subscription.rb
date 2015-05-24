@@ -9,9 +9,9 @@ class Subscription < ActiveRecord::Base
     return true if self.visited_at.nil?
 
     begin
-      # true if the lastest item is newer than the latest visit AND
-      #      if the lastest visit was before visit_interval
-      return true if Subscription.visit_interval > self.visited_at and
+      # true if the subscription is starred OR lastest visit was before visit_interval
+      #  AND if the lastest item is newer than the latest visit
+      return true if (self.starred? or (Subscription.visit_interval > self.visited_at)) and
         self.feed.entries.first.pub_date > self.visited_at
     rescue
     end
