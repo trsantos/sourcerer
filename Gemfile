@@ -10,20 +10,18 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder'
+gem 'sdoc', group: :doc
 gem 'bcrypt'
 gem 'foundation-rails'
-gem 'faker'
-gem 'mousetrap-rails'
 gem 'feedjira'
+gem 'mousetrap-rails'
 gem 'opml_saw', :git => "git://github.com/feedbin/opml_saw.git", :branch => "master"
-#gem 'open_uri_redirections'
 gem 'delayed_job_active_record'
-gem 'sdoc', group: :doc
 
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
-  #gem 'web-console'
+  gem 'web-console'
   gem 'spring'
 end
 
@@ -35,6 +33,5 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'rack-timeout'
   gem 'puma'
 end
