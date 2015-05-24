@@ -11,8 +11,8 @@ class Subscription < ActiveRecord::Base
     begin
       # true if the lastest item is newer than the latest visit AND
       #      if the lastest visit was before visit_interval
-      return true if self.feed.entries.first.pub_date > self.visited_at and
-        Subscription.visit_interval > self.visited_at
+      return true if Subscription.visit_interval > self.visited_at and
+        self.feed.entries.first.pub_date > self.visited_at
     rescue
     end
 
@@ -20,6 +20,6 @@ class Subscription < ActiveRecord::Base
   end
 
   def self.visit_interval
-    4.hours.ago
+    8.hours.ago
   end
 end
