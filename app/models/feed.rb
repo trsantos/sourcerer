@@ -13,15 +13,17 @@ class Feed < ActiveRecord::Base
   def update(update_interval = Feed.update_interval)
     # Continue the update only if the feed was just created or if
     # its last update was a long time ago...
-    unless (self.created_at > Feed.update_interval) or (self.updated_at < update_interval)
-      return
-    end
-
-    self.update_attribute(:updated_at, Time.zone.now)
+    #
+    # Feeds are always updated every hour in the background. Enable the following
+    # conditions only when the spacing of general updates become too large
+    #
+    # unless (self.created_at > Feed.update_interval) or (self.updated_at < update_interval)
+    #   return
+    # end
+    # self.update_attribute(:updated_at, Time.zone.now)
 
     feed = parse_feed
     return if feed.is_a? Integer
-
     update_entries feed
   end
 

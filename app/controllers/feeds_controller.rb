@@ -13,7 +13,7 @@ class FeedsController < ApplicationController
     # TODO: Since we're not updating feeds with no users, display
     #       some message saying that the feed will be updated normally
     #       if the user start following it.
-    if @feed.created_at > Feed.update_interval
+    if @feed.created_at > 1.hour.ago
       # TODO: Use Ajax to reload the page when the fetch is done.
       flash.now[:info] = "You've just added a new feed to Sourcerer! We're going to fetch it shortly but you may subscribe to it right now and everything will be fine. This is going to be fixed soon..."
       @feed.delay.update

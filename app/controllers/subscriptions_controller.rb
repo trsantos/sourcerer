@@ -34,7 +34,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    current_user.delay.update_subscriptions
+    # Enable next line when it becomes impossible to update all feeds every hour
+    # Also remember to change Feed.update_interval
+    #
+    # current_user.delay.update_subscriptions
     subs = current_user.subscriptions.order(starred: :desc, updated_at: :desc)
     subs.each do |s|
       redirect_to s.feed and return if s.updated?

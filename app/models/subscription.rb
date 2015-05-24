@@ -6,7 +6,8 @@ class Subscription < ActiveRecord::Base
   validates :feed_id, presence: true
 
   def self.visit_interval
-    Feed.update_interval
+    # This should be configurable by the user
+    Time.zone.now
   end
 
   def updated?
