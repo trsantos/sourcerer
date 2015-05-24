@@ -40,6 +40,9 @@ class SubscriptionsController < ApplicationController
     # current_user.delay.update_subscriptions
     subs = current_user.subscriptions.order(starred: :desc, updated_at: :desc)
     subs.each do |s|
+      redirect_to s.feed and return if s.updated? and (s.starred? or s.visited_at < Date.today)
+    end
+    subs.each do |s|
       redirect_to s.feed and return if s.updated?
     end
     flash[:info] = "You have no updated feeds. Check back later!"
