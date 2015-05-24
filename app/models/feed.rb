@@ -31,7 +31,7 @@ class Feed < ActiveRecord::Base
   def fetch_and_parse
     setup_fj
     begin
-      Timeout.timeout(10) do
+      Timeout.timeout(15) do
         return Feedjira::Feed.fetch_and_parse self.feed_url
       end
     rescue Timeout::Error
