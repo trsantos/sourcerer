@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root               'static_pages#home'
   get    'about'  => 'static_pages#about'
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
   resources :subscriptions,       only: [:index, :create, :edit, :update, :destroy]
   resources :opml,                only: [:new, :create]
   get 'next' => 'subscriptions#next'
+  mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -20,6 +20,7 @@ class Feed < ActiveRecord::Base
     # unless (self.created_at > Feed.update_interval) or (self.updated_at < update_interval)
     #   return
     # end
+    puts "Updating feed #{self.id}: #{self.title}"
     feed = fetch_and_parse
     return if feed.is_a? Integer
     update_entries feed
@@ -29,7 +30,6 @@ class Feed < ActiveRecord::Base
 
   def fetch_and_parse
     setup_fj
-    puts "Updating feed #{self.id}: #{self.title}"
     begin
       Timeout.timeout(10) do
         return Feedjira::Feed.fetch_and_parse self.feed_url
