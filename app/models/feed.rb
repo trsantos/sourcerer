@@ -26,6 +26,13 @@ class Feed < ActiveRecord::Base
     update_entries feed
   end
 
+  def only_images?
+    self.entries.each do |e|
+      return false if !(e.image && e.description.blank?)
+    end
+    return true
+  end
+
   private
 
   def fetch_and_parse

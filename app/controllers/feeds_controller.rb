@@ -16,6 +16,7 @@ class FeedsController < ApplicationController
       @feed.delay.update
     end
     @entries = @feed.entries
+    @only_images = @feed.only_images?
   end
 
   def new
