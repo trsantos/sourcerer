@@ -42,7 +42,7 @@ class SubscriptionsController < ApplicationController
     next_sub = nil
     subs.each do |s|
       if s.updated?
-        if s.starred? or s.visited_at.nil? or s.visited_at + 3.hours < Date.today
+        if s.starred? or s.visited_at.nil? or s.visited_at < 1.day.ago
           redirect_to s.feed and return
         end
         next_sub ||= s
