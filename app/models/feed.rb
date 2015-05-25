@@ -44,11 +44,10 @@ class Feed < ActiveRecord::Base
 
   def new_entries?(feed)
     begin
-      return self.entries.first.url != feed.entries.first.url or
-        self.entries.second.url != feed.entries.second.url
+      return self.entries.second.url != feed.entries.second.url
     rescue
-      return true
     end
+    return true
   end
 
   def update_entries(feed)
