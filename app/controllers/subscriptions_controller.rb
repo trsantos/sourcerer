@@ -38,13 +38,20 @@ class SubscriptionsController < ApplicationController
     # Also remember to change Feed.update_interval
     #
     # current_user.delay.update_subscriptions
+
     subs = current_user.subscriptions.order(starred: :desc, updated_at: :desc)
+    next_sub = nil
     subs.each do |s|
-      redirect_to s.feed and return if s.updated? and (s.starred? or s.visited_at < Date.today)
+      if s.updated?
+        redirect_to s.feed and return if s.starred? or s.visited_at < Date.today
+        next_sub ||= s
+      end
     end
-    subs.each do |s|
-      redirect_to s.feed and return if s.updated?
+
+    if next_sub
+      redirect_to next_sub.feed and return
     end
+
     flash[:info] = "You have no updated feeds. Check back later!"
     redirect_to root_url
   end
