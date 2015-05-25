@@ -23,9 +23,7 @@ class Feed < ActiveRecord::Base
     puts "Updating feed #{self.id}: #{self.title}"
     feed = fetch_and_parse
     return if feed.is_a? Integer
-    if new_entries? feed
-      update_entries feed
-    end
+    update_entries feed
   end
 
   private
@@ -42,21 +40,15 @@ class Feed < ActiveRecord::Base
     end
   end
 
-  def new_entries?(feed)
-    begin
-      return self.entries.second.url != feed.entries.second.url
-    rescue
-    end
-    return true
-  end
-
   def update_entries(feed)
     self.update_attributes(title:    feed.title,
                            site_url: feed.url || feed.feed_url)
-    self.entries.destroy_all
     feed.entries.first(5).each do |e|
-      insert_entry(e)
+      unless self.entries.find_by(url: e.url)
+        insert_entry(e)
+      end
     end
+    self.entries = self.entries.first(5)
   end
 
   def setup_fj
