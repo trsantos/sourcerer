@@ -50,12 +50,12 @@ class Feed < ActiveRecord::Base
   def update_entries(feed)
     self.update_attributes(title:    feed.title,
                            site_url: feed.url || feed.feed_url)
-    feed.entries.first(10).each do |e|
+    feed.entries.first(5).each do |e|
       unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
         insert_entry(e)
       end
     end
-    self.entries = self.entries.first(10)
+    self.entries = self.entries.first(5)
   end
 
   def setup_fj
