@@ -50,12 +50,12 @@ class Feed < ActiveRecord::Base
   def update_entries(feed)
     self.update_attributes(title:    feed.title,
                            site_url: feed.url || feed.feed_url)
-    feed.entries.first(5).each do |e|
-      unless self.entries.find_by(url: e.url)
+    feed.entries.first(10).each do |e|
+      unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
         insert_entry(e)
       end
     end
-    self.entries = self.entries.first(5)
+    self.entries = self.entries.first(10)
   end
 
   def setup_fj
@@ -83,7 +83,8 @@ class Feed < ActiveRecord::Base
 
   def find_image(entry, description)
     return entry.image ||
-           process_image(find_image_from_description(description))
+           process_image(find_image_from_description(description)) ||
+           process_image(find_og_image(entry.url))
   end
 
   def process_image(img)
@@ -164,6 +165,9 @@ class Feed < ActiveRecord::Base
       img.include? 'subscribe.jpg' or
       img.include? 'forbes_' or
       img.include? 'transparent.png' or
+      # Disable the next to filters when og images are not used
+      img.include? 'bbcimg.co.uk' or
+      img.include? 'phys.org/newman/csz/news/tmb' or
       img.include? '.mp3' or
       img.include? '.m4a' or
       img.include? '.mp4' or
