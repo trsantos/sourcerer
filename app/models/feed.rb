@@ -83,8 +83,7 @@ class Feed < ActiveRecord::Base
 
   def find_image(entry, description)
     return entry.image ||
-           process_image(find_image_from_description(description)) ||
-           process_image(find_og_image(entry.url))
+           process_image(find_image_from_description(description))
   end
 
   def process_image(img)
@@ -166,8 +165,9 @@ class Feed < ActiveRecord::Base
       img.include? 'forbes_' or
       img.include? 'transparent.png' or
       # Disable the next to filters when og images are not used
-      img.include? 'bbcimg.co.uk' or
-      img.include? 'phys.org/newman/csz/news/tmb' or
+      #img.include? 'bbcimg.co.uk' or
+      #img.include? '/images/facebook' or
+      #img.include? 'phys.org/newman/csz/news/tmb' or
       img.include? '.mp3' or
       img.include? '.m4a' or
       img.include? '.mp4' or
