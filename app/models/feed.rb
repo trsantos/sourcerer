@@ -51,7 +51,7 @@ class Feed < ActiveRecord::Base
     self.update_attributes(title:    feed.title,
                            site_url: feed.url || feed.feed_url)
     feed.entries.first(5).each do |e|
-      unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
+      unless self.entries.find_by(url: e.url)# or self.entries.find_by(title: e.title)
         insert_entry(e)
       end
     end
