@@ -20,7 +20,6 @@ class Feed < ActiveRecord::Base
     # unless (self.created_at > Feed.update_interval) or (self.updated_at < update_interval)
     #   return
     # end
-    puts "Updating feed #{self.id}: #{self.title}"
     feed = fetch_and_parse
     return if feed.is_a? Integer
     update_entries feed
