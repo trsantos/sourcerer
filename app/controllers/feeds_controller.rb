@@ -10,7 +10,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    if @feed.created_at > 1.minute.ago
+    if @feed.created_at > 1.hour.ago
       # TODO: Use Ajax to reload the page when the fetch is done.
       # flash.now[:info] = new_feed_message
       @feed.update
