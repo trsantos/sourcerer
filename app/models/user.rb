@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :subscriptions, dependent: :destroy
   has_many :feeds, through: :subscriptions
+
+  has_one  :next_feed, dependent: :destroy
   
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
@@ -120,18 +122,19 @@ class User < ActiveRecord::Base
     return topics.include?(topic)
   end
 
-  def update_subscriptions
-    count = 0
-    [true, false].each do |star|
-      subs = self.subscriptions.where("updated_at < ? AND starred = ?", Feed.update_interval, star)
-      subs.shuffle.each do |s|
-        s.update_attribute(:updated_at, Time.zone.now)
-        s.feed.update
-        if s.updated?
-          count += 1
-          return if count == 2
+  def set_next_feed
+    subs = self.subscriptions.order(starred: :desc, updated_at: :desc)
+    next_sub = nil
+    subs.each do |s|
+      if s.updated?
+        if s.starred? or s.visited_at.nil? or s.visited_at < 1.day.ago
+          next_sub = s
         end
+        next_sub ||= s
       end
+    end
+    if next_sub
+      NextFeed.create(user_id: self.id, feed_id: next_sub.feed.id)
     end
   end
 

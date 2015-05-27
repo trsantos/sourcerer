@@ -33,7 +33,7 @@ class SubscriptionsController < ApplicationController
     redirect_to feed
   end
 
-  def next
+  def old_next
     # Enable next line when it becomes impossible to update all feeds every hour
     # Also remember to change Feed.update_interval
     #
@@ -56,7 +56,23 @@ class SubscriptionsController < ApplicationController
     flash[:info] = "You have no updated feeds. Check back later!"
     redirect_to root_url
   end
-  
+
+  def next
+    if current_user.next_feed.nil?
+      current_user.set_next_feed
+    end
+
+    if current_user.next_feed
+      redirect_to Feed.find current_user.next_feed.feed_id
+      current_user.next_feed.destroy
+      current_user.delay.set_next_feed
+      return
+    else
+      flash[:info] = "You have no updated feeds. Check back later!"
+      redirect_to root_url
+    end
+  end
+
   private
 
   def sub_params
