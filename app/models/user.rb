@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
     subs.each do |s|
       if s.updated?
         if s.starred? or s.visited_at.nil? or s.visited_at < 1.day.ago
-          next_sub = s
+          next_sub = s and break
         end
         next_sub ||= s
       end
