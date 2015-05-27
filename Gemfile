@@ -19,6 +19,8 @@ gem 'opml_saw', :git => "git://github.com/feedbin/opml_saw.git", :branch => "mas
 gem 'sidekiq'
 gem 'sinatra', :require => nil
 
+gem 'faker'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'

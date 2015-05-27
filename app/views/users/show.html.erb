@@ -6,8 +6,8 @@
 
 <%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
     <% Topic.all.each do |t| %>
-		<%= f.check_box t.topic, { checked: @user.following_topic?(t) } %>
-		<%= t.topic %>
+		<%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
+		<%= t.name %>
 		<br/>
     <% end %>
     <%= f.submit "Follow topics", class: "button" %>
