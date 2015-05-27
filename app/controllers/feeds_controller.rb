@@ -16,7 +16,6 @@ class FeedsController < ApplicationController
     end
     @entries = @feed.entries
     @only_images = @feed.only_images?
-    current_user.delay.set_next_feed
   end
 
   def new
@@ -35,9 +34,10 @@ class FeedsController < ApplicationController
   private
 
   def mark_subscription_as_visited
-    if logged_in? and current_user.following?(@feed)
+    if current_user.following?(@feed)
       current_user.subscriptions.find_by(feed_id: @feed.id).update_attribute(:visited_at, Time.zone.now)
     end
+    current_user.delay.set_next_feed
   end
 
 end
