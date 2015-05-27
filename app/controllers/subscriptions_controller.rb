@@ -62,9 +62,9 @@ class SubscriptionsController < ApplicationController
       current_user.set_next_feed
     end
 
-    if current_user.next_feed
-      redirect_to Feed.find current_user.next_feed.feed_id
-      current_user.next_feed.destroy
+    if nf = current_user.next_feed
+      redirect_to Feed.find(nf.feed_id)
+      nf.destroy
       current_user.delay.set_next_feed
       return
     else
