@@ -33,18 +33,13 @@ class SubscriptionsController < ApplicationController
     redirect_to feed
   end
 
-  def old_next
-    # Enable next line when it becomes impossible to update all feeds every hour
-    # Also remember to change Feed.update_interval
-    #
-    # current_user.delay.update_subscriptions
-    subs = current_user.subscriptions.order(starred: :desc, updated_at: :desc)
+  def next
     next_sub = nil
+    subs = current_user.subscriptions.where(updated: true).order(starred: :desc, updated_at: :desc)
     subs.each do |s|
-      if s.updated?
-        if s.starred? or s.visited_at.nil? or s.visited_at < 1.day.ago
-          redirect_to s.feed and return
-        end
+      if s.starred? or s.visited_at.nil? or s.visited_at < 1.day.ago
+        next_sub = s and break
+      else
         next_sub ||= s
       end
     end
@@ -55,21 +50,6 @@ class SubscriptionsController < ApplicationController
 
     flash[:info] = "You have no updated feeds. Check back later!"
     redirect_to root_url
-  end
-
-  def next
-    if current_user.next_feed.nil?
-      current_user.set_next_feed
-    end
-
-    if nf = current_user.next_feed
-      redirect_to Feed.find(nf.feed_id)
-      nf.destroy
-      return
-    else
-      flash[:info] = "You have no updated feeds. Check back later!"
-      redirect_to root_url
-    end
   end
 
   private

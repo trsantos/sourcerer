@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527121849) do
+ActiveRecord::Schema.define(version: 20150527174932) do
 
   create_table "entries", force: :cascade do |t|
     t.text     "title"
@@ -36,15 +36,6 @@ ActiveRecord::Schema.define(version: 20150527121849) do
 
   add_index "feeds", ["feed_url"], name: "index_feeds_on_feed_url", unique: true
 
-  create_table "next_feeds", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "feed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "next_feeds", ["user_id"], name: "index_next_feeds_on_user_id"
-
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "feed_id"
@@ -55,9 +46,11 @@ ActiveRecord::Schema.define(version: 20150527121849) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "from_topic", default: false
+    t.boolean  "updated",    default: true
   end
 
   add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id"
+  add_index "subscriptions", ["updated"], name: "index_subscriptions_on_updated"
   add_index "subscriptions", ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
 
@@ -85,13 +78,12 @@ ActiveRecord::Schema.define(version: 20150527121849) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.boolean  "admin",                    default: false
+    t.boolean  "admin",             default: false
     t.string   "activation_digest"
-    t.boolean  "activated",                default: false
+    t.boolean  "activated",         default: false
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
-    t.datetime "subscriptions_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

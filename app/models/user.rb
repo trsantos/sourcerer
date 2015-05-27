@@ -7,8 +7,6 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :feeds, through: :subscriptions
 
-  has_one  :next_feed, dependent: :destroy
-  
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -120,22 +118,6 @@ class User < ActiveRecord::Base
 
   def following_topic?(topic)
     return topics.include?(topic)
-  end
-
-  def set_next_feed
-    subs = self.subscriptions.order(starred: :desc, updated_at: :desc)
-    next_sub = nil
-    subs.each do |s|
-      if s.updated?
-        if s.starred? or s.visited_at.nil? or s.visited_at < 1.day.ago
-          next_sub = s and break
-        end
-        next_sub ||= s
-      end
-    end
-    if next_sub
-      NextFeed.create(user_id: self.id, feed_id: next_sub.feed.id)
-    end
   end
 
   private

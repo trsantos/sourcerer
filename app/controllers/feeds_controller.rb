@@ -35,9 +35,11 @@ class FeedsController < ApplicationController
 
   def mark_subscription_as_visited
     if current_user.following?(@feed)
-      current_user.subscriptions.find_by(feed_id: @feed.id).update_attribute(:visited_at, Time.zone.now)
+      current_user.subscriptions.find_by(feed_id: @feed.id).update_attributes(visited_at:
+                                                                                Time.zone.now,
+                                                                              updated:
+                                                                                false)
     end
-    current_user.delay.set_next_feed
   end
 
 end
