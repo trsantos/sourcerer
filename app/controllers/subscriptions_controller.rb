@@ -65,7 +65,6 @@ class SubscriptionsController < ApplicationController
     if nf = current_user.next_feed
       redirect_to Feed.find(nf.feed_id)
       nf.destroy
-      current_user.delay.set_next_feed
       return
     else
       flash[:info] = "You have no updated feeds. Check back later!"

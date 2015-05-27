@@ -12,11 +12,11 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
     if @feed.created_at > 1.hour.ago
       # TODO: Use Ajax to reload the page when the fetch is done.
-      # flash.now[:info] = new_feed_message
       @feed.update
     end
     @entries = @feed.entries
     @only_images = @feed.only_images?
+    current_user.delay.set_next_feed
   end
 
   def new
@@ -38,10 +38,6 @@ class FeedsController < ApplicationController
     if logged_in? and current_user.following?(@feed)
       current_user.subscriptions.find_by(feed_id: @feed.id).update_attribute(:visited_at, Time.zone.now)
     end
-  end
-
-  def new_feed_message
-    "You've just added a new feed to Sourcerer! We're going to fetch it shortly but you may subscribe to it right now and everything will be fine. This is going to be fixed soon..."
   end
 
 end
