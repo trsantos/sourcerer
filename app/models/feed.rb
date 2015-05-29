@@ -47,16 +47,16 @@ class Feed < ActiveRecord::Base
   end
 
   def update_entries(feed)
-    updated? = false
+    updated = false
 
     feed.entries.first(5).each do |e|
       unless self.entries.find_by(url: e.url) # or self.entries.find_by(title: e.title)
-        updated? = true
+        updated = true
         insert_entry(e)
       end
     end
 
-    if updated?
+    if updated
       self.update_attributes(title:    feed.title,
                              site_url: feed.url || feed.feed_url)
       Subscription.find_by(feed_id: self.id).each do |s|
