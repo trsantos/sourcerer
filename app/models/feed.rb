@@ -36,14 +36,7 @@ class Feed < ActiveRecord::Base
 
   def fetch_and_parse
     setup_fj
-    begin
-      Timeout.timeout(15) do
-        return Feedjira::Feed.fetch_and_parse self.feed_url
-      end
-    rescue Timeout::Error
-      puts "Feed " + self.id.to_s + " took too long to update."
-      return 0
-    end
+    return Feedjira::Feed.fetch_and_parse self.feed_url
   end
 
   def update_entries(feed)
