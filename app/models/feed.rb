@@ -47,14 +47,23 @@ class Feed < ActiveRecord::Base
   end
 
   def update_entries(feed)
-    self.update_attributes(title:    feed.title,
-                           site_url: feed.url || feed.feed_url)
+    updated? = false
+
     feed.entries.first(5).each do |e|
-      unless self.entries.find_by(url: e.url)# or self.entries.find_by(title: e.title)
+      unless self.entries.find_by(url: e.url) # or self.entries.find_by(title: e.title)
+        updated? = true
         insert_entry(e)
       end
     end
-    self.entries = self.entries.first(5)
+
+    if updated?
+      self.update_attributes(title:    feed.title,
+                             site_url: feed.url || feed.feed_url)
+      Subscription.find_by(feed_id: self.id).each do |s|
+        s.update_attribute(:updated, true)
+      end
+      self.entries = self.entries.first(5)
+    end
   end
 
   def setup_fj
@@ -144,7 +153,6 @@ class Feed < ActiveRecord::Base
       img.include? 'nojs.php' or
       img.include? 'icon' or
       img.include? 'gplus-16.png' or
-      img.include? 'uol-jogos-600px' or
       img.include? 'logo' or
       img.include? 'avw.php' or
       img.include? 'tmn-test' or
@@ -164,9 +172,10 @@ class Feed < ActiveRecord::Base
       img.include? 'forbes_' or
       img.include? 'transparent.png' or
       # Disable the next to filters when og images are not used
-      #img.include? 'bbcimg.co.uk' or
-      #img.include? '/images/facebook' or
-      #img.include? 'phys.org/newman/csz/news/tmb' or
+      # img.include? 'bbcimg.co.uk' or
+      # img.include? '/images/facebook' or
+      # img.include? 'phys.org/newman/csz/news/tmb' or
+      # img.include? 'uol-jogos-600px' or
       img.include? '.mp3' or
       img.include? '.m4a' or
       img.include? '.mp4' or
