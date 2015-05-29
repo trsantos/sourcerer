@@ -59,10 +59,10 @@ class Feed < ActiveRecord::Base
     if updated
       self.update_attributes(title:    feed.title,
                              site_url: feed.url || feed.feed_url)
-      Subscription.where(feed_id: self.id).each do |s|
-        s.update_attribute(:updated, true)
-      end
       self.entries = self.entries.first(5)
+      Subscription.where(feed_id: self.id).each do |s|
+        s.update_attribute(:updated, s.updated?)
+      end
     end
   end
 
