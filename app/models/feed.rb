@@ -22,7 +22,7 @@ class Feed < ActiveRecord::Base
     # end
     feed = fetch_and_parse
     if feed.is_a? Integer
-      puts "Could not update #{self.id}"
+      puts "Could not update #{self.id}, #{self.feed_url}"
       return
     end
     update_entries feed
