@@ -10,7 +10,7 @@ class Feed < ActiveRecord::Base
     1.hour.ago
   end
 
-  def update(update_interval = Feed.update_interval)
+  def update
     # Continue the update only if the feed was just created or if
     # its last update was a long time ago...
     #
@@ -36,7 +36,7 @@ class Feed < ActiveRecord::Base
 
   def fetch_and_parse
     setup_fj
-    return Feedjira::Feed.fetch_and_parse self.feed_url
+    return Feedjira::Feed.fetch_and_parse self.feed_url, timeout: 20
   end
 
   def update_entries(feed)
@@ -45,17 +45,14 @@ class Feed < ActiveRecord::Base
     feed.entries.first(5).each do |e|
       unless self.entries.find_by(url: e.url) # or self.entries.find_by(title: e.title)
         updated = true
-        insert_entry(e)
+        insert_entry e
       end
     end
 
     if updated
       self.update_attributes(title:    feed.title,
                              site_url: feed.url || feed.feed_url)
-      self.entries = self.entries.first(5)
-      Subscription.where(feed_id: self.id).each do |s|
-        s.update_attribute(:updated, s.updated?)
-      end
+      self.entries = self.entries.first 5
     end
   end
 
@@ -95,14 +92,14 @@ class Feed < ActiveRecord::Base
     if img.start_with? '//'
       img = "http:" + img
     elsif img.start_with? '/'
-      parse = URI.parse(self.feed_url)
+      parse = URI.parse self.feed_url
       img = parse.scheme + '://' + parse.host + img
     elsif img.start_with? '../'
-      parse = URI.parse(self.url)
+      parse = URI.parse self.url
       img = parse.scheme + '://' + parse.host + img[2..-1]
     end
 
-    return filter_image(img)
+    return filter_image img
   end
 
   def find_image_from_description(description)
