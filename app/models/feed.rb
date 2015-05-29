@@ -59,7 +59,7 @@ class Feed < ActiveRecord::Base
     if updated
       self.update_attributes(title:    feed.title,
                              site_url: feed.url || feed.feed_url)
-      Subscription.find_by(feed_id: self.id).each do |s|
+      Subscription.where(feed_id: self.id).each do |s|
         s.update_attribute(:updated, true)
       end
       self.entries = self.entries.first(5)
