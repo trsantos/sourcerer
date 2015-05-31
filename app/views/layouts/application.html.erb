@@ -21,6 +21,10 @@
 				<%= content_tag(:div, message, class: "alert-box #{message_type}") %>
 			<% end %>
 
+			<% if params[:controller] == "feeds" && params[:action] == "show" %>
+				<div id="feeds-show"></div>
+			<% end %>
+
 			<div class="row main-content">
 				<div class="small-10 small-offset-1">
 					<%= yield %>
