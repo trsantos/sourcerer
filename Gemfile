@@ -18,6 +18,7 @@ gem 'mousetrap-rails'
 gem 'opml_saw', :git => "git://github.com/feedbin/opml_saw.git", :branch => "master"
 gem 'sidekiq'
 gem 'sinatra', :require => nil
+gem 'normalize-rails'
 
 group :development, :test do
   gem 'sqlite3'
