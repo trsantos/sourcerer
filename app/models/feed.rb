@@ -121,6 +121,11 @@ class Feed < ActiveRecord::Base
   end
 
   def filter_image(img)
+    # resize techcrunch images
+    if img.include? 'tctechcrunch2011'
+      img += '?w=400'
+    end
+
     # discard silly images
     if img.include? 'feedburner' or
       img.include? 'pml.png' or
