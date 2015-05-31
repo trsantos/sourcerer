@@ -10,7 +10,7 @@
 		<%= t.name %>
 		<br/>
     <% end %>
-    <%= f.submit "Follow topics", class: "button" %>
+    <%= f.submit "Save topics", class: "button" %>
 <% end %>
 
-<p>Note that if you have an OPML file, you can <%= link_to "import it", new_opml_path %> too.</p>
+<p><em>Note that you can also <%= link_to "import an OPML file", new_opml_path %>.<em></p>

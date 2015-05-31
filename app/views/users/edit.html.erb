@@ -5,9 +5,13 @@
 
 <div class="row">
     <div class="medium-8 medium-offset-2">
-	<%= form_for(@user) do |f| %>
-	    <%= render 'fields', f: f %>
-	    <%= f.submit "Save changes", class: "button expand" %>
-	<% end %>
+		<%= form_for(@user) do |f| %>
+			<%= render 'fields', f: f %>
+			<%= f.submit "Save changes", class: "button expand" %>
+		<% end %>
+		<p>
+			<%= link_to "Export your data", opml_export_path %><br>
+			<%= link_to "Delete your account", current_user, method: :delete, data: { confirm: "You sure?" } %>
+		</p>
     </div>
 </div>

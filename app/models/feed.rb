@@ -6,10 +6,6 @@ class Feed < ActiveRecord::Base
   
   validates :feed_url, presence: true, uniqueness: true
 
-  def self.update_interval
-    1.hour.ago
-  end
-
   def update
     # Continue the update only if the feed was just created or if
     # its last update was a long time ago...
@@ -17,14 +13,15 @@ class Feed < ActiveRecord::Base
     # Feeds are always updated every hour in the background. Enable the following
     # conditions only when the spacing of general updates become too large
     #
-    # unless (self.created_at > Feed.update_interval) or (self.updated_at < update_interval)
-    #   return
-    # end
+    return if self.updated_at > 30.minutes.ago and self.entries.any?
+
     feed = fetch_and_parse
+
     if feed.is_a? Integer
       puts "Could not update #{self.id}, #{self.feed_url}"
       return
     end
+
     update_entries feed
   end
 
@@ -43,6 +40,9 @@ class Feed < ActiveRecord::Base
   end
 
   def update_entries(feed)
+    self.update_attributes(title:    feed.title,
+                           site_url: feed.url || feed.feed_url)
+
     updated = false
 
     feed.entries.first(5).each do |e|
@@ -53,8 +53,6 @@ class Feed < ActiveRecord::Base
     end
 
     if updated
-      self.update_attributes(title:    feed.title,
-                             site_url: feed.url || feed.feed_url)
       self.entries = self.entries.first 5
     end
   end
@@ -83,7 +81,7 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, description)
-    return entry.image ||
+    return process_image(entry.image) ||
            process_image(find_image_from_description(description))
   end
 

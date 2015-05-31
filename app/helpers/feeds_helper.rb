@@ -7,7 +7,7 @@ module FeedsHelper
         return sub.title
       end
     end
-    return feed.title || "(Untitled)"
+    return feed.title || "(Untitled | #{feed.id})"
   end
 
   def sub_url(feed)

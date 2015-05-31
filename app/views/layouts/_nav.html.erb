@@ -26,8 +26,8 @@
 						<li class="has-dropdown">
 							<%= link_to current_user.name.split.first, '#' %>
 							<ul class="dropdown">
-								<li><%= link_to "Profile", current_user %></li>
-								<li><%= link_to "Settings", edit_user_path(current_user) %></li>
+								<li><%= link_to "Topics", current_user %></li>
+								<li><%= link_to "Account", edit_user_path(current_user) %></li>
 								<li class="divider"></li>
 								<li><%= link_to "Log out", logout_path, method: "delete" %></li>
 							</ul>

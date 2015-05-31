@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :feeds,     		  only: [:index, :new, :create, :show]
   resources :subscriptions,       only: [:index, :create, :edit, :update, :destroy]
   resources :opml,                only: [:new, :create]
+  get 'opml/export' => 'opml#export'
   get 'next' => 'subscriptions#next'
   mount Sidekiq::Web => '/sidekiq'
 
