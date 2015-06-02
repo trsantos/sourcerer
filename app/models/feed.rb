@@ -45,7 +45,7 @@ class Feed < ActiveRecord::Base
 
     updated = false
 
-    feed.entries.first(5).each do |e|
+    feed.entries.first(10).each do |e|
       unless self.entries.find_by(url: e.url) # or self.entries.find_by(title: e.title)
         updated = true
         insert_entry e
@@ -53,7 +53,7 @@ class Feed < ActiveRecord::Base
     end
 
     if updated
-      self.entries = self.entries.first 5
+      self.entries = self.entries.first 10
     end
   end
 
