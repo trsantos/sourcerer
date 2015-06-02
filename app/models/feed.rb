@@ -48,7 +48,7 @@ class Feed < ActiveRecord::Base
     updated = false
 
     feed.entries.first(10).each do |e|
-      unless self.entries.find_by(url: e.url) # or self.entries.find_by(title: e.title)
+      unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
         updated = true
         insert_entry e
       end
