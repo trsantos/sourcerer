@@ -1,7 +1,9 @@
 class Feed < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
 
-  # has_many :users, through: :subscriptions
+  has_many :subscriptions, dependent: :destroy
+  has_many :users, through: :subscriptions
+
   has_many :entries, dependent: :destroy
   
   validates :feed_url, presence: true, uniqueness: true
