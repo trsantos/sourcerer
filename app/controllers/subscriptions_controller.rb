@@ -34,20 +34,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    next_sub = nil
-    subs = current_user.subscriptions.where(updated: true).order(starred: :desc, updated_at: :desc)
-    subs.each do |s|
-      if s.starred? or s.visited_at.nil? or s.visited_at < 1.day.ago
-        next_sub = s and break
-      else
-        next_sub ||= s
-      end
-    end
-
+    next_sub = current_user.subscriptions.where(updated: true).order(starred: :desc, visited_at: :asc).first
     if next_sub
       redirect_to next_sub.feed and return
     end
-
     flash[:info] = "You have no updated feeds. Check back later!"
     redirect_to root_url
   end

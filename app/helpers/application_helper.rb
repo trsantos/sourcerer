@@ -26,6 +26,13 @@ module ApplicationHelper
     end
   end
 
+  def check_for_trial_expiration
+    if current_user.on_trial? and current_user.created_at < 1.week.ago
+      flash[:alert] = "Your trial period has just ended. It's time to subscribe to Sourcerer!"
+      redirect_to billing_path
+    end
+  end
+
   def process_url(url)
     unless url.start_with?('http:') or url.start_with?('https:')
       url = 'http://' + url

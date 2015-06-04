@@ -1,7 +1,8 @@
 class FeedsController < ApplicationController
   include ApplicationHelper
   
-  before_action :logged_in_user, only: [:index, :show, :new, :create]
+  before_action :logged_in_user
+#  before_action :check_for_trial_expiration
   after_action  :mark_subscription_as_visited, only: [:show]
   
   def index
