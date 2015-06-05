@@ -38,7 +38,7 @@ class Feed < ActiveRecord::Base
 
   def fetch_and_parse
     setup_fj
-    return Feedjira::Feed.fetch_and_parse self.feed_url, timeout: 20
+    return Feedjira::Feed.fetch_and_parse self.feed_url
   end
 
   def update_entries(feed)
@@ -48,7 +48,7 @@ class Feed < ActiveRecord::Base
     updated = false
 
     feed.entries.first(5).each do |e|
-      unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
+      unless self.entries.find_by(url: e.url)
         updated = true
         insert_entry e
       end
@@ -177,6 +177,7 @@ class Feed < ActiveRecord::Base
       img.include? '.mp3' or
       img.include? '.m4a' or
       img.include? '.mp4' or
+      img.include? '.psd' or
       img.include? '.pdf' or
       img.include? '.ogv'
       return nil
