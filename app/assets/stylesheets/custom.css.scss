@@ -3,6 +3,9 @@
     li {
 		padding: 10px 0;
 		border-bottom: 1px dotted lightgray;
+		a {
+			color: #222;
+		}
     }
 }
 
@@ -56,14 +59,14 @@ article {
 			li {
 				background-color: inherit;
 				a {
-					color: black !important;
+					color: #222 !important;
 				}
 			}
 		}
 		h1 a {
 			font-size: 1.625rem;
 			line-height: 60px;
-			color: black !important;
+			color: #222 !important;
 		}
 		#favicon {
 			/* this is broken on webkit */
@@ -241,7 +244,7 @@ article {
 }
 
 .entry-title a {
-	color: #111;
+	color: #222;
 	font-size: 1.0625rem;
 	font-weight: bold;
 }
