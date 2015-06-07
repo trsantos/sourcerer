@@ -9,6 +9,8 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
+    #return if self.updated_at > 1.hour.ago and self.entries.any?
+
     feed = fetch_and_parse
 
     if feed.is_a? Integer
