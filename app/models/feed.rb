@@ -9,10 +9,6 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    # Continue with the update
-    # IF the feed was just created OR its last update was before 1 hour ago
-    return if self.updated_at > 1.hour.ago and self.entries.any?
-
     feed = fetch_and_parse
 
     if feed.is_a? Integer
@@ -34,7 +30,11 @@ class Feed < ActiveRecord::Base
 
   def fetch_and_parse
     setup_fj
-    return Feedjira::Feed.fetch_and_parse self.feed_url
+    begin
+      return Feedjira::Feed.fetch_and_parse self.feed_url
+    rescue
+    end
+    return 0
   end
 
   def update_entries(feed)
