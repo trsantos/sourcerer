@@ -9,13 +9,9 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def update
-    # Continue the update only if the feed was just created or if
-    # its last update was a long time ago...
-    #
-    # Feeds are always updated every hour in the background. Enable the following
-    # conditions only when the spacing of general updates become too large
-    #
-    return if self.updated_at > 30.minutes.ago and self.entries.any?
+    # Continue with the update
+    # IF the feed was just created OR its last update was before 1 hour ago
+    return if self.updated_at > 1.hour.ago and self.entries.any?
 
     feed = fetch_and_parse
 
