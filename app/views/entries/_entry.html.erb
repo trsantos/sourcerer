@@ -1,11 +1,5 @@
-<% if old_entry? entry %>
-    <% old = "old" %>
-<% else %>
-    <% old = "" %>
-<% end %>
-
 <article id="entry-<%= entry.id %>">
-    <header class="entry-title <%= old %>">
+	<header class="entry-title <%= old? entry %>">
 		<h5>
 			<%= link_to sanitize(entry.title), entry.url, target: "_blank" %>
 		</h5>
