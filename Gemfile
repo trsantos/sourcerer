@@ -19,6 +19,7 @@ gem 'opml_saw', :git => "git://github.com/feedbin/opml_saw.git", :branch => "mas
 gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem 'normalize-rails'
+gem 'browser'
 
 group :development, :test do
   gem 'sqlite3'
@@ -26,7 +27,6 @@ group :development, :test do
   gem 'web-console'
   gem 'spring'
   gem 'faker'
-  gem 'rack-mini-profiler'
 end
 
 group :test do

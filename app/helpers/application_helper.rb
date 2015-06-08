@@ -125,4 +125,12 @@ module ApplicationHelper
     end
   end
 
+  def safari?
+    if browser.safari?
+      return "safari"
+    else
+      return ""
+    end
+  end
+
 end

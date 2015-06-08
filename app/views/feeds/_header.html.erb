@@ -3,7 +3,7 @@
 		<ul class="title-area">
 			<li class="name">
 				<h1>
-					<img src="<%= get_favicon(sub_url(@feed)) %>" id="favicon" />
+					<img src="<%= get_favicon(sub_url(@feed)) %>" id="favicon" class="<%= safari? %>" />
 					<%= link_to sub_title(@feed),
 					sub_url(@feed),
 					id: "feed-title",
