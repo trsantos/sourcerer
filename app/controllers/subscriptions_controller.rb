@@ -6,7 +6,7 @@ class SubscriptionsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @subscriptions = current_user.subscriptions.sort_by { |s| sub_title(s.feed) || "" }
+    @subscriptions = current_user.subscriptions.sort_by { |s| s.title || s.feed.title || "" }
   end
 
   def create
@@ -21,6 +21,17 @@ class SubscriptionsController < ApplicationController
 
   def update
     @subscription = Subscription.find(params[:id])
+
+    if params[:subscription][:title].blank?
+      params[:subscription][:title] = nil
+    end
+
+    if params[:subscription][:site_url].blank?
+      params[:subscription][:site_url] = nil
+    else
+      params[:subscription][:site_url] = process_url params[:subscription][:site_url]
+    end
+
     if @subscription.update_attributes(sub_params)
       feed = Feed.find(@subscription.feed_id)
       redirect_to feed

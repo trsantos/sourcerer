@@ -168,6 +168,7 @@ class Feed < ActiveRecord::Base
       img.include? 'subscribe.jpg' or
       img.include? 'forbes_' or
       img.include? 'transparent.png' or
+      img.include? 'ynp-rss' or
       # Disable the next to filters when og images are not used
       # img.include? 'bbcimg.co.uk' or
       # img.include? '/images/facebook' or

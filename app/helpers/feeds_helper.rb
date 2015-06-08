@@ -1,23 +1,23 @@
 module FeedsHelper
   
   def sub_title(feed)
-    if logged_in?
-      sub = current_user.subscriptions.find_by(feed_id: feed.id)
-      if sub and !sub.title.blank?
-        return sub.title
-      end
+    default = feed.title || "(Untitled | #{feed.id})"
+    sub = current_user.subscriptions.find_by(feed_id: feed.id)
+    if sub
+      return sub.title || default
+    else
+      return default
     end
-    return feed.title || "(Untitled | #{feed.id})"
   end
 
   def sub_url(feed)
-    if logged_in?
-      sub = current_user.subscriptions.find_by(feed_id: feed.id)
-      if sub and !sub.site_url.blank?
-        return sub.site_url
-      end
+    default = feed.site_url || ""
+    sub = current_user.subscriptions.find_by(feed_id: feed.id)
+    if sub
+      return sub.site_url || default
+    else
+      return default
     end
-    return feed.site_url || ""
   end
 
   def get_favicon(url)
