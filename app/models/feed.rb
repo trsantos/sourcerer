@@ -94,10 +94,10 @@ class Feed < ActiveRecord::Base
     if img.start_with? '//'
       img = "http:" + img
     elsif img.start_with? '/'
-      parse = URI.parse self.feed_url
+      parse = URI.parse(self.site_url || self.feed_url)
       img = parse.scheme + '://' + parse.host + img
     elsif img.start_with? '../'
-      parse = URI.parse self.url
+      parse = URI.parse(self.site_url || self.feed_url)
       img = parse.scheme + '://' + parse.host + img[2..-1]
     end
 
