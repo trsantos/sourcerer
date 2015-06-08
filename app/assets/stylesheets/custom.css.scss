@@ -42,10 +42,10 @@ article {
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
     .top-bar {
-		max-width: 54rem !important;
+		max-width: 800px !important;
     }
     .row {
-		max-width: 45rem !important;
+		max-width: 772px !important;
     }
     .main-content {
 		padding-top: 10px;
@@ -81,7 +81,7 @@ article {
 		}
 		.controls {
 			margin-top: 15px;
-			margin-right: 15px;
+			margin-right: 16px;
 			li a {
 				line-height: 30px !important;
 				background: #eee !important;
@@ -247,7 +247,7 @@ article {
 }
 
 .feed-url a {
-	color: #111;
+	color: #222;
 }
 
 .entry-title a {
