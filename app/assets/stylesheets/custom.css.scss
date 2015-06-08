@@ -2,7 +2,7 @@
     list-style: none;
     li {
 		padding: 10px 0;
-		border-bottom: 1px dotted lightgray;
+		border-bottom: 1px solid lightgray;
 		a {
 			color: #222;
 		}
@@ -238,7 +238,7 @@ article {
 article {
     padding-bottom: 0.6rem;
     padding-top: 0.4rem;
-    border-bottom: 1px dotted lightgray;
+    border-bottom: 1px solid lightgray;
 }
 
 .alert-box {
