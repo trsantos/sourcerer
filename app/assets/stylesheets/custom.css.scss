@@ -74,6 +74,10 @@ article {
 				}
 			}
 		}
+		#feed-title:hover {
+			background: #222 !important;
+			height: 60px !important;
+		}
 		h1 a {
 			font-size: 1.625rem;
 			line-height: 60px;
@@ -101,12 +105,12 @@ article {
 				color: white !important;
 				background: #0070A0 !important;
 				&:hover {
-					background: #005A81 !important;
+					background: #006090 !important;
 				}
 			}
 		}
 		#feed-title {
-			max-width: 350px;
+			max-width: 320px;
 			#font-weight: bold;
 		}
     }
@@ -152,13 +156,13 @@ article {
 /* large screens */
 @media only screen and (min-width: 64.063em) {
     #feed-title {
-		max-width: 450px !important;
+		max-width: 430px !important;
     }
     .main-content {
 		#	padding-top: 0.6rem !important;
 		padding-bottom: 1rem;
         margin: 15px auto !important;
-        border: 1px solid lightgray;
+		#   border: 1px solid lightgray;
 		#	border-top: 0px;
 		#	border-radius: 0px 0px 3px 3px;
 		#   box-shadow: 0px 0px 3px 1px lightgray;
