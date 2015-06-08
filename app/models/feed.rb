@@ -45,7 +45,7 @@ class Feed < ActiveRecord::Base
 
     updated = false
 
-    entries = feed.entries.first(5).reverse
+    entries = feed.entries.first(10).reverse
     entries.each do |e|
       unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
         updated = true
@@ -54,7 +54,7 @@ class Feed < ActiveRecord::Base
     end
 
     if updated
-      self.entries = self.entries.first 5
+      self.entries = self.entries.first 10
     end
   end
 
@@ -87,7 +87,7 @@ class Feed < ActiveRecord::Base
   end
 
   def process_image(img)
-    if img.nil? || img.blank? || !img.include('png') || !img.includ('jpg')
+    if img.nil? || img.blank? || !img.include?('png') || !img.include?('jpg')
       return nil
     end
 
