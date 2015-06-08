@@ -4,7 +4,7 @@
 			<ul class="title-area">
 				<li class="name">
 					<% if logged_in? %>
-						<h1><%= link_to full_title, next_path, id: "logo" %></h1>
+						<h1><%= link_to full_title, next_path, id: "logo", data: { keybinding: 'n' } %></h1>
 					<% else %>
 						<h1><%= link_to full_title, root_path, id: "logo" %></h1>
 					<% end %>

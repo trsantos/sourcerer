@@ -79,24 +79,22 @@ article {
 		.safari {
 			margin-bottom: 9px !important;
 		}
-		.feed-button, #next {
-			margin-top: 8px;
-		}
-		.feed-button {
-			background: transparent !important;
-			&:hover {
-				background: #dedede !important;
-			}
-		}
-		#next {
+		.controls {
+			margin-top: 15px;
 			margin-right: 15px;
-			a {
-				background-color: #0070A0 !important;
-				color: white !important;
+			li a {
+				line-height: 30px !important;
+				background: #eee !important;
+				&:hover {
+					background: #ddd !important;
+				}
 			}
-			a:hover {
-				background-color: #004B6B !important;
-				background: #272727;
+			#next {
+				color: white !important;
+				background: #0070A0 !important;
+				&:hover {
+					background: #005A81 !important;
+				}
 			}
 		}
 		#feed-title {
@@ -259,7 +257,7 @@ article {
 }
 
 .old a {
-	color: #777;
+#	color: #777;
 }
 
 html.turbolinks-progress-bar::before {
