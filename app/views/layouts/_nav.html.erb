@@ -23,6 +23,9 @@
 						<% end %>
 						<li><%= link_to "Subscriptions", subscriptions_path %></li>
 						<li><%= link_to "Add feed", new_feed_path %></li>
+						<li class="active">
+							<%= link_to "Back to reading", next_path, id: "next" %>
+						</li>
 						<li class="has-dropdown">
 							<%= link_to current_user.name.split.first, '#' %>
 							<ul class="dropdown">
