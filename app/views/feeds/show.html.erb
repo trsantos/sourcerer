@@ -8,10 +8,5 @@
 		<p>This feed has no items or has not been fetched yet.</p>
     <% end %>
 </div>
-<small class="feed-url show-for-medium-up">
-	Feed: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %>
-</small>
-<%= link_to "Next feed",
-next_path,
-class: "show-for-small-only button expand fixed",
-	id: "small-next" %>
+
+<%= link_to "Next feed", next_path, class: "show-for-small-only button expand" %>

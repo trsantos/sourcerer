@@ -102,10 +102,10 @@ article {
 				}
 			}
 			#next {
-#				color: white !important;
-#				background: #0070A0 !important;
+				#				color: white !important;
+				#				background: #0070A0 !important;
 				&:hover {
-#					background: #006090 !important;
+					#					background: #006090 !important;
 				}
 			}
 		}
@@ -160,8 +160,8 @@ article {
     }
     .main-content {
 		#	padding-top: 0.6rem !important;
-		padding-bottom: 1rem;
         margin: 15px auto !important;
+		padding-bottom: 3px;
 		#   border: 1px solid lightgray;
 		#	border-top: 0px;
 		#	border-radius: 0px 0px 3px 3px;
@@ -201,7 +201,6 @@ article {
     }
     .main-content {
 		padding-top: 10px;
-		margin-bottom: 45px !important;
     }
     .description {
 		/* n x 1.6 gives n lines */
@@ -210,12 +209,6 @@ article {
     .thumb, .thumb-small {
 		#border: 1px solid #eee;
     }
-	#small-next {
-		margin-top: -45px !important;
-		height: 45px !important;
-		padding-top: 15px !important;
-		top: 100% !important;
-	}
 }
 
 .next-button {
@@ -267,10 +260,6 @@ article:last-child {
 .alert-box {
     margin-bottom: 0px !important;
     text-align: center;
-}
-
-.feed-url a {
-	color: #222;
 }
 
 .entry-title a {
