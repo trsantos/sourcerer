@@ -20,5 +20,6 @@
 
 $(function(){
     Turbolinks.enableProgressBar();
-	$(document).foundation();
+	$(document).on("page:before-change", function () { $(window).scrollTop(0) });
+	$(document).foundation({ topbar: { scrolltop: false } });
 });
