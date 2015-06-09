@@ -22,14 +22,18 @@ class SubscriptionsController < ApplicationController
   def update
     @subscription = Subscription.find(params[:id])
 
-    if params[:subscription][:title].blank?
+    title = params[:subscription][:title]
+    if title && title.blank?
       params[:subscription][:title] = nil
     end
 
-    if params[:subscription][:site_url].blank?
-      params[:subscription][:site_url] = nil
-    else
-      params[:subscription][:site_url] = process_url params[:subscription][:site_url]
+    site_url = params[:subscription][:site_url]
+    if site_url
+      if site_url.blank?
+        params[:subscription][:site_url] = nil
+      else
+        params[:subscription][:site_url] = process_url site_url
+      end
     end
 
     if @subscription.update_attributes(sub_params)
