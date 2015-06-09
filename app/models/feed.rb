@@ -87,7 +87,7 @@ class Feed < ActiveRecord::Base
   end
 
   def process_image(img)
-    if img.nil? || img.blank? || !(img.include?('png') || img.include?('jpg'))
+    if img.nil? || img.blank?
       return nil
     end
 
