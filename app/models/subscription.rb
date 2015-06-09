@@ -6,6 +6,8 @@ class Subscription < ActiveRecord::Base
   validates :feed_id, presence: true
 
   def updated?
+    return false if self.feed.entries.empty?
+
     return true if self.visited_at.nil?
 
     begin
@@ -15,5 +17,4 @@ class Subscription < ActiveRecord::Base
 
     return false
   end
-
 end

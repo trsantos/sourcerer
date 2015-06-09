@@ -201,6 +201,7 @@ article {
     }
     .main-content {
 		padding-top: 10px;
+		margin-bottom: 45px !important;
     }
     .description {
 		/* n x 1.6 gives n lines */
@@ -209,6 +210,12 @@ article {
     .thumb, .thumb-small {
 		#border: 1px solid #eee;
     }
+	#small-next {
+		margin-top: -45px !important;
+		height: 45px !important;
+		padding-top: 15px !important;
+		top: 100% !important;
+	}
 }
 
 .next-button {
@@ -251,6 +258,10 @@ article {
     padding-bottom: 0.6rem;
     padding-top: 0.4rem;
 	border-bottom: 1px solid lightgray;
+}
+
+article:last-child {
+	border-width: 0px !important;
 }
 
 .alert-box {
