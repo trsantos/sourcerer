@@ -1,9 +1,6 @@
 module EntriesHelper
   def old? entry
     s = current_user.subscriptions.find_by(feed_id: entry.feed_id)
-    if !s.nil? and !s.visited_at.nil? and s.visited_at > entry.created_at
-      return "old"
-    end
-    return ""
+    return !s.nil? && !s.visited_at.nil? && s.visited_at > entry.created_at
   end
 end

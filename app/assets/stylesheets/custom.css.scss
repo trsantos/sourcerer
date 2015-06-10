@@ -10,6 +10,9 @@
 			color: #0078A0;
 		}
     }
+	li:last-child {
+		border-width: 0px !important;
+	}
 }
 
 header h2, #home {
@@ -268,7 +271,7 @@ article:last-child {
 	font-weight: bold;
 }
 
-.old a {
+.old header a {
 	color: gray;
 }
 
