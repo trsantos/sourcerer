@@ -12,7 +12,6 @@ Rails.application.routes.draw do
       patch 'update_topics'
     end
   end
-  resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :feeds,     		  only: [:index, :new, :create, :show]
   resources :subscriptions,       only: [:index, :create, :edit, :update, :destroy]
