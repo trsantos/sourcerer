@@ -155,6 +155,7 @@ class Feed < ActiveRecord::Base
       img.include? 'ach.img' or
       img.include? '/comments/' or
       img.include? '/smilies/' or
+      img.include? 'simple-share-buttons-adder' or
       img.include? 'a2t.img' or
       img.include? 'a2t2.img' or
       img.include? 'default-thumbnail' or
@@ -173,7 +174,8 @@ class Feed < ActiveRecord::Base
       img.include? '.mp4' or
       img.include? '.psd' or
       img.include? '.pdf' or
-      img.include? '.ogv'
+      img.include? '.ogv' or
+      img.include? '.opus'
       return nil
     else
       return img
