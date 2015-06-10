@@ -5,9 +5,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
+  before_action :authorize
+
+  private
+
   def authorize
     if current_user.admin?
       Rack::MiniProfiler.authorize_request
     end
   end
+
 end
