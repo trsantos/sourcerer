@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def authorize
-    if current_user.is_admin?
+    if current_user.admin?
       Rack::MiniProfiler.authorize_request
     end
   end
