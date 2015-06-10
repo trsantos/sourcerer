@@ -20,6 +20,7 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem 'normalize-rails'
 gem 'browser'
+gem 'puma'
 
 group :development, :test do
   gem 'sqlite3'
@@ -27,6 +28,7 @@ group :development, :test do
   gem 'web-console'
   gem 'spring'
   gem 'faker'
+  gem 'rack-mini-profiler'
 end
 
 group :test do
@@ -37,5 +39,4 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'puma'
 end
