@@ -1,7 +1,7 @@
 <% provide(:title, sanitize(@feed.title)) %>
 
 <div class="feed-entries">
-    <% if @feed.entries.any? %>
+	<% if @feed.entries.any? %>
 		<p id="entries-header" class="show-for-large-up">What's new</p>
 		<%= render @entries %>
 	<% else %>

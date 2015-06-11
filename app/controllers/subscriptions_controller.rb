@@ -6,7 +6,7 @@ class SubscriptionsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @subscriptions = current_user.subscriptions.sort_by { |s| s.title || s.feed.title || "" }
+    @subscriptions = current_user.subscriptions.includes(:feed).sort_by { |s| s.title || s.feed.title || "" }
   end
 
   def create

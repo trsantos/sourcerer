@@ -161,6 +161,7 @@ class Feed < ActiveRecord::Base
       img.include? 'default-thumbnail' or
       img.include? 'subscribe' or
       img.include? 'forbes_' or
+      img.include? 'emoji' or
       img.include? 'transparent.png' or
       img.include? 'cdh_rss' or
       img.include? 'ynp-rss' or
