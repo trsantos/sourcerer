@@ -20,13 +20,22 @@ header h2, #home {
 }
 
 article {
+	padding-bottom: 0.6rem;
+    padding-top: 0.4rem;
+	border-bottom: 1px solid lightgray;
     .description, p {
 		margin-bottom: 0px;
     }
+	&:last-child {
+		border-width: 0px !important;
+	}
 }
 
 #feed-title {
     display: inline-block !important;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #favicon {
@@ -36,10 +45,27 @@ article {
     width: 20px;
 }
 
-#feed-title {
+.description {
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+}
+
+.alert-box {
+    margin-bottom: 0px !important;
+    text-align: center;
+}
+
+.entry-title a {
+	color: #222;
+	font-size: 1.0625rem;
+	font-weight: bold;
+}
+
+.old header a {
+	color: gray;
+}
+
+html.turbolinks-progress-bar::before {
+    background-color: #00A6EC !important;
 }
 
 /* medium and large */
@@ -62,7 +88,7 @@ article {
 		}
 	}
     .feed-header {
-		border-bottom: 1px solid lightgray;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);;
 		z-index: 1 !important;
 		margin-top: 45px;
 		.top-bar {
@@ -165,37 +191,4 @@ article {
 		/* n x 1.6 gives n lines */
 		max-height: 6.4rem;
     }
-}
-
-.description {
-    overflow: hidden;
-}
-
-article {
-    padding-bottom: 0.6rem;
-    padding-top: 0.4rem;
-	border-bottom: 1px solid lightgray;
-}
-
-article:last-child {
-	border-width: 0px !important;
-}
-
-.alert-box {
-    margin-bottom: 0px !important;
-    text-align: center;
-}
-
-.entry-title a {
-	color: #222;
-	font-size: 1.0625rem;
-	font-weight: bold;
-}
-
-.old header a {
-	color: gray;
-}
-
-html.turbolinks-progress-bar::before {
-    background-color: #00A6EC !important;
 }
