@@ -21,7 +21,6 @@ gem 'sinatra', :require => nil
 gem 'normalize-rails'
 gem 'browser'
 gem 'puma'
-gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'sqlite3'

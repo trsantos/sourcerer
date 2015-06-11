@@ -159,7 +159,7 @@ class Feed < ActiveRecord::Base
       img.include? 'a2t.img' or
       img.include? 'a2t2.img' or
       img.include? 'default-thumbnail' or
-      img.include? 'subscribe.jpg' or
+      img.include? 'subscribe' or
       img.include? 'forbes_' or
       img.include? 'transparent.png' or
       img.include? 'cdh_rss' or
