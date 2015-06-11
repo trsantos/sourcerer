@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def in_feeds_show
     if params[:controller] == "feeds" && params[:action] == "show"
-      " show-for-medium-up"
+      " show-for-medium-up no-shadow"
     else
       ""
     end
