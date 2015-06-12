@@ -92,6 +92,10 @@ class Feed < ActiveRecord::Base
     elsif img.start_with? '../'
       parse = URI.parse(self.site_url || self.feed_url)
       img = parse.scheme + '://' + parse.host + img[2..-1]
+    elsif !img.start_with? 'http'
+      parse = URI.parse(self.site_url || self.feed_url)
+      # parse.path is bogus if site_url doesn't exist
+      img = parse.scheme + '://' + parse.host + parse.path + img
     end
 
     return filter_image img
@@ -118,6 +122,8 @@ class Feed < ActiveRecord::Base
     # resize techcrunch images
     if img.include? 'tctechcrunch2011'
       img += '?w=400'
+    elsif img.include? 'images.wrc.com'
+      img += '_896x504.jpg'
     end
 
     # discard silly images
@@ -143,7 +149,7 @@ class Feed < ActiveRecord::Base
       img.include? 'nojs.php' or
       img.include? 'icon' or
       img.include? 'gplus-16.png' or
-      img.include? 'logo' or
+      #img.include? 'logo' or
       img.include? 'avw.php' or
       img.include? 'tmn-test' or
       img.include? '-ipad-h' or

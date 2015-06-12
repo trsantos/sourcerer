@@ -11,7 +11,9 @@ class Subscription < ActiveRecord::Base
     return true if self.visited_at.nil?
 
     begin
-      return true if self.feed.entries.first.pub_date > self.visited_at
+      self.feed.entries.each do |e|
+        return true if e.pub_date > self.visited_at
+      end
     rescue
     end
 
