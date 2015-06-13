@@ -1,5 +1,6 @@
 <div id="app-header">
-    <%= content_tag :header, class: "contain-to-grid fixed" + in_feeds_show do %>
+    <%= content_tag :header,
+	class: "contain-to-grid" + (in_feeds_show ? " show-for-medium-up no-shadow" : "") do %>
 		<nav class="top-bar" data-topbar>
 			<ul class="title-area">
 				<li class="name">

@@ -10,11 +10,7 @@ module ApplicationHelper
   end
 
   def in_feeds_show
-    if params[:controller] == "feeds" && params[:action] == "show"
-      " show-for-medium-up no-shadow"
-    else
-      ""
-    end
+    return params[:controller] == "feeds" && params[:action] == "show"
   end
 
   # Confirms a logged-in user.

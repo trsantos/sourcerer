@@ -121,7 +121,7 @@ class Feed < ActiveRecord::Base
   def filter_image(img)
     # resize techcrunch images
     if img.include? 'tctechcrunch2011'
-      img += '?w=400'
+      img += '?w=738'
     elsif img.include? 'images.wrc.com'
       img += '_896x504.jpg'
     end
