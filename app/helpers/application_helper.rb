@@ -38,7 +38,7 @@ module ApplicationHelper
 
   def get_feeds(topic)
     t = topic.name
-    if t == "Computers"
+    if t == "Computers & Internet"
       return [
         "http://techcrunch.com/feed/",
         "http://www.wired.com/feed/",

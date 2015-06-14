@@ -5,12 +5,12 @@
 <p>Please, select the topics you want to follow:</p>
 
 <%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
-    <% Topic.all.each do |t| %>
+    <% Topic.all.order(:name).each do |t| %>
 		<%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
-		<%= t.name %>
+		<%= f.label t.name %>
 		<br/>
     <% end %>
     <%= f.submit "Save topics", class: "button" %>
 <% end %>
 
-<p><em>Note that you can also <%= link_to "import an OPML file", new_opml_path %>.<em></p>
+<p><em>Note that you can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>
