@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title><%= full_title(yield(:title)) %></title>
 		<%= stylesheet_link_tag    'application', 'data-turbolinks-track' => true %>
@@ -9,7 +10,7 @@
 		<%= csrf_meta_tags %>
     </head>
     <body>
-		<header class="fixed">
+		<header class="fixed contain-to-grid">
 			<%= render 'layouts/nav' %>
 			<% if in_feeds_show %>
 				<%= render partial: 'feeds/header' %>

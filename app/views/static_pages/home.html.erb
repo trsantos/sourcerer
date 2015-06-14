@@ -5,12 +5,8 @@
 			<p>Sourcerer is the sorcerer of news sources.</p>
 		</header>
 		<div class="medium-6 medium-offset-3">
-			<% if logged_in? %>
-				<%= link_to "Start reading!", next_path, class: "button expand" %>
-			<% else %>
-				<%= link_to "Sign up now!", signup_path, class: "button expand" %>
-				<%= link_to "Log in", login_path, class: "button expand show-for-small-only" %>
-			<% end %>
+			<%= link_to "Sign up now!", signup_path, class: "button expand" %>
+			<%= link_to "Log in", login_path, class: "button expand show-for-small-only" %>
 		</div>
     </div>
 </div>
