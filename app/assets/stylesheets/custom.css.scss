@@ -154,8 +154,8 @@ html.turbolinks-progress-bar::before {
 		border-bottom: 1px solid lightgray;
 	}
 	.feeds-show {
-		/* feed-header: 60px */
-		margin-top: 60px !important;
+		/* feed-header + app-header: 60px + 45px */
+		padding-top: 105px !important;
 	}
 }
 
