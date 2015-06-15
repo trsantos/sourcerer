@@ -34,7 +34,7 @@ class Feed < ActiveRecord::Base
 
   def update_entries(feed)
     self.update_attributes(title:    feed.title,
-                           site_url: feed.url || feed.feed_url)
+                           site_url: process_url(feed.url || feed.feed_url))
 
     updated = false
 
@@ -143,6 +143,7 @@ class Feed < ActiveRecord::Base
       img.include? 'smile.png' or
       img.include? 'blank.' or
       img.include? 'application-pdf.png' or
+      img.include? 's-US_UK_CA-mini' or
       img.include? 'gif;base64' or
       img.include? 'abrirpdf.png' or
       img.include? 'gravatar.com/avatar' or

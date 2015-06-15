@@ -40,32 +40,75 @@ module ApplicationHelper
     t = topic.name
     if t == "Computers & Internet"
       return [
-        "http://techcrunch.com/feed/",
-        "http://www.wired.com/feed/",
-        "http://feeds.arstechnica.com/arstechnica/index/"
+        # Alexa categories: Computers, Home/Consumer Information
+        "http://www.techmeme.com/feed.xml", # 12,553
+        "http://www.cnet.com/rss/all/", # 149
+        #"http://feeds.mashable.com/Mashable", # 287
+        "http://www.engadget.com/rss.xml", # 312
+        #"http://www.gsmarena.com/rss-news-reviews.php3", # 364
+        #"http://feeds.gawker.com/lifehacker/full", # 366
+        #"http://feeds.gawker.com/gizmodo/full", # 404
+        "http://techcrunch.com/feed/", # 444
+        #"http://www.theverge.com/rss/frontpage", # 458
+        #"http://feeds2.feedburner.com/ziffdavis/pcmag", # 722
+        "http://www.wired.com/feed/", # 666
+        #"http://www.tomshardware.com/feeds/rss2/news.xml", # 796
+        #"http://feeds2.feedburner.com/techradar/allnews", # 929
+        #"http://feeds.howtogeek.com/howtogeek", # 936
+        #"http://feeds.arstechnica.com/arstechnica/index/" # 1,238
       ]
     elsif t == "News"
       return [
-        "http://rss.cnn.com/rss/cnn_topstories.rss",
-        "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-        "http://www.theguardian.com/uk/rss"
+        "http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml", # 74
+        "http://rss.cnn.com/rss/edition.rss", # 86
+        #"http://www.huffingtonpost.com/feeds/index.xml", # 109
+        "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml", # 110
+        #"http://news.google.com/?output=rss",
+        "http://www.theguardian.com/international/rss", # 157
+        #"http://www.forbes.com/real-time/feed2/", # 169
+        #"http://feeds.feedburner.com/foxnews/latest", # 212
+        "http://feeds.washingtonpost.com/rss/homepage", # 224
+        #"http://www.wsj.com/xml/rss/3_7014.xml", # 319
+        #"http://rssfeeds.usatoday.com/usatoday-NewsTopStories", # 326
+        #"http://feeds.reuters.com/reuters/topNews" # 409
       ]
     elsif t == "Business"
       return [
-        "http://feeds.wsjonline.com/wsj/xml/rss/3_7011.xml",
-        "http://www.newslookup.com/rss/business/bloomberg.rss",
-        "http://feeds.marketwatch.com/marketwatch/topstories/"
+        "http://www.forbes.com/business/feed2/", # 169
+        "http://www.wsj.com/xml/rss/3_7014.xml", # 319
+        #"http://feeds.reuters.com/reuters/businessNews", # 411
+        #"http://rss.cnn.com/rss/money_topstories.rss", # 86
+        #"http://feeds.marketwatch.com/marketwatch/topstories/", # 762
+        "http://www.entrepreneur.com/latest.rss", # 770
+        #"http://www.investing.com/rss/news.rss", # 1,045
+        "http://www.ft.com/rss/home/uk", # 1,379
+        #"http://feeds.inc.com/home/updates", # 1,101
+        #"http://rss.cnn.com/fortunefinance", # 1,623
+        "http://www.economist.com/sections/business-finance/rss.xml", # 1,613
+        #"http://www.ibtimes.com/rss/companies", # 1,452
       ]
     elsif t == "Games"
       return [
-        "http://feeds.ign.com/ign/games-all",
-        "http://store.steampowered.com/feeds/news.xml",
-        "http://www.gamespot.com/feeds/mashup/"
+        "http://feeds.ign.com/ign/games-all", # 282
+        #"http://store.steampowered.com/feeds/news.xml", # 280
+        "http://feeds.gawker.com/kotaku/full", # 758
+        "http://www.gamespot.com/feeds/mashup/", # 860
+        "http://www.pcgamer.com/feed/", # 1,665
+        "http://www.polygon.com/rss/index.xml", # 2,211
+        #"http://www.eurogamer.net/?format=rss", # 4,193
+        #"http://www.vg247.com/feed/", # 4,801
+        #"http://www.gamesradar.com/all-platforms/news/rss/", # 4,280
+        #"http://www.gameinformer.com/feeds/topfiverss.aspx?p=home", # 6,551
+        #"http://www.gametrailers.com/reviews/feed", # 9,873
       ]
     elsif t == "Science"
       return [
-        "http://feeds.sciencedaily.com/sciencedaily",
-        "http://feeds.nationalgeographic.com/ng/News/News_Main",
+        "https://www.youtube.com/feeds/videos.xml?channel_id=UCAuUUnT6oDeKwE6v1NGQxug", # 736
+        "http://feeds.nationalgeographic.com/ng/News/News_Main", # 1,039
+        "http://feeds.nature.com/NatureNewsComment", # 1,738
+        "http://feeds.feedburner.com/IeeeSpectrumFullText", # 1,957
+        "http://www.livescience.com/home/feed/site.xml", # 2,667
+        "http://feeds.sciencedaily.com/sciencedaily/", # 2,687
         "http://phys.org/rss-feed/breaking/",
       ]
     elsif t == "Architecture"

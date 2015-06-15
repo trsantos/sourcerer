@@ -7,7 +7,7 @@
 <%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
     <% Topic.all.order(:name).each do |t| %>
 		<%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
-		<%= f.label t.name %>
+		<%= f.label t.name, t.name %>
 		<br/>
     <% end %>
     <%= f.submit "Save topics", class: "button" %>
