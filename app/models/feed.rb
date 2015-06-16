@@ -151,7 +151,7 @@ class Feed < ActiveRecord::Base
       img.include? 'nojs.php' or
       img.include? 'icon' or
       img.include? 'gplus-16.png' or
-      #img.include? 'logo' or
+      img.include? 'logo' or
       img.include? 'avw.php' or
       img.include? 'tmn-test' or
       img.include? '-ipad-h' or

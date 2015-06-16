@@ -38,7 +38,7 @@ module ApplicationHelper
 
   def get_feeds(topic)
     t = topic.name
-    if t == "Computers & Internet"
+    if t == "Technology"
       return [
         # Alexa categories: Computers, Home/Consumer Information
         "http://www.techmeme.com/feed.xml", # 12,553
@@ -79,17 +79,18 @@ module ApplicationHelper
         #"http://feeds.reuters.com/reuters/businessNews", # 411
         #"http://rss.cnn.com/rss/money_topstories.rss", # 86
         #"http://feeds.marketwatch.com/marketwatch/topstories/", # 762
-        "http://www.entrepreneur.com/latest.rss", # 770
+        #"http://www.entrepreneur.com/latest.rss", # 770
         #"http://www.investing.com/rss/news.rss", # 1,045
         "http://www.ft.com/rss/home/uk", # 1,379
         #"http://feeds.inc.com/home/updates", # 1,101
         #"http://rss.cnn.com/fortunefinance", # 1,623
         "http://www.economist.com/sections/business-finance/rss.xml", # 1,613
         #"http://www.ibtimes.com/rss/companies", # 1,452
+        "http://feeds.harvardbusiness.org/harvardbusiness/"
       ]
     elsif t == "Games"
       return [
-        "http://feeds.ign.com/ign/games-all", # 282
+        "http://feeds.ign.com/ign/all", # 282
         #"http://store.steampowered.com/feeds/news.xml", # 280
         "http://feeds.gawker.com/kotaku/full", # 758
         "http://www.gamespot.com/feeds/mashup/", # 860
@@ -103,61 +104,101 @@ module ApplicationHelper
       ]
     elsif t == "Science"
       return [
-        "https://www.youtube.com/feeds/videos.xml?channel_id=UCAuUUnT6oDeKwE6v1NGQxug", # 736
+        #"https://www.youtube.com/feeds/videos.xml?channel_id=UCAuUUnT6oDeKwE6v1NGQxug", # 736
         "http://feeds.nationalgeographic.com/ng/News/News_Main", # 1,039
         "http://feeds.nature.com/NatureNewsComment", # 1,738
-        "http://feeds.feedburner.com/IeeeSpectrumFullText", # 1,957
-        "http://www.livescience.com/home/feed/site.xml", # 2,667
+        #"http://feeds.feedburner.com/IeeeSpectrumFullText", # 1,957
+        #"http://www.livescience.com/home/feed/site.xml", # 2,667
         "http://feeds.sciencedaily.com/sciencedaily/", # 2,687
-        "http://phys.org/rss-feed/breaking/",
+        "http://rss.sciam.com/ScientificAmerican-Global", # 4,167
+        "http://www.space.com/home/feed/site.xml", # 4,716
+        #"http://news.sciencemag.org/rss/current.xml", # 5,190
+        #"http://phys.org/rss-feed/breaking/", # 5,202
       ]
     elsif t == "Architecture"
       return [
-        "http://feeds.feedburner.com/ArchDaily",
-        "http://www.dwell.com/articles/feed",
-        "http://www.architecturaldigest.com/feed/rss/archdigest.rss.xml",
+        "http://feeds.feedburner.com/ArchDaily", # 2,717
+        "http://feeds.feedburner.com/dezeen", # 11,217
+        "http://www.dwell.com/articles/feed", # 20,741
+        "http://www.architecturaldigest.com/feed/rss/architecture-design.rss.xml", # 17,454
+        "http://architizer.com/blog/feed/", # 25,715
+        #"http://archinect.com/feed/0/features", # 32,524
       ]
-    elsif t == "Television"
-      return [
-        "http://feeds.eonline.com/eonline/topstories",
-        "http://news.yahoo.com/rss/tv",
-        "http://rss.tvguide.com/breakingnews",
-      ]
-    elsif t == "Photography"
-      return [
-        "http://feed.500px.com/500px-best",
-        "http://feeds.feedburner.com/DigitalPhotographySchool",
-        "http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/",
-      ]
+    # elsif t == "Television"
+    #   return [
+    #     #"http://feeds.ign.com/ign/tv-all",
+    #     #"http://feeds.eonline.com/eonline/topstories", # 563
+    #     "http://morningafter.gawker.com/rss",
+    #     "http://www.rollingstone.com/tv.rss",
+    #     "http://feeds.feedburner.com/thr/television",
+    #     "http://rss.tvguide.com/breakingnews", # 1,395
+    #     #"http://www.avclub.com/feed/rss/?feature_types=tv-club",
+    #     "http://variety.com/feed/",
+    #     #"http://news.yahoo.com/rss/tv",
+    #     #"http://tvline.com/feed/", # 3,617
+    #   ]
     elsif t == "Music"
       return [
         "http://www.rollingstone.com/music.rss",
-        "http://www.billboard.com/rss/the-feed",
         "http://www.mtv.com/news/feed/",
+        "http://www.billboard.com/articles/rss.xml",
+        "http://pitchfork.com/rss/news/",
+        #"http://www.allmusic.com/rss",
+        "http://www.nme.com/rss/news"
       ]
     elsif t == "Movies"
       return [
-        "http://feeds.ign.com/ign/movies-all",
-        "http://www.rottentomatoes.com/syndication/rss/top_news.xml",
-        "https://www.yahoo.com/movies/rss"
+        #"http://feeds.ign.com/ign/movies-all", # 281
+        "http://defamer.gawker.com/rss", # 620
+        #"http://www.rollingstone.com/movies.rss", # 1,227
+        "http://feeds.feedburner.com/thr/film", # 1,232
+        "http://www.avclub.com/feed/rss/?tags=film", # 1,727
+        #"http://www.boxofficemojo.com/data/rss.php?file=topstories.xml", # 2,581
+        #"http://whatculture.com/category/film/feed", # 2,737
+        "http://www.theguardian.com/film/rss",
+        "http://rss.feedsportal.com/c/592/f/7507/index.rss" # Empire
       ]
-    elsif t == "Comics"
+    elsif t == "Photography"
       return [
-        "http://xkcd.com/rss.xml",
-        "http://feeds.feedburner.com/uclick/calvinandhobbes",
-        "http://www.questionablecontent.net/QCRSS.xml",
+        "http://flickr.tumblr.com/rss", # 135
+        "http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/", # 1,039
+        "http://feed.500px.com/500px-best", # 1,557
+        "http://www.bostonglobe.com/rss/bigpicture", # 2,838
+        "http://feeds.feedburner.com/DigitalPhotographySchool", # 5,903
+        #"http://feeds2.feedburner.com/photographyblog", # 15,315
+        #"http://feeds.feedburner.com/Ephotozine", # 18,027
       ]
-    elsif t == "Health"
-      return [
-        "http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC",
-        "http://www.drugs.com/feeds/medical_news.xml",
-        "http://www.medicinenet.com/rss/dailyhealth.xml",
-      ]
+    # elsif t == "Comics"
+    #   return [
+    #     "http://xkcd.com/rss.xml", # 1,502
+    #     "http://feeds.feedburner.com/uclick/calvinandhobbes", #2,473
+    #     #"http://feeds.feedburner.com/Explosm", # 2,464
+    #     "http://www.comicbookresources.com/feed.php?feed=all", # 3,650
+    #     #"http://www.questionablecontent.net/QCRSS.xml", # 3,826
+    #     "http://www.smbc-comics.com/rss.php", # 4,042
+    #     "http://dilbert.com/feed", # 4,792
+    #   ]
+    # elsif t == "Health" # Maybe I should axe this topic. Not many good feeds
+    #   return [
+    #     "http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC", # 300
+    #     "http://feeds.health.com/healthtopstories",
+    #     "http://www.medscape.com/cx/rssfeeds/2700.xml", # 2,220
+    #     "https://www.psychologytoday.com/front/feed", # 2,451
+    #     "https://www.yahoo.com/health/rss",
+    #     #"http://www.menshealth.com/events-promotions/washpofeed", # 3,230
+    #     #"http://www.womenshealthmag.com/washpofeed", # 3,653
+    #   ]
     elsif t == "Sports"
       return [
-        "http://sports-ak.espn.go.com/espn/rss/news",
-        "http://www.nba.com/rss/nba_rss.xml",
-        "http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP",
+        "http://sports.espn.go.com/espn/rss/news", # 102
+        "http://bleacherreport.com/articles/feed", # 343
+        "http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP", # 433
+        "http://www.nba.com/rss/nba_rss.xml", # 403
+        "http://feeds.bbci.co.uk/sport/0/rss.xml",
+        #"http://www.cbssports.com/partners/feeds/rss/home_news", # 491
+        #"http://feeds.gawker.com/deadspin/full", # 955
+        #"http://api.foxsports.com/v1/rss?partnerKey=zBaFxRyGKCfxBagJG9b8pqLyndmvo7UU",
+        #"http://www.fifa.com/rss/index.xml",
       ]
     else
       return []
