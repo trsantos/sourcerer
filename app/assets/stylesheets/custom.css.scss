@@ -47,7 +47,7 @@ article {
 }
 
 #favicon {
-	background-color: white;
+#	background-color: white;
 	padding: 2px;
     height: 20px;
     width: 20px;
@@ -73,7 +73,7 @@ article {
 }
 
 html.turbolinks-progress-bar::before {
-    background-color: #00A6EC !important;
+    background-color: #0077AA !important;
 }
 
 /* medium and large */
@@ -88,28 +88,34 @@ html.turbolinks-progress-bar::before {
 		padding-top: 10px;
     }
 	#app-header {
-		background: #272727 !important;
-		.contain-to-grid {
-			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-		}
-		.top-bar, a {
-			background: #272727 !important;
-		}
 		a:hover {
-			background: #171717 !important;
-		}
-		.no-shadow {
-			box-shadow: none;
+			background: #222 !important;
 		}
 	}
     .feed-header {
-		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);;
 		z-index: 1 !important;
+		border-bottom: 1px solid lightgray;
+		background: #eee;
+		a {
+			background: #eee !important;
+			color: #222 !important;
+			&:hover {
+				background: #ddd !important;
+			}
+		}
+		.active a {
+			background: #0077AA !important;
+			color: #fff !important;
+			&:hover {
+				background: #006699 !important;
+			}
+		}
 		.top-bar {
 			height: 60px;
+			background: inherit;
 		}
 		#feed-title:hover {
-			background: #222 !important;
+			background: #ddd !important;
 			height: 60px !important;
 		}
 		h1 a {
@@ -140,7 +146,7 @@ html.turbolinks-progress-bar::before {
 		margin-left: 0.9375rem !important;
 		padding-left: 0px !important;
 		overflow: hidden;
-		max-height: 90px;
+		max-height: 94px;
     }
     .desc-with-img {
 		padding-left: 1.875rem !important;
@@ -149,7 +155,7 @@ html.turbolinks-progress-bar::before {
     .description {
 		margin-top: -5px;
 		/* n x 1.6 gives n lines */
-		max-height: 4.8rem;
+		max-height: 3.2rem;
     }
 	#entries-header {
 		text-align: center;
@@ -172,9 +178,10 @@ html.turbolinks-progress-bar::before {
     .main-content {
 		padding-bottom: 3px;
 		background-color: white;
+		box-shadow: 0px 0px 3px 1px lightgray;
     }
     body {
-		background-color: lightgray !important;
+		background-color: #ddd !important;
     }
 	.feeds-show-div {
 		height: 15px;
