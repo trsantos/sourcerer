@@ -7,6 +7,11 @@
 	<% else %>
 		<p>This feed has no items or has not been fetched yet.</p>
     <% end %>
+	<div class="feed-url">
+		<small>
+			Feed url: <%= link_to @feed.feed_url, @feed.feed_url %>
+		</small>
+	</div>
 </div>
 
 <%= link_to "Next feed", next_path, class: "show-for-small-only button expand" %>
