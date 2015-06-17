@@ -39,7 +39,7 @@ class Feed < ActiveRecord::Base
 
     updated = false
 
-    entries = feed.entries.first(5).reverse
+    entries = feed.entries.first(10).reverse
     entries.each do |e|
       unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
         updated = true
@@ -48,7 +48,7 @@ class Feed < ActiveRecord::Base
     end
 
     if updated
-      self.entries = self.entries.first 5
+      self.entries = self.entries.first 10
     end
   end
 
@@ -153,6 +153,7 @@ class Feed < ActiveRecord::Base
       img.include? 'gplus-16.png' or
       img.include? 'logo' or
       img.include? 'avw.php' or
+      img.include? 'service_links' or
       img.include? 'tmn-test' or
       img.include? '-ipad-h' or
       img.include? 'webkit-fake-url' or

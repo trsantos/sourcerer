@@ -1,3 +1,19 @@
+$fh-bg: #232C33;
+$ah-bg: #00120B;
+$active-bg: #008cba;
+$body-bg: #DBDBDF;
+
+$a: #fff;
+$ah-a: #fff;
+
+$active-hover: #006a98;
+$fh-hover: #121B22;
+$ah-hover: #121b22;
+
+.old header a {
+	color: gray !important;
+}
+
 main {
 	padding-top: 45px !important;
 }
@@ -10,12 +26,9 @@ main {
     list-style: none;
     li {
 		padding: 10px 0;
-		border-bottom: 1px solid lightgray;
+		border-bottom: 1px dotted lightgray;
 		a {
 			color: #222;
-		}
-		a:hover {
-			color: #0078A0;
 		}
     }
 	li:last-child {
@@ -30,7 +43,7 @@ header h2, #home {
 article {
 	padding-bottom: 0.6rem;
     padding-top: 0.4rem;
-	border-bottom: 1px solid lightgray;
+	border-bottom: 1px dotted lightgray;
     .description, p {
 		margin-bottom: 0px;
     }
@@ -47,7 +60,7 @@ article {
 }
 
 #favicon {
-#	background-color: white;
+	background-color: white;
 	padding: 2px;
     height: 20px;
     width: 20px;
@@ -63,13 +76,13 @@ article {
 }
 
 .entry-title a {
-	color: #222;
+	color: #222 !important;
 	font-size: 1.0625rem;
 	font-weight: bold;
 }
 
-.old header a {
-	color: gray;
+.crop, .thumb-small, .thumb {
+#	border-radius: 3px !important;
 }
 
 html.turbolinks-progress-bar::before {
@@ -88,26 +101,37 @@ html.turbolinks-progress-bar::before {
 		padding-top: 10px;
     }
 	#app-header {
-		a:hover {
-			background: #222 !important;
+		background: $ah-bg;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+		.top-bar, .contain-to-grid, a {
+			background: $ah-bg !important;
 		}
+		a {
+			color: $ah-a !important;
+		}
+		a:hover {
+			background: $ah-hover !important;
+		}
+	}
+	.no-shadow {
+		box-shadow: none !important;
 	}
     .feed-header {
 		z-index: 1 !important;
-		border-bottom: 1px solid lightgray;
-		background: #eee;
+		background: $fh-bg;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
 		a {
-			background: #eee !important;
-			color: #222 !important;
+			background: $fh-bg !important;
+			color: $a !important;
 			&:hover {
-				background: #ddd !important;
+				background: $fh-hover !important;
 			}
 		}
 		.active a {
-			background: #0077AA !important;
+			background: $active-bg !important;
 			color: #fff !important;
 			&:hover {
-				background: #006699 !important;
+				background: $active-hover !important;
 			}
 		}
 		.top-bar {
@@ -115,7 +139,7 @@ html.turbolinks-progress-bar::before {
 			background: inherit;
 		}
 		#feed-title:hover {
-			background: #ddd !important;
+			background: $fh-hover !important;
 			height: 60px !important;
 		}
 		h1 a {
@@ -162,7 +186,7 @@ html.turbolinks-progress-bar::before {
 		font-weight: bold;
 		padding-bottom: 6px;
 		margin-bottom: 0px;
-		border-bottom: 1px solid lightgray;
+		border-bottom: 1px dotted lightgray;
 	}
 	.feeds-show {
 		/* feed-header + app-header: 60px + 45px */
@@ -178,10 +202,10 @@ html.turbolinks-progress-bar::before {
     .main-content {
 		padding-bottom: 3px;
 		background-color: white;
-		box-shadow: 0px 0px 3px 1px lightgray;
+#		box-shadow: 0px 0px 3px 1px lightgray;
     }
     body {
-		background-color: #ddd !important;
+		background-color: $body-bg !important;
     }
 	.feeds-show-div {
 		height: 15px;
