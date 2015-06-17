@@ -37,19 +37,14 @@ class Feed < ActiveRecord::Base
     self.update_attributes(title:    feed.title,
                            site_url: process_url(feed.url || feed.feed_url))
 
-    updated = false
-
-    entries = feed.entries.first(10).reverse
+    entries = feed.entries.first(5).reverse
     entries.each do |e|
       unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
-        updated = true
         insert_entry e
       end
     end
 
-    if updated
-      self.entries = self.entries.first 10
-    end
+    self.entries = self.entries.first 5
   end
 
   def setup_fj
