@@ -95,10 +95,11 @@ html.turbolinks-progress-bar::before {
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
     .top-bar {
-#		max-width: 800px !important;
+		max-width: 900px !important;
     }
     .row {
 		max-width: 760px !important;
+		max-width: 800px !important;
     }
     .main-content {
 		padding-top: 10px;
