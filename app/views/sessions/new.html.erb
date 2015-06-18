@@ -7,7 +7,7 @@
     <div class="medium-8 medium-offset-2">
 		<%= form_for(:session, url: login_path) do |f| %>
 			<%= f.label :email %>
-			<%= f.text_field :email, autofocus: true %>
+			<%= f.text_field :email %>
 
 			<%= f.label :password %>
 			<%= f.password_field :password %>
