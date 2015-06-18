@@ -45,6 +45,7 @@ article {
     padding-top: 0.4rem;
 	border-bottom: 1px dotted lightgray;
     .description, p {
+		font-size: 15px !important;
 		margin-bottom: 0px;
     }
 	&:last-child {
@@ -179,7 +180,7 @@ html.turbolinks-progress-bar::before {
     .description {
 		margin-top: -5px;
 		/* n x 1.6 gives n lines */
-		max-height: 4.8rem;
+		max-height: 4.5rem;
     }
 	#entries-header {
 		text-align: center;
@@ -239,6 +240,6 @@ html.turbolinks-progress-bar::before {
     }
     .description {
 		/* n x 1.6 gives n lines */
-		max-height: 6.4rem;
+		max-height: 6.0rem;
     }
 }
