@@ -82,7 +82,7 @@ article {
 }
 
 .crop, .thumb-small, .thumb {
-#	border-radius: 3px !important;
+	border-radius: 2px !important;
 }
 
 html.turbolinks-progress-bar::before {
@@ -207,6 +207,7 @@ html.turbolinks-progress-bar::before {
 		max-width: 430px !important;
     }
     .main-content {
+		border-radius: 2px;
 #		padding-bottom: 3px;
 		background-color: white;
 #		box-shadow: 0px 0px 3px 1px lightgray;
