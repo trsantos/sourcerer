@@ -9,6 +9,10 @@ class Feed < ActiveRecord::Base
   
   validates :feed_url, presence: true, uniqueness: true
 
+  def self.entries_per_feed
+    return 10
+  end
+
   def update
     feed = fetch_and_parse
     return if feed.is_a? Integer
@@ -37,14 +41,14 @@ class Feed < ActiveRecord::Base
     self.update_attributes(title:    feed.title,
                            site_url: process_url(feed.url || feed.feed_url))
 
-    entries = feed.entries.first(5).reverse
+    entries = feed.entries.first(Feed.entries_per_feed).reverse
     entries.each do |e|
       unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
         insert_entry e
       end
     end
 
-    self.entries = self.entries.first 5
+    self.entries = self.entries.first Feed.entries_per_feed
   end
 
   def setup_fj

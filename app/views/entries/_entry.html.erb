@@ -1,8 +1,8 @@
 <article class="<%= "old" if old? entry %>">
 	<header class="entry-title">
-		<h5>
+		<h6>
 			<%= link_to sanitize(entry.title), entry.url, target: "_blank" %>
-		</h5>
+		</h6>
     </header>
     <div class="row">
 		<% if @only_images %>
