@@ -47,6 +47,12 @@ article {
     .description, p {
 		font-size: 14px !important;
 		margin-bottom: 0px;
+		a {
+			color: inherit;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
     }
 	&:last-child {
 		border-width: 0px !important;
