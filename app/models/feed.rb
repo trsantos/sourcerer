@@ -114,7 +114,7 @@ class Feed < ActiveRecord::Base
       doc.css('*').each do |e|
         if e.name == "img"
           return e.attributes['src'].value
-        elsif e.name == "p"
+        elsif e.name == "p" && !p.text.blank?
           break
         end
       end
