@@ -111,12 +111,12 @@ class Feed < ActiveRecord::Base
   def find_image_from_description(description)
     begin
       doc = Nokogiri::HTML description
-      first_el = doc.css('body').children.first
-      if first_el.name == "img"
-        return first_el.attributes['src'].value
-      # also test if it is a link to an image
-      elsif first_el.children.first.name == "img"
-        return first_el.children.first.attributes['src'].value
+      doc.css('*').each do |e|
+        if e.name == "img"
+          return e.attributes['src'].value
+        elsif e.name == "p"
+          break
+        end
       end
     rescue
     end
