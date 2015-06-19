@@ -54,7 +54,7 @@ class SubscriptionsController < ApplicationController
       redirect_to next_sub.feed and return
     end
     flash[:info] = "You have no updated feeds. Check back later!"
-    redirect_to root_url, :from_next => "1"
+    redirect_to root_url({ :from_next => true })
   end
 
   private
