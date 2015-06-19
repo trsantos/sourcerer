@@ -40,15 +40,22 @@ class Feed < ActiveRecord::Base
   def update_entries(feed)
     self.update_attributes(title:    feed.title,
                            site_url: process_url(feed.url || feed.feed_url))
-
-    entries = feed.entries.first(Feed.entries_per_feed).reverse
-    entries.each do |e|
-      unless self.entries.find_by(url: e.url) or self.entries.find_by(title: e.title)
+    if feed_updated? feed
+      self.entries.destroy_all
+      # reverse order of insertion because of feeds with wrong dates
+      entries = feed.entries.first(Feed.entries_per_feed).reverse
+      entries.each do |e|
         insert_entry e
       end
     end
+  end
 
-    self.entries = self.entries.first Feed.entries_per_feed
+  def feed_updated?(feed)
+    entries = feed.entries.first(Feed.entries_per_feed)
+    entries.each do |e|
+      return true unless self.entries.find_by(url: e.url)
+    end
+    return false
   end
 
   def setup_fj
@@ -60,7 +67,7 @@ class Feed < ActiveRecord::Base
   def insert_entry(e)
     description = e.content || e.summary || ""
     self.entries.create(title:       e.title,
-                        description: sanitize(description, tags: ["a"], attributes: ["href"]).first(400),
+                        description: sanitize(strip_tags(description)).first(300),
                         pub_date:    find_pub_date(e.published),
                         image:       find_image(e, description),
                         url:         e.url)
@@ -104,7 +111,13 @@ class Feed < ActiveRecord::Base
   def find_image_from_description(description)
     begin
       doc = Nokogiri::HTML description
-      return doc.css('img').first.attributes['src'].value
+      first_el = doc.css('body').children.first
+      if first_el.name == "img"
+        return first_el.attributes['src'].value
+      # also test if it is a link to an image
+      elsif first_el.children.first.name == "img"
+        return first_el.children.first.attributes['src'].value
+      end
     rescue
     end
     return nil
@@ -128,60 +141,60 @@ class Feed < ActiveRecord::Base
 
     # discard silly images
     if img.include? 'feedburner' or
-      img.include? 'pml.png' or
-      img.include? '.gif' or
-      img.include? '.tiff' or
-      img.include? 'rc.img' or
-      img.include? 'mf.gif' or
-      img.include? 'ptq.gif' or
-      img.include? 'twitter16.png' or
-      img.include? 'sethsblog' or
-      img.include? 'assets.feedblitz.com/i/' or
-      img.include? 'wirecutter-deals' or
-      img.include? '/heads/' or
-      img.include? '/share/' or
-      img.include? 'smile.png' or
-      img.include? 'blank.' or
-      img.include? 'application-pdf.png' or
-      img.include? 's-US_UK_CA-mini' or
-      img.include? 'gif;base64' or
-      img.include? 'abrirpdf.png' or
-      img.include? 'gravatar.com/avatar' or
-      img.include? 'nojs.php' or
-      img.include? 'icon' or
-      img.include? 'gplus-16.png' or
-      img.include? 'logo' or
-      img.include? 'avw.php' or
-      img.include? 'service_links' or
-      img.include? 'tmn-test' or
-      img.include? '-ipad-h' or
-      img.include? 'webkit-fake-url' or
-      img.include? '/img/oglobo.jpg' or
-      img.include? 'beacon' or
-      img.include? 'usatoday-newstopstories' or
-      img.include? 'a2.img' or
-      img.include? 'ach.img' or
-      img.include? '/comments/' or
-      img.include? '/smilies/' or
-      img.include? 'simple-share-buttons-adder' or
-      img.include? 'a2t.img' or
-      img.include? 'a2t2.img' or
-      img.include? 'default-thumbnail' or
-      img.include? 'subscribe' or
-      img.include? 'forbes_' or
-      img.include? 'emoji' or
-      img.include? 'transparent.png' or
-      img.include? 'cdh_rss' or
-      img.include? 'ynp-rss' or
+      # img.include? 'pml.png' or
+      # img.include? 'rc.img' or
+      # img.include? 'mf.gif' or
+      # img.include? 'ptq.gif' or
+      # img.include? 'twitter16.png' or
+      # img.include? 'sethsblog' or
+      # img.include? 'assets.feedblitz.com/i/' or
+      # img.include? 'wirecutter-deals' or
+      # img.include? '/heads/' or
+      # img.include? '/share/' or
+      # img.include? 'smile.png' or
+      # img.include? 'blank.' or
+      # img.include? 'application-pdf.png' or
+      # img.include? 's-US_UK_CA-mini' or
+      # img.include? 'gif;base64' or
+      # img.include? 'abrirpdf.png' or
+      # img.include? 'gravatar.com/avatar' or
+      # img.include? 'nojs.php' or
+      # img.include? 'icon' or
+      # img.include? 'gplus-16.png' or
+      # img.include? 'logo' or
+      # img.include? 'avw.php' or
+      # img.include? 'service_links' or
+      # img.include? 'tmn-test' or
+      # img.include? '-ipad-h' or
+      # img.include? 'webkit-fake-url' or
+      # img.include? '/img/oglobo.jpg' or
+      # img.include? 'beacon' or
+      # img.include? 'usatoday-newstopstories' or
+      # img.include? 'a2.img' or
+      # img.include? 'ach.img' or
+      # img.include? '/comments/' or
+      # img.include? '/smilies/' or
+      # img.include? 'simple-share-buttons-adder' or
+      # img.include? 'a2t.img' or
+      # img.include? 'a2t2.img' or
+      # img.include? 'default-thumbnail' or
+      # img.include? 'subscribe' or
+      # img.include? 'forbes_' or
+      # img.include? 'emoji' or
+      # img.include? 'transparent.png' or
+      # img.include? 'cdh_rss' or
+      # img.include? 'ynp-rss' or
       # Disable the next to filters when og images are not used
       # img.include? 'bbcimg.co.uk' or
       # img.include? '/images/facebook' or
       # img.include? 'phys.org/newman/csz/news/tmb' or
       # img.include? 'uol-jogos-600px' or
+      img.include? '.tiff' or
       img.include? '.mp3' or
       img.include? '.m4a' or
       img.include? '.mp4' or
       img.include? '.psd' or
+      img.include? '.gif' or
       img.include? '.pdf' or
       img.include? '.ogv' or
       img.include? '.opus'
