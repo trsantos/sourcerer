@@ -40,22 +40,15 @@ class Feed < ActiveRecord::Base
   def update_entries(feed)
     self.update_attributes(title:    feed.title,
                            site_url: process_url(feed.url || feed.feed_url))
-    if feed_updated? feed
-      self.entries.destroy_all
-      # reverse order of insertion because of feeds with wrong dates
-      entries = feed.entries.first(Feed.entries_per_feed).reverse
-      entries.each do |e|
+
+    entries = feed.entries.firts(Feed.entries_per_feed).reverse
+    entries.each do |e|
+      unless self.entries.find_by(url: e.url) || self.entries.find_by(title: e.title)
         insert_entry e
       end
     end
-  end
 
-  def feed_updated?(feed)
-    entries = feed.entries.first(Feed.entries_per_feed)
-    entries.each do |e|
-      return true unless self.entries.find_by(url: e.url)
-    end
-    return false
+    self.entries = self.entries.first Feed.entries_per_feed
   end
 
   def setup_fj
@@ -133,9 +126,7 @@ class Feed < ActiveRecord::Base
 
   def filter_image(img)
     # resize techcrunch images
-    if img.include? 'tctechcrunch2011'
-      img += '?w=738'
-    elsif img.include? 'images.wrc.com'
+    if img.include? 'images.wrc.com'
       img += '_896x504.jpg'
     end
 
