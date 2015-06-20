@@ -90,8 +90,13 @@ article {
     text-align: center;
 }
 
-.crop, .thumb-small, .thumb {
+.crop, .small-thumb, .big-thumb {
 	border-radius: 2px !important;
+}
+
+.big-thumb {
+	margin-bottom: 7px;
+	margin-top: 1px;
 }
 
 html.turbolinks-progress-bar::before {

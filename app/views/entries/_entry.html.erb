@@ -7,12 +7,12 @@
     <div class="row">
 		<% if @only_images %>
 			<div class="small-12 columns">
-				<%= image_tag entry.image, class: "thumb" %>
+				<%= image_tag entry.image, class: "big-thumb" %>
 			</div>
 		<% else %>
 			<% if entry.image %>
 				<div class="medium-2 columns crop">
-					<%= image_tag entry.image, class: "thumb-small" %>
+					<%= image_tag entry.image, class: "small-thumb" %>
 				</div>
 				<div class="medium-10 columns desc-with-img">
 					<p class="description">
