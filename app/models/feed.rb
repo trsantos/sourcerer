@@ -41,7 +41,7 @@ class Feed < ActiveRecord::Base
     self.update_attributes(title:    feed.title,
                            site_url: process_url(feed.url || feed.feed_url))
 
-    entries = feed.entries.firts(Feed.entries_per_feed).reverse
+    entries = feed.entries.first(Feed.entries_per_feed).reverse
     entries.each do |e|
       unless self.entries.find_by(url: e.url) || self.entries.find_by(title: e.title)
         insert_entry e
