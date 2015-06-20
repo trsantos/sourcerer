@@ -11,7 +11,7 @@ $fh-hover: #121B22;
 $ah-hover: #121b22;
 
 .old header a {
-	color: #86868f !important;
+#	color: #86868f !important;
 }
 
 main {
@@ -232,7 +232,7 @@ html.turbolinks-progress-bar::before {
 		background-color: $body-bg !important;
     }
 	.feeds-show-div {
-#		height: 15px;
+		height: 20px;
 	}
 }
 
