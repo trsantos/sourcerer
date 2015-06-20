@@ -187,6 +187,7 @@ class Feed < ActiveRecord::Base
       img.include? '.psd' or
       img.include? '.gif' or
       img.include? '.pdf' or
+      img.include? '.webm' or
       img.include? '.ogv' or
       img.include? '.opus'
       return nil
