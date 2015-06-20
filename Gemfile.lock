@@ -120,7 +120,7 @@ GEM
     pg (0.18.2)
     puma (2.11.3)
       rack (>= 1.1, < 2.0)
-    rack (1.6.2)
+    rack (1.6.4)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -171,8 +171,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sidekiq (3.4.0)
-      celluloid (>= 0.16.0)
+    sidekiq (3.4.1)
+      celluloid (~> 0.16.0)
       connection_pool (>= 2.1.1)
       json
       redis (>= 3.0.6)
