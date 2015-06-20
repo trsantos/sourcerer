@@ -2,7 +2,7 @@
 
 <div class="feed-entries">
 	<% if @feed.entries.any? %>
-		<p id="entries-header" class="show-for-large-up">Latest</p>
+		<!-- <p id="entries-header" class="show-for-large-up">Latest</p> -->
 		<%= render @entries %>
 	<% else %>
 		<p>This feed has no items or has not been fetched yet.</p>
