@@ -76,10 +76,10 @@ article {
 }
 
 #favicon {
-	background-color: white;
-	padding: 2px;
-    height: 20px;
-    width: 20px;
+#	background-color: white;
+#	padding: 2px;
+    height: 16px;
+    width: 16px;
 }
 .description {
     overflow: hidden;
@@ -232,7 +232,7 @@ html.turbolinks-progress-bar::before {
 		background-color: $body-bg !important;
     }
 	.feeds-show-div {
-		height: 15px;
+#		height: 15px;
 	}
 }
 
