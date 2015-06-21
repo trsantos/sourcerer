@@ -45,7 +45,7 @@ article {
     padding-top: 0.4rem;
 	border-bottom: 1px dotted lightgray;
     .description, p {
-		font-size: 14px !important;
+#		font-size: 14px !important;
 		margin-bottom: 1px;
 		a {
 			color: inherit;
@@ -65,7 +65,7 @@ article {
 }
 
 .top-bar ul li > a {
-	font-size: 12px !important;
+#	font-size: 12px !important;
 }
 
 #feed-title {
@@ -194,7 +194,7 @@ html.turbolinks-progress-bar::before {
     .description {
 		margin-top: -5px;
 		/* n x 1.6 gives n lines */
-		max-height: 2.8rem;
+		max-height: 3.2rem;
     }
 	#entries-header {
 		text-align: center;
@@ -254,6 +254,6 @@ html.turbolinks-progress-bar::before {
     }
     .description {
 		/* n x 1.6 gives n lines */
-		max-height: 5.6rem;
+		max-height: 6.4rem;
     }
 }
