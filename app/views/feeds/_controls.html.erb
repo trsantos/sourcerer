@@ -2,13 +2,13 @@
 	<% s = current_user.subscriptions.find_by(feed_id: @feed.id) %>
 	<% if s.starred %>
 		<li>
-			<%= link_to "Unstar",
+			<%= link_to "♥",
 			subscription_path(s, subscription: { starred: false }),
 			method: :patch %>
 		</li>
 	<% else %>
 		<li>
-			<%= link_to "Star",
+			<%= link_to "♡",
 			subscription_path(s, subscription: { starred: true }),
 			method: :patch %>
 		</li>
