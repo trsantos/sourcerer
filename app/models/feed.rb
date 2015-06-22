@@ -40,23 +40,20 @@ class Feed < ActiveRecord::Base
   def update_entries(feed)
     self.update_attributes(title: feed.title, site_url: process_url(feed.url || feed.feed_url))
 
-    entries = feed.entries.first(Feed.entries_per_feed).reverse
+    entries = feed.entries.first(Feed.entries_per_feed)
 
-    updated = false
-    entries.each do |e|
-      old = self.entries.find_by(url: e.url)
-      if old
-        old.update_attribute(:updated_at, Time.zone.now)
-      else
-        insert_entry e
-        updated = true
-      end
-    end
-
-    if updated
+    if updated? entries
+      self.entries.destroy_all
+      entries.each { |e| insert_entry e }
       self.subscriptions.each { |s| s.update_attribute(:updated, true) }
-      self.entries = self.entries.order(updated_at: :desc).first Feed.entries_per_feed
     end
+  end
+
+  def updated?(fj_entries)
+    fj_entries.each do |e|
+      return true unless self.entries.find_by(url: e.url)
+    end
+    false
   end
 
   def setup_fj
