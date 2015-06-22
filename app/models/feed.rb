@@ -47,7 +47,7 @@ class Feed < ActiveRecord::Base
     entries.each do |e|
       old = self.entries.find_by(url: e.url)
       if old
-        dates[e.object_id] = old.created_at
+        dates[e.object_id] = [old.created_at, old.pub_date].min
       else
         updated = true
       end
