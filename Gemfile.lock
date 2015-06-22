@@ -111,7 +111,6 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    mousetrap-rails (1.4.6)
     multi_json (1.11.1)
     multipart-post (2.0.0)
     nokogiri (1.6.6.2)
@@ -223,7 +222,6 @@ DEPENDENCIES
   jquery-turbolinks
   mini_backtrace
   minitest-reporters
-  mousetrap-rails
   normalize-rails
   opml_saw!
   pg

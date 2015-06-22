@@ -45,7 +45,7 @@ class Feed < ActiveRecord::Base
     if updated? entries
       self.entries.destroy_all
       entries.each { |e| insert_entry e }
-      self.subscriptions.each { |s| s.update_attribute(:updated, s.updated?) }
+      self.subscriptions.each { |s| s.update_attribute(:updated, true) }
     end
   end
 
