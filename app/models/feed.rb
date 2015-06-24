@@ -10,7 +10,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def self.entries_per_feed
-    return 5
+    return 10
   end
 
   def update
