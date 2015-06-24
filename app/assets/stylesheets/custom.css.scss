@@ -12,7 +12,7 @@ $ah-hover: #121b22;
 
 .old header a {
 #	color: #86868f !important;
-	color: #888 !important;
+#	color: #888 !important;
 }
 
 main {
@@ -257,4 +257,7 @@ html.turbolinks-progress-bar::before {
 		/* n x 1.6 gives n lines */
 		max-height: 6.4rem;
     }
+	#next {
+		margin-top: -1px;
+	}
 }
