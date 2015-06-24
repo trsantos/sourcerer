@@ -51,7 +51,7 @@ class Feed < ActiveRecord::Base
 
   def has_new_entries?(entries)
     entries.each do |e|
-      return true if not self.entries.find_by(e.url)
+      return true unless self.entries.find_by(url: e.url)
     end
     false
   end
