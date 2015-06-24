@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
   include ApplicationHelper
   
   before_action :logged_in_user
-#  before_action :check_for_trial_expiration
+  #before_action :check_for_trial_expiration
   after_action  :mark_subscription_as_visited, only: [:show]
   
   def index
@@ -15,7 +15,7 @@ class FeedsController < ApplicationController
       # TODO: Use Ajax to reload the page when the fetch is done.
       @feed.update
     end
-    @entries = @feed.entries.first Feed.entries_per_feed
+    @entries = @feed.entries
     @only_images = @feed.only_images?
   end
 
