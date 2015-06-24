@@ -48,7 +48,7 @@ article {
 	border-bottom: 1px dotted lightgray;
     .description, p {
 		font-size: 15px !important;
-		margin-bottom: 3px;
+		margin-bottom: 1px;
 		a {
 			color: inherit;
 		}
@@ -197,7 +197,7 @@ html.turbolinks-progress-bar::before {
     .description {
 		margin-top: -5px;
 		/* n x 1.6 gives n lines */
-		max-height: 2.8rem;
+		max-height: 3rem;
     }
 	#entries-header {
 		text-align: center;
@@ -257,7 +257,7 @@ html.turbolinks-progress-bar::before {
     }
     .description {
 		/* n x 1.6 gives n lines */
-		max-height: 5.6rem;
+		max-height: 6rem;
     }
 	#next {
 		margin-top: -1px;
