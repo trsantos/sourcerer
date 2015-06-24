@@ -3,6 +3,11 @@ $ah-bg: #010A11;
 $active-bg: #008cba;
 $body-bg: #d3d3db;
 $body-bg: #93a3b1;
+$body-bg: #364652;
+$body-bg: #454e55;
+$body-bg: #565f66;
+$body-bg: #677077;
+$body-bg: #788188;
 
 $a: #fff;
 $ah-a: #fff;
@@ -103,10 +108,10 @@ html.turbolinks-progress-bar::before {
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
     .top-bar {
-		max-width: 870px !important;
+		max-width: 900px !important;
     }
     .row {
-		max-width: 800px !important;
+		max-width: 830px !important;
     }
     .main-content {
 		padding-top: 10px;
