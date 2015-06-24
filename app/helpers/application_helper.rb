@@ -41,7 +41,7 @@ module ApplicationHelper
     if t == "Technology"
       return [
         # Alexa categories: Computers, Home/Consumer Information
-        "http://www.techmeme.com/feed.xml", # 12,553
+        #"http://www.techmeme.com/feed.xml", # 12,553
         "http://www.cnet.com/rss/all/", # 149
         #"http://feeds.mashable.com/Mashable", # 287
         "http://www.engadget.com/rss.xml", # 312
@@ -55,7 +55,7 @@ module ApplicationHelper
         #"http://www.tomshardware.com/feeds/rss2/news.xml", # 796
         #"http://feeds2.feedburner.com/techradar/allnews", # 929
         #"http://feeds.howtogeek.com/howtogeek", # 936
-        #"http://feeds.arstechnica.com/arstechnica/index/" # 1,238
+        "http://feeds.arstechnica.com/arstechnica/index/" # 1,238
       ]
     elsif t == "News"
       return [
