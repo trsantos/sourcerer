@@ -1,7 +1,7 @@
 $fh-bg: #232C33;
-$ah-bg: #00120B;
+$ah-bg: #010A11;
 $active-bg: #008cba;
-$body-bg: #dbdbdf;
+$body-bg: #566D7B;
 
 $a: #fff;
 $ah-a: #fff;
@@ -11,7 +11,8 @@ $fh-hover: #121B22;
 $ah-hover: #121b22;
 
 .old header a {
-	color: #86868f !important;
+#	color: #86868f !important;
+	color: #888 !important;
 }
 
 main {
@@ -106,7 +107,7 @@ html.turbolinks-progress-bar::before {
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
     .top-bar {
-		max-width: 880px !important;
+		max-width: 870px !important;
     }
     .row {
 		max-width: 800px !important;
