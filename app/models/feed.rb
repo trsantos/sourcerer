@@ -42,20 +42,9 @@ class Feed < ActiveRecord::Base
 
     entries = feed.entries.first(Feed.entries_per_feed)
 
-    updated = false
-    dates = {}
-    entries.each do |e|
-      old = self.entries.find_by(url: e.url)
-      if old
-        dates[e.object_id] = old.created_at
-      else
-        updated = true
-      end
-    end
-
-    if updated
+    if has_new_entries? entries
       self.entries.destroy_all
-      entries.each { |e| insert_entry e, dates[e.object_id] }
+      entries.each { |e| insert_entry e }
       self.subscriptions.each { |s| s.update_attribute(:updated, true) }
     end
   end
@@ -73,14 +62,13 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
   end
 
-  def insert_entry(e, original_date)
+  def insert_entry(e)
     description = e.content || e.summary || ""
     self.entries.create(title:       (e.title if not e.title.blank?),
                         description: sanitize(strip_tags(description)).first(400),
                         pub_date:    find_pub_date(e.published),
                         image:       find_image(e, description),
-                        url:         e.url,
-                        created_at:  original_date || Time.zone.now)
+                        url:         e.url)
   end
 
   def find_pub_date(date)
