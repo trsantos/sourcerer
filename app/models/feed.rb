@@ -40,19 +40,20 @@ class Feed < ActiveRecord::Base
   def update_entries(feed)
     self.update_attributes(title: feed.title, site_url: process_url(feed.url || feed.feed_url))
 
-    updated = false
-    entries = feed.entries.first(Feed.entries_per_feed).reverse
-    entries.each do |e|
-      unless self.entries.find_by(url: e.url)
-        insert_entry e
-        updated = true
-      end
-    end
+    entries = feed.entries.first(Feed.entries_per_feed)
 
-    if updated
-      self.entries = self.entries.first Feed.entries_per_feed
-      self.subscriptions.each { |s| s.update_attribute :updated, true }
+    if has_new_entries? entries
+      self.entries.destroy_all
+      entries.each { |e| insert_entry e }
+      self.subscriptions.each { |s| s.update_attribute(:updated, true) }
     end
+  end
+
+  def has_new_entries?(entries)
+    entries.each do |e|
+      return true unless self.entries.find_by(url: e.url)
+    end
+    false
   end
 
   def setup_fj
