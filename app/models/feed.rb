@@ -14,6 +14,8 @@ class Feed < ActiveRecord::Base
   end
 
   def update
+    return if self.entries.any? and self.updated_at > 1.hour.ago
+    self.update_attribute(:updated_at, Time.zone.now)
     feed = fetch_and_parse
     return if feed.is_a? Integer
     update_entries feed
