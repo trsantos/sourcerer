@@ -89,6 +89,7 @@ article {
 	background-repeat: no-repeat;
 	#background-color: white;
 	background-position: center;
+	margin-bottom: -1px;
 }
 
 #favicon-img {
@@ -249,8 +250,11 @@ html.turbolinks-progress-bar::before {
 /* Small */
 @media only screen and (max-width: 40em) {
     .feed-header {
-		#favicon {
+		#favicon-img {
 			margin-bottom: -2px !important;
+		}
+		#favicon {
+			margin-bottom: -3px !important;
 		}
     }
     .desc-with-img {
