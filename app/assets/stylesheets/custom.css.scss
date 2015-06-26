@@ -32,6 +32,9 @@ main {
 		a {
 			color: #222;
 		}
+		a:hover {
+			text-decoration: underline;
+		}
     }
 	li:last-child {
 		border-width: 0px !important;
@@ -46,14 +49,14 @@ article {
 	padding-bottom: 0.6rem;
     padding-top: 0.4rem;
 	border-bottom: 1px dotted lightgray;
+	a:hover {
+		text-decoration: underline;
+	}
     .description, p {
 		font-size: 15px !important;
 		margin-bottom: 0px;
 		a {
 			color: inherit;
-		}
-		a:hover {
-			text-decoration: underline;
 		}
     }
 	&:last-child {
@@ -237,12 +240,6 @@ html.turbolinks-progress-bar::before {
 		#favicon {
 			margin-bottom: -2px;
 		}
-		.safari {
-			margin-bottom: 3px !important;
-		}
-		.controls a:hover {
-			background: #272727 !important;
-		}
     }
     .desc-with-img {
 		margin-top: 8px;
@@ -253,5 +250,21 @@ html.turbolinks-progress-bar::before {
     }
 	#next {
 		margin-top: -1px;
+	}
+	.top-bar {
+		background: $fh-bg !important;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+		.contain-to-grid, a, .title-area {
+			background: $fh-bg !important;
+		}
+		a {
+			color: $ah-a !important;
+		}
+		a:hover {
+			background: $fh-hover !important;
+		}
+		#next {
+			background: $active-bg !important;
+		}
 	}
 }
