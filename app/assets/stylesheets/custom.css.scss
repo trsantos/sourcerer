@@ -179,7 +179,7 @@ html.turbolinks-progress-bar::before {
 			}
 		}
 		#feed-title {
-			max-width: 480px;
+			max-width: 460px;
 		}
     }
     .crop {
@@ -265,6 +265,9 @@ html.turbolinks-progress-bar::before {
 		}
 		#next {
 			background: $active-bg !important;
+		}
+		h1 a {
+			width: calc(100% - 40px) !important;
 		}
 	}
 }
