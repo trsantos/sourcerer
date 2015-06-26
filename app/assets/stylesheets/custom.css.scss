@@ -169,13 +169,14 @@ html.turbolinks-progress-bar::before {
 		}
 		.controls {
 			margin-top: 15px;
+			#margin-top: 0px;
 			margin-right: 16px;
 			li a {
 				line-height: 30px !important;
 			}
 		}
 		#feed-title {
-			max-width: 380px;
+			max-width: 480px;
 		}
     }
     .crop {
@@ -216,7 +217,7 @@ html.turbolinks-progress-bar::before {
 /* large screens */
 @media only screen and (min-width: 64.063em) {
     #feed-title {
-		max-width: 490px !important;
+		max-width: 590px !important;
     }
     .main-content {
 		border-radius: 2px;
