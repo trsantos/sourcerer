@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
   # Follow a feed. Last arg should be a hash
   def follow(feed, from_topic = false)
     unless following?(feed)
-      subscriptions.create(feed_id: feed.id, from_topic: from_topic)
+      subscriptions.create(feed_id: feed.id, updated: feed.entries.any?, from_topic: from_topic)
     end
   end
 

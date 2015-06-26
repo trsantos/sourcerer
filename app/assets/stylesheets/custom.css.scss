@@ -78,11 +78,14 @@ article {
 }
 
 #favicon {
-	background-color: white;
-	padding: 1px;
-    height: 18px;
-    width: 18px;
+	padding: 0px;
+    height: 16px;
+    width: 16px;
+	margin: 0 0 22px 15px;
+	display: inline-block;
+	background-size: 16px 16px !important;
 }
+
 .description {
     overflow: hidden;
 }
@@ -164,8 +167,8 @@ html.turbolinks-progress-bar::before {
 		}
 		#favicon {
 			/* this is broken on webkit */
-			margin-bottom: 52px;
-			margin-left: 15px;
+			#margin-bottom: 52px;
+			#margin-left: 15px;
 		}
 		.safari {
 			margin-bottom: 9px !important;
@@ -243,8 +246,8 @@ html.turbolinks-progress-bar::before {
 @media only screen and (max-width: 40em) {
     .feed-header {
 		#favicon {
-			margin-bottom: 37px;
-			margin-left: 15px;
+			margin-bottom: 15px;
+			#margin-left: 15px;
 		}
 		.safari {
 			margin-bottom: 3px !important;

@@ -23,5 +23,10 @@ module FeedsHelper
   def get_favicon(url)
     return "http://www.google.com/s2/favicons?domain=" + url
   end
+
+  def favicon_for(url)
+    uri = URI.parse url
+    return uri.scheme + '://' + uri.host + '/favicon.ico'
+  end
   
 end
