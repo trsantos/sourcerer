@@ -3,11 +3,10 @@
 		<ul class="title-area">
 			<li class="name">
 				<h1>
-					<div id="favicon" style="background: url(<%= '"' + favicon_for(sub_url(@feed)) + '"' %>);"></div>
-					<%= link_to sub_title(@feed),
-					sub_url(@feed),
-					id: "feed-title",
-					target: "_blank" %>
+					<a href="<%= sub_url(@feed) %>" id="feed-title" target="_blank">
+						<div id="favicon" style="background-image: url(<%= '"' + favicon_for(sub_url(@feed)) + '"' %>);"></div>
+						<%= sub_title(@feed) %>
+					</a>
 				</h1>
 			</li>
 			<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
