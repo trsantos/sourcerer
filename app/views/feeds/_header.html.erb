@@ -4,7 +4,8 @@
 			<li class="name">
 				<h1>
 					<a href="<%= sub_url(@feed) %>" id="feed-title" target="_blank">
-						<img id="favicon" src="<%= favicon_for(sub_url(@feed)) %>"/>
+						<div id="favicon" style="background-image: url(<%= '"' + favicon_for(sub_url(@feed)) + '"' %>);"></div>
+						<img id="favicon-img" src="<%= favicon_for(sub_url(@feed)) %>"/>
 						<%= sub_title(@feed) %>
 					</a>
 				</h1>
@@ -20,9 +21,14 @@
 </div>
 <script>
 $(function() {
-	f = $('#favicon');
-	// Code is redundant as I'm not decided on behavior
-	// f.hide();
-	f.load(function() { f.show(); }).error(function () { f.hide(); });
+	var img = $('#favicon-img');
+	var f = $('#favicon');
+	img.load(function() {
+		f.css("background-color", "white");
+		f.show();
+	})
+		.error(function () {
+			f.hide(100);
+		});
 });
 </script>

@@ -81,14 +81,25 @@ article {
 }
 
 #favicon {
-	padding: 1px;
+	height: 18px;
+	width: 18px;
+	margin-right: 5px;
+	display: inline-block;
+	background-size: 16px 16px !important;
+	background-repeat: no-repeat;
+	#background-color: white;
+	background-position: center;
+}
+
+#favicon-img {
+	display: none;
     height: 18px;
     width: 18px;
+	padding: 1px;
+	background-color: white;
     /* height: 16px; */
     /* width: 16px; */
 	margin-right: 5px;
-	display: inline-block;
-	background-color: white;
 	margin-bottom: 2px !important;
 }
 
@@ -239,7 +250,7 @@ html.turbolinks-progress-bar::before {
 @media only screen and (max-width: 40em) {
     .feed-header {
 		#favicon {
-			margin-bottom: 3px !important;
+			margin-bottom: -2px !important;
 		}
     }
     .desc-with-img {
