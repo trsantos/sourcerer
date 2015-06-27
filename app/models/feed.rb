@@ -42,11 +42,18 @@ class Feed < ActiveRecord::Base
   def update_entries(feed)
     self.update_attributes(title: feed.title, site_url: process_url(feed.url || feed.feed_url))
 
-    entries = feed.entries.first(Feed.entries_per_feed)
+    entries = feed.entries.first(Feed.entries_per_feed).reverse
 
-    if has_new_entries? entries
-      self.entries.destroy_all
-      entries.each { |e| insert_entry e }
+    updated = false
+    entries.each do |e|
+      unless self.entries.find_by(url: e.url)
+        insert_entry e
+        updated = true
+      end
+    end
+
+    if updated
+      self.entries = self.entries.last Feed.entries_per_feed
       self.subscriptions.each { |s| s.update_attribute(:updated, true) }
     end
   end
