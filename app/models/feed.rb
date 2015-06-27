@@ -69,17 +69,9 @@ class Feed < ActiveRecord::Base
     description = e.content || e.summary || ""
     self.entries.create(title:       (e.title if not e.title.blank?),
                         description: sanitize(description, tags: ['a'], attributes: ['href']),
-                        pub_date:    find_pub_date(e.published),
+                        pub_date:    e.published || Time.zone.now,
                         image:       find_image(e, description),
                         url:         e.url)
-  end
-
-  def find_pub_date(date)
-    if date.nil? or date > Time.zone.now
-      Time.zone.now
-    else
-      date
-    end
   end
 
   def find_image(entry, description)
