@@ -14,8 +14,6 @@ class Feed < ActiveRecord::Base
   end
 
   def update
-    return if self.entries.any? and self.updated_at > 1.hour.ago
-    self.update_attribute(:updated_at, Time.zone.now)
     feed = fetch_and_parse
     return if feed.is_a? Integer
     update_entries feed
@@ -90,19 +88,6 @@ class Feed < ActiveRecord::Base
     if img.nil? || img.blank?
       return nil
     end
-
-    # maybe not needed anymore... let's see
-    # uri = URI.uri(self.site_url || self.feed_url)
-    # if img.start_with? '//'
-    #   img = "http:" + img
-    # elsif img.start_with? '/'
-    #   img = uri.scheme + '://' + uri.host + img
-    # elsif img.start_with? '../'
-    #   img = uri.scheme + '://' + uri.host + img[2..-1]
-    # elsif !img.start_with? 'http'
-    #   img = uri.scheme + '://' + uri.host + uri.path + img
-    # end
-
     return filter_image img
   end
 
