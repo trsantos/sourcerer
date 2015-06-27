@@ -68,8 +68,8 @@ class Feed < ActiveRecord::Base
   def setup_fj
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
+    Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("img", :value => :src, :as => :image)
-    #Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
   end
 
   def insert_entry(e)
@@ -103,7 +103,7 @@ class Feed < ActiveRecord::Base
     #   img = uri.scheme + '://' + uri.host + uri.path + img
     # end
 
-    return img
+    return filter_image img
   end
 
   def find_image_from_description(description)
@@ -130,17 +130,12 @@ class Feed < ActiveRecord::Base
   end
 
   def filter_image(img)
-    # resize techcrunch images
-    if img.include? 'images.wrc.com'
-      img += '_896x504.jpg'
-    end
-
-    if img.include? '.tiff' or
-      img.include? '.mp3' or
+    if img.include? '.mp3' or
+      #img.include? '.tiff' or
       img.include? '.m4a' or
       img.include? '.mp4' or
       img.include? '.psd' or
-      img.include? '.gif' or
+      #img.include? '.gif' or
       img.include? '.pdf' or
       img.include? '.webm' or
       img.include? '.ogv' or
