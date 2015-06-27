@@ -1,3 +1,7 @@
 <li>
-	<%= link_to subscription.title || subscription.feed.title, subscription.feed %>
+	<% if subscription.starred? %>
+		<%= link_to "[★] " + (subscription.title || subscription.feed.title).to_s, subscription.feed %>
+	<% else %>
+		<%= link_to subscription.title || subscription.feed.title, subscription.feed %>
+	<% end %>
 </li>
