@@ -17,28 +17,28 @@ $fh-hover: #121B22;
 $ah-hover: #121b22;
 
 main {
-#	padding-top: 45px !important;
+    #	padding-top: 45px !important;
 }
 
 #topics-button {
-	margin-top: 15px;
+    margin-top: 15px;
 }
 
 .users, .feeds {
     list-style: none;
     li {
-		padding: 10px 0;
-		border-bottom: 1px dotted lightgray;
-		a {
-			color: #222;
-		}
-		a:hover {
-#			text-decoration: underline;
-		}
-    }
-	li:last-child {
-		border-width: 0px !important;
+	padding: 10px 0;
+	border-bottom: 1px dotted lightgray;
+	a {
+	    color: #222;
 	}
+	a:hover {
+	    #			text-decoration: underline;
+	}
+    }
+    li:last-child {
+	border-width: 0px !important;
+    }
 }
 
 header h2, #home {
@@ -46,62 +46,62 @@ header h2, #home {
 }
 
 article {
-	padding-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
     padding-top: 0.4rem;
-	border-bottom: 1px dotted lightgray;
+    border-bottom: 1px dotted lightgray;
     .description, p {
-		font-size: 15px !important;
-		margin-bottom: 0px;
-		a {
-			color: inherit;
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-    }
-	&:last-child {
-		border-width: 0px !important;
+	font-size: 15px !important;
+	margin-bottom: 0px;
+	a {
+	    color: inherit;
 	}
+	a:hover {
+	    text-decoration: underline;
+	}
+    }
+    &:last-child {
+	border-width: 0px !important;
+    }
 }
 
 .entry-title a {
-	color: #222 !important;
-	font-weight: bold;
+    color: #222 !important;
+    font-weight: bold;
 }
 
 .top-bar ul li > a {
-#	font-size: 12px !important;
+    #	font-size: 12px !important;
 }
 
 #feed-title {
     display: inline-block !important;
-	overflow: hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 #favicon {
-	height: 18px;
-	width: 18px;
-	margin-right: 5px;
-	display: inline-block;
-	background-size: 16px 16px !important;
-	background-repeat: no-repeat;
-	background-color: white;
-	background-position: center;
-	margin-bottom: -1px;
+    height: 18px;
+    width: 18px;
+    margin-right: 5px;
+    display: inline-block;
+    background-size: 16px 16px !important;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center;
+    margin-bottom: -1px;
 }
 
 #favicon-img {
-#	display: none;
+    #	display: none;
     height: 18px;
     width: 18px;
-	padding: 1px;
-	background-color: white;
+    padding: 1px;
+    background-color: white;
     /* height: 16px; */
     /* width: 16px; */
-	margin-right: 5px;
-	margin-bottom: 2px !important;
+    margin-right: 5px;
+    margin-bottom: 2px !important;
 }
 
 .description {
@@ -109,17 +109,17 @@ article {
 }
 
 .alert-box {
-	margin-bottom: 0px !important;
+    margin-bottom: 0px !important;
     text-align: center;
 }
 
 .crop, .small-thumb, .big-thumb {
-	border-radius: 2px !important;
+    border-radius: 2px !important;
 }
 
 .big-thumb {
-	margin-bottom: 7px;
-	margin-top: 1px;
+    margin-bottom: 7px;
+    margin-top: 1px;
 }
 
 html.turbolinks-progress-bar::before {
@@ -129,165 +129,170 @@ html.turbolinks-progress-bar::before {
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
     .top-bar {
-		max-width: 900px !important;
+	max-width: 900px !important;
     }
     .row {
-		max-width: 830px !important;
+	max-width: 830px !important;
     }
     .main-content {
-		padding-top: 10px;
+	padding-top: 10px;
     }
-	#app-header {
-		background: $ah-bg;
-		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-		.top-bar, .contain-to-grid, a {
-			background: $ah-bg !important;
-		}
-		a {
-			color: $ah-a !important;
-		}
-		a:hover {
-			background: $ah-hover !important;
-		}
+    #app-header {
+	background: $ah-bg;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+	.top-bar, .contain-to-grid, a {
+	    background: $ah-bg !important;
 	}
-	.no-shadow {
-		box-shadow: none !important;
+	a {
+	    color: $ah-a !important;
 	}
+	a:hover {
+	    background: $ah-hover !important;
+	}
+    }
+    .no-shadow {
+	box-shadow: none !important;
+    }
     .feed-header {
-		z-index: 1 !important;
-		background: $fh-bg;
-		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-		a {
-			background: $fh-bg !important;
-			color: $a !important;
-			&:hover {
-				background: $fh-hover !important;
-			}
-		}
-		.active a {
-			background: $active-bg !important;
-			color: #fff !important;
-			&:hover {
-				background: $active-hover !important;
-			}
-		}
-		.top-bar {
-			height: 60px;
-			background: inherit;
-		}
-		#feed-title:hover {
-			background: $fh-hover !important;
-			height: 60px !important;
-		}
-		h1 a {
-			font-size: 1.625rem;
-			line-height: 60px;
-		}
-		.controls {
-			margin-top: 15px;
-			#margin-top: 0px;
-			margin-right: 16px;
-			li a {
-				line-height: 30px !important;
-			}
-		}
-		#feed-title {
-			max-width: 460px;
-		}
+	z-index: 1 !important;
+	background: $fh-bg;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+	a {
+	    background: $fh-bg !important;
+	    color: $a !important;
+	    &:hover {
+		background: $fh-hover !important;
+	    }
+	}
+	.active a {
+	    background: $active-bg !important;
+	    color: #fff !important;
+	    &:hover {
+		background: $active-hover !important;
+	    }
+	}
+	.top-bar {
+	    height: 60px;
+	    background: inherit;
+	}
+	#feed-title:hover {
+	    background: $fh-hover !important;
+	    height: 60px !important;
+	}
+	h1 a {
+	    font-size: 1.625rem;
+	    line-height: 60px;
+	}
+	.controls {
+	    margin-top: 15px;
+	    #margin-top: 0px;
+	    margin-right: 16px;
+	    li a {
+		line-height: 30px !important;
+	    }
+	}
+	#feed-title {
+	    max-width: 460px;
+	}
     }
     .crop {
-		padding-right: 0px !important;
-		margin-left: 0.9375rem !important;
-		padding-left: 0px !important;
-		overflow: hidden;
-		/* 62px comes from text description on the side */
-		max-height: 62px;
-		margin-bottom: 5px;
-		border: 1px solid rgba(120, 129, 136, 0.2);
+	padding-right: 0px !important;
+	margin-left: 0.9375rem !important;
+	padding-left: 0px !important;
+	overflow: hidden;
+	/* 62px comes from text description on the side */
+	max-height: 62px;
+	margin-bottom: 5px;
+	border: 1px solid rgba(120, 129, 136, 0.2);
+    }
+    .small-thumb {
+	margin-left: auto;
+	margin-right: auto;
+	display: inherit;
     }
     .desc-with-img {
-		padding-left: 1.875rem !important;
-		margin-left: -0.9375rem;
+	padding-left: 1.875rem !important;
+	margin-left: -0.9375rem;
     }
     .description {
-		margin-top: -5px;
-		/* n x 1.6 gives n lines */
-		max-height: 4.5rem;
+	margin-top: -5px;
+	/* n x 1.6 gives n lines */
+	max-height: 4.5rem;
     }
-	#entries-header {
-		text-align: center;
-		font-weight: bold;
-		padding-bottom: 6px;
-		margin-bottom: 0px;
-		border-bottom: 1px dotted lightgray;
+    #entries-header {
+	text-align: center;
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-bottom: 0px;
+	border-bottom: 1px dotted lightgray;
+    }
+    .feed-url {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	a {
+	    color: #222 !important;
 	}
-	.feed-url {
-		margin-top: 5px;
-		margin-bottom: 10px;
-		a {
-			color: #222 !important;
-		}
-	}
+    }
 }
 
 /* large screens */
 @media only screen and (min-width: 64.063em) {
     #feed-title {
-		max-width: 590px !important;
+	max-width: 590px !important;
     }
     .main-content {
-		border-radius: 2px;
-		background-color: white;
+	border-radius: 2px;
+	background-color: white;
     }
     body {
-		background-color: $body-bg !important;
+	background-color: $body-bg !important;
     }
-	.feeds-show-div {
-		height: 20px;
-	}
+    .feeds-show-div {
+	height: 20px;
+    }
 }
 
 /* Small */
 @media only screen and (max-width: 40em) {
     .feed-header {
-		#favicon-img {
-			margin-bottom: 3px !important;
-		}
-		#favicon {
-			margin-bottom: -3px !important;
-		}
+	#favicon-img {
+	    margin-bottom: 3px !important;
+	}
+	#favicon {
+	    margin-bottom: -3px !important;
+	}
     }
     .desc-with-img {
-		margin-top: 8px;
+	margin-top: 8px;
     }
     .description {
-		/* n x 1.6 gives n lines */
-		max-height: 6rem;
+	/* n x 1.6 gives n lines */
+	max-height: 6rem;
     }
+    #next {
+	margin-top: -1px;
+    }
+    .top-bar {
+	background: $fh-bg !important;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+	.contain-to-grid, a, .title-area {
+	    background: $fh-bg !important;
+	}
+	a {
+	    color: $ah-a !important;
+	}
+	a:hover {
+	    background: $fh-hover !important;
+	}
 	#next {
-		margin-top: -1px;
+	    background: $active-bg !important;
 	}
-	.top-bar {
-		background: $fh-bg !important;
-		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-		.contain-to-grid, a, .title-area {
-			background: $fh-bg !important;
-		}
-		a {
-			color: $ah-a !important;
-		}
-		a:hover {
-			background: $fh-hover !important;
-		}
-		#next {
-			background: $active-bg !important;
-		}
-		h1 a {
-			width: calc(100% - 50px) !important;
-		}
+	h1 a {
+	    width: calc(100% - 50px) !important;
 	}
+    }
 }
 
 .updated-sub {
-	font-weight: bold;
+    font-weight: bold;
 }
