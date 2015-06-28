@@ -3,7 +3,12 @@ $ah-bg: #010A11;
 $ah-bg: #091219;
 $active-bg: #008cba;
 $body-bg: #364652;
-$body-bg: #73828F;
+$body-bg: #114B5F;
+$body-bg: #234645;
+$body-bg: #18314F;
+$body-bg: #324A5F;
+$body-bg: #D3D4D9;
+//$body-bg: #73828F;
 //$body-bg: #454e55;
 //$body-bg: #565f66;
 //$body-bg: #677077;
@@ -242,6 +247,7 @@ html.turbolinks-progress-bar::before {
     .main-content {
 	border-radius: 2px;
 	background-color: white;
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
     }
     body {
 	background-color: $body-bg !important;
