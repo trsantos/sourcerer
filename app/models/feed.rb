@@ -102,7 +102,7 @@ class Feed < ActiveRecord::Base
 
   def find_image(entry, description)
     return process_image(image_from_description(description)) ||
-           # process_image(og_image(entry.url)) ||
+           process_image(og_image(entry.url)) ||
            process_image(entry.image)
   end
 
@@ -157,18 +157,18 @@ class Feed < ActiveRecord::Base
 
   def filter_image(img)
     # blanks
-    if img.include? 'mf.gif'
-    #   img.include? 'blank' or
-    #   img.include? 'pixel.wp' or
-    #   img.include? 'Badge' or
-    #   img.include? 'beacon'
+    if img.include? 'mf.gif' or
+      img.include? 'blank' or
+      img.include? 'pixel.wp' or
+      img.include? 'Badge' or
+      img.include? 'beacon'
       return nil
     end
 
     # special cases
-    if img.include? 'feedburner'
-      #   img.include? 'share-button' # Fapesp
-      #   img.include? '_thumb' # Goal.com
+    if img.include? 'feedburner' or
+      img.include? 'share-button' or # Fapesp
+      img.include? '_thumb' # Goal.com
       return nil
     end
 
