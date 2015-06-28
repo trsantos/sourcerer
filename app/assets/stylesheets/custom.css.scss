@@ -3,9 +3,9 @@ $ah-bg: #010A11;
 $ah-bg: #091219;
 $active-bg: #008cba;
 //$body-bg: #234645;
-//$body-bg: #D3D4D9;
 $body-bg: #324A5F;
 $body-bg: #364652;
+$body-bg: #D3D4D9;
 //$body-bg: #73828F;
 //$body-bg: #454e55;
 //$body-bg: #565f66;
@@ -141,7 +141,7 @@ html.turbolinks-progress-bar::before {
     }
     #app-header {
 	background: $ah-bg;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
 	.top-bar, .contain-to-grid, a {
 	    background: $ah-bg !important;
 	}
@@ -158,7 +158,7 @@ html.turbolinks-progress-bar::before {
     .feed-header {
 	z-index: 1 !important;
 	background: $fh-bg;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
 	a {
 	    background: $fh-bg !important;
 	    color: $a !important;
@@ -245,7 +245,6 @@ html.turbolinks-progress-bar::before {
     .main-content {
 	border-radius: 2px;
 	background-color: white;
-	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
     }
     body {
 	background-color: $body-bg !important;
