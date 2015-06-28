@@ -161,6 +161,8 @@ class Feed < ActiveRecord::Base
       img.include? 'blank' or
       img.include? 'pixel.wp' or
       img.include? 'Badge' or
+      img.include? 'ptq.gif' or
+      img.include? 'wirecutter-deals-300x250.png' or
       img.include? 'beacon'
       return nil
     end
@@ -168,6 +170,7 @@ class Feed < ActiveRecord::Base
     # special cases
     if img.include? 'feedburner' or
       img.include? 'share-button' or # Fapesp
+      img.include? 'cdh_rss.jpg' or # Clube do Hardware
       img.include? '_thumb' # Goal.com
       return nil
     end
