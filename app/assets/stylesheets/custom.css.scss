@@ -33,7 +33,7 @@ main {
 			color: #222;
 		}
 		a:hover {
-			text-decoration: underline;
+#			text-decoration: underline;
 		}
     }
 	li:last-child {
@@ -49,14 +49,14 @@ article {
 	padding-bottom: 0.6rem;
     padding-top: 0.4rem;
 	border-bottom: 1px dotted lightgray;
-	a:hover {
-		text-decoration: underline;
-	}
     .description, p {
 		font-size: 15px !important;
 		margin-bottom: 0px;
 		a {
 			color: inherit;
+		}
+		a:hover {
+			text-decoration: underline;
 		}
     }
 	&:last-child {
