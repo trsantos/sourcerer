@@ -1,43 +1,43 @@
 <% if current_user.following?(@feed) %>
-	<% s = current_user.subscriptions.find_by(feed_id: @feed.id) %>
-	<% if s.starred %>
-		<li>
-			<%= link_to "★",
-			subscription_path(s, subscription: { starred: false }),
-			method: :patch %>
-		</li>
-	<% else %>
-		<li>
-			<%= link_to "☆",
-			subscription_path(s, subscription: { starred: true }),
-			method: :patch %>
-		</li>
-	<% end %>
+    <% s = current_user.subscriptions.find_by(feed_id: @feed.id) %>
+    <% if s.starred %>
 	<li>
-		<%= link_to "Edit", edit_subscription_path(s) %>
+	    <%= link_to "★",
+	    subscription_path(s, subscription: { starred: false }),
+	    method: :patch %>
 	</li>
+    <% else %>
 	<li>
-		<%= link_to "Unsubscribe",
-		subscription_path(s),
-		method: :delete %>
+	    <%= link_to "☆",
+	    subscription_path(s, subscription: { starred: true }),
+	    method: :patch %>
 	</li>
+    <% end %>
+    <li>
+	<%= link_to "Edit", edit_subscription_path(s) %>
+    </li>
+    <li>
+	<%= link_to "Unsubscribe",
+	subscription_path(s),
+	method: :delete %>
+    </li>
 <% else %>
-	<li>
-		<%= link_to "Subscribe",
-		subscriptions_path(feed_id: @feed.id),
-		method: :post %>
-	</li>
+    <li>
+	<%= link_to "Subscribe",
+	subscriptions_path(feed_id: @feed.id),
+	method: :post %>
+    </li>
 <% end %>
 
 <li class="active">
-	<%= link_to "Next feed", next_path, id: "next" %>
+    <%= link_to "Next feed", next_path, id: "next" %>
 </li>
 
 <li class="has-dropdown show-for-small-only">
-	<%= link_to current_user.name.split.first, '#' %>
-	<ul class="dropdown">
-		<li><%= link_to "Topics", current_user %></li>
-		<li><%= link_to "Account", edit_user_path(current_user) %></li>
-		<li><%= link_to "Log out", logout_path, method: "delete" %></li>
-	</ul>
+    <%= link_to current_user.name.split.first, '#' %>
+    <ul class="dropdown">
+	<li><%= link_to "Topics", current_user %></li>
+	<li><%= link_to "Account", edit_user_path(current_user) %></li>
+	<li><%= link_to "Log out", logout_path, method: "delete" %></li>
+    </ul>
 </li>

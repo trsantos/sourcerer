@@ -6,12 +6,12 @@
 
 <%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
     <% Topic.all.order(:name).each do |t| %>
-		<div class="medium-6 columns">
-			<%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
-			<%= f.label t.name, t.name %>
-		</div>
+	<div class="medium-6 columns">
+	    <%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
+	    <%= f.label t.name, t.name %>
+	</div>
     <% end %>
-	<%= f.submit "Save Topics", class: "button", id: "topics-button" %>
+    <%= f.submit "Save Topics", class: "button", id: "topics-button" %>
 <% end %>
 
 <p><em>Note that you can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>

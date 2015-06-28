@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title><%= full_title(yield(:title)) %></title>
-		<%= stylesheet_link_tag    'application', 'data-turbolinks-track' => true %>
-		<%= javascript_include_tag 'vendor/modernizr' %>
-		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-		<%= csrf_meta_tags %>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title><%= full_title(yield(:title)) %></title>
+	<%= stylesheet_link_tag    'application', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'vendor/modernizr' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
     </head>
     <body>
-		<header class="contain-to-grid">
-			<%= render 'layouts/nav' %>
-			<% if in_feeds_show %>
-				<%= render partial: 'feeds/header' %>
-			<% end %>
-		</header>
-		<main class="<%= in_feeds_show ? "feeds-show" : "" %>">
-			<% flash.each do |message_type, message| %>
-				<%= content_tag(:div,
-								message,
-								class: "alert-box #{message_type}" +
-								(in_feeds_show ? " alert-in-feeds-show" : "")) %>
-			<% end %>
+	<header class="contain-to-grid">
+	    <%= render 'layouts/nav' %>
+	    <% if in_feeds_show %>
+		<%= render partial: 'feeds/header' %>
+	    <% end %>
+	</header>
+	<main class="<%= in_feeds_show ? "feeds-show" : "" %>">
+	    <% flash.each do |message_type, message| %>
+	        <%= content_tag(:div,
+				message,
+				class: "alert-box #{message_type}" +
+				(in_feeds_show ? " alert-in-feeds-show" : "")) %>
+	    <% end %>
 
-			<div class="feeds-show-div"></div>
+	    <div class="feeds-show-div"></div>
 
-			<div class="row main-content">
-				<div class="small-10 small-offset-1">
-					<%= yield %>
-				</div>
-			</div>
+	    <div class="row main-content">
+		<div class="small-10 small-offset-1">
+		    <%= yield %>
+		</div>
+	    </div>
 
-			<div class="feeds-show-div"></div>
-		</main>
+	    <div class="feeds-show-div"></div>
+	</main>
     </body>
 </html>

@@ -87,13 +87,13 @@ article {
 	display: inline-block;
 	background-size: 16px 16px !important;
 	background-repeat: no-repeat;
-	#background-color: white;
+	background-color: white;
 	background-position: center;
 	margin-bottom: -1px;
 }
 
 #favicon-img {
-	display: none;
+#	display: none;
     height: 18px;
     width: 18px;
 	padding: 1px;
@@ -251,7 +251,7 @@ html.turbolinks-progress-bar::before {
 @media only screen and (max-width: 40em) {
     .feed-header {
 		#favicon-img {
-			margin-bottom: -2px !important;
+			margin-bottom: 3px !important;
 		}
 		#favicon {
 			margin-bottom: -3px !important;

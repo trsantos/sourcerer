@@ -5,9 +5,9 @@
 
 <div class="row">
     <div class="medium-8 medium-offset-2">
-		<%= form_for(:opml , url: opml_index_path) do |f| %>
-			<%= f.file_field :opml_file %>
-			<%= f.submit "Submit", class: "button expand" %>
-		<% end %>
-	</div>
+	<%= form_for(:opml , url: opml_index_path) do |f| %>
+	    <%= f.file_field :opml_file %>
+	    <%= f.submit "Submit", class: "button expand" %>
+	<% end %>
+    </div>
 </div>

@@ -1,38 +1,38 @@
 <div id="app-header" class="<%= (in_feeds_show ? " show-for-medium-up no-shadow" : "fixed") %>">
-	<nav class="top-bar" data-topbar data-options="is_hover: false">
-		<ul class="title-area">
-			<li class="name">
-				<% if logged_in? %>
-					<h1><%= link_to full_title, next_path, id: "logo", data: { keybinding: 'n' } %></h1>
-				<% else %>
-					<h1><%= link_to full_title, root_path, id: "logo" %></h1>
-				<% end %>
-			</li>
-			<li class="toggle-topbar menu-icon">
-				<a href="#"><span></span></a>
-			</li>
-		</ul>
-		<section class="top-bar-section">
-			<ul class="right">
-				<% if logged_in? %>
-					<li><%= link_to "Subscriptions", subscriptions_path %></li>
-					<li><%= link_to "Add feed", new_feed_path %></li>
-					<li class="active show-for-small-only">
-						<%= link_to "Back to your feeds", next_path, id: "next" %>
-					</li>
-					<li class="has-dropdown">
-						<%= link_to current_user.name.split.first, '#' %>
-						<ul class="dropdown">
-							<li><%= link_to "Topics", current_user %></li>
-							<li><%= link_to "Account", edit_user_path(current_user) %></li>
-							<li><%= link_to "Log out", logout_path, method: "delete" %></li>
-						</ul>
-					</li>
-				<% else %>
-					<li><%= link_to "About",  about_path %></li>
-					<li><%= link_to "Log in", login_path %></li>
-				<% end %>
+    <nav class="top-bar" data-topbar data-options="is_hover: false">
+	<ul class="title-area">
+	    <li class="name">
+		<% if logged_in? %>
+		    <h1><%= link_to full_title, next_path, id: "logo", data: { keybinding: 'n' } %></h1>
+		<% else %>
+		    <h1><%= link_to full_title, root_path, id: "logo" %></h1>
+		<% end %>
+	    </li>
+	    <li class="toggle-topbar menu-icon">
+		<a href="#"><span></span></a>
+	    </li>
+	</ul>
+	<section class="top-bar-section">
+	    <ul class="right">
+		<% if logged_in? %>
+		    <li><%= link_to "Subscriptions", subscriptions_path %></li>
+		    <li><%= link_to "Add feed", new_feed_path %></li>
+		    <li class="active show-for-small-only">
+			<%= link_to "Back to your feeds", next_path, id: "next" %>
+		    </li>
+		    <li class="has-dropdown">
+			<%= link_to current_user.name.split.first, '#' %>
+			<ul class="dropdown">
+			    <li><%= link_to "Topics", current_user %></li>
+			    <li><%= link_to "Account", edit_user_path(current_user) %></li>
+			    <li><%= link_to "Log out", logout_path, method: "delete" %></li>
 			</ul>
-		</section>
-	</nav>
+		    </li>
+		<% else %>
+		    <li><%= link_to "About",  about_path %></li>
+		    <li><%= link_to "Log in", login_path %></li>
+		<% end %>
+	    </ul>
+	</section>
+    </nav>
 </div>
