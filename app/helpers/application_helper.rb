@@ -30,6 +30,7 @@ module ApplicationHelper
   end
 
   def process_url(url)
+    url = url.strip
     unless url.start_with?('http:') or url.start_with?('https:')
       url = 'http://' + url
     end

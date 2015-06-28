@@ -16,6 +16,7 @@ class Feed < ActiveRecord::Base
   def update
     feed = fetch_and_parse
     return if feed.is_a? Integer
+    #self.entries.destroy_all
     update_entries feed
   end
 
@@ -106,7 +107,7 @@ class Feed < ActiveRecord::Base
   end
 
   def process_image(img)
-    if img.nil? || img.blank?
+    if img.nil? || img.blank? || img == '0'
       return nil
     end
 
@@ -128,11 +129,16 @@ class Feed < ActiveRecord::Base
   def image_from_description(description)
     begin
       doc = Nokogiri::HTML description
+      first_p = true
       doc.css('*').each do |e|
         if e.name == "img"
           return e.attributes['src'].value
-        elsif e.name == "p" && !e.text.blank?
-          break
+        elsif e.name == "p"
+          if first_p
+            first_p = false
+          else
+            break
+          end
         end
       end
     rescue
@@ -143,17 +149,23 @@ class Feed < ActiveRecord::Base
   def og_image(url)
     begin
       require 'open-uri'
-      doc = Nokogiri::HTML(open(URI::escape(url.strip.split(/#|\?/).first)))
+      doc = Nokogiri::HTML(open(URI::escape(url.strip.split(/#/).first)))
       return doc.css("meta[property='og:image']").first.attributes['content'].value
     rescue
     end
   end
 
   def filter_image(img)
-    # if img.include? 'logo' or
-    #   img.include? 'blank' or
-    #   img.include? 'beacon'
-    #   return nil
+    if img.include? 'mf.gif' or
+      img.include? 'blank' or
+      img.include? 'feedburner' or
+      img.include? 'share-button' or
+      img.include? 'pixel.wp' or
+      img.include? 'Badge' or
+      (img.include? 'goal.com' and img.include? '_thumb') or
+      img.include? 'beacon'
+      return nil
+    end
     if img.include? '.mp3' or
       # img.include? '.tiff' or
       img.include? '.m4a' or
