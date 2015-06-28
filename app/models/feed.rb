@@ -156,16 +156,23 @@ class Feed < ActiveRecord::Base
   end
 
   def filter_image(img)
+    # blanks
     if img.include? 'mf.gif' or
       img.include? 'blank' or
       img.include? 'feedburner' or
-      img.include? 'share-button' or
       img.include? 'pixel.wp' or
       img.include? 'Badge' or
-      (img.include? 'goal.com' and img.include? '_thumb') or
       img.include? 'beacon'
       return nil
     end
+
+    # special cases
+    if img.include? 'share-button' or # Fapesp
+      img.include? '_thumb' # Goal.com
+      return nil
+    end
+
+    # non-image formats
     if img.include? '.mp3' or
       # img.include? '.tiff' or
       img.include? '.m4a' or
@@ -177,9 +184,9 @@ class Feed < ActiveRecord::Base
       img.include? '.ogv' or
       img.include? '.opus'
       return nil
-    else
-      return img
     end
+
+    return img
   end
 
 end
