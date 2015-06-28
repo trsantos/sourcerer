@@ -26,6 +26,32 @@ class Feed < ActiveRecord::Base
     return true
   end
 
+  # Too complicated, but seems to work.
+  # Disable for now as I think that it's still better to load favicons dynamically.
+  # def favicon_for
+  #   begin
+  #     uri = URI.parse self.site_url
+  #     favicon = uri.scheme + '://' + uri.host + '/favicon.ico'
+  #     if open(favicon)
+  #       self.update_attribute(:favicon, favicon)
+  #     else
+  #       favicon = nil
+  #       require 'open-uri'
+  #       doc = Nokogiri::HTML open(uri.scheme + '://' + uri.host).read.downcase
+  #       list = ['link[@rel="fluid-icon"]', 'link[@rel="shortcut icon"]', 'link[@rel="icon"]']
+  #       favicon = list.map{ |x| doc.css(x) }.select{ |x| x.any? }.first
+  #       if favicon
+  #         f = favicon.attr('href').value
+  #         if URI.parse(f).relative?
+  #           f += uri.scheme + '://' + uri.host + '/' + f
+  #         self.update_attribute(:favicon, f)
+  #         end
+  #       end
+  #     end
+  #   rescue
+  #   end
+  # end
+
   private
 
   def fetch_and_parse
@@ -56,13 +82,6 @@ class Feed < ActiveRecord::Base
     end
   end
 
-  def has_new_entries?(entries)
-    entries.each do |e|
-      return true unless self.entries.find_by(url: e.url)
-    end
-    false
-  end
-
   def setup_fj
     Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
@@ -71,16 +90,18 @@ class Feed < ActiveRecord::Base
   end
 
   def insert_entry(e)
+    # Don't remember why content comes first
     description = e.content || e.summary || ""
     self.entries.create(title:       (e.title if not e.title.blank?),
                         description: sanitize(strip_tags(description)).first(400),
                         pub_date:    e.published || Time.zone.now,
                         image:       find_image(e, description),
-                        url:         e.url)
+                        url:         e.url.strip)
   end
 
   def find_image(entry, description)
-    return process_image(find_image_from_description(description)) ||
+    return process_image(image_from_description(description)) ||
+           process_image(og_image(entry.url)) ||
            process_image(entry.image)
   end
 
@@ -88,10 +109,23 @@ class Feed < ActiveRecord::Base
     if img.nil? || img.blank?
       return nil
     end
+
+    uri = URI.parse(self.site_url || self.feed_url)
+    if img.start_with? '//'
+      img = "http:" + img
+    elsif img.start_with? '/'
+      img = uri.scheme + '://' + uri.host + img
+    elsif img.start_with? '../'
+      img = uri.scheme + '://' + uri.host + img[2..-1]
+    elsif !img.start_with? 'http'
+      # I don't remember why I added this one
+      img = 'http://' + uri.host + uri.path + img
+    end
+
     return filter_image img
   end
 
-  def find_image_from_description(description)
+  def image_from_description(description)
     begin
       doc = Nokogiri::HTML description
       doc.css('*').each do |e|
@@ -106,8 +140,9 @@ class Feed < ActiveRecord::Base
     return nil
   end
 
-  def find_og_image(url)
+  def og_image(url)
     begin
+      require 'open-uri'
       doc = Nokogiri::HTML(open(URI::escape(url.strip.split(/#|\?/).first)))
       return doc.css("meta[property='og:image']").first.attributes['content'].value
     rescue
@@ -115,12 +150,16 @@ class Feed < ActiveRecord::Base
   end
 
   def filter_image(img)
+    # if img.include? 'logo' or
+    #   img.include? 'blank' or
+    #   img.include? 'beacon'
+    #   return nil
     if img.include? '.mp3' or
-      #img.include? '.tiff' or
+      # img.include? '.tiff' or
       img.include? '.m4a' or
       img.include? '.mp4' or
       img.include? '.psd' or
-      #img.include? '.gif' or
+      # img.include? '.gif' or
       img.include? '.pdf' or
       img.include? '.webm' or
       img.include? '.ogv' or
