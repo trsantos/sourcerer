@@ -4,7 +4,7 @@ $fh-bg: #222B32;
 
 $ah-bg: #010A11;
 //$ah-bg: #091219;
-$ah-bg: #111A21;
+//$ah-bg: #111A21;
 //$ah-bg: #121B22;
 //$ah-bg: #0C151C;
 //$ah-bg: #333;
@@ -17,15 +17,14 @@ $body-bg: #364652;
 $body-bg: #D3D4D9;
 //$body-bg: #CCCDD2;
 //$body-bg: #ddd;
-//$body-bg: #778087;
+$body-bg: #778087;
 //$body-bg: #73828F;
 
-//$body-bg: #96B2C6;
-//$body-bg: #E8E9F3;
-//$body-bg: #96BDC6;
-//$body-bg: #565f66;
-//$body-bg: #555e65;
-//$body-bg: #666f76;
+$body-bg: #96B2C6;
+$body-bg: #96BDC6;
+$body-bg: #555e65;
+$body-bg: #666f76;
+$body-bg: #778087;
 //$body-bg: #889198;
 //$body-bg: #f5f5f5;
 
@@ -34,8 +33,8 @@ $a: #fff;
 $ah-a: #fff;
 
 $active-hover: #007ba9;
-$fh-hover: #1A232A;
-$ah-hover: #1A232A;
+$fh-hover: #111A21;
+$ah-hover: #111A21;
 
 main {
     #	padding-top: 45px !important;
@@ -178,7 +177,6 @@ html.turbolinks-progress-bar::before {
 	z-index: 1 !important;
 	background: $fh-bg;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
-#	border-bottom: 1px solid #ccc;
 	a {
 	    background: $fh-bg !important;
 	    color: $a !important;
