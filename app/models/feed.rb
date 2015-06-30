@@ -132,7 +132,7 @@ class Feed < ActiveRecord::Base
       doc.css('*').each do |e|
         if e.name == "img"
           return e.attributes['src'].value
-        elsif e.name == "p"
+        elsif e.name == "p" && !e.text.blank?
           break
         end
       end
@@ -156,6 +156,7 @@ class Feed < ActiveRecord::Base
       img.include? 'blank' or
       img.include? 'pixel.wp' or
       img.include? 'Badge' or
+      img.include? 'feedsportal' or
       img.include? 'ptq.gif' or
       img.include? 'wirecutter-deals-300x250.png' or
       img.include? 'beacon'
