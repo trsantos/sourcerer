@@ -129,16 +129,11 @@ class Feed < ActiveRecord::Base
   def image_from_description(description)
     begin
       doc = Nokogiri::HTML description
-      first_p = true
       doc.css('*').each do |e|
         if e.name == "img"
           return e.attributes['src'].value
         elsif e.name == "p"
-          if first_p
-            first_p = false
-          else
-            break
-          end
+          break
         end
       end
     rescue
@@ -171,6 +166,7 @@ class Feed < ActiveRecord::Base
     if img.include? 'feedburner' or
       img.include? 'share-button' or # Fapesp
       img.include? 'cdh_rss.jpg' or # Clube do Hardware
+      img.include? 'pixel.gif' or # Bleacher Report
       img.include? '_thumb' # Goal.com
       return nil
     end
