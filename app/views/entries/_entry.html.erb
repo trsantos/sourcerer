@@ -1,9 +1,11 @@
 <article>
     <% if @displaying_river %>
-	<img src="<%= favicon_for entry.feed.site_url %>" class="favicon"/>
-	<small class="river-feed-title">
-	    <%= link_to entry.feed.title, entry.feed %>
-	</small>
+	<div class="river">
+	    <img src="<%= favicon_for entry.feed.site_url %>" class="favicon"/>
+	    <small>
+		<%= link_to entry.feed.title, entry.feed %>
+	    </small>
+	</div>
     <% end %>
     <header class="entry-title">
 	<h6>

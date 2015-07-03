@@ -326,6 +326,12 @@ html.turbolinks-progress-bar::before {
     font-weight: bold;
 }
 
-.river-feed-title a {
-    color: #222 !important;
+.river {
+    .favicon {
+	width: 16px;
+	height: 16px;
+    }
+    a {
+	color: #222 !important;
+    }
 }
