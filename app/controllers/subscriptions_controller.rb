@@ -1,7 +1,7 @@
 class SubscriptionsController < ApplicationController
   include ApplicationHelper
   include FeedsHelper
-  
+
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -60,10 +60,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def river
-    # @entries = []
-    # current_user.feeds.each { |f| @entries += f.entries.order(pub_date: :desc).first 2 }
-    # @entries = @entries.sort_by{ |e| e.pub_date }.reverse!.first(30)
-    @entries = current_user.entries.order(pub_date: :desc).group(:feed_id).limit(10)
+    @entries = current_user.entries.select('DISTINCT ON (entries.pub_date, entries.feed_id) *').order(pub_date: :desc, feed_id: :asc).group(:feed_id, :id, 'feeds.id', 'subscriptions.id').first(10)
+    # @entries = current_user.entries.order(pub_date: :desc).group(:feed_id).first(10)
     @only_images = false
     @displaying_river = true
   end
