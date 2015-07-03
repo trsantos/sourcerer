@@ -63,7 +63,8 @@ class SubscriptionsController < ApplicationController
     # @entries = []
     # current_user.feeds.each { |f| @entries += f.entries.order(pub_date: :desc).first 2 }
     # @entries = @entries.sort_by{ |e| e.pub_date }.reverse!.first(30)
-    @entries = current_user.entries.order(pub_date: :desc).first(20)
+    # @entries = current_user.entries.order(pub_date: :desc).group(:feed_id).limit(2)
+    @entries = current_user.entries.order(pub_date: :desc).first(30)
     @only_images = false
     @displaying_river = true
   end
