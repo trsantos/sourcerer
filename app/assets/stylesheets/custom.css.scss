@@ -54,7 +54,7 @@ main {
     list-style: none;
     li {
 	padding: 10px 0;
-	border-bottom: 1px dotted lightgray;
+	border-bottom: 1px dotted gray;
 	a {
 	    color: #222;
 	}
@@ -74,7 +74,7 @@ header h2, #home {
 article {
     padding-bottom: 0.6rem;
     padding-top: 0.4rem;
-    border-bottom: 1px dotted lightgray;
+    border-bottom: 1px dotted gray;
     .description, p {
 	font-size: 15px !important;
 	margin-bottom: 0px;
@@ -251,7 +251,7 @@ html.turbolinks-progress-bar::before {
 	font-weight: bold;
 	padding-bottom: 6px;
 	margin-bottom: 0px;
-	border-bottom: 1px dotted lightgray;
+	border-bottom: 1px dotted gray;
     }
     .feed-url {
 	margin-top: 5px;
@@ -324,4 +324,8 @@ html.turbolinks-progress-bar::before {
 
 .updated-sub {
     font-weight: bold;
+}
+
+.river-feed-title a {
+    color: #222 !important;
 }

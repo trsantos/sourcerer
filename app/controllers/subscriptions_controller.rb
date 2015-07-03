@@ -59,6 +59,14 @@ class SubscriptionsController < ApplicationController
     redirect_to root_url({ :from_next => true })
   end
 
+  def river
+    entries = []
+    current_user.feeds.each { |f| entries += f.entries.first 2 }
+    @entries = entries.sort_by{ |e| e.pub_date }.reverse!.first(20)
+    @only_images = false
+    @displaying_river = true
+  end
+
   private
 
   def sub_params

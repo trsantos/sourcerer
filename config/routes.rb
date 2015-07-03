@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :opml,                only: [:new, :create]
   get 'opml/export' => 'opml#export'
   get 'next' => 'subscriptions#next'
+  get 'river' => 'subscriptions#river'
   mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.

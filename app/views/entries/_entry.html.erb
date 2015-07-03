@@ -1,4 +1,10 @@
 <article>
+    <% if @displaying_river %>
+	<img src="<%= favicon_for entry.feed.site_url %>" class="favicon"/>
+	<small class="river-feed-title">
+	    <%= link_to entry.feed.title, entry.feed %>
+	</small>
+    <% end %>
     <header class="entry-title">
 	<h6>
 	    <%= link_to sanitize(entry.title), entry.url, target: "_blank" %>

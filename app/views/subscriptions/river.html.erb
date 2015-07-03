@@ -1,0 +1,17 @@
+<% provide(:title, "River") %>
+
+<div class="feed-entries">
+    <p id="entries-header" class="show-for-large-up">Your river</p>
+    <%= render @entries %>
+</div>
+
+<%= link_to "Zoom in", next_path, class: "button expand", id: "next" %>
+
+<script>
+imgs = document.getElementsByClassName("favicon");
+for (var i = 0; i < imgs.length; ++i) {
+	imgs[i].onerror = function() {
+		this.setAttribute("src", "<%= asset_path('feed-icon-16x16.png') %>");
+	};
+};
+</script>
