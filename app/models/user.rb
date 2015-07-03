@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :feeds, through: :subscriptions
 
+  has_many :entries, through: :feeds
+
   attr_accessor :remember_token, :reset_token
   before_save   :downcase_email
 
