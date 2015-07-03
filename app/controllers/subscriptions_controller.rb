@@ -61,7 +61,7 @@ class SubscriptionsController < ApplicationController
 
   def river
     @entries = []
-    current_user.feeds.each { |f| @entries += f.entries.first 2 }
+    current_user.feeds.each { |f| @entries += f.entries.order(pub_date: :desc).first 2 }
     @entries = @entries.sort_by{ |e| e.pub_date }.reverse!.first(30)
     @only_images = false
     @displaying_river = true
