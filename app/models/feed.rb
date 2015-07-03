@@ -95,9 +95,16 @@ class Feed < ActiveRecord::Base
     description = e.content || e.summary || ""
     self.entries.create(title:       (e.title if not e.title.blank?),
                         description: sanitize(strip_tags(description)).first(400),
-                        pub_date:    e.published || Time.zone.now,
+                        pub_date:    find_date(e.published),
                         image:       find_image(e, description),
                         url:         e.url.strip)
+  end
+
+  def find_date(pub_date)
+    if pub_date.nil? || pub_date > Time.zone.now
+      return Time.zone.now
+    end
+    pub_date
   end
 
   def find_image(entry, description)
@@ -155,6 +162,7 @@ class Feed < ActiveRecord::Base
     if img.include? 'mf.gif' or
       img.include? 'blank' or
       img.include? 'pixel.wp' or
+      img.include? 'pixel.gif' or
       img.include? 'Badge' or
       img.include? 'feedsportal' or
       img.include? 'ptq.gif' or

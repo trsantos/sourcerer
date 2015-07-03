@@ -334,4 +334,10 @@ html.turbolinks-progress-bar::before {
     a {
 	color: #222 !important;
     }
+    max-width: 100%;
+#    display: inline-block !important;
+    overflow: hidden;
+#   text-overflow: ellipsis;
+    white-space: nowrap;
+
 }

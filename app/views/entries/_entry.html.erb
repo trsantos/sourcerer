@@ -3,7 +3,7 @@
 	<div class="river">
 	    <img src="<%= favicon_for entry.feed.site_url %>" class="favicon"/>
 	    <small>
-		<%= link_to entry.feed.title, entry.feed %>
+		<%= link_to entry.feed.title, entry.feed, target: "_blank" %>
 	    </small>
 	</div>
     <% end %>
