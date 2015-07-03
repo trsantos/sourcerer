@@ -97,7 +97,7 @@ class Feed < ActiveRecord::Base
                         description: sanitize(strip_tags(description)).first(400),
                         pub_date:    find_date(e.published),
                         image:       find_image(e, description),
-                        url:         e.url.strip)
+                        url:         e.url)
   end
 
   def find_date(pub_date)
