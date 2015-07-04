@@ -32,7 +32,7 @@ $body-bg: #485665;
 $body-bg: #7798AB;
 $body-bg: #364652;
 $body-bg: #99A2A9;
-$body-bg: #D3D4D9;
+//$body-bg: #D3D4D9;
 
 $a: #fff;
 //$a: #222;
@@ -41,6 +41,21 @@ $ah-a: #fff;
 $active-hover: #007ba9;
 $fh-hover: #111A21;
 $ah-hover: #111A21;
+body {
+#    line-height:   1 !important;
+}
+
+p, h5 {
+    margin-top:    0px !important;
+    margin-bottom: 0px !important;
+#    line-height:   1 !important;
+}
+
+footer, small {
+    vertical-align: middle !important;
+    font-size: 11px !important;
+#    line-height:   1 !important;
+}
 
 main {
     #	padding-top: 45px !important;
@@ -72,12 +87,12 @@ header h2, #home {
 }
 
 article {
-    padding-bottom: 0.5rem;
+    padding-bottom: 5px;
     padding-top: 5px;
     border-bottom: 1px dotted gray;
     .description, p {
 #	font-size: 15px !important;
-	margin-bottom: 0px;
+#	margin-bottom: 0px;
 	a {
 	    color: inherit;
 	}
@@ -88,12 +103,15 @@ article {
     a:hover {
 	text-decoration: underline;
     }
+#    min-height: 104px;
 }
 
-.entry-title a {
-    color: #222 !important;
-    font-weight: bold;
-    font-size: 17px;
+.entry-title {
+    a {
+	color: #222 !important;
+	font-weight: bold;
+	font-size: 17px;
+    }
 }
 
 .top-bar ul li > a {
@@ -116,7 +134,7 @@ article {
     background-repeat: no-repeat;
     background-color: white;
     background-position: center;
-    margin-bottom: -1px;
+#    margin-bottom: -1px;
 }
 
 #favicon-img {
@@ -136,17 +154,25 @@ article {
 }
 
 .alert-box {
-    margin-bottom: 0px !important;
+#    margin-bottom: 0px !important;
     text-align: center;
 }
 
 .crop, .small-thumb, .big-thumb {
-    border-radius: 2px !important;
+#    border-radius: 2px !important;
+}
+
+.small-thumb, .big-thumb {
+    margin-top: 5px;
+}
+
+.crop {
+    margin-bottom: 5px;
 }
 
 .big-thumb {
-    margin-bottom: 7px;
-    margin-top: 1px;
+#    margin-bottom: 7px;
+#    margin-top: 1px;
 }
 
 html.turbolinks-progress-bar::before {
@@ -163,6 +189,7 @@ html.turbolinks-progress-bar::before {
     }
     .main-content {
 	padding-top: 10px;
+	padding-bottom: 10px;
     }
     #app-header {
 	background: $ah-bg;
@@ -222,13 +249,12 @@ html.turbolinks-progress-bar::before {
 	}
     }
     .crop {
-	padding-right: 0px !important;
-	margin-left: 0.9375rem !important;
-	padding-left: 0px !important;
+#	padding-right: 0px !important;
+#	margin-left: 0.9375rem !important;
+#	padding-left: 0px !important;
 	overflow: hidden;
-	/* 62px comes from text description on the side */
-	max-height: 62px;
-	margin-bottom: 5px;
+	max-height: 75px;
+#	margin-bottom: 5px;
 #	border: 1px solid rgba(120, 129, 136, 0.2);
 #	box-shadow: 0px 0px 1px rgba(120, 129, 136, 0.5);
     }
@@ -238,25 +264,25 @@ html.turbolinks-progress-bar::before {
 #	display: inherit;
     }
     .desc-with-img {
-	padding-left: 1.875rem !important;
-	margin-left: -0.9375rem;
+	padding-left: 0px !important;
+#	margin-left: -0.9375rem;
     }
     .description {
-	margin-top: -5px;
+#	margin-top: -5px !important;
 	/* n x 1.6 gives n lines */
-	max-height: 3rem;
-	max-height: 4.5rem;
+	max-height: 3.2rem;
+#	max-height: 4.8rem;
     }
     #entries-header {
 	text-align: center;
 	font-weight: bold;
-	padding-bottom: 6px;
-	margin-bottom: 0px;
+	padding-bottom: 5px;
+#	margin-bottom: 0px;
 	border-bottom: 1px dotted gray;
     }
     .feed-url {
-	margin-top: 5px;
-	margin-bottom: 10px;
+#	margin-top: 5px;
+#	margin-bottom: 10px;
 	a {
 	    color: #222 !important;
 	}
@@ -269,7 +295,7 @@ html.turbolinks-progress-bar::before {
 	max-width: 590px !important;
     }
     .main-content {
-	border-radius: 2px;
+#	border-radius: 2px;
 	background-color: white;
 #	border: 1px solid #CCC;
 #	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
@@ -285,11 +311,11 @@ html.turbolinks-progress-bar::before {
 /* Small */
 @media only screen and (max-width: 40em) {
     .desc-with-img {
-	margin-top: 8px;
+#	margin-top: 8px;
     }
     .description {
 	/* n x 1.6 gives n lines */
-	max-height: 6rem;
+	max-height: 6.4rem;
     }
     #next {
 	margin-top: -1px;
@@ -323,7 +349,7 @@ html.turbolinks-progress-bar::before {
     .favicon {
 	width: 16px;
 	height: 16px;
-	margin-bottom: -2px !important;
+#	margin-bottom: -2px !important;
     }
     margin-right: 10px;
     max-width: 100%;
@@ -332,7 +358,7 @@ html.turbolinks-progress-bar::before {
     a {
 	color: #222 !important;
     }
-    .margin-bottom: 5px;
+#    margin-bottom: 5px;
 }
 
 .left small {

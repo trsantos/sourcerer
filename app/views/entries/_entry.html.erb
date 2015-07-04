@@ -1,8 +1,8 @@
 <article>
     <% if @displaying_river %>
-	<div class="river">
-	    <img src="<%= favicon_for entry.feed.site_url %>" class="favicon"/>
+	<div class="river left">
 	    <a href="<%= feed_path(entry.feed) %>" target="_blank">
+		<img src="<%= favicon_for entry.feed.site_url %>" class="favicon"/>
 		<small><%= entry.feed.title %></small>
 	    </a>
 	</div>
@@ -18,11 +18,11 @@
 		<%= image_tag entry.image, class: "big-thumb" %>
 	    </div>
 	<% else %>
-	    <% if entry.image %>
-		<div class="medium-2 columns crop">
+	    <% if entry.image # && !@displaying_river %>
+		<div class="medium-3 columns crop">
 		    <%= image_tag entry.image, class: "small-thumb" %>
 		</div>
-		<div class="medium-10 columns desc-with-img">
+		<div class="medium-9 columns desc-with-img">
 		    <p class="description">
 			<%= sanitize entry.description %>
 		    </p>
