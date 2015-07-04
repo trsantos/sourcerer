@@ -76,7 +76,7 @@ article {
     padding-top: 5px;
     border-bottom: 1px dotted gray;
     .description, p {
-	font-size: 15px !important;
+#	font-size: 15px !important;
 	margin-bottom: 0px;
 	a {
 	    color: inherit;
@@ -93,6 +93,7 @@ article {
 .entry-title a {
     color: #222 !important;
     font-weight: bold;
+    font-size: 17px;
 }
 
 .top-bar ul li > a {
@@ -155,10 +156,10 @@ html.turbolinks-progress-bar::before {
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
     .top-bar {
-	max-width: 900px !important;
+	max-width: 820px !important;
     }
     .row {
-	max-width: 830px !important;
+	max-width: 750px !important;
     }
     .main-content {
 	padding-top: 10px;
@@ -243,7 +244,8 @@ html.turbolinks-progress-bar::before {
     .description {
 	margin-top: -5px;
 	/* n x 1.6 gives n lines */
-	max-height: 4.5rem;
+	max-height: 3rem;
+	#max-height: 4.5rem;
     }
     #entries-header {
 	text-align: center;
