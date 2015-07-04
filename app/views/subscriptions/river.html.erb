@@ -15,7 +15,7 @@
 imgs = document.getElementsByClassName("favicon");
 for (var i = 0; i < imgs.length; ++i) {
 	imgs[i].onerror = function() {
-		this.setAttribute("src", "<%= asset_path('feed-icon-16x16.png') %>");
+		this.setAttribute("src", "<%= asset_path('feed-icon-16x16-gray.png') %>");
 	};
 };
 </script>

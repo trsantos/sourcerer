@@ -229,12 +229,12 @@ html.turbolinks-progress-bar::before {
 	max-height: 62px;
 	margin-bottom: 5px;
 #	border: 1px solid rgba(120, 129, 136, 0.2);
-	box-shadow: 0px 0px 1px rgba(120, 129, 136, 0.5);
+#	box-shadow: 0px 0px 1px rgba(120, 129, 136, 0.5);
     }
     .small-thumb {
-	margin-left: auto;
-	margin-right: auto;
-	display: inherit;
+#	margin-left: auto;
+#	margin-right: auto;
+#	display: inherit;
     }
     .desc-with-img {
 	padding-left: 1.875rem !important;
