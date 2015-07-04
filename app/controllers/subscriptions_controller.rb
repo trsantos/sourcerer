@@ -58,12 +58,6 @@ class SubscriptionsController < ApplicationController
     redirect_to root_url({ :from_next => true })
   end
 
-  def river
-    @entries = current_user.subscriptions.where(updated: true).order("RANDOM()").includes(:entries).limit(5).map{ |s| s.entries.last }.sort_by{ |e| e.pub_date }.reverse
-    @only_images = false
-    @displaying_river = true
-  end
-
   private
 
   def sub_params

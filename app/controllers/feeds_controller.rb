@@ -17,7 +17,6 @@ class FeedsController < ApplicationController
     end
     @entries = @feed.entries.order(pub_date: :desc).first Feed.entries_per_feed
     @only_images = @feed.only_images?
-    @displaying_river = false
   end
 
   def new

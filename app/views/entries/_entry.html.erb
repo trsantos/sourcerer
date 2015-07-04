@@ -1,12 +1,4 @@
 <article>
-    <% if @displaying_river %>
-	<div class="river">
-	    <a href="<%= feed_path(entry.feed) %>" target="_blank">
-		<img src="<%= favicon_for entry.feed.site_url %>" class="favicon"/>
-		<small><%= entry.feed.title %></small>
-	    </a>
-	</div>
-    <% end %>
     <header class="entry-title">
 	<h5>
 	    <%= link_to sanitize(entry.title), entry.url, target: "_blank" %>
@@ -18,7 +10,7 @@
 		<%= image_tag entry.image, class: "big-thumb" %>
 	    </div>
 	<% else %>
-	    <% if entry.image #&& !@displaying_river %>
+	    <% if entry.image %>
 		<div class="medium-3 columns crop">
 		    <%= image_tag entry.image, class: "small-thumb" %>
 		</div>
