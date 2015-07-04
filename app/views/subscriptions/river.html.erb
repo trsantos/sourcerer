@@ -1,12 +1,15 @@
 <% provide(:title, "River") %>
 
 <div class="feed-entries">
-    <p id="entries-header" class="show-for-large-up">River of News</p>
+    <p id="entries-header" class="show-for-large-up">Random bits</p>
     <%= render @entries %>
 </div>
 
-<%= link_to "Zoom in", next_path, class: "button expand", id: "next" %>
-<%= link_to "Reload", river_path, class: "button expand", id: "river" %>
+<div class="row">
+    <div class="medium-4 medium-centered columns">
+	<%= link_to "Dive in", next_path, class: "button expand", id: "next", data: { keybinding: 'n' } %>
+    </div>
+</div>
 
 <script>
 imgs = document.getElementsByClassName("favicon");

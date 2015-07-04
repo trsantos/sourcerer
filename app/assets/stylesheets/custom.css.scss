@@ -5,7 +5,7 @@ $fh-bg: #222B32;
 $ah-bg: #010A11;
 //$ah-bg: #091219;
 //$ah-bg: #111A21;
-//$ah-bg: #121B22;
+$ah-bg: #121B22;
 //$ah-bg: #0C151C;
 //$ah-bg: #333;
 //$ah-bg: #222B32;
@@ -203,10 +203,9 @@ html.turbolinks-progress-bar::before {
 	}
 	#feed-title:hover {
 	    background: $fh-hover !important;
-	    height: 60px !important;
 	}
 	h1 a {
-	    font-size: 1.625rem;
+	    font-size: 26px;
 	    line-height: 60px;
 	}
 	.controls {
@@ -228,7 +227,6 @@ html.turbolinks-progress-bar::before {
 	overflow: hidden;
 	/* 62px comes from text description on the side */
 	max-height: 62px;
-	max-height: 69px;
 	margin-bottom: 5px;
 #	border: 1px solid rgba(120, 129, 136, 0.2);
 	box-shadow: 0px 0px 1px rgba(120, 129, 136, 0.5);
@@ -284,14 +282,6 @@ html.turbolinks-progress-bar::before {
 
 /* Small */
 @media only screen and (max-width: 40em) {
-    .feed-header {
-	#favicon-img {
-	    margin-bottom: 3px !important;
-	}
-	#favicon {
-	    margin-bottom: -3px !important;
-	}
-    }
     .desc-with-img {
 	margin-top: 8px;
     }
@@ -303,16 +293,16 @@ html.turbolinks-progress-bar::before {
 	margin-top: -1px;
     }
     .top-bar {
-	background: $fh-bg !important;
+	background: $ah-bg !important;
 	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
 	.contain-to-grid, a, .title-area {
-	    background: $fh-bg !important;
+	    background: $ah-bg !important;
 	}
 	a {
 	    color: $ah-a !important;
 	}
 	a:hover {
-	    background: $fh-hover !important;
+	    background: $ah-hover !important;
 	}
 	#next {
 	    background: $active-bg !important;
@@ -334,4 +324,15 @@ html.turbolinks-progress-bar::before {
 	margin-bottom: -2px !important;
     }
     margin-right: 10px;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    a {
+	color: #222 !important;
+    }
+    .margin-bottom: 5px;
+}
+
+.left small {
+    display: none;
 }

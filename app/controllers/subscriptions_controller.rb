@@ -51,7 +51,6 @@ class SubscriptionsController < ApplicationController
 
   def next
     next_sub = current_user.subscriptions.where(updated: true).order(starred: :desc, visited_at: :asc).first
-    #next_sub = current_user.subscriptions.where(updated: true, starred: true).order("RANDOM()").first || current_user.subscriptions.where(updated: true, starred: false).order("RANDOM()").first
     if next_sub
       redirect_to next_sub.feed and return
     end
@@ -60,9 +59,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def river
-    # @entries = current_user.entries.order(pub_date: :desc, feed_id: :asc).select('DISTINCT ON (entries.pub_date, entries.feed_id) *').group(:feed_id, :id, 'feeds.id', 'subscriptions.id').first(10)
-    # @entries = current_user.entries.order(pub_date: :desc).group(:feed_id).first(10)
-    @entries = current_user.entries.order(pub_date: :desc).first(50).uniq{ |e| e.feed_id }.first(10)
+    @entries = current_user.subscriptions.where(updated: true).order("RANDOM()").includes(:entries).first(10).map{ |s| s.entries.last }.sort_by{ |e| e.pub_date }.reverse
     @only_images = false
     @displaying_river = true
   end

@@ -15,8 +15,7 @@ class FeedsController < ApplicationController
       # TODO: Use Ajax to reload the page when the fetch is done.
       @feed.update
     end
-    @entries = @feed.entries.order(pub_date: :desc)
-    # @entries = @feed.entries.order(pub_date: :desc).first 5
+    @entries = @feed.entries.order(pub_date: :desc).first Feed.entries_per_feed
     @only_images = @feed.only_images?
     @displaying_river = false
   end
