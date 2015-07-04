@@ -31,7 +31,7 @@ $body-bg: #465362;
 $body-bg: #485665;
 $body-bg: #7798AB;
 $body-bg: #364652;
-$body-bg: #99A2A9;
+//$body-bg: #99A2A9;
 //$body-bg: #D3D4D9;
 
 $a: #fff;
@@ -166,13 +166,14 @@ article {
     margin-top: 5px;
 }
 
-.crop {
+.crop, .big-thumb {
     margin-bottom: 5px;
 }
 
 .big-thumb {
-#    margin-bottom: 7px;
-#    margin-top: 1px;
+#    margin-left: auto;
+#    margin-right: auto;
+#    display: block;
 }
 
 html.turbolinks-progress-bar::before {
@@ -182,10 +183,10 @@ html.turbolinks-progress-bar::before {
 /* medium and large */
 @media only screen and (min-width: 40.063em) {
     .top-bar {
-	max-width: 820px !important;
+	max-width: 870px !important;
     }
     .row {
-	max-width: 750px !important;
+	max-width: 800px !important;
     }
     .main-content {
 	padding-top: 10px;
@@ -245,7 +246,7 @@ html.turbolinks-progress-bar::before {
 	    }
 	}
 	#feed-title {
-	    max-width: 460px;
+	    max-width: 400px;
 	}
     }
     .crop {
@@ -292,11 +293,11 @@ html.turbolinks-progress-bar::before {
 /* large screens */
 @media only screen and (min-width: 64.063em) {
     #feed-title {
-	max-width: 590px !important;
+	max-width: 500px !important;
     }
     .main-content {
 #	border-radius: 2px;
-	background-color: white;
+	background-color: #eef;
 #	border: 1px solid #CCC;
 #	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
     }
