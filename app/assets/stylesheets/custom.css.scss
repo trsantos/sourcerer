@@ -72,8 +72,8 @@ header h2, #home {
 }
 
 article {
-    padding-bottom: 0.6rem;
-    padding-top: 0.4rem;
+    padding-bottom: 0.5rem;
+    padding-top: 5px;
     border-bottom: 1px dotted gray;
     .description, p {
 	font-size: 15px !important;
@@ -228,6 +228,7 @@ html.turbolinks-progress-bar::before {
 	overflow: hidden;
 	/* 62px comes from text description on the side */
 	max-height: 62px;
+	max-height: 69px;
 	margin-bottom: 5px;
 #	border: 1px solid rgba(120, 129, 136, 0.2);
 	box-shadow: 0px 0px 1px rgba(120, 129, 136, 0.5);
@@ -330,14 +331,7 @@ html.turbolinks-progress-bar::before {
     .favicon {
 	width: 16px;
 	height: 16px;
+	margin-bottom: -2px !important;
     }
-    a {
-	color: #222 !important;
-    }
-    max-width: 100%;
-#    display: inline-block !important;
-    overflow: hidden;
-#   text-overflow: ellipsis;
-    white-space: nowrap;
-
+    margin-right: 10px;
 }

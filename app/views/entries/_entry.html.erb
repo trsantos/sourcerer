@@ -1,10 +1,9 @@
 <article>
     <% if @displaying_river %>
-	<div class="river">
-	    <img src="<%= favicon_for sub_url(entry.feed) %>" class="favicon"/>
-	    <small>
-		<%= link_to sub_title(entry.feed), entry.feed, target: "_blank" %>
-	    </small>
+	<div class="river left">
+	    <a href="<%= feed_path(entry.feed) %>" target="_blank">
+		<img src="<%= favicon_for sub_url(entry.feed) %>" class="favicon"/>
+	    </a>
 	</div>
     <% end %>
     <header class="entry-title">

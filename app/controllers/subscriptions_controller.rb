@@ -62,7 +62,7 @@ class SubscriptionsController < ApplicationController
   def river
     # @entries = current_user.entries.order(pub_date: :desc, feed_id: :asc).select('DISTINCT ON (entries.pub_date, entries.feed_id) *').group(:feed_id, :id, 'feeds.id', 'subscriptions.id').first(10)
     # @entries = current_user.entries.order(pub_date: :desc).group(:feed_id).first(10)
-    @entries = current_user.entries.order(pub_date: :desc).to_a.uniq{ |e| e.feed_id }.first(10)
+    @entries = current_user.entries.order(pub_date: :desc).first(50).uniq{ |e| e.feed_id }.first(10)
     @only_images = false
     @displaying_river = true
   end
