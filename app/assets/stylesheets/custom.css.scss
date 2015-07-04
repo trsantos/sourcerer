@@ -91,7 +91,7 @@ article {
     padding-top: 5px;
     border-bottom: 1px dotted gray;
     .description, p {
-#	font-size: 15px !important;
+	font-size: 15px !important;
 #	margin-bottom: 0px;
 	a {
 	    color: inherit;
@@ -270,8 +270,8 @@ html.turbolinks-progress-bar::before {
     .description {
 #	margin-top: -5px !important;
 	/* n x 1.6 gives n lines */
-	max-height: 3.2rem;
-#	max-height: 4.8rem;
+	max-height: 3rem;
+#	max-height: 4.5rem;
     }
     #entries-header {
 	text-align: center;
@@ -315,7 +315,7 @@ html.turbolinks-progress-bar::before {
     }
     .description {
 	/* n x 1.6 gives n lines */
-	max-height: 6.4rem;
+	max-height: 6rem;
     }
     #next {
 	margin-top: -1px;

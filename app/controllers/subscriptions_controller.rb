@@ -59,7 +59,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def river
-    @entries = current_user.subscriptions.where(updated: true).order("RANDOM()").includes(:entries).limit(Feed.entries_per_feed).map{ |s| s.entries.last }#.sort_by{ |e| e.pub_date }.reverse
+    @entries = current_user.subscriptions.where(updated: true).order("RANDOM()").includes(:entries).limit(5).map{ |s| s.entries.last }.sort_by{ |e| e.pub_date }.reverse
     @only_images = false
     @displaying_river = true
   end
