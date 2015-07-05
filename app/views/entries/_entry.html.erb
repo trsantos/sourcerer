@@ -1,8 +1,8 @@
 <article>
     <header class="entry-title">
-	<h5>
+	<h6>
 	    <%= link_to sanitize(entry.title), entry.url, target: "_blank" %>
-	</h5>
+	</h6>
     </header>
     <div class="row">
 	<% if @only_images %>
@@ -11,10 +11,10 @@
 	    </div>
 	<% else %>
 	    <% if entry.image %>
-		<div class="medium-3 columns crop">
+		<div class="crop">
 		    <%= image_tag entry.image, class: "small-thumb" %>
 		</div>
-		<div class="medium-9 columns desc-with-img">
+		<div class="desc-with-img">
 		    <p class="description">
 			<%= sanitize entry.description %>
 		    </p>

@@ -16,7 +16,7 @@ class Feed < ActiveRecord::Base
   def update
     feed = fetch_and_parse
     return if feed.is_a? Integer
-    #self.entries.destroy_all
+#    self.entries.delete_all
     update_entries feed
   end
 
@@ -109,7 +109,7 @@ class Feed < ActiveRecord::Base
 
   def find_image(entry, description)
     return process_image(image_from_description(description)) ||
-           process_image(og_image(entry.url)) ||
+#           process_image(og_image(entry.url)) ||
            process_image(entry.image)
   end
 
@@ -139,8 +139,8 @@ class Feed < ActiveRecord::Base
       doc.css('*').each do |e|
         if e.name == "img"
           return e.attributes['src'].value
-        elsif e.name == "p" && !e.text.blank?
-          break
+        # elsif e.name == "p" && !e.text.blank?
+        #   break
         end
       end
     rescue
@@ -174,7 +174,11 @@ class Feed < ActiveRecord::Base
     # special cases
     if img.include? 'feedburner' or
       img.include? 'share-button' or # Fapesp
-      img.include? 'cdh_rss.jpg' or # Clube do Hardware
+      img.include? 'wp-content/plugins' or # Wordpress share plugins
+      img.include? 'clubedohardware.com.br' or # Clube do Hardware
+      img.include? 'pml.png' or # Techmeme
+      img.include? 'fsdn.com' or # Slashdot
+      img.include? 'divisoriagizmodo' or # Gizmodo
       img.include? 'pixel.gif' or # Bleacher Report
       img.include? '_thumb' # Goal.com
       return nil
