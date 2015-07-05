@@ -225,7 +225,7 @@ html.turbolinks-progress-bar::before {
 #	padding-left: 0px !important;
 	overflow: hidden;
 	max-width: 167px !important;
-	max-height: 77px;
+	max-height: 85px;
 #	margin-bottom: 5px;
 #	border: 1px solid rgba(120, 129, 136, 0.2);
 #	box-shadow: 0px 0px 1px rgba(120, 129, 136, 0.5);
@@ -243,7 +243,7 @@ html.turbolinks-progress-bar::before {
     .description {
 	/* n x 1.6 gives n lines */
 	max-height: 2.8rem;
-#	max-height: 4.2rem;
+	max-height: 4.2rem;
     }
     #entries-header {
 	text-align: center;
