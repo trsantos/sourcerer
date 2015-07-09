@@ -54,7 +54,7 @@ $bg-color: #B7C2AA;
 	    h6 {
 		margin-top: 0px;
 		/* swap margin-bottom to 0px when timestamp appears below the title */
-		margin-bottom: 0px;
+		margin-bottom: 5px;
 	    }
 	}
 	.timestamp {
@@ -172,11 +172,8 @@ $bg-color: #B7C2AA;
 	font-weight: bold;
 	font-size: 15px;
 	padding: 5px 0px;
-	margin-top: 0px;
+	margin-top: 3px;
 	margin-bottom: 0px;
-    }
-    #whats-new {
-#	text-align: center;
     }
     .top-bar {
 	h1 a {
