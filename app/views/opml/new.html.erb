@@ -1,13 +1,10 @@
 <% provide(:title, "Import OPML") %>
+
 <header>
     <h2>Import OPML</h2>
 </header>
 
-<div class="row">
-    <div class="medium-8 medium-offset-2">
-	<%= form_for(:opml , url: opml_index_path) do |f| %>
-	    <%= f.file_field :opml_file %>
-	    <%= f.submit "Submit", class: "button expand" %>
-	<% end %>
-    </div>
-</div>
+<%= form_for(:opml , url: opml_index_path) do |f| %>
+    <%= f.file_field :opml_file %>
+    <%= f.submit "Submit", class: "button expand" %>
+<% end %>

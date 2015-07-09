@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:show, :edit, :update, :destroy]
-  before_action :admin_user,     only: :destroy
+  before_action :admin_user,     only: [:destroy, :index]
 
   def index
     @users = User.all
@@ -13,6 +13,9 @@ class UsersController < ApplicationController
   end
   
   def new
+    if logged_in?
+      redirect_to current_user
+    end
     @user = User.new
   end
 

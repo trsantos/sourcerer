@@ -3,10 +3,6 @@
     <h2>All users</h2>
 </header>
 
-<%= will_paginate renderer: FoundationPagination::Rails %>
-
 <ul class="users">
     <%= render @users %>
 </ul>
-
-<%= will_paginate renderer: FoundationPagination::Rails %>

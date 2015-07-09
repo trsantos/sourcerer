@@ -3,11 +3,7 @@
     <h2>Sign up</h2>
 </header>
 
-<div class="row">
-    <div class="medium-8 medium-offset-2">
-	<%= form_for(@user) do |f| %>
-	    <%= render 'fields', f: f %>
-	    <%= f.submit "Create my account", class: "button expand" %>
-	<% end %>
-    </div>
-</div>
+<%= form_for(@user) do |f| %>
+    <%= render 'fields', f: f %>
+    <%= f.submit "Create my account", class: "button expand" %>
+<% end %>

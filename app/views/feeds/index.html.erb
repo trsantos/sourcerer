@@ -1,12 +1,9 @@
 <% provide(:title, 'All feeds') %>
+
 <header>
     <h2>All feeds (<%= Feed.count %>)</h2>
 </header>
 
-<div class="row">
-    <div class="medium-10 medium-offset-1">
-	<ul class="feeds no-bullet">
-	    <%= render @feeds %>
-	</ul>
-    </div>
-</div>
+<ul class="feeds no-bullet">
+    <%= render @feeds %>
+</ul>

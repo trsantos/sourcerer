@@ -70,7 +70,7 @@ GEM
       i18n (~> 0.5)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.9.1)
+    faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
     feedjira (2.0.0)
       faraday (~> 0.9)
@@ -84,7 +84,7 @@ GEM
       activesupport (>= 4.1.0)
     hitimes (1.2.2)
     i18n (0.7.0)
-    jbuilder (2.3.0)
+    jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.4)
@@ -105,7 +105,7 @@ GEM
       rails (>= 2.3.3)
     mini_portile (0.6.2)
     minitest (5.7.0)
-    minitest-reporters (1.0.17)
+    minitest-reporters (1.0.18)
       ansi
       builder
       minitest (>= 5.0)

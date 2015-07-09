@@ -1,8 +1,13 @@
 <% provide(:title, 'Your subscriptions') %>
 
-<header>
-    <h2>Your subscriptions (<%= current_user.subscriptions.count %>)</h2>
-</header>
-<ul class="feeds no-bullet">
-    <%= render @subscriptions %>
-</ul>
+<div id="subscriptions-container">
+
+    <header>
+	<h2>Your subscriptions (<%= current_user.subscriptions.count %>)</h2>
+    </header>
+
+    <ul class="feeds no-bullet">
+	<%= render @subscriptions %>
+    </ul>
+
+</div>

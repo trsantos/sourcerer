@@ -4,6 +4,9 @@ class PasswordResetsController < ApplicationController
   before_action :check_expiration, only: [:edit, :update]
   
   def new
+    if logged_in?
+      redirect_to current_user
+    end
   end
 
   def create
@@ -23,10 +26,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    if both_passwords_blank?
-      flash.now[:alert] = "Password/confirmation can't be blank"
-      render 'edit'
-    elsif @user.update_attributes(user_params)
+    if @user.update_attributes(user_params)
       log_in @user
       flash[:success] = "Password has been reset."
       redirect_to @user
@@ -39,12 +39,6 @@ class PasswordResetsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:password, :password_confirmation)
-  end
-
-  # Returns true if password & confirmation are blank.
-  def both_passwords_blank?
-    params[:user][:password].blank? &&
-      params[:user][:password_confirmation].blank?
   end
 
   # Before filters

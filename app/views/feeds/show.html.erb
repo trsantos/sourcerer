@@ -1,17 +1,47 @@
 <% provide(:title, sanitize(@feed.title)) %>
 
-<div class="feed-entries">
-    <% if @feed.entries.any? %>
-	<p id="entries-header" class="show-for-large-up">What's new</p>
-	<%= render @entries %>
-    <% else %>
-	<p>This feed has no items or has not been fetched yet.</p>
-    <% end %>
-    <div class="feed-url show-for-medium-up">
-	<small>
-	    Feed url: <%= link_to @feed.feed_url, @feed.feed_url, target: "_blank" %>
-	</small>
+<div id="feeds-show-container" class="row">
+
+    <aside>
+	<div class="large-3 columns show-for-large-up">
+	    <p class="section-heading">Feed info</p>
+	    <% if @feed.logo %>
+		<div id="feed-logo">
+		    <img id="logo-img" src="<%= @feed.logo %>"/>
+		</div>
+	    <% end %>
+	    <% if @feed.description %>
+		<p id="aside-description"><%= @feed.description %></p>
+	    <% end %>
+	    <% unless @feed.logo or @feed.description %>
+		<p id="aside-title"><%= sub_title @feed %></p>
+	    <% end %>
+	    <div id="resources">
+		<strong>
+		    <%= link_to "Website", sub_url(@feed), target: "_blank" %><br/>
+		    <%= link_to "Raw feed", @feed.feed_url, target: "_blank" %>
+		</strong>
+	    </div>
+	</div>
+    </aside>
+
+    <!-- Insert class 'large-uncentered' when displaying the aside above -->
+    <div class="box medium-9 medium-centered large-8 large-uncentered columns">
+	<% if @feed.entries.any? %>
+	    <p id="whats-new" class="show-for-large-up section-heading">What's new</p>
+	    <%= render @entries %>
+	<% else %>
+	    <p>This feed has no items or has not been fetched yet.</p>
+	<% end %>
     </div>
+
 </div>
 
-<%= link_to "Next feed", next_path, class: "show-for-small-only button expand", id: "next" %>
+<%= link_to "Next feed", next_path, class: "show-for-small-only button expand fixed", id: "next" %>
+
+<script>
+var logo = document.getElementById("logo-img");
+logo.onerror = function() {
+	logo.style.display = "none";
+};
+</script>

@@ -1,4 +1,4 @@
-<div id="app-header" class="<%= (in_feeds_show ? " show-for-medium-up no-shadow" : "fixed") %>">
+<div id="app-header" class="<%= in_feeds_show ? "show-for-medium-up" : "" %>">
     <nav class="top-bar" data-topbar data-options="is_hover: false">
 	<ul class="title-area">
 	    <li class="name">
@@ -18,7 +18,7 @@
 		    <li><%= link_to "Subscriptions", subscriptions_path %></li>
 		    <li><%= link_to "Add feed", new_feed_path %></li>
 		    <li class="active show-for-small-only">
-			<%= link_to "Back to your feeds", next_path, id: "next" %>
+			<%= link_to "Back to reading", next_path, id: "next" %>
 		    </li>
 		    <li class="has-dropdown">
 			<%= link_to current_user.name.split.first, '#' %>
@@ -29,7 +29,6 @@
 			</ul>
 		    </li>
 		<% else %>
-		    <li><%= link_to "About",  about_path %></li>
 		    <li><%= link_to "Log in", login_path %></li>
 		<% end %>
 	    </ul>

@@ -5,7 +5,7 @@
 	<% status = "" %>
     <% end %>
 
-    <%= link_to status + (subscription.title || subscription.feed.title).to_s,
+    <%= link_to status + (subscription.title || subscription.feed.title || "(Untitled #{subscription.feed.id})").to_s,
     subscription.feed,
     class: subscription.updated? ? "updated-sub" : "" %>
 </li>

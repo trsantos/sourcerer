@@ -1,10 +1,10 @@
-<div class="feed-header sticky">
+<div id="feed-header">
     <nav class="top-bar" data-topbar>
 	<ul class="title-area">
 	    <li class="name">
 		<h1>
 		    <a href="<%= sub_url(@feed) %>" id="feed-title" target="_blank">
-			<img id="favicon-img" src="<%= favicon_for(sub_url(@feed)) %>"/>
+			<img id="favicon" src="<%= favicon_for(sub_url(@feed)) %>"/>
 			<%= sub_title(@feed) %>
 		    </a>
 		</h1>
@@ -19,8 +19,14 @@
     </nav>
 </div>
 <script>
-img = document.getElementById("favicon-img");
+var img = document.getElementById("favicon");
 img.onerror = function() {
 	img.setAttribute("src", "<%= asset_path('feed-icon-16x16.png') %>");
+}
+
+var fh = document.getElementById("feed-header");
+var mq = window.matchMedia("(min-width: 40.063em)");
+if (!mq.matches) {
+//	fh.className = "fixed";
 }
 </script>

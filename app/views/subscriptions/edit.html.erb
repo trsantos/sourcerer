@@ -1,18 +1,15 @@
 <% provide(:title, "Edit subscription") %>
+
 <header>
     <h2>Feed settings</h2>
 </header>
 
-<div class="row">
-    <div class="medium-8 medium-offset-2">
-	<%= form_for(@subscription) do |f| %>
-	    <%= f.label :title %>
-	    <%= f.text_field :title, value: sub_title(@subscription.feed), placeholder: @subscription.feed.title %>
+<%= form_for(@subscription) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title, value: sub_title(@subscription.feed), placeholder: @subscription.feed.title %>
 
-	    <%= f.label :site_url %>
-	    <%= f.text_field :site_url, value: sub_url(@subscription.feed), placeholder: @subscription.feed.site_url %>
+    <%= f.label :site_url %>
+    <%= f.text_field :site_url, value: sub_url(@subscription.feed), placeholder: @subscription.feed.site_url %>
 
-	    <%= f.submit "Save changes", class: "button expand" %>
-	<% end %>
-    </div>
-</div>
+    <%= f.submit "Save changes", class: "button expand" %>
+<% end %>

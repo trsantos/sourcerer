@@ -14,6 +14,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update
+#    return if self.updated_at > 1.hour.ago
     feed = fetch_and_parse
     return if feed.is_a? Integer
 #    self.entries.delete_all
@@ -27,32 +28,6 @@ class Feed < ActiveRecord::Base
     return true
   end
 
-  # Too complicated, but seems to work.
-  # Disable for now as I think that it's still better to load favicons dynamically.
-  # def favicon_for
-  #   begin
-  #     uri = URI.parse self.site_url
-  #     favicon = uri.scheme + '://' + uri.host + '/favicon.ico'
-  #     if open(favicon)
-  #       self.update_attribute(:favicon, favicon)
-  #     else
-  #       favicon = nil
-  #       require 'open-uri'
-  #       doc = Nokogiri::HTML open(uri.scheme + '://' + uri.host).read.downcase
-  #       list = ['link[@rel="fluid-icon"]', 'link[@rel="shortcut icon"]', 'link[@rel="icon"]']
-  #       favicon = list.map{ |x| doc.css(x) }.select{ |x| x.any? }.first
-  #       if favicon
-  #         f = favicon.attr('href').value
-  #         if URI.parse(f).relative?
-  #           f += uri.scheme + '://' + uri.host + '/' + f
-  #         self.update_attribute(:favicon, f)
-  #         end
-  #       end
-  #     end
-  #   rescue
-  #   end
-  # end
-
   private
 
   def fetch_and_parse
@@ -65,7 +40,10 @@ class Feed < ActiveRecord::Base
   end
 
   def update_entries(feed)
-    self.update_attributes(title: feed.title, site_url: process_url(feed.url || feed.feed_url))
+    self.update_attributes(title: feed.title,
+                           site_url: process_url(feed.url || feed.feed_url),
+                           description: sanitize(strip_tags(feed.description)),
+                           logo: feed.logo)
 
     entries = feed.entries.first(Feed.entries_per_feed).reverse
 
@@ -88,6 +66,7 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
     Feedjira::Feed.add_common_feed_entry_element("img", :value => :src, :as => :image)
+    Feedjira::Feed.add_common_feed_element :url, as: :logo, ancestor: :image
   end
 
   def insert_entry(e)
@@ -108,13 +87,11 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, description)
-    return process_image(image_from_description(description)) ||
-#           process_image(og_image(entry.url)) ||
-           process_image(entry.image)
+    return [image_from_description(description), entry.image].map{ |i| process_image i }.find{ |x| !x.nil? }
   end
 
   def process_image(img)
-    if img.nil? || img.blank? || img == '0'
+    if img.nil? || img.blank?
       return nil
     end
 
@@ -136,13 +113,7 @@ class Feed < ActiveRecord::Base
   def image_from_description(description)
     begin
       doc = Nokogiri::HTML description
-      doc.css('*').each do |e|
-        if e.name == "img"
-          return e.attributes['src'].value
-        # elsif e.name == "p" && !e.text.blank?
-        #   break
-        end
-      end
+      return filter_image doc.css('img').first.attributes['src'].value
     rescue
     end
     return nil
@@ -160,14 +131,15 @@ class Feed < ActiveRecord::Base
   def filter_image(img)
     # blanks
     if img.include? 'mf.gif' or
-      img.include? 'blank' or
-      img.include? 'pixel.wp' or
-      img.include? 'pixel.gif' or
-      img.include? 'Badge' or
-      img.include? 'feedsportal' or
-      img.include? 'ptq.gif' or
-      img.include? 'wirecutter-deals-300x250.png' or
-      img.include? 'beacon'
+        img.include? 'blank' or
+        img.include? 'pixel.wp' or
+        img.include? 'pixel.gif' or
+        img.include? 'Badge' or
+        img.include? 'ptq.gif' or
+        img.include? 'wirecutter-deals-300x250.png' or
+        img.include? 'beacon' or
+      img == 'http://www.scientificamerican.com' or
+      img.include? 'feedsportal'
       return nil
     end
 
@@ -177,20 +149,28 @@ class Feed < ActiveRecord::Base
       img.include? 'wp-content/plugins' or # Wordpress share plugins
       img.include? 'clubedohardware.com.br' or # Clube do Hardware
       img.include? 'pml.png' or # Techmeme
+      img.include? 'wp-includes/images/smilies' or # Treehouse (and others)
       img.include? 'fsdn.com' or # Slashdot
       img.include? 'divisoriagizmodo' or # Gizmodo
       img.include? 'pixel.gif' or # Bleacher Report
-      img.include? '_thumb' # Goal.com
+      img.include? 'wordpress.com/1.0/comments' or # Wordpress
+      img.include? 'images/share' or # EFF
+      img.include? 'modules/service_links' or # KDE Dot News
+      img.include? 'badge' or # Cato.org
+      img.include? 'dynamic1.anandtech.com' or # Anandtech
+      img.include? '/icons/' or # EFF
+      (img.include? '_thumb' and img.include? 'goal.com') or # Goal.com
+      img.include? ';base64,' # Bittorrent
       return nil
     end
 
     # non-image formats
     if img.include? '.mp3' or
-      # img.include? '.tiff' or
+      img.include? '.tiff' or
       img.include? '.m4a' or
       img.include? '.mp4' or
       img.include? '.psd' or
-      # img.include? '.gif' or
+      img.include? '.gif' or
       img.include? '.pdf' or
       img.include? '.webm' or
       img.include? '.ogv' or
