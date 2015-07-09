@@ -49,29 +49,31 @@ $bg-color: #B7C2AA;
 	margin-bottom: 50px;
     }
     article {
-	padding: 10px 0px 5px 0px;
+	padding: 10px 0px;
 	header {
 	    h6 {
 		margin-top: 0px;
 		/* swap margin-bottom to 0px when timestamp appears below the title */
-		margin-bottom: 5px;
+		margin-bottom: 0px;
 	    }
 	}
 	.timestamp {
 	    font-size: 11px;
 	    /* set to 0px when part of header. 5px otherwise */
-	    margin-bottom: 5px;
+	    margin-bottom: 0px;
 	}
 	.small-thumb-container, .big-thumb-container {
 	    margin-top: 5px;
-	    margin-bottom: 10px;
+	    margin-bottom: 5px;
+	}
+	.small-thumb-container, .big-thumb-container img {
 	    border-radius: 2px;
 	}
 	.description {
 	    font-size: 15px;
 	    max-height: 6rem;
 	    overflow: hidden;
-	    margin-bottom: 5px;
+	    margin-bottom: 0px;
 	}
     }
     #next {
