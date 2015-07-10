@@ -1,6 +1,11 @@
 /* Constants */
-$bg-color: #B7C2AA;
+$bg-color: #9DC5BB;
+$bg-color: #CBCFA7;
+$bg-color: #5D7175;
+$bg-color: #B7C2AA; /* default */
 
+$fh-color: #12191F;
+$fh-hover: #1B2228;
 
 // Small screens
 /* Define mobile styles */
@@ -56,6 +61,9 @@ $bg-color: #B7C2AA;
 		/* swap margin-bottom to 0px when timestamp appears below the title */
 		margin-bottom: 0px;
 	    }
+	    .old a {
+		color: #666;
+	    }
 	}
 	.timestamp {
 	    font-size: 11px;
@@ -98,15 +106,15 @@ $bg-color: #B7C2AA;
 	}
     }
     #feed-header {
-	background-color: #12191F;
+	background-color: $fh-color;
 	.top-bar {
-	    background-color: #12191F;
+	    background-color: $fh-color;
 	}
 	section ul {
 	    li:not(.active) a {
-		background-color: #12191F;
+		background-color: $fh-color;
 		&:hover {
-		    background-color: #1B2228;
+		    background-color: $fh-hover;
 		}
 	    }
 	}

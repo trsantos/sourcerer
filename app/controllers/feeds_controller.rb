@@ -16,7 +16,7 @@ class FeedsController < ApplicationController
       @feed.update
     end
     #@feed.update
-    @entries = @feed.entries.order(pub_date: :desc).first Feed.entries_per_feed
+    @entries = @feed.entries.order(pub_date: :desc)
     @only_images = @feed.only_images?
   end
 
