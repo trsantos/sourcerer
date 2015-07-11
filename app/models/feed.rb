@@ -10,7 +10,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def self.entries_per_feed
-    return 10
+    return 5
   end
 
   def update
@@ -45,18 +45,19 @@ class Feed < ActiveRecord::Base
                            description: sanitize(strip_tags(feed.description)),
                            logo: feed.logo)
 
-    entries = feed.entries.first(Feed.entries_per_feed).reverse
+    entries = feed.entries.first(Feed.entries_per_feed)
 
     updated = false
     entries.each do |e|
       unless self.entries.find_by(url: e.url)
-        insert_entry e
         updated = true
+        break
       end
     end
 
     if updated
-      self.entries = self.entries.last Feed.entries_per_feed
+      self.entries.delete_all
+      entries.each { |e| insert_entry e }
       self.subscriptions.each { |s| s.update_attribute(:updated, true) }
     end
   end
