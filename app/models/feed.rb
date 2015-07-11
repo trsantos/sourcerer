@@ -61,7 +61,9 @@ class Feed < ActiveRecord::Base
     if updated
       self.entries.delete_all
       entries.each { |e| insert_entry e, old_dates[e.object_id] }
-      self.subscriptions.each { |s| s.update_attribute(:updated, self.entries.first.pub_date > s.visited_at) }
+      if self.entries.first
+        self.subscriptions.each { |s| s.update_attribute(:updated, self.entries.first.pub_date > s.visited_at) }
+      end
     end
   end
 

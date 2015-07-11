@@ -21,12 +21,6 @@
 <script>
 var img = document.getElementById("favicon");
 img.onerror = function() {
-	img.setAttribute("src", "<%= asset_path('feed-icon-16x16.png') %>");
-}
-
-var fh = document.getElementById("feed-header");
-var mq = window.matchMedia("(min-width: 40.063em)");
-if (!mq.matches) {
-//	fh.className = "fixed";
+	img.style.display = "none";
 }
 </script>
