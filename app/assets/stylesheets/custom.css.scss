@@ -1,8 +1,9 @@
 /* Constants */
 $bg-color: #B7C2AA; /* default */
+$bg-color: #A4C2A5;
 $bg-color: #CBCFA7;
-$bg-color: #9DC5BB;
-$bg-color: #bcb;
+
+$box-color: white;
 
 $fh-color: #12191F;
 $fh-hover: #1B2228;
@@ -171,7 +172,7 @@ $fh-hover: #1B2228;
     .box, .box-no-fs {
 	/* comment this line when using the aside */
 	padding: 0px 30px !important;
-	background-color: white;
+	background-color: $box-color;
 	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
     }
     .box-no-fs {
