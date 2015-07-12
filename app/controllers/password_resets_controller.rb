@@ -3,8 +3,6 @@ class PasswordResetsController < ApplicationController
   before_action :valid_user,       only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
 
-  force_ssl unless Rails.env.development?
-  
   def new
     if logged_in?
       redirect_to current_user
