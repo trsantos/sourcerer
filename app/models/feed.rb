@@ -10,7 +10,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, presence: true, uniqueness: true
 
   def self.entries_per_feed
-    return 10
+    return 7
   end
 
   def update
@@ -45,22 +45,18 @@ class Feed < ActiveRecord::Base
                            description: sanitize(strip_tags(feed.description)),
                            logo: feed.logo)
 
-    entries = feed.entries.first(Feed.entries_per_feed)
+    entries = feed.entries.first(Feed.entries_per_feed).reverse
 
     updated = false
-    old_dates = {}
     entries.each do |e|
-      existing_entry = self.entries.find_by(url: e.url)
-      if existing_entry
-        old_dates[e.object_id] = existing_entry.pub_date
-      else
+      unless self.entries.find_by(url: e.url)
+        insert_entry e
         updated = true
       end
     end
 
     if updated
-      self.entries.delete_all
-      entries.each { |e| insert_entry e, old_dates[e.object_id] }
+      self.entries = self.entries.first Feed.entries_per_feed
       if self.entries.first
         self.subscriptions.each { |s| s.update_attribute(:updated, self.entries.first.pub_date > s.visited_at) }
       end
@@ -75,12 +71,12 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_element :url, as: :logo, ancestor: :image
   end
 
-  def insert_entry(e, old_date)
+  def insert_entry(e)
     # Don't remember why content comes first
     description = e.content || e.summary || ""
     self.entries.create(title:       (e.title if not e.title.blank?),
                         description: sanitize(strip_tags(description)).first(400),
-                        pub_date:    (old_date || find_date(e.published)),
+                        pub_date:    find_date(e.published),
                         image:       find_image(e, description),
                         url:         e.url)
   end
