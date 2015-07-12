@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:show, :edit, :update, :destroy]
   before_action :admin_user,     only: [:destroy, :index]
 
+  force_ssl unless Rails.env.development?
+
   def index
     @users = User.all
   end
