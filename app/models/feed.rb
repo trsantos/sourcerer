@@ -14,10 +14,10 @@ class Feed < ActiveRecord::Base
   end
 
   def update
-#    return if self.updated_at > 1.hour.ago
+    #    return if self.updated_at > 1.hour.ago
     feed = fetch_and_parse
     return if feed.is_a? Integer
-#    self.entries.delete_all
+    #    self.entries.delete_all
     update_entries feed
   end
 
@@ -137,14 +137,15 @@ class Feed < ActiveRecord::Base
   def filter_image(img)
     # blanks
     if img.include? 'mf.gif' or
-        img.include? 'blank' or
-        img.include? 'pixel.wp' or
-        img.include? 'pixel.gif' or
-        img.include? 'Badge' or
-        img.include? 'ptq.gif' or
-        img.include? 'wirecutter-deals-300x250.png' or
-        img.include? 'beacon' or
+      img.include? 'blank' or
+      img.include? 'pixel.wp' or
+      img.include? 'pixel.gif' or
+      img.include? 'Badge' or
+      img.include? 'ptq.gif' or
+      img.include? 'wirecutter-deals-300x250.png' or
+      img.include? 'beacon' or
       img == 'http://www.scientificamerican.com' or
+      img == 'http://eu.square-enix.com/' or
       img.include? 'feedsportal'
       return nil
     end
