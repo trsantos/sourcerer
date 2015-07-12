@@ -103,6 +103,8 @@ class Feed < ActiveRecord::Base
       img = '//' + uri.host + img
     elsif !img.start_with? 'http'
       img = '//' + uri.host + uri.path + img
+    elsif img.start_with? 'http://'
+      img = img[5..-1]
     end
 
     return filter_image img
