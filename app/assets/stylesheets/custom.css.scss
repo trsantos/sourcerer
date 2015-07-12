@@ -99,6 +99,9 @@ $fh-hover: #1B2228;
     article img {
 	border-radius: 2px;
     }
+    .small-thumb-container, .big-thumb-container {
+    	display: none;
+    }
 }
 
 
