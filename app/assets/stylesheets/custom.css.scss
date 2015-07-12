@@ -2,7 +2,7 @@
 $bg-color: #B7C2AA; /* default */
 $bg-color: #A4C2A5;
 $bg-color: #CBCFA7;
-$bg-color: #ccb;
+$bg-color: #cca;
 
 $box-color: white;
 
@@ -65,13 +65,14 @@ $fh-hover: #1B2228;
 		margin-top: 0px;
 		/* swap margin-bottom to 0px when timestamp appears below the title */
 		margin-bottom: 0px;
+		font-size: 17px;
 	    }
 	    .old a {
 		color: #666;
 	    }
 	}
 	.timestamp {
-	    font-size: 11px;
+	    font-size: small;
 	    /* set to 0px when part of header. 5px otherwise */
 	    margin-bottom: 5px;
 	}
@@ -83,8 +84,7 @@ $fh-hover: #1B2228;
 	    border-radius: 2px;
 	}
 	.description {
-	    font-size: 15px;
-	    max-height: 6rem;
+	    max-height: 6.4rem;
 	    overflow: hidden;
 	    margin-bottom: 5px;
 	}
@@ -127,7 +127,7 @@ $fh-hover: #1B2228;
     #feed-header {
 	h1 {
 	    line-height: 50px;
-	    font-size: 24px;
+	    font-size: x-large;
 	}
 	height: 50px;
 	.top-bar {
@@ -151,7 +151,7 @@ $fh-hover: #1B2228;
 	    border: 1px solid rgba(0, 0, 0, 0.2);
 	}
 	.description {
-	    max-height: 4.5rem;
+	    max-height: 4.8rem;
 	    #max-height: 100%;
 	}
     }
@@ -174,7 +174,7 @@ $fh-hover: #1B2228;
 	/* comment this line when using the aside */
 	padding: 0px 30px !important;
 	background-color: $box-color;
-	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     }
     .box-no-fs {
 	padding: 10px 30px !important;
@@ -185,7 +185,6 @@ $fh-hover: #1B2228;
     .section-heading {
 	border-bottom: 1px dotted gray;
 	font-weight: bold;
-	font-size: 15px;
 	padding: 5px 0px;
 	margin-top: 3px;
 	margin-bottom: 0px;
@@ -223,7 +222,7 @@ $fh-hover: #1B2228;
 	    margin-top: 5px;
 	}
 	p, a {
-	    font-size: 13px;
+	    font-size: small;
 	    color: #222;
 	    margin-bottom: 0px;
 	}
