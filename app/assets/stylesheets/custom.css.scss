@@ -100,7 +100,7 @@ $fh-hover: #1B2228;
 	border-radius: 2px;
     }
     .small-thumb-container, .big-thumb-container, img {
-    	display: none;
+    	display: none !important;
     }
 }
 
