@@ -57,9 +57,7 @@ class Feed < ActiveRecord::Base
 
     if updated
       self.entries = self.entries.first Feed.entries_per_feed
-      if self.entries.first
-        self.subscriptions.each { |s| s.update_attribute(:updated, self.entries.first.pub_date > s.visited_at) }
-      end
+      self.subscriptions.each { |s| s.update_attribute(:updated, (s.visited_at.nil? || self.entries.first.pub_date > s.visited_at)) }
     end
   end
 
