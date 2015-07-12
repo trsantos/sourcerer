@@ -23,7 +23,7 @@ module FeedsHelper
   def favicon_for(url)
     begin
       uri = URI.parse url
-      return '//' + uri.host + '/favicon.ico'
+      return uri.scheme + '://' + uri.host + '/favicon.ico'
     rescue
       return ""
     end
