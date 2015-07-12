@@ -14,10 +14,9 @@ class Feed < ActiveRecord::Base
   end
 
   def update
-    #    return if self.updated_at > 1.hour.ago
     feed = fetch_and_parse
     return if feed.is_a? Integer
-    #    self.entries.delete_all
+    #self.entries.delete_all
     update_entries feed
   end
 
@@ -56,7 +55,7 @@ class Feed < ActiveRecord::Base
     end
 
     if updated
-      self.entries = self.entries.first Feed.entries_per_feed
+      self.entries = self.entries.order(pub_date: :desc).first(Feed.entries_per_feed)
       if self.entries.first
         self.subscriptions.each { |s| s.update_attribute(:updated, (s.visited_at.nil? || self.entries.first.pub_date > s.visited_at)) }
       end
@@ -98,15 +97,12 @@ class Feed < ActiveRecord::Base
     end
 
     uri = URI.parse(self.site_url || self.feed_url)
-    if img.start_with? '//'
-      img = "http:" + img
+    if img.start_with?('//')
+    # do nothing
     elsif img.start_with? '/'
-      img = uri.scheme + '://' + uri.host + img
-    elsif img.start_with? '../'
-      img = uri.scheme + '://' + uri.host + img[2..-1]
+      img = '//' + uri.host + img
     elsif !img.start_with? 'http'
-      # I don't remember why I added this one
-      img = 'http://' + uri.host + uri.path + img
+      img = '//' + uri.host + uri.path + img
     end
 
     return filter_image img
@@ -141,7 +137,7 @@ class Feed < ActiveRecord::Base
       img.include? 'wirecutter-deals-300x250.png' or
       img.include? 'beacon' or
       img == 'http://www.scientificamerican.com' or
-      img == 'http://eu.square-enix.com/' or
+      img == 'http://eu.square-enix.com' or
       img.include? 'feedsportal'
       return nil
     end
@@ -156,6 +152,8 @@ class Feed < ActiveRecord::Base
       img.include? 'fsdn.com' or # Slashdot
       img.include? 'divisoriagizmodo' or # Gizmodo
       img.include? 'pixel.gif' or # Bleacher Report
+      img.include? 'avclub/None' or # A.V. Club
+      img.include? '0.gravatar.com' or # Feedly
       img.include? 'wordpress.com/1.0/comments' or # Wordpress
       img.include? 'images/share' or # EFF
       img.include? 'modules/service_links' or # KDE Dot News

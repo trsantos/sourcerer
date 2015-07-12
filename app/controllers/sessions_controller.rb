@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  #force_ssl unless Rails.env.development?
+
   def new
     if logged_in?
       redirect_to current_user
