@@ -99,11 +99,11 @@ class Feed < ActiveRecord::Base
 
     uri = URI.parse(self.site_url || self.feed_url)
     if img.start_with?('//')
-    # do nothing
+    # do nothing hoping that relative protocol urls works for the given site
     elsif img.start_with? '/'
-      img = '//' + uri.host + img
+      img = uri.scheme + '://' + uri.host + img
     elsif !img.start_with? 'http'
-      img = '//' + uri.host + uri.path + img
+      img = uri.scheme + '://' + uri.host + uri.path + img
     # elsif img.start_with? 'http://'
     #   img = img[5..-1]
     end
