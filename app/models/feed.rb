@@ -1,6 +1,7 @@
 class Feed < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include ApplicationHelper
+  include EntriesHelper
 
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
@@ -58,7 +59,7 @@ class Feed < ActiveRecord::Base
       self.entries = self.entries.order(pub_date: :desc).first(Feed.entries_per_feed)
       first = self.entries.order(pub_date: :desc).first
       if first
-        self.subscriptions.each { |s| s.update_attribute(:updated, (s.visited_at.nil? || first.pub_date > s.visited_at)) }
+        self.subscriptions.each { |s| s.update_attribute(:updated, !old?(first, s)) }
       end
     end
   end

@@ -1,7 +1,11 @@
 module EntriesHelper
-  def old?(entry)
+  def old?(entry, sub = nil)
     begin
-      return true if entry.pub_date < current_user.subscriptions.find_by(feed_id: entry.feed.id).visited_at
+      if sub.nil?
+        sub = current_user.subscriptions.find_by(feed_id: entry.feed.id)
+      end
+      return true if entry.pub_date < sub.visited_at
+      return true if entry.created_at < sub.visited_at
     rescue
     end
     return false
