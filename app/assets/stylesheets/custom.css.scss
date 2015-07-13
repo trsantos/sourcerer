@@ -172,12 +172,12 @@ $fh-hover: #1B2228;
     }
     .box, .box-no-fs {
 	/* comment this line when using the aside */
-	padding: 0px 30px !important;
+	padding: 0px 60px !important;
 	background-color: $box-color;
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     }
     .box-no-fs {
-	padding: 10px 30px !important;
+	padding: 20px 60px !important;
 	ul {
 	    margin-bottom: 0px;
 	}
@@ -186,8 +186,7 @@ $fh-hover: #1B2228;
 	border-bottom: 1px dotted gray;
 	font-size: 16px;
 	font-weight: bold;
-	padding: 5px 0px;
-	margin-top: 5px;
+	margin-top: 10px;
 	margin-bottom: 0px;
     }
     .top-bar {
@@ -197,9 +196,7 @@ $fh-hover: #1B2228;
     }
     aside .large-3 {
 	/* invert if displaying aside on the right */
-	padding-left: 0px !important;
-	padding-right: 30px;
-	margin-left: 4.16666666666666666667%;
+	padding-right: 60px;
     }
     aside {
 #	display: none;
@@ -226,11 +223,6 @@ $fh-hover: #1B2228;
 	    font-size: small;
 	    color: #222;
 	    margin-bottom: 0px;
-	}
-    }
-    .contain-to-grid {
-	.active {
-	    margin-right: 15px;
 	}
     }
     #large-sep {

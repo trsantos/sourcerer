@@ -33,6 +33,6 @@
 	<% end %>
     </div>
     <p class="timestamp">
-	Posted <%= time_ago_in_words(entry.pub_date) %> ago
+	<%= time_ago_in_words(entry.pub_date).capitalize %> ago
     </p>
 </article>
