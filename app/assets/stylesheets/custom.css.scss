@@ -6,7 +6,7 @@ $bg-color: #cca;
 
 $box-color: white;
 
-$fh-color: #12191F;
+$fh-color: #111A21;
 $fh-hover: #1B2228;
 
 // Small screens
@@ -65,7 +65,7 @@ $fh-hover: #1B2228;
 		margin-top: 0px;
 		/* swap margin-bottom to 0px when timestamp appears below the title */
 		margin-bottom: 5px;
-		font-size: 17px;
+		font-size: large;
 	    }
 	    .old a {
 		color: #666;
@@ -108,6 +108,9 @@ $fh-hover: #1B2228;
     .top-bar {
 	h1 a {
 	    max-width: 450px;
+	}
+	a:hover {
+	    background-color: $fh-hover;
 	}
     }
     #feed-header {
@@ -170,21 +173,27 @@ $fh-hover: #1B2228;
     body {
 	background-color: $bg-color !important;
     }
+    .top-bar {
+	max-width: 947px !important;
+	.active, .has-dropdown {
+	    margin-right: 15px;
+	}
+    }
     .box, .box-no-fs {
 	/* comment this line when using the aside */
-	padding: 0px 60px !important;
+	padding: 0px 20px !important;
 	background-color: $box-color;
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     }
     .box-no-fs {
-	padding: 20px 60px !important;
+	padding: 10px 40px !important;
 	ul {
 	    margin-bottom: 0px;
 	}
     }
     .section-heading {
 	border-bottom: 1px dotted gray;
-	font-size: 16px;
+	font-size: medium;
 	font-weight: bold;
 	padding-bottom: 5px;
 	margin-top: 10px;
@@ -197,7 +206,9 @@ $fh-hover: #1B2228;
     }
     aside .large-3 {
 	/* invert if displaying aside on the right */
-	padding-right: 60px;
+	padding-right: 20px;
+	padding-left: 0px;
+	margin-left: 4.16666666666666666667%;
     }
     aside {
 #	display: none;
@@ -208,7 +219,7 @@ $fh-hover: #1B2228;
 	#feed-logo {
 	    img {
 		margin-top: 18px;
-		max-height: 80px;
+		max-height: 70px;
 		padding: 2px;
 		background-color: white;
 	    }
