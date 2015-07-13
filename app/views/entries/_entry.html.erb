@@ -1,10 +1,10 @@
 <article>
     <header>
-	<h6 class="<%= "old" if old? entry %>">
+	<h5 class="<%= "old" if old? entry %>">
 	    <strong>
 		<%= link_to sanitize(entry.title), entry.url, class: "entry-title", target: "_blank" %>
 	    </strong>
-	</h6>
+	</h5>
     </header>
     <div class="row">
 	<% if @only_images %>
