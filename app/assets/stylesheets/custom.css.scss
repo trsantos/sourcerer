@@ -60,10 +60,10 @@ $fh-hover: #1B2228;
     }
     article {
 	padding: 10px 0px;
-	a, p, h5 {
-	    margin: 0px !important;
-	}
 	header {
+	    h5, h6 {
+		margin: 0px;
+	    }
 	    .old a {
 		color: #666;
 	    }
@@ -71,6 +71,8 @@ $fh-hover: #1B2228;
 	.timestamp {
 	    font-size: small;
 	    color: #444;
+	    margin-top: 0px;
+	    margin-bottom: 5px;
 	}
 	.small-thumb-container, .big-thumb-container {
 	    margin: 5px 0px;
@@ -79,8 +81,10 @@ $fh-hover: #1B2228;
 	    border-radius: 2px;
 	}
 	.description {
-	    max-height: 6.4rem;
+	    font-size: 15px;
+	    max-height: 6rem;
 	    overflow: hidden;
+	    margin-bottom: 0px;
 	}
     }
     #next {
@@ -143,12 +147,12 @@ $fh-hover: #1B2228;
 	    float: left;
 	    max-width: 25%;
 	    max-height: 85px;
-	    margin-right: 10px;
+	    margin-right: 15px;
 	    overflow: hidden;
 	    border: 1px solid rgba(0, 0, 0, 0.2);
 	}
 	.description {
-	    max-height: 4.8rem;
+	    max-height: 4.5rem;
 	    #max-height: 100%;
 	}
     }
