@@ -11,16 +11,14 @@
 //$bg-color: #A4C2A5; /* GOOD */
 //$bg-color: #ACBDBA; /* GOOD */
 //$bg-color: #B2EFB2;
-$bg-color: #B9D8C2; /* GOOD */
+//$bg-color: #B9D8C2; /* GOOD */
 //$bg-color: #C1BDBF;
 //$bg-color: #C7E8F3;
 //$bg-color: #C9CDC0; /* GOOD */
-//$bg-color: #CBD4C2; /* GOOD */
+$bg-color: #CBD4C2; /* GOOD */
 //$bg-color: #CCCCBB; /* GOOD */
 //$bg-color: #CDCDCD; /* GOOD */
 //$bg-color: #F3C969;
-
-
 
 $box-color: white;
 
@@ -81,7 +79,6 @@ $fh-hover: #1B2228;
 	header {
 	    h5, h6 {
 		margin: 0px;
-		font-size: 17px;
 	    }
 	    .old a {
 		color: #666;
@@ -100,8 +97,7 @@ $fh-hover: #1B2228;
 	    border-radius: 2px;
 	}
 	.description {
-	    font-size: 15px;
-	    max-height: 6rem;
+	    max-height: 6.4rem;
 	    overflow: hidden;
 	    margin-bottom: 0px;
 	}
@@ -175,7 +171,7 @@ $fh-hover: #1B2228;
 	    border: 1px solid rgba(0, 0, 0, 0.2);
 	}
 	.description {
-	    max-height: 4.5rem;
+	    max-height: 4.8rem;
 	    #max-height: 100%;
 	}
     }
