@@ -12,13 +12,17 @@
     <div class="row">
 	<% if @only_images %>
 	    <div class="small-12 columns big-thumb-container">
-		<%= image_tag entry.image %>
+		<a href="<%= entry.url %>" target="_blank" style="color: #222">
+		    <%= image_tag entry.image %>
+		</a>
 	    </div>
 	<% else %>
 	    <% if entry.image %>
 		<div class="small-12 columns">
 		    <div class="small-thumb-container">
-			<%= image_tag entry.image %>
+			<a href="<%= entry.url %>" target="_blank" style="color: #222">
+			    <%= image_tag entry.image %>
+			</a>
 		    </div>
 		    <div class="description-with-thumb-container">
 			<p class="description">
