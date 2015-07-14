@@ -1,8 +1,10 @@
 <% provide(:title, @user.name) %>
 
-<h2>Hello, <%= @user.name.split.first %></h2>
+<header>
+    <h3>Hello, <%= @user.name.split.first %></h3>
+</header>
 
-<p>Tell me what you like:</p>
+<p class="topics-p">Tell me what you like:</p>
 
 <%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
     <% Topic.all.order(:name).each do |t| %>
@@ -11,7 +13,7 @@
 	    <%= f.label t.name, t.name %>
 	</div>
     <% end %>
-    <%= f.submit "Save Topics", class: "button", id: "topics-button" %>
+    <%= f.submit "Save Topics", class: "button expand", id: "topics-button" %>
 <% end %>
 
-<p><em>Note that you can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>
+<p class="topics-p"><em>Note that you can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>
