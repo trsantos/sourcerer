@@ -1,10 +1,26 @@
 /* Constants */
-$bg-color: #B7C2AA; /* default */
-$bg-color: #A4C2A5;
-$bg-color: #CBCFA7;
-$bg-color: #cca;
-$bg-color: #A2A7A5;
-$bg-color: #ACBDBA;
+//$bg-color: #0F5257; /* GOOD */
+//$bg-color: #2C4A4A;
+//$bg-color: #3E92CC;
+//$bg-color: #65ADF5;
+//$bg-color: #74B3CE;
+//$bg-color: #79B791; /* GOOD */
+//$bg-color: #86CB92; /* GOOD */
+//$bg-color: #8EDCE6;
+//$bg-color: #95E88F;
+//$bg-color: #A4C2A5; /* GOOD */
+//$bg-color: #ACBDBA; /* GOOD */
+//$bg-color: #B2EFB2;
+$bg-color: #B9D8C2; /* GOOD */
+//$bg-color: #C1BDBF;
+//$bg-color: #C7E8F3;
+//$bg-color: #C9CDC0; /* GOOD */
+//$bg-color: #CBD4C2; /* GOOD */
+//$bg-color: #CCCCBB; /* GOOD */
+//$bg-color: #CDCDCD; /* GOOD */
+//$bg-color: #F3C969;
+
+
 
 $box-color: white;
 
@@ -14,9 +30,6 @@ $fh-hover: #1B2228;
 // Small screens
 /* Define mobile styles */
 @media only screen {
-    body {
-	background-color: $bg-color !important;
-    }
     main {
 	padding-top: 45px;
     }
@@ -68,6 +81,7 @@ $fh-hover: #1B2228;
 	header {
 	    h5, h6 {
 		margin: 0px;
+		font-size: 17px;
 	    }
 	    .old a {
 		color: #666;
@@ -190,7 +204,7 @@ $fh-hover: #1B2228;
 	/* comment this line when using the aside */
 	padding: 0px 20px !important;
 	background-color: $box-color;
-	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
     }
     .box-no-fs {
 	padding: 10px 40px !important;
