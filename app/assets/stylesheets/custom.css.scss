@@ -3,6 +3,8 @@ $bg-color: #B7C2AA; /* default */
 $bg-color: #A4C2A5;
 $bg-color: #CBCFA7;
 $bg-color: #cca;
+$bg-color: #A2A7A5;
+$bg-color: #ACBDBA;
 
 $box-color: white;
 
@@ -12,6 +14,9 @@ $fh-hover: #1B2228;
 // Small screens
 /* Define mobile styles */
 @media only screen {
+    body {
+	background-color: $bg-color !important;
+    }
     main {
 	padding-top: 45px;
     }
