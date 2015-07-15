@@ -56,8 +56,8 @@ class Feed < ActiveRecord::Base
     end
 
     if updated
-      self.entries = self.entries.order(pub_date: :desc).first(Feed.entries_per_feed)
-      first = self.entries.order(pub_date: :desc).first
+      self.entries = self.entries.first(Feed.entries_per_feed)
+      first = self.entries.first
       if first
         self.subscriptions.each { |s| s.update_attribute(:updated, !old?(first, s)) }
       end
