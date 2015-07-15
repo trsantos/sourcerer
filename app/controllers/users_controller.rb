@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  #force_ssl unless Rails.env.development?
+  force_ssl unless Rails.env.development?
 
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:show, :edit, :update, :destroy]

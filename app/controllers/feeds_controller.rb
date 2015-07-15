@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
   include ApplicationHelper
   
   before_action :logged_in_user
-  #before_action :force_http
+  before_action :force_http
   after_action  :mark_subscription_as_visited, only: [:show]
   
   def index
