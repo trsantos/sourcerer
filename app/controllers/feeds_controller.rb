@@ -2,7 +2,6 @@ class FeedsController < ApplicationController
   include ApplicationHelper
   
   before_action :logged_in_user
-  before_action :force_http
   after_action  :mark_subscription_as_visited, only: [:show]
   
   def index
@@ -41,12 +40,6 @@ class FeedsController < ApplicationController
                                                                                 Time.zone.now,
                                                                               updated:
                                                                                 false)
-    end
-  end
-
-  def force_http
-    if request.ssl? && Rails.env.production?
-      redirect_to :protocol => 'http://', :status => :moved_permanently
     end
   end
 
