@@ -27,6 +27,8 @@ group :development, :test do
   gem 'spring'
   gem 'faker'
   gem 'rack-mini-profiler'
+  gem 'rubocop'
+  gem 'ruby-lint'
 end
 
 group :test do

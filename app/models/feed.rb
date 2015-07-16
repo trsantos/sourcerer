@@ -7,43 +7,41 @@ class Feed < ActiveRecord::Base
   has_many :users, through: :subscriptions
 
   has_many :entries, dependent: :destroy
-  
+
   validates :feed_url, presence: true, uniqueness: true
 
   def self.entries_per_feed
-    return 10
+    10
   end
 
   def update
     feed = fetch_and_parse
     return if feed.is_a? Integer
-    #self.entries.delete_all
+    # self.entries.delete_all
     update_entries feed
   end
 
   def only_images?
-    self.entries.each do |e|
-      return false if !(e.image && e.description.blank?)
+    entries.each do |e|
+      return false unless e.image && e.description.blank?
     end
-    return true
+    true
   end
 
   private
 
   def fetch_and_parse
     setup_fj
-    begin
-      return Feedjira::Feed.fetch_and_parse self.feed_url
-    rescue
-    end
-    return 0
+    return Feedjira::Feed.fetch_and_parse feed_url
+  rescue
+    0
   end
 
   def update_entries(feed)
-    self.update_attributes(title: feed.title,
-                           site_url: process_url(feed.url || feed.feed_url),
-                           description: sanitize(strip_tags(feed.description)),
-                           logo: feed.logo)
+    update_attributes(title: feed.title,
+                      site_url: process_url(feed.url || feed.feed_url),
+                      description: sanitize(strip_tags(feed.description)),
+                      logo: feed.logo)
 
     entries = feed.entries.first(Feed.entries_per_feed).reverse
 
@@ -55,135 +53,129 @@ class Feed < ActiveRecord::Base
       end
     end
 
-    if updated
-      self.entries = self.entries.first(Feed.entries_per_feed)
-      first = self.entries.first
-      if first
-        self.subscriptions.each { |s| s.update_attribute(:updated, !old?(first, s)) }
-      end
-    end
+    return unless updated
+    self.entries = self.entries.first(Feed.entries_per_feed)
+    first = self.entries.first
+    return unless first
+    subscriptions.each { |s| s.update_attribute(:updated, !old?(first, s)) }
   end
 
   def setup_fj
-    Feedjira::Feed.add_common_feed_entry_element("enclosure", :value => :url, :as => :image)
-    Feedjira::Feed.add_common_feed_entry_element("media:thumbnail", :value => :url, :as => :image)
-    Feedjira::Feed.add_common_feed_entry_element("media:content", :value => :url, :as => :image)
-    Feedjira::Feed.add_common_feed_entry_element("img", :value => :src, :as => :image)
-    Feedjira::Feed.add_common_feed_element :url, as: :logo, ancestor: :image
+    Feedjira::Feed.add_common_feed_entry_element(:enclosure,
+                                                 value: :url,
+                                                 as: :image)
+    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
+                                                 value: :url,
+                                                 as: :image)
+    Feedjira::Feed.add_common_feed_entry_element(:img,
+                                                 value: :scr,
+                                                 as: :image)
+    Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
   end
 
   def insert_entry(e)
-    # Don't remember why content comes first
-    description = e.content || e.summary || ""
-    self.entries.create(title:       (e.title if not e.title.blank?),
-                        description: sanitize(strip_tags(description)).first(400),
-                        pub_date:    find_date(e.published),
-                        image:       find_image(e, description),
-                        url:         e.url)
+    description = e.content || e.summary || ''
+    entries.create(title:       (e.title unless e.title.blank?),
+                   description: sanitize(strip_tags(description)).first(400),
+                   pub_date:    find_date(e.published),
+                   image:       find_image(e, description),
+                   url:         e.url)
   end
 
   def find_date(pub_date)
-    if pub_date.nil? || pub_date > Time.zone.now
-      return Time.zone.now
-    end
+    return Time.zone.now if pub_date.nil? || pub_date > Time.zone.now
     pub_date
   end
 
   def find_image(entry, description)
-    return [image_from_description(description), entry.image].map{ |i| process_image i }.find{ |x| !x.nil? }
+    process_image(image_from_description(description)) ||
+      process_image(entry.image)
   end
 
   def process_image(img)
-    if img.nil? || img.blank?
-      return nil
-    end
+    return if img.nil? || img.blank?
+    img = parse_image img
+    filter_image img
+  end
 
-    uri = URI.parse(self.site_url || self.feed_url)
-    if img.start_with?('//')
-    # do nothing hoping that relative protocol urls works for the given site
-    elsif img.start_with? '/'
-      img = uri.scheme + '://' + uri.host + img
-    elsif !img.start_with? 'http'
-      img = uri.scheme + '://' + uri.host + uri.path + img
-    # elsif img.start_with? 'http://'
-    #   img = img[5..-1]
-    end
-
-    return filter_image img
+  def parse_image(img)
+    return img if img.start_with?('//')
+    uri = URI.parse(site_url || feed_url)
+    start = uri.scheme + '://' + uri.host
+    return start + img if img.start_with? '/'
+    return start + uri.path + img unless img.start_with? 'http'
+    img
   end
 
   def image_from_description(description)
-    begin
-      doc = Nokogiri::HTML description
-      return filter_image doc.css('img').first.attributes['src'].value
-    rescue
-    end
-    return nil
+    doc = Nokogiri::HTML description
+    return filter_image doc.css('img').first.attributes['src'].value
+  rescue
+    nil
   end
 
   def og_image(url)
-    begin
-      require 'open-uri'
-      doc = Nokogiri::HTML(open(URI::escape(url.strip.split(/#/).first)))
-      return doc.css("meta[property='og:image']").first.attributes['content'].value
-    rescue
-    end
+    require 'open-uri'
+    doc = Nokogiri::HTML(open(URI.escape(url.strip.split(/#/).first)))
+    img = doc.css("meta[property='og:image']").first
+    return img.attributes['content'].value
+  rescue
+    nil
   end
 
   def filter_image(img)
     # blanks
-    if img.include? 'mf.gif' or
-      img.include? 'blank' or
-      img.include? 'pixel.wp' or
-      img.include? 'pixel.gif' or
-      img.include? 'Badge' or
-      img.include? 'ptq.gif' or
-      img.include? 'wirecutter-deals-300x250.png' or
-      img.include? 'beacon' or
-      img == 'http://www.scientificamerican.com' or
-      img == 'http://eu.square-enix.com' or
-      img.include? 'feedsportal'
+    if (img.include? 'mf.gif') ||
+       (img.include? 'blank') ||
+       (img.include? 'pixel.wp') ||
+       (img.include? 'pixel.gif') ||
+       (img.include? 'Badge') ||
+       (img.include? 'ptq.gif') ||
+       (img.include? 'wirecutter-deals-300x250.png') ||
+       (img.include? 'beacon') ||
+       (img == 'http://www.scientificamerican.com') ||
+       (img == 'http://eu.square-enix.com') ||
+       (img.include? 'feedsp||tal')
       return nil
     end
 
     # special cases
-    if img.include? 'feedburner' or
-      img.include? 'share-button' or # Fapesp
-      img.include? 'wp-content/plugins' or # Wordpress share plugins
-      img.include? 'clubedohardware.com.br' or # Clube do Hardware
-      img.include? 'pml.png' or # Techmeme
-      img.include? 'wp-includes/images/smilies' or # Treehouse (and others)
-      img.include? 'fsdn.com' or # Slashdot
-      img.include? 'divisoriagizmodo' or # Gizmodo
-      img.include? 'pixel.gif' or # Bleacher Report
-      img.include? 'avclub/None' or # A.V. Club
-      img.include? '0.gravatar.com' or # Feedly
-      img.include? 'wordpress.com/1.0/comments' or # Wordpress
-      img.include? 'images/share' or # EFF
-      img.include? 'modules/service_links' or # KDE Dot News
-      img.include? 'badge' or # Cato.org
-      img.include? 'dynamic1.anandtech.com' or # Anandtech
-      img.include? '/icons/' or # EFF
-      (img.include? '_thumb' and img.include? 'goal.com') or # Goal.com
-      img.include? ';base64,' # Bittorrent
+    if (img.include? 'feedburner') ||
+       (img.include? 'share-button') || # Fapesp
+       (img.include? 'wp-content/plugins') || # W||dpress share plugins
+       (img.include? 'clubedohardware.com.br') || # Clube do Hardware
+       (img.include? 'pml.png') || # Techmeme
+       (img.include? 'wp-includes/images/smilies') || # Treehouse (and others)
+       (img.include? 'fsdn.com') || # Slashdot
+       (img.include? 'divis||iagizmodo') || # Gizmodo
+       (img.include? 'pixel.gif') || # Bleacher Rep||t
+       (img.include? 'avclub/None') || # A.V. Club
+       (img.include? '0.gravatar.com') || # Feedly
+       (img.include? 'w||dpress.com/1.0/comments') || # W||dpress
+       (img.include? 'images/share') || # EFF
+       (img.include? 'modules/service_links') || # KDE Dot News
+       (img.include? 'badge') || # Cato.||g
+       (img.include? 'dynamic1.anandtech.com') || # Anandtech
+       (img.include? '/icons/') || # EFF
+       (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
+       (img.include? ';base64,') # Bitt||rent
       return nil
     end
 
-    # non-image formats
-    if img.include? '.mp3' or
-      img.include? '.tiff' or
-      img.include? '.m4a' or
-      img.include? '.mp4' or
-      img.include? '.psd' or
-      img.include? '.gif' or
-      img.include? '.pdf' or
-      img.include? '.webm' or
-      img.include? '.ogv' or
-      img.include? '.opus'
+    # non-image f||mats
+    if (img.include? '.mp3') ||
+       (img.include? '.tiff') ||
+       (img.include? '.m4a') ||
+       (img.include? '.mp4') ||
+       (img.include? '.psd') ||
+       (img.include? '.gif') ||
+       (img.include? '.pdf') ||
+       (img.include? '.webm') ||
+       (img.include? '.ogv') ||
+       (img.include? '.opus')
       return nil
     end
 
-    return img
+    img
   end
-
 end
