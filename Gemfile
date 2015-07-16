@@ -14,11 +14,12 @@ gem 'sdoc', group: :doc
 gem 'bcrypt'
 gem 'foundation-rails'
 gem 'feedjira'
-gem 'opml_saw', :git => "git://github.com/feedbin/opml_saw.git", :branch => "master"
+gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
 gem 'sidekiq'
-gem 'sinatra', :require => nil
+gem 'sinatra', require: nil
 gem 'normalize-rails'
 gem 'mousetrap-rails'
+gem 'paypal-sdk-rest'
 
 group :development, :test do
   gem 'sqlite3'
@@ -27,8 +28,9 @@ group :development, :test do
   gem 'spring'
   gem 'faker'
   gem 'rack-mini-profiler'
-  gem 'rubocop'
-  gem 'ruby-lint'
+  gem 'rubocop', require: false
+  gem 'pry'
+  gem 'pry-doc'
 end
 
 group :test do
