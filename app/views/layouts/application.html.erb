@@ -14,24 +14,20 @@
     <body>
 	<header id="combined-header" class="contain-to-grid fixed">
 	    <%= render 'layouts/nav' %>
-	    <% if in_feeds_show %>
-		<%= render 'feeds/header' %>
-	    <% end %>
+	    <%= render 'feeds/header' if in_feeds_show %>
 	</header>
-	<main>
+	<main id="<%= "main-fs" if in_feeds_show %>">
 	    <% flash.each do |message_type, message| %>
 	        <%= content_tag(:div,
 				message,
 				class: "alert-box #{message_type}") %>
 	    <% end %>
 
-	    <div id="large-sep"></div>
 	    <div class="row" id="main-content">
-		<div class="small-12 columns <%= "medium-7 medium-centered box-no-fs" if not in_feeds_show %>">
+		<div class="small-12 columns <%= "medium-7 medium-centered box-no-fs" unless in_feeds_show %>">
 		    <%= yield %>
 		</div>
 	    </div>
-	    <div id="large-sep"></div>
 	</main>
     </body>
 </html>

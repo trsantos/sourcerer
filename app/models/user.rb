@@ -10,11 +10,13 @@ class User < ActiveRecord::Base
   has_many :entries, through: :feeds
 
   attr_accessor :remember_token, :reset_token
-  before_save   :downcase_email
+  before_save :downcase_email
 
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
+  validates :email,
+            presence: true,
+            length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
 
@@ -22,14 +24,17 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, allow_blank: true
 
   # Returns the hash digest of the given string
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-             BCrypt::Engine.cost
+  def self.digest(string)
+    if ActiveModel::SecurePassword.min_cost
+      cost = BCrypt::Engine::MIN_COST
+    else
+      cost = BCrypt::Engine.cost
+    end
     BCrypt::Password.create(string, cost: cost)
   end
 
   # Returns a random token.
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -69,17 +74,17 @@ class User < ActiveRecord::Base
 
   # Follow a feed. Last arg should be a hash
   def follow(feed, from_topic = false)
-    unless following?(feed)
-      subscriptions.create(feed_id: feed.id, updated: feed.entries.any?, from_topic: from_topic)
-    end
+    return if following? feed
+    subscriptions.create(feed_id: feed.id,
+                         updated: feed.entries.any?,
+                         from_topic: from_topic)
   end
 
   # Unfollow a feed
   def unfollow(feed)
     s = subscriptions.find_by(feed_id: feed.id)
-    if s
-      s.destroy
-    end
+    return if s.nil?
+    s.destroy
   end
 
   # True if current user is following the given feed
@@ -92,23 +97,22 @@ class User < ActiveRecord::Base
     get_feeds(topic).each do |url|
       follow(Feed.find_or_create_by(feed_url: url), true)
     end
-    #topic.feeds.each do |f|
-    #  follow(f)
-    #end
+    # topic.feeds.each do |f|
+    #   follow(f)
+    # end
   end
 
   def unfollow_topic(topic)
     get_feeds(topic).each do |url|
       f = Feed.find_or_create_by(feed_url: url)
-      s = self.subscriptions.find_by(feed_id: f.id)
-      if s and s.from_topic
-        unfollow(f)
-      end
+      s = subscriptions.find_by(feed_id: f.id)
+      next unless s && s.from_topic
+      unfollow(f)
     end
   end
 
   def following_topic?(topic)
-    return topics.include?(topic)
+    topics.include?(topic)
   end
 
   private
@@ -117,5 +121,4 @@ class User < ActiveRecord::Base
   def downcase_email
     self.email = email.downcase
   end
-
 end

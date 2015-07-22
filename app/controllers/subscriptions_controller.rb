@@ -6,8 +6,8 @@ class SubscriptionsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @subscriptions = current_user.subscriptions.includes(:feed).where(starred: true).sort_by { |s| s.title || s.feed.title || "" }
-    @subscriptions += current_user.subscriptions.includes(:feed).where(starred: false).sort_by { |s| s.title || s.feed.title || "" }
+    @subscriptions =
+      current_user.subscriptions.includes(:feed).order(starred: :desc)
   end
 
   def create
@@ -21,41 +21,28 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
+    set_update_params
     @subscription = Subscription.find(params[:id])
-
-    title = params[:subscription][:title]
-    if title && title.blank?
-      params[:subscription][:title] = nil
-    end
-
-    site_url = params[:subscription][:site_url]
-    if site_url
-      if site_url.blank?
-        params[:subscription][:site_url] = nil
-      else
-        params[:subscription][:site_url] = process_url site_url
-      end
-    end
-
-    if @subscription.update_attributes(sub_params)
-      feed = Feed.find(@subscription.feed_id)
-      redirect_to feed
-    end
+    @subscription.update_attributes(sub_params)
+    redirect_to @subscription.feed
   end
 
   def destroy
-    feed = Feed.find(Subscription.find(params[:id]).feed_id)
+    feed = Subscription.find(params[:id]).feed
     current_user.unfollow(feed)
     redirect_to feed
   end
 
   def next
-    next_sub = current_user.subscriptions.where(updated: true).order(starred: :desc, visited_at: :asc).first
+    next_sub =
+      current_user.subscriptions
+      .where(updated: true).order(starred: :desc, visited_at: :asc).first
     if next_sub
-      redirect_to next_sub.feed and return
+      redirect_to next_sub.feed
+      return
     end
-    flash[:info] = "You have no updated feeds. Check back later!"
-    redirect_to root_url({ :from_next => true })
+    flash[:info] = 'You have no updated feeds. Check back later!'
+    redirect_to root_url(from_next: true)
   end
 
   private
@@ -64,9 +51,22 @@ class SubscriptionsController < ApplicationController
     params.require(:subscription).permit(:title, :site_url, :starred)
   end
 
-  def correct_user
-    @user = User.find(Subscription.find(params[:id]).user_id)
-    redirect_to root_url unless current_user?(@user) or current_user.admin?
+  def set_update_params
+    title = params[:subscription][:title]
+    params[:subscription][:title] = nil if title.blank?
+
+    site_url = params[:subscription][:site_url]
+    params[:subscription][:site_url] = process_url site_url
   end
 
+  def next_updated_sub
+    starred_order = rand < 0.8 ? :desc : :asc
+    current_user.subscriptions.where(updated: true)
+      .order(starred: starred_order, visited_at: :asc).first
+  end
+
+  def correct_user
+    @user = User.find(Subscription.find(params[:id]).user_id)
+    redirect_to root_url unless current_user?(@user) || current_user.admin?
+  end
 end

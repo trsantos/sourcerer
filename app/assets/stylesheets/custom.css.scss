@@ -110,6 +110,23 @@ $fh-hover: #1B2228;
 	left: 0px;
 	right: 0px;
     }
+    .billing-container {
+	padding-top: 0.75rem;
+	h3 {
+	    margin-top: 0px;
+	}
+	.paypal-button img {
+	    max-height: 45px;
+	    margin-bottom: 20px;
+	}
+	#br-flag {
+	    height: 16px;
+	    margin-bottom: 3px;
+	}
+	p:last-child {
+	    margin-bottom: 0px;
+	}
+    }
 }
 
 /* max-width 640px, mobile-only styles, use when QAing mobile issues */
@@ -123,6 +140,9 @@ $fh-hover: #1B2228;
 // Medium screens
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
+    #main-fs {
+	padding-top: 95px;
+    }
     .top-bar {
 	h1 a {
 	    max-width: 450px;
@@ -159,7 +179,6 @@ $fh-hover: #1B2228;
 	}
     }
     #feeds-show-container {
-	margin-top: 50px;
 	margin-bottom: 0px;
     }
     article {
@@ -200,6 +219,9 @@ $fh-hover: #1B2228;
 	    margin-right: 15px;
 	}
     }
+    #main-content {
+	margin: 15px auto;
+    }
     .box, .box-no-fs {
 	/* comment this line when using the aside */
 #	padding: 0px 20px !important;
@@ -207,9 +229,12 @@ $fh-hover: #1B2228;
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     }
     .box-no-fs {
-#	padding: 10px 20px !important;
+#	padding: 0px 15px 15px !important;
 	ul {
 	    margin-bottom: 0px;
+	}
+	li:last-child {
+	    padding-bottom: 15px;
 	}
     }
     .section-heading {
@@ -258,11 +283,11 @@ $fh-hover: #1B2228;
 	    margin-bottom: 0px;
 	}
     }
-    #large-sep {
-	height: 15px;
-    }
     .small-thumb-container {
 	max-height: 94px;
+    }
+    .box-no-fs p:last-child {
+	padding-bottom: 15px;
     }
 }
 

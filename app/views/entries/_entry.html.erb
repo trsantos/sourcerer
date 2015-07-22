@@ -5,6 +5,7 @@
 		<%= link_to sanitize(entry.title), entry.url, class: "entry-title", target: "_blank" %>
 	    </strong>
 	</h5>
+	<!-- should use time_tag here -->
 	<p class="timestamp">
 	    <%= time_ago_in_words(entry.pub_date).capitalize %> ago
 	</p>

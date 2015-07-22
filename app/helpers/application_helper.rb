@@ -1,7 +1,6 @@
 module ApplicationHelper
-
   def full_title(page_title = '')
-    base_title = "Sourcerer"
+    base_title = 'Sourcerer'
     if page_title.empty?
       base_title
     else
@@ -10,28 +9,21 @@ module ApplicationHelper
   end
 
   def in_feeds_show
-    return params[:controller] == "feeds" && params[:action] == "show"
+    params[:controller] == 'feeds' && params[:action] == 'show'
   end
 
   # Confirms a logged-in user.
   def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:alert] = "Please log in."
-      redirect_to login_url
-    end
-  end
-
-  def check_for_trial_expiration
-    if current_user.on_trial? and current_user.created_at < 1.week.ago
-      flash[:alert] = "Your trial period has just ended. It's time to subscribe to Sourcerer!"
-      redirect_to billing_path
-    end
+    return if logged_in?
+    store_location
+    flash[:alert] = 'Please log in.'
+    redirect_to login_url
   end
 
   def process_url(url)
+    return nil if url.blank?
     url = url.strip
-    unless url.start_with?('http:') or url.start_with?('https:')
+    unless url.start_with?('http:') || url.start_with?('https:')
       url = 'http://' + url
     end
     url
@@ -205,13 +197,4 @@ module ApplicationHelper
       return []
     end
   end
-
-  def safari?
-    if browser.safari?
-      return "safari"
-    else
-      return ""
-    end
-  end
-
 end

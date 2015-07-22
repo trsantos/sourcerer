@@ -1,25 +1,27 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  root               'static_pages#home'
-  get    'signup' => 'users#new'
-  get    'login'  => 'sessions#new'
-  post   'login'  => 'sessions#create'
+  root 'static_pages#home'
+  get 'signup' => 'users#new'
+  get 'login'  => 'sessions#new'
+  post 'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   resources :users do
     member do
       patch 'update_topics'
     end
   end
-  resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :feeds,     		  only: [:index, :new, :create, :show]
-  resources :subscriptions,       only: [:index, :create, :edit, :update, :destroy]
-  resources :opml,                only: [:new, :create]
+  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :feeds,           only: [:index, :new, :create, :show]
+  resources :subscriptions,   only: [:index, :create, :edit,
+                                     :update, :destroy]
+  resources :opml,            only: [:new, :create]
   get 'opml/export' => 'opml#export'
   get 'next' => 'subscriptions#next'
-  get 'billing/success' => 'billing#success'
-  get 'billing/cancel' => 'billing#cancel'
   get 'billing/expired' => 'billing#expired'
+  get 'billing/checkout' => 'billing#checkout'
+  get 'billing/confirm' => 'billing#confirm'
+  get 'billing/finalize' => 'billing#finalize'
   mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.
