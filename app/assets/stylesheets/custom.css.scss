@@ -77,10 +77,10 @@ $fh-hover: #1B2228;
 	header {
 	    h5, h6 {
 		margin: 0px;
-		font-size: 18px;
+		font-size: 17px;
 	    }
 	    .old a {
-		color: #666;
+		#color: #666;
 	    }
 	}
 	.timestamp {
@@ -96,8 +96,8 @@ $fh-hover: #1B2228;
 	    border-radius: 2px;
 	}
 	.description {
-	    font-size: 16px;
-	    max-height: 6.4rem;
+	    font-size: 15px;
+	    max-height: 6rem;
 	    overflow: hidden;
 	    margin-bottom: 0px;
 	    margin-top: 5px;
@@ -191,7 +191,7 @@ $fh-hover: #1B2228;
 	    border: 1px solid rgba(0, 0, 0, 0.2);
 	}
 	.description {
-	    max-height: 4.8rem;
+	    max-height: 4.5rem;
 	    #max-height: 100%;
 	}
     }
