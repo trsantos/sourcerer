@@ -241,8 +241,7 @@ $fh-hover: #1B2228;
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     }
     .box-no-fs {
-#	background-color: transparent !important;
-#	padding: 0px 15px 15px !important;
+#	padding: 0px 20px !important;
 	ul {
 	    margin-bottom: 0px;
 	}
@@ -284,7 +283,7 @@ $fh-hover: #1B2228;
 	    }
 	}
 	#aside-description, #aside-title {
-#	    color: #444;
+	    color: #333;
 	    margin-top: 15px;
 	}
 	#resources {
