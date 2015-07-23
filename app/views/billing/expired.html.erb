@@ -15,5 +15,5 @@
 
     <%= link_to image_tag('//www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png'), billing_checkout_path, class: 'paypal-button', 'data-no-turbolink': true %>
 
-    <p><%= image_tag 'brazil.png', id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', billing_checkout_path(br: true), 'data-no-turbolink': true %> to pay in BRL.</p>
+    <p><%= image_tag asset_path('brazil.png'), id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', billing_checkout_path(br: true), 'data-no-turbolink': true %> to pay in BRL.</p>
 </div>

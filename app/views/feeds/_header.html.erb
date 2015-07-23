@@ -21,6 +21,7 @@
 <script>
 var img = document.getElementById("favicon");
 img.onerror = function() {
-	img.style.display = "none";
+	img.setAttribute("src", "<%= asset_path('feed-icon-28x28.png') %>");
+	// img.style.display = "none";
 }
 </script>
