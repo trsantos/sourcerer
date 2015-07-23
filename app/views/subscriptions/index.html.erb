@@ -3,7 +3,7 @@
 <div id="subscriptions-container">
 
     <header>
-	<h3>Your subscriptions (<%= current_user.subscriptions.count %>)</h3>
+	<h3>Your <%= pluralize current_user.subscriptions.count, 'subscription' %></h3>
     </header>
 
     <ul class="feeds no-bullet">

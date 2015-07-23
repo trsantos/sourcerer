@@ -8,7 +8,7 @@ $bg-color: #C9CDC0; /* GOOD! and better for crappy screens? */
 //$bg-color: #CBD4C2;
 //$bg-color: #CCCCBB;
 $bg-color: #CDCDCD; /* GOOD! and "neutral" */
-$bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it to the gray tone before launching. */
+//$bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it to the gray tone before launching. */
 //$bg-color: #F3C969;
 
 $box-color: white;
@@ -60,8 +60,11 @@ $fh-hover: #1B2228;
 	    text-overflow: ellipsis;
 	    white-space: nowrap;
 	}
-	#logo,  #feed-title {
-	    font-size: 17px;
+	#logo {
+	    font-size: medium; // or 17px
+	}
+	#feed-title {
+	    font-size: large; // or 22px
 	}
     }
     #favicon {
@@ -80,17 +83,17 @@ $fh-hover: #1B2228;
 	header {
 	    h5, h6 {
 		margin: 0px;
-		font-size: 17px;
+		font-size: large; // or 17px
 	    }
 	    .old a {
 		#color: #666;
 	    }
 	}
 	.timestamp {
-	    font-size: small;
+	    font-size: x-small;
 	    color: #444;
 	    margin: 0px;
-#	    margin-top: -4px;
+#	    margin-top: 5px;
 	}
 	.small-thumb-container, .big-thumb-container {
 	    margin: 10px 0px 5px 0px;
@@ -143,7 +146,7 @@ $fh-hover: #1B2228;
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
     #main-fs {
-	padding-top: 95px;
+	padding-top: 100px;
     }
     .top-bar {
 	h1 a {
@@ -154,6 +157,7 @@ $fh-hover: #1B2228;
 	}
     }
     #feed-header {
+#	border-top: 1px solid #111;
 	background-color: $fh-color;
 	.top-bar {
 	    background-color: $fh-color;
@@ -169,17 +173,17 @@ $fh-hover: #1B2228;
     }
     #feed-header {
 	h1 {
-	    line-height: 50px;
+	    line-height: 55px;
 	    #feed-title {
-		font-size: 22px;
+		font-size: x-large; // or 22px
 	    }
 	}
-	height: 50px;
+	height: 55px;
 	.top-bar {
 	    height: inherit;
 	}
 	section ul a {
-	    line-height: 50px;
+	    line-height: 55px;
 	}
     }
     #feeds-show-container {
@@ -230,9 +234,10 @@ $fh-hover: #1B2228;
 	/* comment this line when using the aside */
 #	padding: 0px 20px !important;
 	background-color: $box-color;
-	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+#	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     }
     .box-no-fs {
+#	background-color: transparent !important;
 #	padding: 0px 15px 15px !important;
 	ul {
 	    margin-bottom: 0px;
