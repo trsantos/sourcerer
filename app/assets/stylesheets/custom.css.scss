@@ -60,13 +60,9 @@ $fh-hover: #1B2228;
 	    text-overflow: ellipsis;
 	    white-space: nowrap;
 	}
-	#logo {
+	#logo, #feed-title {
 	    font-size: medium;
 	    font-size: 17px;
-	}
-	#feed-title {
-	    font-size: large;
-	    font-size: 22px;
 	}
     }
     #favicon {
@@ -278,7 +274,7 @@ $fh-hover: #1B2228;
 	    img {
 		margin-top: 18px;
 		max-height: 70px;
-		padding: 2px;
+		padding: 3px;
 		background-color: white;
 	    }
 	}
