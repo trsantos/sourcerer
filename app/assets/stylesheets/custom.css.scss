@@ -61,7 +61,7 @@ $fh-hover: #1B2228;
 	    white-space: nowrap;
 	}
 	#logo,  #feed-title {
-	    font-size: large;
+	    font-size: 17px;
 	}
     }
     #favicon {
@@ -80,7 +80,7 @@ $fh-hover: #1B2228;
 	header {
 	    h5, h6 {
 		margin: 0px;
-		font-size: large;
+		font-size: 17px;
 	    }
 	    .old a {
 		#color: #666;
@@ -99,7 +99,6 @@ $fh-hover: #1B2228;
 	    border-radius: 2px;
 	}
 	.description {
-	    font-size: medium;
 	    max-height: 6.4rem;
 	    overflow: hidden;
 	    margin-bottom: 0px;
@@ -172,7 +171,7 @@ $fh-hover: #1B2228;
 	h1 {
 	    line-height: 50px;
 	    #feed-title {
-		font-size: x-large;
+		font-size: 22px;
 	    }
 	}
 	height: 50px;
@@ -247,7 +246,7 @@ $fh-hover: #1B2228;
 	font-size: small;
 	text-transform: uppercase;
 	padding-bottom: 5px;
-	margin-top: 10px;
+	margin-top: 6px;
 	margin-bottom: 0px;
     }
     .top-bar {
