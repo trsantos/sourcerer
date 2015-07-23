@@ -60,6 +60,9 @@ $fh-hover: #1B2228;
 	    text-overflow: ellipsis;
 	    white-space: nowrap;
 	}
+	#logo,  #feed-title {
+	    font-size: large;
+	}
     }
     #favicon {
 	height: 18px;
@@ -77,7 +80,7 @@ $fh-hover: #1B2228;
 	header {
 	    h5, h6 {
 		margin: 0px;
-		font-size: 17px;
+		font-size: large;
 	    }
 	    .old a {
 		#color: #666;
@@ -96,8 +99,8 @@ $fh-hover: #1B2228;
 	    border-radius: 2px;
 	}
 	.description {
-	    font-size: 15px;
-	    max-height: 6rem;
+	    font-size: medium;
+	    max-height: 6.4rem;
 	    overflow: hidden;
 	    margin-bottom: 0px;
 	    margin-top: 5px;
@@ -168,7 +171,9 @@ $fh-hover: #1B2228;
     #feed-header {
 	h1 {
 	    line-height: 50px;
-	    font-size: x-large;
+	    #feed-title {
+		font-size: x-large;
+	    }
 	}
 	height: 50px;
 	.top-bar {
@@ -191,7 +196,7 @@ $fh-hover: #1B2228;
 	    border: 1px solid rgba(0, 0, 0, 0.2);
 	}
 	.description {
-	    max-height: 4.5rem;
+	    max-height: 4.8rem;
 	    #max-height: 100%;
 	}
     }

@@ -27,7 +27,7 @@ group :development, :test do
   gem 'web-console'
   gem 'spring'
   gem 'faker'
-  gem 'rack-mini-profiler'
+#  gem 'rack-mini-profiler'
   gem 'rubocop', require: false
   gem 'pry'
   gem 'pry-doc'
