@@ -7,7 +7,7 @@ $bg-color: #ACBDBA; /* also GOOD */
 $bg-color: #C9CDC0; /* GOOD! and better for crappy screens? */
 //$bg-color: #CBD4C2;
 //$bg-color: #CCCCBB;
-$bg-color: #CDCDCD; /* GOOD! and "neutral" */
+//$bg-color: #CDCDCD; /* GOOD! and "neutral" */
 //$bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it to the gray tone before launching. */
 //$bg-color: #F3C969;
 
@@ -61,10 +61,12 @@ $fh-hover: #1B2228;
 	    white-space: nowrap;
 	}
 	#logo {
-	    font-size: medium; // or 17px
+	    font-size: medium;
+	    font-size: 17px;
 	}
 	#feed-title {
-	    font-size: large; // or 22px
+	    font-size: large;
+	    font-size: 22px;
 	}
     }
     #favicon {
@@ -83,14 +85,15 @@ $fh-hover: #1B2228;
 	header {
 	    h5, h6 {
 		margin: 0px;
-		font-size: large; // or 17px
+		font-size: large;
+		font-size: 17px;
 	    }
 	    .old a {
 		#color: #666;
 	    }
 	}
 	.timestamp {
-	    font-size: x-small;
+	    font-size: small;
 	    color: #444;
 	    margin: 0px;
 #	    margin-top: 5px;
@@ -175,7 +178,8 @@ $fh-hover: #1B2228;
 	h1 {
 	    line-height: 55px;
 	    #feed-title {
-		font-size: x-large; // or 22px
+		font-size: x-large;
+		font-size: 22px;
 	    }
 	}
 	height: 55px;
@@ -234,7 +238,7 @@ $fh-hover: #1B2228;
 	/* comment this line when using the aside */
 #	padding: 0px 20px !important;
 	background-color: $box-color;
-#	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     }
     .box-no-fs {
 #	background-color: transparent !important;
@@ -280,7 +284,7 @@ $fh-hover: #1B2228;
 	    }
 	}
 	#aside-description, #aside-title {
-	    color: #444;
+#	    color: #444;
 	    margin-top: 15px;
 	}
 	#resources {
