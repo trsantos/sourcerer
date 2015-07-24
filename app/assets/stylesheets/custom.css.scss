@@ -8,10 +8,10 @@ $bg-color: #ACBDBA; /* also GOOD */
 $bg-color: #C9CDC0; /* GOOD! and better for crappy screens? */
 //$bg-color: #CBD4C2;
 //$bg-color: #CCCCBB;
-//$bg-color: #CDCDCD; /* GOOD! and "neutral" */
-//$bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it to the gray tone before launching. */
-$bg-color: #B4B8C5; // GREAT!
-$bg-color: #B4B895; // 'calibration' lol
+$bg-color: #CDCDCD; /* GOOD! and "neutral" */
+$bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it to the gray tone before launching. */
+//$bg-color: #B4B8C5; // (not so) GREAT!
+//$bg-color: #B4B895; // 'calibration' lol
 //$bg-color: #F3C969;
 
 $box-color: white;
@@ -150,7 +150,7 @@ $fh-hover: #1D252B;
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
     #main-fs {
-	padding-top: 100px;
+	padding-top: 95px;
     }
     .top-bar {
 	h1 a {
@@ -177,18 +177,18 @@ $fh-hover: #1D252B;
     }
     #feed-header {
 	h1 {
-	    line-height: 55px;
+	    line-height: 50px;
 	    #feed-title {
 		font-size: x-large;
 #		font-size: 22px;
 	    }
 	}
-	height: 55px;
+	height: 50px;
 	.top-bar {
 	    height: inherit;
 	}
 	section ul a {
-	    line-height: 55px;
+	    line-height: 50px;
 	}
     }
     #feeds-show-container {
