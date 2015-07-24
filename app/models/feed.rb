@@ -63,7 +63,7 @@ class Feed < ActiveRecord::Base
   end
 
   def insert_new_entries(fj_feed)
-    fj_entries = fj_feed.entries.first(Feed.entries_per_feed)
+    fj_entries = fj_feed.entries.first(Feed.entries_per_feed).reverse
     fj_entries.each do |e|
       insert_entry e
     end
