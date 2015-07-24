@@ -10,6 +10,7 @@ $bg-color: #C9CDC0; /* GOOD! and better for crappy screens? */
 //$bg-color: #CDCDCD; /* GOOD! and "neutral" */
 //$bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it to the gray tone before launching. */
 //$bg-color: #F3C969;
+$bg-color: #f8f8f8;
 
 $box-color: white;
 
@@ -231,7 +232,6 @@ $fh-hover: #1B2228;
 	margin: 15px auto;
     }
     .box, .box-no-fs {
-	/* comment this line when using the aside */
 #	padding: 0px 20px !important;
 	background-color: $box-color;
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
@@ -264,8 +264,11 @@ $fh-hover: #1B2228;
 	padding-left: 0px;
 	margin-left: 4.16666666666666666667%;
     }
+    .large-8 {
+#	padding-right: 0px !important;
+    }
     aside {
-#	display: none;
+	#	display: none;
 	margin-left: auto;
 	.box {
 	    padding-bottom: 10px;
@@ -273,13 +276,14 @@ $fh-hover: #1B2228;
 	#feed-logo {
 	    img {
 		margin-top: 18px;
-		max-height: 70px;
-		padding: 3px;
+		max-height: 100px;
+		padding: 2px;
+		border: 1px solid rgba(0, 0, 0, 0.2);
 		background-color: white;
 	    }
 	}
 	#aside-description, #aside-title {
-	    color: #333;
+	    color: #444;
 	    margin-top: 15px;
 	}
 	#resources {
