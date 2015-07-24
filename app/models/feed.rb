@@ -38,13 +38,6 @@ class Feed < ActiveRecord::Base
     0
   end
 
-  def update_entries(fj_feed)
-    return unless insert_new_entries fj_feed
-    first = entries.first
-    return unless first
-    subscriptions.each { |s| s.update_attribute(:updated, !old?(first, s)) }
-  end
-
   def update_feed_attributes(fj_feed)
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
@@ -52,17 +45,28 @@ class Feed < ActiveRecord::Base
                       logo: fj_feed.logo)
   end
 
-  def insert_new_entries(fj_feed)
-    fj_entries = fj_feed.entries.first(Feed.entries_per_feed).reverse
-    updated = false
-    fj_entries.each do |e|
-      unless entries.find_by(url: e.url)
-        insert_entry e
-        updated = true
-      end
+  def update_entries(fj_feed)
+    return unless new_entries? fj_feed
+    entries.delete_all
+    insert_new_entries fj_feed
+    subscriptions.each do |s|
+      s.update_attribute(:updated, !old?(entries.first, s))
     end
-    self.entries = entries.order(created_at: :desc).first(Feed.entries_per_feed)
-    updated
+  end
+
+  def new_entries?(fj_feed)
+    fj_entries = fj_feed.entries.first(Feed.entries_per_feed)
+    fj_entries.each do |e|
+      return true unless entries.find_by(url: e.url)
+    end
+    false
+  end
+
+  def insert_new_entries(fj_feed)
+    fj_entries = fj_feed.entries.first(Feed.entries_per_feed)
+    fj_entries.each do |e|
+      insert_entry e
+    end
   end
 
   def setup_fj
@@ -94,7 +98,6 @@ class Feed < ActiveRecord::Base
 
   def find_image(entry, description)
     process_image(image_from_description(description)) ||
-      process_image(og_image(entry.url)) ||
       process_image(entry.image)
   end
 
