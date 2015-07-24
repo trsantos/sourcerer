@@ -1,4 +1,5 @@
 /* Constants */
+//$bg-color: #587B7F;
 //$bg-color: #79B791;
 $bg-color: #ACBDBA; /* also GOOD */
 //$bg-color: #B2EFB2;
@@ -9,13 +10,16 @@ $bg-color: #C9CDC0; /* GOOD! and better for crappy screens? */
 //$bg-color: #CCCCBB;
 //$bg-color: #CDCDCD; /* GOOD! and "neutral" */
 //$bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it to the gray tone before launching. */
+$bg-color: #B4B8C5; // GREAT!
+$bg-color: #B4B895; // 'calibration' lol
 //$bg-color: #F3C969;
-$bg-color: #f8f8f8;
 
 $box-color: white;
 
-$fh-color: #111A21;
-$fh-hover: #1B2228;
+$fh-color: #121B22;
+//$fh-color: #1B2021;
+
+$fh-hover: #1D252B;
 
 // Small screens
 /* Define mobile styles */
@@ -63,7 +67,7 @@ $fh-hover: #1B2228;
 	}
 	#logo, #feed-title {
 	    font-size: medium;
-	    font-size: 17px;
+#	    font-size: 17px;
 	}
     }
     #favicon {
@@ -83,7 +87,7 @@ $fh-hover: #1B2228;
 	    h5, h6 {
 		margin: 0px;
 		font-size: large;
-		font-size: 17px;
+#		font-size: 17px;
 	    }
 	    .old a {
 		#color: #666;
@@ -157,7 +161,7 @@ $fh-hover: #1B2228;
 	}
     }
     #feed-header {
-#	border-top: 1px solid #111;
+#	border-top: 1px solid #334;
 	background-color: $fh-color;
 	.top-bar {
 	    background-color: $fh-color;
@@ -176,7 +180,7 @@ $fh-hover: #1B2228;
 	    line-height: 55px;
 	    #feed-title {
 		font-size: x-large;
-		font-size: 22px;
+#		font-size: 22px;
 	    }
 	}
 	height: 55px;
