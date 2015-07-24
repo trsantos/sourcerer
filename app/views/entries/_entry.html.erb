@@ -5,9 +5,6 @@
 		<%= link_to sanitize(entry.title), entry.url, class: "entry-title", target: "_blank" %>
 	    </strong>
 	</h5>
-	<p class="timestamp">
-	    <%= time_ago_in_words(entry.pub_date).capitalize %> ago
-	</p>
     </header>
     <div class="row">
 	<% if @only_images %>
@@ -39,4 +36,7 @@
 	    <% end %>
 	<% end %>
     </div>
+    <p class="timestamp">
+	<%= time_ago_in_words(entry.pub_date).capitalize %> ago
+    </p>
 </article>
