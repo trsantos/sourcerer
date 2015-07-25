@@ -165,7 +165,7 @@ $fh-hover: #1D252B;
 	}
     }
     #feed-header {
-#	border-top: 1px solid #334;
+#	border-top: 1px solid #40444F;
 	background-color: $fh-color;
 	.top-bar {
 	    background-color: $fh-color;
@@ -184,7 +184,6 @@ $fh-hover: #1D252B;
 	    line-height: 50px;
 	    #feed-title {
 		font-size: x-large;
-#		font-size: 22px;
 	    }
 	}
 	height: 50px;
@@ -257,8 +256,7 @@ $fh-hover: #1D252B;
 	border-bottom: 1px dotted gray;
 	font-size: small;
 	text-transform: uppercase;
-	padding-bottom: 5px;
-	margin-top: 10px;
+	padding: 6px 0px 5px;
 	margin-bottom: 0px;
     }
     .top-bar {
@@ -276,7 +274,6 @@ $fh-hover: #1D252B;
 #	padding-right: 0px !important;
     }
     aside {
-	#	display: none;
 	margin-left: auto;
 	.box {
 	    padding-bottom: 10px;
