@@ -13,13 +13,13 @@ $bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it t
 $bg-color: #B4B8C5; // GREAT! (at least on tablet)
 //$bg-color: #B4B895; // 'calibration' lol
 //$bg-color: #F3C969;
-//$bg-color: #eee;
+$bg-color: #eee;
 //$bg-color: lightgray;
 
 $box-color: white;
 
 $fh-color: #121B22;
-//$fh-color: #20242F; // #eee
+$fh-color: #20242F; // #eee
 
 $fh-hover: #1D252B;
 
@@ -232,7 +232,7 @@ $fh-hover: #1D252B;
     }
     .top-bar {
 	max-width: 947px !important;
-	.active, .has-dropdown {
+	.active {
 	    margin-right: 15px;
 	}
     }
