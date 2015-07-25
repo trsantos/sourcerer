@@ -13,11 +13,12 @@ $bg-color: #CDCDAD; /* Above color "calibrated" to my crappy screen. Change it t
 //$bg-color: #B4B8C5; // (not so) GREAT!
 //$bg-color: #B4B895; // 'calibration' lol
 //$bg-color: #F3C969;
+$bg-color: #eee;
 
 $box-color: white;
 
 $fh-color: #121B22;
-//$fh-color: #1B2021;
+//$fh-color: #424B52;
 
 $fh-hover: #1D252B;
 
@@ -289,7 +290,7 @@ $fh-hover: #1D252B;
 	    }
 	}
 	#aside-description, #aside-title {
-	    color: #444;
+	    color: #333;
 	    margin-top: 15px;
 	}
 	#resources {
