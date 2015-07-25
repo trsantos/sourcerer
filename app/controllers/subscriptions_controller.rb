@@ -51,10 +51,18 @@ class SubscriptionsController < ApplicationController
   end
 
   def set_update_params
-    title = params[:subscription][:title]
-    params[:subscription][:title] = nil if title.blank?
+    set_update_title
+    set_update_url
+  end
 
+  def set_update_title
+    title = params[:subscription][:title]
+    params[:subscription][:title] = nil if title && title.blank?
+  end
+
+  def set_update_url
     site_url = params[:subscription][:site_url]
+    return if site_url.nil?
     params[:subscription][:site_url] = process_url site_url
   end
 
