@@ -21,7 +21,7 @@ $box-color: white;
 $fh-color: #121B22;
 $fh-color: #20242F; // #eee
 
-$fh-hover: #1D252B;
+$fh-hover: #292D36;
 
 // Small screens
 /* Define mobile styles */
@@ -281,7 +281,7 @@ $fh-hover: #1D252B;
 	#feed-logo {
 	    img {
 		margin-top: 13px;
-		max-height: 100px;
+		max-height: 80px;
 		padding: 2px;
 		box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
 		background-color: white;
@@ -289,10 +289,10 @@ $fh-hover: #1D252B;
 	}
 	#aside-description, #aside-title {
 	    color: #333;
-	    margin-top: 15px;
+	    margin-top: 10px;
 	}
 	#resources {
-	    margin-top: 10px;
+	    margin-top: 5px;
 	}
 	p, a {
 	    font-size: small;
