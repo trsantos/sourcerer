@@ -79,7 +79,7 @@ $fh-hover: #1D252B;
 	width: 18px;
 	padding: 1px;
 	background-color: white;
-	margin-right: 5px;
+	margin-right: 8px;
 	margin-bottom: 3px;
     }
     #feeds-show-container {
@@ -241,7 +241,7 @@ $fh-hover: #1D252B;
     .box, .box-no-fs {
 #	padding: 0px 20px !important;
 	background-color: $box-color;
-	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
     }
     .box-no-fs {
 #	padding: 0px 20px !important;
@@ -283,7 +283,7 @@ $fh-hover: #1D252B;
 		margin-top: 13px;
 		max-height: 100px;
 		padding: 2px;
-		box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+		box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
 		background-color: white;
 	    }
 	}
