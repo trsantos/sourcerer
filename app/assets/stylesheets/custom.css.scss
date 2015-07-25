@@ -65,9 +65,11 @@ $fh-hover: #1D252B;
 	    text-overflow: ellipsis;
 	    white-space: nowrap;
 	}
-	#logo, #feed-title {
+	#logo {
 	    font-size: medium;
-#	    font-size: 17px;
+	}
+	#feed-title {
+	    font-size: large;
 	}
     }
     #favicon {
@@ -76,7 +78,7 @@ $fh-hover: #1D252B;
 	padding: 1px;
 	background-color: white;
 	margin-right: 5px;
-	margin-bottom: 2px;
+	margin-bottom: 3px;
     }
     #feeds-show-container {
 	margin-bottom: 50px;
@@ -279,10 +281,10 @@ $fh-hover: #1D252B;
 	}
 	#feed-logo {
 	    img {
-		margin-top: 18px;
+		margin-top: 13px;
 		max-height: 100px;
 		padding: 2px;
-		border: 1px solid rgba(0, 0, 0, 0.2);
+		box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
 		background-color: white;
 	    }
 	}
