@@ -55,7 +55,7 @@ class Feed < ActiveRecord::Base
   end
 
   def new_entries?(fj_feed)
-    fj_entries = fj_feed.entries.first(Feed.entries_per_feed)
+    fj_entries = fj_feed.entries.first(3)
     fj_entries.each do |e|
       return true unless entries.find_by(url: e.url)
     end
