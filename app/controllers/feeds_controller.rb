@@ -13,7 +13,7 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
     # TODO: Use Ajax to reload the page when the fetch is done.
     @feed.update if @feed.created_at > 1.minute.ago
-    @entries = @feed.entries
+    @entries = @feed.entries.order(created_at: :desc)
     @only_images = @feed.only_images?
   end
 
