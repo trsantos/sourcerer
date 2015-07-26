@@ -50,7 +50,7 @@ class Feed < ActiveRecord::Base
     entries.delete_all
     insert_new_entries fj_feed
     subscriptions.each do |s|
-      s.update_attribute(:updated, !old?(entries.first, s))
+      s.update_attribute(:updated, true)
     end
   end
 
