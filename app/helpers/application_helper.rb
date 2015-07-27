@@ -31,10 +31,9 @@ module ApplicationHelper
 
   def get_feeds(topic)
     t = topic.name
-    if t == "Technology"
+    if t == 'Technology'
       return [
         # Alexa categories: Computers, Home/Consumer Information
-        #"http://www.techmeme.com/feed.xml", # 12,553
         "http://www.cnet.com/rss/all/", # 149
         #"http://feeds.mashable.com/Mashable", # 287
         "http://www.engadget.com/rss.xml", # 312
