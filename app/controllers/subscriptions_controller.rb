@@ -7,7 +7,7 @@ class SubscriptionsController < ApplicationController
 
   def index
     @subscriptions = current_user.subscriptions.includes(:feed)
-                     .order(updated: :desc, starred: :desc, visited_at: :asc)
+                     .order(updated: :desc, starred: :desc)
   end
 
   def create

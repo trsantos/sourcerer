@@ -3,7 +3,7 @@
 <div id="subscriptions-container">
 
     <header>
-	<h3>Your subscriptions [<%= current_user.subscriptions.where(updated: true).count %> updated]</h3>
+	<h3>Your subscriptions [<%= current_user.subscriptions.where(updated: true).count %> updated, <%= current_user.subscriptions.count %> total]</h3>
     </header>
 
     <ul class="feeds no-bullet">
