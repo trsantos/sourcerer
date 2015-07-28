@@ -56,9 +56,11 @@ $fh-height: 50px;
 	}
 	#logo {
 	    font-size: medium;
+	    font-size: 16px;
 	}
 	#feed-title {
 	    font-size: large;
+	    font-size: 18px;
 	}
     }
     #favicon {
@@ -80,6 +82,7 @@ $fh-height: 50px;
 		margin-top: 0px;
 		margin-bottom: 5px;
 		font-size: large;
+		font-size: 18px;
 	    }
 	}
 	.small-thumb-container, .big-thumb-container {
@@ -91,6 +94,7 @@ $fh-height: 50px;
 	}
 	.description {
 	    font-size: medium;
+	    font-size: 16px;
 	    max-height: 6.4rem;
 	    overflow: hidden;
 	    margin-top: 0px;
@@ -98,6 +102,7 @@ $fh-height: 50px;
 	}
 	.timestamp {
 	    font-size: small;
+	    font-size: 13px;
 	    color: #444;
 	    margin-top: 0px;
 	    margin-bottom: 5px;
@@ -170,6 +175,7 @@ $fh-height: 50px;
 	    line-height: $fh-height;
 	    #feed-title {
 		font-size: x-large;
+		font-size: 24px;
 	    }
 	}
 	height: $fh-height;
@@ -226,6 +232,7 @@ $fh-height: 50px;
     .section-heading {
 	border-bottom: 1px dotted gray;
 	font-size: small;
+	font-size: 13px;
 	text-transform: uppercase;
 	padding: 10px 0px 5px;
 	margin: 0px;
@@ -253,6 +260,7 @@ $fh-height: 50px;
 	}
 	p, a {
 	    font-size: small;
+	    font-size: 13px;
 	    color: #222;
 	    margin-bottom: 0px;
 	}
