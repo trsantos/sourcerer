@@ -6,7 +6,7 @@
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><%= full_title(yield(:title)) %></title>
-	<%= stylesheet_link_tag    'application', 'data-turbolinks-track' => true %>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'vendor/modernizr' %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<%= csrf_meta_tags %>
@@ -16,13 +16,10 @@
 	    <%= render 'layouts/nav' %>
 	    <%= render 'feeds/header' if in_feeds_show %>
 	</header>
-	<main id="<%= "main-fs" if in_feeds_show %>">
+	<main class="<%= "main-fs" if in_feeds_show %>">
 	    <% flash.each do |message_type, message| %>
-	        <%= content_tag(:div,
-				message,
-				class: "alert-box #{message_type}") %>
+	        <%= content_tag(:div, message, class: "alert-box #{message_type}") %>
 	    <% end %>
-
 	    <div class="row" id="main-content">
 		<div class="small-12 columns <%= "medium-7 medium-centered large-8 box-no-fs" unless in_feeds_show %>">
 		    <%= yield %>
