@@ -1,11 +1,16 @@
 <% provide(:title, "New feed") %>
-<header>
-    <h3>New feed</h3>
-</header>
 
-<%= form_for(:feed, url: feeds_path) do |f| %>
-    <%= f.label :feed %>
-    <%= f.text_field :feed_url, autofocus: true %>
+<div class="row simple-container">
+    <div class="medium-8 medium-centered large-7 columns box">
+	<header>
+	    <h3>New feed</h3>
+	</header>
 
-    <%= f.submit "Submit", class: "button expand" %>
-<% end %>
+	<%= form_for(:feed, url: feeds_path) do |f| %>
+	    <%= f.label :feed %>
+	    <%= f.text_field :feed_url, autofocus: true %>
+
+	    <%= f.submit "Submit", class: "button radius expand" %>
+	<% end %>
+    </div>
+</div>

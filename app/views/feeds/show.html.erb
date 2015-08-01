@@ -1,5 +1,7 @@
 <% provide(:title, sanitize(@feed.title)) %>
 
+<div id="fs-top-sep"></div>
+
 <div id="feeds-show-container" class="row">
     <aside>
 	<div class="large-3 columns show-for-large-up">
@@ -21,6 +23,14 @@
 		    <%= link_to "Raw feed", @feed.feed_url, target: "_blank" %>
 		</strong>
 	    </div>
+	    <% if Time.current > current_user.expiration_date - 1.week %>
+		<div class="aside-sep"></div>
+		<p class="section-heading">Important</p>
+		<div id="aside-sub">
+		    <p>Your subscription is about to end.</p>
+		    <strong><%= link_to 'Renewal now', billing_expired_path %></strong>
+		</div>
+	    <% end %>
 	</div>
     </aside>
     <div class="box medium-10 medium-centered large-9 large-uncentered columns">
@@ -32,6 +42,8 @@
 	<% end %>
     </div>
 </div>
+
+<div id="fs-bottom-sep"></div>
 
 <%= link_to "Next feed", next_path, class: "show-for-small-only button expand", id: "next" %>
 

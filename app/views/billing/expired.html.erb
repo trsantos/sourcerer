@@ -1,19 +1,25 @@
 <% expiration_date = current_user.expiration_date %>
 
-<div class="billing-container">
-    <% if Time.current < expiration_date %>
-	<p>Your subscription to Sourcerer will expire in <%= distance_of_time_in_words_to_now expiration_date %>.</p>
-    <% else %>
-	<p>Oops. Your subscription to Sourcerer expired <%= time_ago_in_words expiration_date %> ago.</p>
-    <% end %>
+<div class="row billing-container simple-container">
+    <div class="medium-8 large-7 medium-centered columns box">
+	<header>
+	    <h3>Subscription renewal</h3>
+	</header>
 
-    <p>But for <strong>$15</strong> you'll be able to continue using the app for <strong>one more year</strong>, until <%= new_expiration_date %>.</p>
+	<% if Time.current < expiration_date %>
+	    <p>Your subscription to Sourcerer will expire in <%= distance_of_time_in_words_to_now expiration_date %>.</p>
+	<% else %>
+	    <p>Oops. Your subscription to Sourcerer expired <%= time_ago_in_words expiration_date %> ago.</p>
+	<% end %>
 
-    <p>There will be no auto renewal so you won't get any surprises in the future.</p>
+	<p>But for <strong>$20</strong> you'll be able to continue using the app for <strong>one more year</strong>, until <%= new_expiration_date %>.</p>
 
-    <p>Looks good? Then click the button to begin the check out with Paypal. When you come back, you'll get a chance to review everything before the actual payment.</p>
+	<p>There will be no auto renewal and thus no surprises in the future.</p>
 
-    <%= link_to image_tag('//www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png'), billing_checkout_path, class: 'paypal-button', 'data-no-turbolink': true %>
+	<p>Looks good? Then click the button to begin the check out with Paypal. When you come back, you'll get a chance to review everything before the actual payment.</p>
 
-    <p><%= image_tag asset_path('brazil.png'), id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', billing_checkout_path(br: true), 'data-no-turbolink': true %> to pay in BRL.</p>
+	<%= link_to image_tag('//www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png'), billing_checkout_path, class: 'paypal-button', 'data-no-turbolink': true %>
+
+	<p><%= image_tag 'brazil.png', id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', billing_checkout_path(br: true), 'data-no-turbolink': true %> to pay in BRL.</p>
+    </div>
 </div>

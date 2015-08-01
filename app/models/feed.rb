@@ -102,7 +102,7 @@ class Feed < ActiveRecord::Base
   end
 
   def process_image(img)
-    return if img.nil? || img.blank?
+    return if img.blank?
     img = parse_image img
     filter_image img
   end

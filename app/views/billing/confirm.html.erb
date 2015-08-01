@@ -1,11 +1,15 @@
-<div class="billing-container">
-    <h3>We're almost done!</h3>
+<div class="row billing-container simple-container">
+    <div class="medium-8 large-7 medium-centered columns box">
+	<header>
+	    <h3>We're almost done!</h3>
+	</header>
 
-    <p>Review your payment information before approving it. You will be charged only after this confirmation step.</p>
+	<p>Review your payment information before approving it. You will be charged only after this confirmation step.</p>
 
-    <strong>Price:</strong> <%= @total %> <%= @currency %><br/>
-    <strong>New subscription end date: </strong><%= new_expiration_date %><br/>
-    <br/>
+	<strong>Price:</strong> <%= @total %> <%= @currency %><br/>
+	<strong>New subscription end date: </strong><%= new_expiration_date %><br/>
+	<br/>
 
-    <%= link_to "Confirm payment", billing_finalize_path(params), class: 'button', id: 'confirm-button', 'data-no-turbolink': true %>
+	<%= link_to "Confirm payment", billing_finalize_path(params), class: 'button radius expand', 'data-no-turbolink': true %>
+    </div>
 </div>

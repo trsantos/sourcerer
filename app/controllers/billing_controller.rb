@@ -43,7 +43,7 @@ class BillingController < ApplicationController
   private
 
   def payment_details(br)
-    pc = br ? %w(50 BRL) : %w(15 USD)
+    pc = br ? %w(70 BRL) : %w(20 USD)
     { intent: 'sale',
       payer: { payment_method: 'paypal' },
       redirect_urls: { return_url: billing_confirm_url,
@@ -56,7 +56,7 @@ class BillingController < ApplicationController
   end
 
   def payment_details_without_item_list(br)
-    pc = br ? %w(50 BRL) : %w(15 USD)
+    pc = br ? %w(70 BRL) : %w(20 USD)
     { intent: 'sale',
       payer: { payment_method: 'paypal' },
       redirect_urls: { return_url: billing_confirm_url,

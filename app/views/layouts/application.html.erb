@@ -12,19 +12,22 @@
 	<%= csrf_meta_tags %>
     </head>
     <body>
-	<header id="combined-header" class="contain-to-grid fixed">
-	    <%= render 'layouts/nav' %>
-	    <%= render 'feeds/header' if in_feeds_show %>
-	</header>
-	<main class="<%= "main-fs" if in_feeds_show %>">
-	    <% flash.each do |message_type, message| %>
-	        <%= content_tag(:div, message, class: "alert-box #{message_type}") %>
+	<% if logged_in? %>
+	    <header id="combined-header" class="contain-to-grid fixed">
+		<%= render 'layouts/nav' %>
+		<%= render 'feeds/header' if in_feeds_show %>
+	    </header>
+	    <div id="nav-sep"></div>
+	    <% if in_feeds_show %>
+		<div id="fs-fh-sep"></div>
 	    <% end %>
-	    <div class="row" id="main-content">
-		<div class="small-12 columns <%= "medium-7 medium-centered large-8 box-no-fs" unless in_feeds_show %>">
-		    <%= yield %>
-		</div>
-	    </div>
-	</main>
+	<% end %>
+	<% flash.each do |message_type, message| %>
+	    <%= content_tag(:div, message, class: "alert-box #{message_type}") %>
+	<% end %>
+	<% if logged_in? && !in_feeds_show %>
+	    <div id="neg-nav-sep"></div>
+	<% end %>
+	<%= yield %>
     </body>
 </html>

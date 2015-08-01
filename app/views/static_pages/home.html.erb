@@ -1,9 +1,71 @@
-<header>
-    <h2>Welcome to Sourcerer</h2>
-</header>
-<% if logged_in? %>
-    <%= link_to "Start reading!", next_path, class: "button expand" %>
-<% else %>
-    <%= link_to "Sign up now!", signup_path, class: "button expand" %>
-    <%= link_to "Log in", login_path, class: "button expand show-for-small-only" %>
-<% end %>
+<div id="homepage">
+    <div class="dark" style="background-color: #20242F; color: white; padding-bottom: 1px">
+	<div class="row" style="padding: 0px 15px">
+	    <header style="margin-top: 15px">
+		<h3 class="left" style="color:white; margin: 6px 0px; padding: 0px">Sourcerer</h3>
+		<%= link_to "Log in", login_path, class: "button secondary right radius" %>
+	    </header>
+	</div>
+	<div class="row" style="padding: 0px 15px">
+	    <div style="height: 20px"></div>
+	    <h3 class="text-center" style="color: white">Discover the important news you've been missing.</h3>
+	    <div style="height: 40px"></div>
+	    <div class="medium-5 medium-centered columns">
+		<%= link_to "Sign up", signup_path, class: "button expand radius" %>
+		<p class="text-center">7-day free trial. $20/year after that.</p>
+	    </div>
+	    <div style="height: 40px"></div>
+	</div>
+	<div style="height: 400px; width: 1080px; margin: 5px auto 0px auto; overflow: hidden; box-shadow: 0px 0px 5px lightgray; border-radius: 5px 5px 0px 0px" class="show-for-large-up"">
+	    <%= image_tag 'ss.png', style: "margin-top: -1px; max-width: 1366px; margin-left: -143px" %>
+	</div>
+    </div>
+
+    <div class="light" style="color: #20242F; background: #f8f8f8">
+	<div class="row" style="padding: 10px 30px">
+	    <div class="medium-6 large-6 columns" style="text-align: center">
+		<%= icon 'newspaper-o', style: "font-size: 70px; margin-top: 20px" %>
+		<p>Get updated on your favorite websites, blogs, comics, YouTube channels and more. Anything with an RSS feed.</p>
+	    </div>
+	    <div class="medium-6 large-6 columns" style="text-align: center">
+		<%= icon 'magic', style: "font-size: 70px; margin-top: 20px" %>
+		<p>Hear from all your sources, no matter their quantity. High-volume feeds are not over represented.</p>
+	    </div>
+	</div>
+	<div class="row" style="padding: 10px 30px">
+	    <div class="medium-6 large-6 columns" style="text-align: center">
+		<%= icon 'star', style: "font-size: 70px; margin-top: 20px" %>
+		<p>Star your must-read feeds and see their updates before everything else.</p>
+	    </div>
+	    <div class="medium-6 large-6 columns" style="text-align: center">
+		<%= icon 'desktop', style: "font-size: 70px; margin-top: 20px" %>
+		<%= icon 'tablet', style: "font-size: 70px; margin-top: 20px" %>
+		<%= icon 'mobile', style: "font-size: 70px; margin-top: 20px" %>
+		<p>Read on the go. Sourcerer works fine on all your devices. There is no app to install, just visit the website.</p>
+	    </div>
+	</div>
+    </div>
+
+    <div class="dark" style="padding-top: 15px; background-color: #20242F; color: white">
+	<div class="row">
+	    <div class="medium-7 medium-centered large-6 columns">
+		<h4 style="color: white; text-align: center">Other features</h4>
+		<ul class="circle" style="text-align: center">
+		    <li>No need to spend time managing and categorizing feeds.</li>
+		    <li>Starring and unsubscribing to feeds are 1-click actions.</li>
+		    <li>No social media sharing buttons and the like.</li>
+		    <li>No unread counts nor manual mark as read.</li>
+		    <li>OPML import and export.</li>
+		</ul>
+	    </div>
+	</div>
+    </div>
+
+    <div>
+	<div class="" style="padding-top: 20px; border-top: 0px dotted gray">
+	    <div class="columns">
+		<p class="text-center" style="font-size: small">Created by <%= link_to '@thiago__rs', '//twitter.com/thiago__rs', target: '_blank' %>. You can also reach me by <%= mail_to 'trsantos1@gmail.com', 'email' %>. Please tell me about any bugs, wording issues or anything else!</p>
+	    </div>
+	</div>
+    </div>
+</div>

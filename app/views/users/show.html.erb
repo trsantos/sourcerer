@@ -1,19 +1,23 @@
 <% provide(:title, @user.name) %>
 
-<header>
-    <h3>Hello, <%= @user.name.split.first %></h3>
-</header>
+<div class="row simple-container">
+    <div class="medium-8 medium-centered large-7 columns box">
+	<header>
+	    <h3>Topics</h3>
+	</header>
 
-<p class="topics-p">Tell me what you like:</p>
+	<p class="topics-p">Tell me what you like:</p>
 
-<%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
-    <% Topic.all.order(:name).each do |t| %>
-	<div class="medium-6 columns">
-	    <%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
-	    <%= f.label t.name, t.name %>
-	</div>
-    <% end %>
-    <%= f.submit "Save Topics", class: "button expand", id: "topics-button" %>
-<% end %>
+	<%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
+	    <% Topic.all.order(:name).each do |t| %>
+		<div class="medium-6 columns">
+		    <%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
+		    <%= f.label t.name, t.name %>
+		</div>
+	    <% end %>
+	    <%= f.submit "Save Topics", class: "button radius expand", id: "topics-button" %>
+	<% end %>
 
-<p class="topics-p"><em>Note that you can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>
+	<p class="topics-p"><em>You can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>
+    </div>
+</div>

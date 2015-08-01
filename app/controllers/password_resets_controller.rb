@@ -5,7 +5,7 @@ class PasswordResetsController < ApplicationController
 
   def new
     if logged_in?
-      redirect_to current_user
+      redirect_to edit_user_path current_user
     end
   end
 
@@ -13,7 +13,7 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by(email: params[:password_reset][:email].downcase)
     if @user
       @user.create_reset_digest
-      @user.send_password_reset_email
+      @user.delay.send_password_reset_email
       flash[:info] = "Email sent with password reset instructions"
       redirect_to root_url
     else

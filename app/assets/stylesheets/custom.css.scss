@@ -13,18 +13,19 @@ $fh-height: 50px;
 // Small screens
 /* Define mobile styles */
 @media only screen {
-    main {
-	padding-top: 45px;
+    .simple-container {
+	header {
+	    text-align: center;
+	}
     }
-    header h3 {
-	padding-top: 0.75rem;
-	margin-top: 0px;
+    #nav-sep {
+	height: 45px;
     }
     .alert-box {
 	margin-bottom: 0px !important;
 	text-align: center;
     }
-    .topics-p, .topics-button {
+    .topics-p {
 	margin-bottom: 0.5rem;
     }
     .users li, .feeds li, article {
@@ -116,10 +117,6 @@ $fh-height: 50px;
 	right: 0px;
     }
     .billing-container {
-	padding-top: 0.75rem;
-	h3 {
-	    margin-top: 0px;
-	}
 	.paypal-button img {
 	    max-height: 45px;
 	    margin-bottom: 20px;
@@ -127,9 +124,6 @@ $fh-height: 50px;
 	#br-flag {
 	    height: 16px;
 	    margin-bottom: 3px;
-	}
-	p:last-child {
-	    margin-bottom: 0px;
 	}
     }
 }
@@ -145,6 +139,25 @@ $fh-height: 50px;
 // Medium screens
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
+    #fs-fh-sep {
+	height: 50px;
+    }
+    #neg-nav-sep {
+	/* 75 - 30 = 45px */
+	margin-top: -60px;
+    }
+    .simple-container {
+	padding: 75px 0px !important;
+	align-items: center;
+	.box {
+	    border: 1px solid lightgray;
+	    padding: 15px;
+	    border-radius: 3px;
+	    ul {
+		margin-bottom: 0px;
+	    }
+	}
+    }
     .main-fs {
 	padding-top: 95px;
     }
@@ -212,22 +225,18 @@ $fh-height: 50px;
 // Large screens
 /* min-width 1025px, large screens */
 @media only screen and (min-width: 64.063em) {
+    #fs-top-sep {
+	height: 15px;
+    }
+    #fs-bottom-sep {
+	height: 15px;
+    }
     body {
 	background-color: $bg-color !important;
     }
-    #main-content {
-	margin: 15px auto;
-    }
-    .box, .box-no-fs {
+    .box, {
 	background-color: $box-color;
-    }
-    .box-no-fs {
-	ul {
-	    margin-bottom: 0px;
-	}
-	li:last-child, p:last-child {
-	    padding-bottom: 15px;
-	}
+	border-radius: 2px;
     }
     .section-heading {
 	border-bottom: 1px dotted gray;
@@ -247,11 +256,11 @@ $fh-height: 50px;
 	    img {
 		margin-top: 13px;
 		max-height: 80px;
-		padding: 2px;
+		padding: 3px;
 		background-color: white;
 	    }
 	}
-	#aside-description, #aside-title {
+	#aside-description, #aside-title, #aside-sub {
 	    color: #333;
 	    margin-top: 10px;
 	}
@@ -263,6 +272,9 @@ $fh-height: 50px;
 	    font-size: 13px;
 	    color: #222;
 	    margin-bottom: 0px;
+	}
+	.aside-sep {
+	    height: 20px;
 	}
     }
 }

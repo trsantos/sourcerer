@@ -20,6 +20,7 @@ gem 'sinatra', require: nil
 gem 'normalize-rails'
 gem 'mousetrap-rails'
 gem 'paypal-sdk-rest'
+gem 'font-awesome-sass'
 
 group :development, :test do
   gem 'sqlite3'

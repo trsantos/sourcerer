@@ -12,6 +12,11 @@ module ApplicationHelper
     params[:controller] == 'feeds' && params[:action] == 'show'
   end
 
+  def in_auth?
+    (params[:controller] == 'users' && params[:action] == 'new') ||
+      (params[:controller] == 'sessions' && params[:action] == 'new')
+  end
+
   # Confirms a logged-in user.
   def logged_in_user
     return if logged_in?
