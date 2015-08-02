@@ -1,14 +1,15 @@
 <div id="homepage">
     <div class="dark" style="background-color: #20242F; color: white; padding-bottom: 1px">
 	<div class="row" style="padding: 0px 15px">
-	    <header style="margin-top: 15px">
-		<h3 class="left" style="color:white; margin: 6px 0px; padding: 0px">Sourcerer</h3>
+	    <header style="margin-top: 30px">
+		<%= image_tag 'logo_light.png', class: 'left', style: 'height: 50px' %>
+		<!-- <h3 class="left" style="color:white; margin: 6px 0px; padding: 0px">Sourcerer</h3> -->
 		<%= link_to "Log in", login_path, class: "button secondary right radius" %>
 	    </header>
 	</div>
 	<div class="row" style="padding: 0px 15px">
 	    <div style="height: 20px"></div>
-	    <h2 class="text-center" style="color: white">Discover the important news you've been missing.</h2>
+	    <h2 class="text-center" style="color: white">Uncover important news around you.</h2>
 	    <div style="height: 40px"></div>
 	    <div class="medium-5 medium-centered columns">
 		<%= link_to "Sign up for 7 day free trial", signup_path, class: "button expand radius" %>
