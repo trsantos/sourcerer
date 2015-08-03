@@ -13,6 +13,12 @@ $fh-height: 50px;
 // Small screens
 /* Define mobile styles */
 @media only screen {
+    #homepage {
+	#top {
+	    background-color: $fh-color;
+	    color: white;
+	}
+    }
     .simple-container {
 	header {
 	    text-align: center;
