@@ -1,72 +1,77 @@
 <div id="homepage">
-    <div id="top" style="background-color: #20242F; color: white; padding-bottom: 1px">
-	<div class="row" style="padding: 0px 15px">
-	    <header style="margin-top: 30px">
-		<%= image_tag 'logo_light.png', class: 'left', style: 'height: 50px' %>
-		<!-- <h3 class="left" style="color:white; margin: 6px 0px; padding: 0px">Sourcerer</h3> -->
-		<%= link_to "Log in", login_path, class: "button secondary right radius" %>
-	    </header>
-	</div>
-	<div class="row" style="padding: 0px 15px">
-	    <div style="height: 20px"></div>
-	    <h2 class="text-center" style="color: white">Discover important news around you.</h2>
-	    <div style="height: 40px"></div>
-	    <div class="medium-5 medium-centered columns">
-		<%= link_to "Sign up for 7 day free trial", signup_path, class: "button expand radius" %>
-		<p class="text-center">$20/year after that</p>
+    <section id="top">
+	<header>
+	    <div class="row">
+		<div class="columns">
+		    <%= image_tag 'logo_light.png', id: 'logo', class: 'left show-for-medium-up' %>
+		    <%= image_tag 'logo_icon.png', id: 'logo', class: 'left show-for-small-only' %>
+		    <%= link_to "Log in", login_path, class: "button secondary right radius" %>
+		</div>
 	    </div>
-	    <div style="height: 40px"></div>
+	</header>
+	<div class="row">
+	    <h2 id="tagline" class="text-center">Discover important news around you.</h2>
+	    <div class="medium-5 medium-centered columns">
+		<%= link_to "Start your free trial", signup_path, class: "button expand radius" %>
+		<p id="price-info" class="text-center">Try it free for 7 days. It's $20/year after that.</p>
+	    </div>
 	</div>
-	<div style="height: 400px; width: 1080px; margin: 5px auto 0px auto; overflow: hidden; box-shadow: 0px 0px 5px lightgray; border-radius: 5px 5px 0px 0px" class="show-for-large-up"">
-	    <%= image_tag 'ss.png', style: "margin-top: -1px; max-width: 1366px; margin-left: -143px" %>
+	<!-- <div style="height: 400px; width: 1080px; margin: 5px auto 0px auto; overflow: hidden; box-shadow: 0px 0px 5px lightgray; border-radius: 5px 5px 0px 0px" class="show-for-large-up""> -->
+	<div class="row">
+	    <div id="ss-container" class="medium-centered columns show-for-xxlarge-up">
+		<%#= image_tag 'ss.png', style: "margin-top: -1px; max-width: 1366px; margin-left: -143px" %>
+		<%#= image_tag 'ss.png' %>
+	    </div>
 	</div>
-    </div>
+    </section>
 
-    <div class="light" style="color: #20242F; background: #f8f8f8">
-	<div class="row" style="padding: 10px 30px">
-	    <div class="medium-6 large-6 columns" style="text-align: center">
-		<%= icon 'newspaper-o', style: "font-size: 70px; margin-top: 20px" %>
+    <section class="main-features">
+	<div class="row first-row">
+	    <div class="medium-6 columns">
+		<%= icon 'newspaper-o' %>
 		<p>Get updated on your favorite websites, blogs, comics, YouTube channels and more. Anything with an RSS feed.</p>
 	    </div>
-	    <div class="medium-6 large-6 columns" style="text-align: center">
-		<%= icon 'magic', style: "font-size: 70px; margin-top: 20px" %>
-		<p>Hear from all your sources, no matter their quantity. High-volume feeds are not over represented.</p>
+	    <div class="medium-6 columns">
+		<%= icon 'magic' %>
+		<p>Hear from all your sources, no matter their quantity. You won't see the same high-volume feeds everytime.</p>
 	    </div>
 	</div>
-	<div class="row" style="padding: 10px 30px">
-	    <div class="medium-6 large-6 columns" style="text-align: center">
-		<%= icon 'star', style: "font-size: 70px; margin-top: 20px" %>
-		<p>Star your must-read feeds and see their updates before everything else.</p>
+	<div class="row second-row">
+	    <div class="medium-6 columns">
+		<%= icon 'star' %>
+		<p>Star any sources that you want to see before everything else. These will be your must-reads.</p>
 	    </div>
-	    <div class="medium-6 large-6 columns" style="text-align: center">
-		<%= icon 'desktop', style: "font-size: 70px; margin-top: 20px" %>
-		<%= icon 'tablet', style: "font-size: 70px; margin-top: 20px" %>
-		<%= icon 'mobile', style: "font-size: 70px; margin-top: 20px" %>
+	    <div class="medium-6 columns">
+		<%= icon 'desktop' %>
+		<%= icon 'tablet' %>
+		<%= icon 'mobile' %>
 		<p>Read on the go. Sourcerer works fine on all your devices. There is no app to install, just visit the website.</p>
 	    </div>
 	</div>
-    </div>
+    </section>
 
-    <div class="dark" style="padding-top: 15px; background-color: #20242F; color: white">
+    <section class="other-features">
 	<div class="row">
-	    <div class="medium-7 medium-centered large-6 columns">
-		<h4 style="color: white; text-align: center">Other features</h4>
-		<ul class="circle" style="text-align: center">
+	    <h4 class="text-center">Other features</h4>
+	    <ul class="circle">
+		<div class="medium-6 columns">
 		    <li>No need to spend time managing and categorizing feeds.</li>
 		    <li>Starring and unsubscribing to feeds are 1-click actions.</li>
 		    <li>No social media sharing buttons and the like.</li>
+		</div>
+		<div class="medium-6 columns">
 		    <li>No unread counts nor manual mark as read.</li>
 		    <li>OPML import and export.</li>
-		</ul>
-	    </div>
+		</div>
+	    </ul>
 	</div>
-    </div>
+    </section>
 
-    <div>
-	<div class="" style="padding-top: 20px; border-top: 0px dotted gray">
+    <footer>
+	<div class="row">
 	    <div class="columns">
-		<p class="text-center" style="font-size: small">Created by <%= link_to '@thiago__rs', '//twitter.com/thiago__rs', target: '_blank' %>. You can also reach me by <%= mail_to 'trsantos1@gmail.com', 'email' %>. Please tell me about any bugs, wording issues or anything else!</p>
+		<p class="text-center">Developed by Thiago Rodrigues. You can reach me via <%= link_to 'Twitter', '//twitter.com/thiago__rs', target: '_blank' %> or <%= mail_to 'trsantos1@gmail.com', 'email' %>.</p>
 	    </div>
 	</div>
-    </div>
+    </footer>
 </div>

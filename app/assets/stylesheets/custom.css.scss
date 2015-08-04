@@ -14,9 +14,51 @@ $fh-height: 50px;
 /* Define mobile styles */
 @media only screen {
     #homepage {
+	height: 100%;
+	background-color: $fh-color;
 	#top {
+	    color: white;
+	    header {
+		padding-top: 15px;
+		#logo {
+		    height: 60px;
+		}
+	    }
+	    #tagline {
+		color: white;
+		margin: 20px 0px 40px 0px;
+	    }
+	    #price-info {
+		margin-bottom: 40px;
+	    }
+	}
+	.main-features {
+	    text-align: center;
+	    #background-color: white;
+	    .row {
+		background-color: white;
+		padding-top: 20px;
+		color: $fh-color;
+	    }
+	    i {
+		font-size: 50px;
+	    }
+	}
+	.other-features {
+	    padding: 40px 0px;
 	    background-color: $fh-color;
 	    color: white;
+	    h4 {
+		color: inherit;
+	    }
+	}
+	footer {
+	    background-color: $fh-color;
+	    color: white;
+#	    padding-top: 15px;
+	    p {
+		font-size: small;
+	    }
 	}
     }
     .simple-container {
@@ -145,6 +187,30 @@ $fh-height: 50px;
 // Medium screens
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
+    #homepage {
+	#top {
+	    header {
+		padding-top: 30px;
+		#logo {
+		    height: 50px;
+		}
+	    }
+	}
+	#ss-container {
+	    max-height: 690px;
+	    overflow: hidden;
+	    margin-top: 40px;
+	    margin-bottom: 60px;
+	}
+	.main-features {
+	    .first-row {
+		border-radius: 5px 5px 0px 0px;
+	    }
+	    .second-row {
+		border-radius: 0px 0px 5px 5px;
+	    }
+	}
+    }
     #fs-fh-sep {
 	height: 50px;
     }
