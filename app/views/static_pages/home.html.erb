@@ -3,24 +3,21 @@
 	<header>
 	    <div class="row">
 		<div class="columns">
-		    <%= image_tag 'logo_light.png', id: 'logo', class: 'left show-for-medium-up' %>
-		    <%= image_tag 'logo_icon.png', id: 'logo', class: 'left show-for-small-only' %>
+		    <%= image_tag 'logo_white_50.png', id: 'logo', class: 'left show-for-medium-up' %>
+		    <%= image_tag 'logo_icon_50.png', id: 'logo', class: 'left show-for-small-only' %>
 		    <%= link_to "Log in", login_path, class: "button secondary right radius" %>
 		</div>
 	    </div>
 	</header>
 	<div class="row">
-	    <h2 id="tagline" class="text-center">Discover important news around you.</h2>
-	    <div class="medium-5 medium-centered columns">
-		<%= link_to "Start your free trial", signup_path, class: "button expand radius" %>
-		<p id="price-info" class="text-center">Try it free for 7 days. It's $20/year after that.</p>
+	    <div class="columns">
+		<h2 id="tagline" class="text-center">I've got some good news for you.</h2>
 	    </div>
 	</div>
-	<!-- <div style="height: 400px; width: 1080px; margin: 5px auto 0px auto; overflow: hidden; box-shadow: 0px 0px 5px lightgray; border-radius: 5px 5px 0px 0px" class="show-for-large-up""> -->
 	<div class="row">
-	    <div id="ss-container" class="medium-centered columns show-for-xxlarge-up">
-		<%#= image_tag 'ss.png', style: "margin-top: -1px; max-width: 1366px; margin-left: -143px" %>
-		<%#= image_tag 'ss.png' %>
+	    <div class="medium-6 medium-centered columns">
+		<%= link_to "Start your free trial now", signup_path, class: "button expand radius" %>
+		<p id="price-info" class="text-center">Try it free for 7 days. It's $20/year after that.</p>
 	    </div>
 	</div>
     </section>
@@ -29,7 +26,7 @@
 	<div class="row first-row">
 	    <div class="medium-6 columns">
 		<%= icon 'newspaper-o' %>
-		<p>Get updated on your favorite websites, blogs, comics, YouTube channels and more. Anything with an RSS feed.</p>
+		<p>Get updated on your favorite websites, blogs, comics and more. Subscribe to anything with an RSS feed.</p>
 	    </div>
 	    <div class="medium-6 columns">
 		<%= icon 'magic' %>
@@ -39,7 +36,7 @@
 	<div class="row second-row">
 	    <div class="medium-6 columns">
 		<%= icon 'star' %>
-		<p>Star any sources that you want to see before everything else. These will be your must-reads.</p>
+		<p>You can also star your must-read sources. They will be shown before everything else when updated.</p>
 	    </div>
 	    <div class="medium-6 columns">
 		<%= icon 'desktop' %>
@@ -50,27 +47,10 @@
 	</div>
     </section>
 
-    <section class="other-features">
-	<div class="row">
-	    <h4 class="text-center">Other features</h4>
-	    <ul class="circle">
-		<div class="medium-6 columns">
-		    <li>No need to spend time managing and categorizing feeds.</li>
-		    <li>Starring and unsubscribing to feeds are 1-click actions.</li>
-		    <li>No social media sharing buttons and the like.</li>
-		</div>
-		<div class="medium-6 columns">
-		    <li>No unread counts nor manual mark as read.</li>
-		    <li>OPML import and export.</li>
-		</div>
-	    </ul>
-	</div>
-    </section>
-
     <footer>
 	<div class="row">
 	    <div class="columns">
-		<p class="text-center">Developed by Thiago Rodrigues. You can reach me via <%= link_to 'Twitter', '//twitter.com/thiago__rs', target: '_blank' %> or <%= mail_to 'trsantos1@gmail.com', 'email' %>.</p>
+		<p class="text-center">Created by Thiago Rodrigues. You can reach me via <%= link_to 'Twitter', '//twitter.com/thiago__rs', target: '_blank' %> or <%= mail_to 'trsantos1@gmail.com', 'email' %>.</p>
 	    </div>
 	</div>
     </footer>
