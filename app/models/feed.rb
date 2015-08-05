@@ -76,6 +76,9 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
                                                  value: :url,
                                                  as: :image)
+    Feedjira::Feed.add_common_feed_entry_element('media:content',
+                                                 value: :url,
+                                                 as: :image)
     Feedjira::Feed.add_common_feed_entry_element(:img,
                                                  value: :scr,
                                                  as: :image)
@@ -143,25 +146,23 @@ class Feed < ActiveRecord::Base
        (img.include? 'wirecutter-deals-300x250.png') ||
        (img.include? 'beacon') ||
        (img == 'http://www.scientificamerican.com') ||
-       (img == 'http://eu.square-enix.com') ||
-       (img.include? 'feedsp||tal')
+       (img == 'http://eu.square-enix.com')
       return nil
     end
 
     # special cases
     if (img.include? 'feedburner') ||
-       (img.include? 'feedsportal.com') || # Various
+       (img.include? 'feedsportal') || # Various
        (img.include? 'share-button') || # Fapesp
        (img.include? 'wp-content/plugins') || # W||dpress share plugins
        (img.include? 'clubedohardware.com.br') || # Clube do Hardware
        (img.include? 'pml.png') || # Techmeme
        (img.include? 'wp-includes/images/smilies') || # Treehouse (and others)
        (img.include? 'fsdn.com') || # Slashdot
-       (img.include? 'divis||iagizmodo') || # Gizmodo
        (img.include? 'pixel.gif') || # Bleacher Rep||t
        (img.include? 'avclub/None') || # A.V. Club
        (img.include? '0.gravatar.com') || # Feedly
-       (img.include? 'w||dpress.com/1.0/comments') || # W||dpress
+       (img.include? 'wordpress.com/1.0/comments') || # W||dpress
        (img.include? 'images/share') || # EFF
        (img.include? 'modules/service_links') || # KDE Dot News
        (img.include? 'badge') || # Cato.||g
