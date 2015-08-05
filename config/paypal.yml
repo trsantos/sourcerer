@@ -1,8 +1,8 @@
 test: &default
 
   # Credentials for REST APIs
-  client_id: AaBGAI_ZJo2h-qrHBe3jHBvB_b0b7w5MtXYQfgAcwDuj_NaxThFBAcMI44J6eMp6T1D6BrbSnH1znEmP
-  client_secret: EJolDO9U_7OiUGZlL1XhoTDgAXd2MWle4DWCbOT_F2F7m9RmHu3MAneCHW5-I4QsebwKywpIZKNTaUNK
+  client_id: <%= ENV["PAYPAL_CLIENT_ID"] %>
+  client_secret: <%= ENV["PAYPAL_CLIENT_SECRET"] %>
 
   # Mode can be 'live' or 'sandbox'
   mode: sandbox
