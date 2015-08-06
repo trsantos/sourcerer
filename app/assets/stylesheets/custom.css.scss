@@ -25,9 +25,12 @@ $fh-height: 50px;
 		    height: 50px;
 		}
 	    }
-	    #tagline {
+	    .tagline {
 		color: white;
 		margin: 20px 0px 40px 0px;
+	    }
+	    .main-tagline {
+		margin-bottom: 0px;
 	    }
 	    #price-info {
 		margin-bottom: 40px;
