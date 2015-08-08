@@ -70,18 +70,10 @@ class Feed < ActiveRecord::Base
   end
 
   def setup_fj
-    Feedjira::Feed.add_common_feed_entry_element(:enclosure,
-                                                 value: :url,
-                                                 as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
-                                                 value: :url,
-                                                 as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:content',
-                                                 value: :url,
-                                                 as: :image)
-    Feedjira::Feed.add_common_feed_entry_element(:img,
-                                                 value: :scr,
-                                                 as: :image)
+    Feedjira::Feed.add_common_feed_entry_element(:enclosure, value: :url, as: :image)
+    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail', value: :url, as: :image)
+    Feedjira::Feed.add_common_feed_entry_element('media:content', value: :url, as: :image)
+    Feedjira::Feed.add_common_feed_entry_element(:img, value: :scr, as: :image)
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
   end
 
@@ -112,7 +104,7 @@ class Feed < ActiveRecord::Base
 
   def parse_image(img)
     return img if img.start_with?('//')
-    uri = URI.parse(site_url || feed_url)
+    uri = URI.parse(feed_url || site_url) # just use feed_url?
     start = uri.scheme + '://' + uri.host
     return start + img if img.start_with? '/'
     return start + uri.path + img unless img.start_with? 'http'
@@ -145,6 +137,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'ptq.gif') ||
        (img.include? 'wirecutter-deals-300x250.png') ||
        (img.include? 'beacon') ||
+       (img.include? 'rssfeeds.usatoday.com') ||
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil
