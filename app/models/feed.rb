@@ -138,6 +138,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'wirecutter-deals-300x250.png') ||
        (img.include? 'beacon') ||
        (img.include? 'rssfeeds.usatoday.com') ||
+       (img.include? 'architecturaldigest.com/ad') ||
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil

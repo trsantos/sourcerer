@@ -2,7 +2,9 @@
     <nav class="top-bar" data-topbar>
 	<ul class="title-area">
 	    <li class="name">
-		<h1><%= link_to full_title, next_path, id: "logo", data: { keybinding: 'n' } %></h1>
+		<h1>
+		    <%= link_to image_tag('logo_nav.png'), next_path, id: 'logo', data: { keybinding: 'n' } %>
+		</h1>
 	    </li>
 	    <li class="toggle-topbar menu-icon">
 		<a href="#"><span></span></a>
