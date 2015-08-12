@@ -41,13 +41,13 @@ module ApplicationHelper
         # Alexa categories: Computers, Home/Consumer Information
         'http://www.cnet.com/rss/all/',
         'http://techcrunch.com/feed/',
-        'http://feeds.arstechnica.com/arstechnica/index/'
+        'http://www.wired.com/feed/'
       ]
     elsif t == 'News'
       return [
-        'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',
         'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
-        'http://www.theguardian.com/international/rss'
+        'http://www.theguardian.com/international/rss',
+        'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml'
       ]
     elsif t == 'Business'
       return [
