@@ -82,7 +82,7 @@ module ApplicationHelper
     elsif t == 'Movies'
       return [
         'http://feeds.feedburner.com/thr/film',
-        'http://www.theguardian.com/film/rss',
+        'http://www.avclub.com/feed/rss/?tags=film',
         'http://rss.feedsportal.com/c/592/f/7507/index.rss'
       ]
     elsif t == 'Photography'

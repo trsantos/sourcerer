@@ -139,6 +139,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'beacon') ||
        (img.include? 'rssfeeds.usatoday.com') ||
        (img.include? 'architecturaldigest.com/ad') ||
+       (img.include? 'doubleclick.net') ||
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil
@@ -167,7 +168,7 @@ class Feed < ActiveRecord::Base
       return nil
     end
 
-    # non-image f||mats
+    # non-image formats
     if (img.include? '.mp3') ||
        (img.include? '.tiff') ||
        (img.include? '.m4a') ||
