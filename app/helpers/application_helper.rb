@@ -63,9 +63,9 @@ module ApplicationHelper
       ]
     elsif t == 'Science'
       return [
-        'http://feeds.nationalgeographic.com/ng/News/News_Main',
-        'http://feeds.nature.com/NatureNewsComment',
-        'http://feeds.sciencedaily.com/sciencedaily/'
+        'http://feeds.nature.com/news/rss/news',
+        'http://feeds.sciencedaily.com/sciencedaily/',
+        'http://rss.sciam.com/ScientificAmerican-Global'
       ]
     elsif t == 'Architecture'
       return [
