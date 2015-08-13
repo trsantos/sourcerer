@@ -70,8 +70,8 @@ module ApplicationHelper
     elsif t == 'Architecture'
       return [
         'http://feeds.feedburner.com/ArchDaily',
-        'http://feeds.feedburner.com/dezeen',
-        'http://www.dwell.com/articles/feed'
+        'http://www.designboom.com/feed/',
+        'http://feeds.feedburner.com/FreshInspirationForYourHome/'
       ]
     elsif t == 'Music'
       return [
