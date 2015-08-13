@@ -58,6 +58,13 @@ $fh-height: 50px;
 	    }
 	}
     }
+    .logo-wrap {
+	margin: 15px;
+	text-align: center;
+	img {
+	    height: 50px;
+	}
+    }
     .simple-container {
 	header {
 	    text-align: center;
@@ -189,11 +196,9 @@ $fh-height: 50px;
 	    padding-top: 40px;
 	}
     }
-    #logo-img-support {
-#	margin-top: 100%;
-#	margin-bottom: -50px;
-#	height: 50px;
-#	margin: 0px auto 10px auto;
+    .logo-wrap {
+	margin: 30px;
+	margin-bottom: -45px;
     }
     #fs-fh-sep {
 	height: 50px;
