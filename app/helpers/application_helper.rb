@@ -76,7 +76,7 @@ module ApplicationHelper
     elsif t == 'Music'
       return [
         'http://www.rollingstone.com/music.rss',
-        'http://pitchfork.com/rss/news/',
+        'http://www.billboard.com/articles/rss.xml',
         'http://www.nme.com/rss/news'
       ]
     elsif t == 'Movies'
