@@ -58,8 +58,8 @@ module ApplicationHelper
     elsif t == 'Games'
       return [
         'http://feeds.ign.com/ign/all',
-        'http://www.gamespot.com/feeds/mashup/',
-        'http://www.pcgamer.com/feed/'
+        'http://www.pcgamer.com/feed/',
+        'http://www.polygon.com/rss/index.xml'
       ]
     elsif t == 'Science'
       return [
