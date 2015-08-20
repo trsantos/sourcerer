@@ -39,9 +39,9 @@ $fh-height: 50px;
 	.main-features {
 	    text-align: center;
 	    background-color: $fh-color;
-	    #background-color: white;
+	    background-color: white;
 	    .row {
-		background-color: white;
+		#background-color: white;
 		padding-top: 20px;
 		color: $fh-color;
 	    }
@@ -299,7 +299,7 @@ $fh-height: 50px;
 	    .first-row {
 		border-radius: 3px 3px 0px 0px;
 	    }
-	    .second-row {
+	    .last-row {
 		border-radius: 0px 0px 3px 3px;
 	    }
 	}
