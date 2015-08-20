@@ -27,13 +27,16 @@ $fh-height: 50px;
 	    }
 	    .tagline {
 		color: white;
-		margin: 20px 0px 40px 0px;
+		margin: 30px 0px 50px 0px;
 	    }
 	    .main-tagline {
 		margin-bottom: 0px;
 	    }
+	    .sub-tagline {
+		margin-top: 20px;
+	    }
 	    #price-info {
-		margin-bottom: 40px;
+		margin-bottom: 50px;
 	    }
 	}
 	.main-features {
@@ -42,12 +45,15 @@ $fh-height: 50px;
 	    background-color: white;
 	    .row {
 		#background-color: white;
-		padding-top: 20px;
 		color: $fh-color;
 	    }
 	    i {
+		padding-top: 20px;
 		font-size: 50px;
 	    }
+	}
+	.screenshots {
+	    color: white;
 	}
 	footer {
 	    padding-top: 20px;
@@ -56,6 +62,13 @@ $fh-height: 50px;
 	    p {
 		font-size: small;
 	    }
+	}
+	.home-heading {
+	    text-align: center;
+	    text-transform: uppercase;
+	    padding: 5px 0px;
+	    border-bottom: 1px dotted gray;
+	    margin-bottom: 0px;
 	}
     }
     .logo-wrap {
