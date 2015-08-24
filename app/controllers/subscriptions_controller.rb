@@ -34,8 +34,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    next_sub = current_user.subscriptions
-               .order(updated: :desc, starred: :desc, visited_at: :asc).first
+    next_sub = current_user.subscriptions.where(updated: true)
+               .order(starred: :desc, visited_at: :asc).first
     if next_sub
       redirect_to next_sub.feed
       return
