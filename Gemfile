@@ -17,8 +17,6 @@ gem 'feedjira'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
 gem 'sidekiq'
 gem 'sinatra', require: nil
-gem 'normalize-rails'
-gem 'mousetrap-rails'
 gem 'paypal-sdk-rest'
 gem 'font-awesome-sass'
 
