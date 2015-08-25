@@ -1,15 +1,26 @@
 <% provide(:title, 'Reset password') %>
-<header>
-    <h3>Reset password</h3>
-</header>
 
-<%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
-    <%= render 'shared/error_messages' %>
+<div class="logo-wrap">
+    <%= link_to image_tag('logo_dark_50.png'), root_url %>
+</div>
 
-    <%= hidden_field_tag :email, @user.email %>
+<div class="row simple-container">
+    <div class="medium-6 large-5 medium-centered columns box">
+	<header>
+	    <h3>Reset password</h3>
+	</header>
 
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+	<%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+	    <%= render 'shared/error_messages' %>
 
-    <%= f.submit "Update password", class: "button radius expand" %>
-<% end %>
+	    <%= hidden_field_tag :email, @user.email %>
+
+	    <%= f.label :password %>
+	    <%= f.password_field :password %>
+	    <%= f.label :password_confirmation %>
+	    <%= f.password_field :password_confirmation %>
+
+	    <%= f.submit "Update password", class: "button radius expand" %>
+	<% end %>
+    </div>
+</div>
