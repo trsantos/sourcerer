@@ -7,15 +7,20 @@
 	</header>
 
 	<%= form_for(@user) do |f| %>
-	    <%= render 'fields', f: f %>
-	    <%= f.label :password_confirmation %>
-	    <%= f.password_field :password_confirmation %>
+	    <%= render 'shared/error_messages' %>
+
+	    <%= f.label :name %>
+	    <%= f.text_field :name %>
+
+	    <%= f.label :email %>
+	    <%= f.text_field :email %>
+
 	    <%= f.submit "Save changes", class: "button radius expand" %>
 	<% end %>
-	<p id="account-last-p" data-no-turbolink>
+	<p data-no-turbolink>
 	    <strong>Subscription end date:</strong> <%= @user.expiration_date.to_date.to_formatted_s(:long) %><br>
 	    <%= link_to "Export your data", opml_export_path %><br>
-	    <%#= link_to "Delete your account", current_user, method: :delete, data: { confirm: "Are you sure you want to delete your account?" } %>
+	    <%= link_to "Delete your account", current_user, method: :delete, data: { confirm: "Are you sure you want to delete your account? This can't be undone." } %>
 	</p>
     </div>
 </div>
