@@ -11,11 +11,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @topics = Topic.all
   end
-  
+
   def new
-    if logged_in?
-      redirect_to edit_user_path current_user
-    end
+    redirect_to edit_user_path current_user if logged_in?
     @user = User.new
   end
 
@@ -36,7 +34,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated."
+      flash[:success] = 'Profile updated.'
       redirect_to @user
     else
       render 'edit'
@@ -45,7 +43,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:info] = "User deleted."
+    flash[:info] = 'User deleted.'
     redirect_to users_url
   end
 
@@ -53,25 +51,22 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     current_user.topics = []
     # This is REALLY ugly. Will fix ASOP lol.
-    # I need to do the unfollowing first so that feeds are not unsubscribed by accident
+    # I need to do the unfollowing first so that
+    # feeds are not unsubscribed by accident
     params[:topic].each do |t, v|
       t = Topic.find_by(name: t)
-      if v == '0'
-        current_user.unfollow_topic(t)
-      end
+      current_user.unfollow_topic(t) if v == '0'
     end
     params[:topic].each do |t, v|
       t = Topic.find_by(name: t)
-      if v == '1'
-        current_user.follow_topic(t)
-      end
+      current_user.follow_topic(t) if v == '1'
     end
-    flash[:info] = "Topics updated. Happy reading!"
+    flash[:info] = 'Topics updated. Happy reading!'
     redirect_to next_path
   end
 
   private
-  
+
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)
@@ -79,11 +74,10 @@ class UsersController < ApplicationController
 
   # Confirms a logged-in user.
   def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:alert] = "Please log in."
-      redirect_to login_url
-    end
+    return if logged_in?
+    store_location
+    flash[:alert] = 'Please log in.'
+    redirect_to login_url
   end
 
   # Confirms the correct user.
