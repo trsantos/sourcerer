@@ -1,12 +1,10 @@
 class PasswordResetsController < ApplicationController
-  before_action :get_user,         only: [:edit, :update]
+  before_action :find_user,         only: [:edit, :update]
   before_action :valid_user,       only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
 
   def new
-    if logged_in?
-      redirect_to edit_user_path current_user
-    end
+    redirect_to edit_user_path current_user if logged_in?
   end
 
   def create
@@ -14,21 +12,21 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_reset_digest
       @user.delay.send_password_reset_email
-      flash[:info] = "Email sent with password reset instructions"
+      flash[:info] = 'Email sent with password reset instructions'
       redirect_to root_url
     else
-      flash.now[:alert] = "Email address not found"
+      flash.now[:alert] = 'Email address not found'
       render 'new'
     end
   end
-  
+
   def edit
   end
 
   def update
     if @user.update_attributes(user_params)
       log_in @user
-      flash[:success] = "Password has been reset."
+      flash[:success] = 'Password has been reset.'
       redirect_to @user
     else
       render 'edit'
@@ -42,23 +40,21 @@ class PasswordResetsController < ApplicationController
   end
 
   # Before filters
-  
-  def get_user
+
+  def find_user
     @user = User.find_by(email: params[:email])
   end
 
   # Confirms a valid user.
   def valid_user
-    unless @user && @user.authenticated?(:reset, params[:id])
-      redirect_to root_url
-    end
+    redirect_to root_url unless @user && @user.authenticated?(:reset,
+                                                              params[:id])
   end
 
   # Checks expiration of reset token.
   def check_expiration
-    if @user.password_reset_expired?
-      flash[:alert] = "Password reset has expired."
-      redirect_to new_password_reset_url
-    end
+    return unless @user.password_reset_expired?
+    flash[:alert] = 'Password reset has expired.'
+    redirect_to new_password_reset_url
   end
 end
