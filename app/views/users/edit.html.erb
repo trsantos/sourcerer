@@ -15,7 +15,7 @@
 	    <%= f.label :email %>
 	    <%= f.text_field :email %>
 
-	    <%= f.submit "Save changes", class: "button radius expand" %>
+	    <%= f.submit "Save changes", class: "button radius expand", data: { disable_with: "Please wait..." } %>
 	<% end %>
 	<p data-no-turbolink>
 	    <strong>Subscription end date:</strong> <%= @user.expiration_date.to_date.to_formatted_s(:long) %><br>

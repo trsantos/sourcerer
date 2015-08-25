@@ -20,7 +20,7 @@
 	    <%= f.label :password_confirmation %>
 	    <%= f.password_field :password_confirmation %>
 
-	    <%= f.submit "Update password", class: "button radius expand" %>
+	    <%= f.submit "Update password", class: "button radius expand", data: { disable_with: "Please wait..." } %>
 	<% end %>
     </div>
 </div>

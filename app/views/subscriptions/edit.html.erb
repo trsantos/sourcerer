@@ -13,7 +13,7 @@
 	    <%= f.label :site_url %>
 	    <%= f.text_field :site_url, value: sub_url(@subscription.feed), placeholder: @subscription.feed.site_url %>
 
-	    <%= f.submit "Save changes", class: "button radius expand" %>
+	    <%= f.submit "Save changes", class: "button radius expand", data: { disable_with: "Please wait..." } %>
 	<% end %>
     </div>
 </div>

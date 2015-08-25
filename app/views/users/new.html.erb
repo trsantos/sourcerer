@@ -12,7 +12,7 @@
 
 	<%= form_for(@user) do |f| %>
 	    <%= render 'fields', f: f %>
-	    <%= f.submit "Sign up", class: "button radius expand" %>
+	    <%= f.submit "Sign up", class: "button radius expand", data: { disable_with: "Please wait..." } %>
 	<% end %>
 
 	<p class="text-center">Already use Sourcerer? <%= link_to 'Log in', login_path %></p>

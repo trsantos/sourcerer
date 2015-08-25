@@ -10,7 +10,7 @@
 	    <%= f.label :feed %>
 	    <%= f.text_field :feed_url, autofocus: true %>
 
-	    <%= f.submit "Submit", class: "button radius expand" %>
+	    <%= f.submit "Submit", class: "button radius expand", data: { disable_with: "Please wait..." } %>
 	<% end %>
     </div>
 </div>
