@@ -12,7 +12,7 @@ class FeedsController < ApplicationController
   def show
     @feed = Feed.find(params[:id])
     # TODO: Use Ajax to reload the page when the fetch is done.
-    @feed.update if @feed.created_at > 1.minute.ago || Rails.env.development?
+    @feed.update if @feed.created_at > 1.minute.ago
     @entries = @feed.entries.order(created_at: :desc)
     @only_images = @feed.only_images?
   end
@@ -41,8 +41,11 @@ class FeedsController < ApplicationController
   end
 
   def mark_subscription_as_visited
-    return unless current_user.following?(@feed)
     sub = current_user.subscriptions.find_by(feed_id: @feed.id)
-    sub.update_attributes(visited_at: Time.zone.now, updated: false)
+    if sub.updated?
+      sub.update_attributes(visited_at: Time.zone.now, updated: false)
+    end
+  rescue
+    nil
   end
 end

@@ -44,20 +44,14 @@ class UsersController < ApplicationController
   end
 
   def update_topics
-    @user = User.find(params[:id])
-    current_user.topics = []
-    # This is REALLY ugly. Will fix ASOP lol.
-    # I need to do the unfollowing first so that
-    # feeds are not unsubscribed by accident
+    user = current_user
+    user.topics = []
     params[:topic].each do |t, v|
       t = Topic.find_by(name: t)
-      current_user.unfollow_topic(t) if v == '0'
+      user.unfollow_topic(t) if v == '0'
+      user.follow_topic(t) if v == '1'
     end
-    params[:topic].each do |t, v|
-      t = Topic.find_by(name: t)
-      current_user.follow_topic(t) if v == '1'
-    end
-    flash[:info] = 'Topics updated. Happy reading!'
+    flash[:success] = 'Topics updated. Happy reading!'
     redirect_to next_path
   end
 

@@ -34,16 +34,15 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    next_sub = current_user.subscriptions.where(updated: true)
-               .order(starred: :desc, visited_at: :asc).first
+    next_sub = find_next_sub
     if next_sub
       redirect_to next_sub.feed
       return
     end
-    redirect_to eof_path
+    redirect_to none_path
   end
 
-  def eof
+  def none
   end
 
   private
@@ -68,10 +67,16 @@ class SubscriptionsController < ApplicationController
     params[:subscription][:site_url] = process_url site_url
   end
 
-  def next_updated_sub
-    starred_order = rand < 0.8 ? :desc : :asc
-    current_user.subscriptions.where(updated: true)
-      .order(starred: starred_order, visited_at: :asc).first
+  def find_next_sub
+    user = current_user
+    if (sub = user.subscriptions.where(updated: true)
+              .order(starred: :desc, visited_at: :asc).first)
+      sub
+    elsif (random_sub = user.subscriptions.order('RANDOM()').first)
+      flash[:info] =
+        'You have no updated feeds right now. Check back later!'
+      random_sub
+    end
   end
 
   def correct_user

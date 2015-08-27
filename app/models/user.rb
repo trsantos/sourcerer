@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
       f = Feed.find_or_create_by(feed_url: url)
       s = subscriptions.find_by(feed_id: f.id)
       next unless s && s.from_topic
-      unfollow(f)
+      s.destroy
     end
   end
 
