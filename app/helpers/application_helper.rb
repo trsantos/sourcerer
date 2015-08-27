@@ -38,8 +38,10 @@ module ApplicationHelper
     t = topic.name
     if t == 'Technology'
       return [
-        # Alexa categories: Computers, Home/Consumer Information
+        # Alexa categories: Computers, Home/Consumer Information, The Verge sucks
         'http://www.cnet.com/rss/all/',
+        'http://www.engadget.com/rss.xml',
+        'http://feeds.gawker.com/gizmodo/full',
         'http://techcrunch.com/feed/',
         'http://www.wired.com/feed/'
       ]
