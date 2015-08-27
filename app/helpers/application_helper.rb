@@ -47,15 +47,20 @@ module ApplicationHelper
       ]
     elsif t == 'News'
       return [
+        'http://rss.cnn.com/rss/edition.rss',
+        'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',
         'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
         'http://www.theguardian.com/international/rss',
-        'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml'
+        'http://feeds.feedburner.com/foxnews/latest'
       ]
     elsif t == 'Business'
+      # change Economist to FT?
       return [
+        'http://www.forbes.com/business/feed2/',
         'http://www.wsj.com/xml/rss/3_7014.xml',
-        'http://www.ft.com/rss/home/uk',
-        'http://www.economist.com/sections/business-finance/rss.xml'
+        'http://rss.cnn.com/rss/money_topstories.rss',
+        'http://www.entrepreneur.com/latest.rss',
+        'http://www.ft.com/rss/home/us'
       ]
     elsif t == 'Games'
       return [
