@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   resources :opml,            only: [:new, :create]
   get 'opml/export' => 'opml#export'
   get 'next' => 'subscriptions#next'
-  get 'none' => 'subscriptions#none'
   get 'billing/expired' => 'billing#expired'
   get 'billing/checkout' => 'billing#checkout'
   get 'billing/confirm' => 'billing#confirm'

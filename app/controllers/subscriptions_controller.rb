@@ -39,10 +39,8 @@ class SubscriptionsController < ApplicationController
       redirect_to next_sub.feed
       return
     end
-    redirect_to none_path
-  end
-
-  def none
+    flash[:alert] = "Sourcerer is useful only if you subscribe to some feeds. Please, choose some topics or import an OPML file, if you're coming from another reader."
+    redirect_to current_user
   end
 
   private
