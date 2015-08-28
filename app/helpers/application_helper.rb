@@ -62,11 +62,13 @@ module ApplicationHelper
         'http://www.entrepreneur.com/latest.rss',
         'http://www.ft.com/rss/home/us'
       ]
-    elsif t == 'Games'
+    elsif t == 'Gaming'
       return [
         'http://feeds.ign.com/ign/all',
-        'http://www.pcgamer.com/feed/',
-        'http://www.polygon.com/rss/index.xml'
+        'http://feeds.gawker.com/kotaku/full',
+        'http://www.polygon.com/rss/index.xml',
+        'http://www.eurogamer.net/?format=rss',
+        'http://feeds.feedburner.com/RockPaperShotgun'
       ]
     elsif t == 'Science'
       return [
