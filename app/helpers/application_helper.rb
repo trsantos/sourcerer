@@ -36,24 +36,7 @@ module ApplicationHelper
 
   def get_feeds(topic)
     t = topic.name
-    if t == 'Technology'
-      return [
-        # Alexa categories: Computers, Home/Consumer Information, The Verge sucks
-        'http://www.cnet.com/rss/all/',
-        'http://www.engadget.com/rss.xml',
-        'http://feeds.gawker.com/gizmodo/full',
-        'http://techcrunch.com/feed/',
-        'http://www.wired.com/feed/'
-      ]
-    elsif t == 'News'
-      return [
-        'http://rss.cnn.com/rss/edition.rss',
-        'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',
-        'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
-        'http://www.theguardian.com/international/rss',
-        'http://feeds.feedburner.com/foxnews/latest'
-      ]
-    elsif t == 'Business'
+    if t == 'Business'
       # change Economist to FT?
       return [
         'http://www.forbes.com/business/feed2/',
@@ -61,6 +44,10 @@ module ApplicationHelper
         'http://rss.cnn.com/rss/money_topstories.rss',
         'http://www.entrepreneur.com/latest.rss',
         'http://www.ft.com/rss/home/us'
+      ]
+    elsif t == 'Design'
+      return [
+        ''
       ]
     elsif t == 'Gaming'
       return [
@@ -70,17 +57,11 @@ module ApplicationHelper
         'http://www.eurogamer.net/?format=rss',
         'http://feeds.feedburner.com/RockPaperShotgun'
       ]
-    elsif t == 'Science'
+    elsif t == 'Movies'
       return [
-        'http://feeds.nature.com/news/rss/news',
-        'http://feeds.sciencedaily.com/sciencedaily/',
-        'http://rss.sciam.com/ScientificAmerican-Global'
-      ]
-    elsif t == 'Architecture'
-      return [
-        'http://feeds.feedburner.com/ArchDaily',
-        'http://www.designboom.com/feed/',
-        'http://feeds.feedburner.com/FreshInspirationForYourHome/'
+        'http://feeds.feedburner.com/thr/film',
+        'http://www.avclub.com/feed/rss/?tags=film',
+        'http://rss.feedsportal.com/c/592/f/7507/index.rss'
       ]
     elsif t == 'Music'
       return [
@@ -88,11 +69,13 @@ module ApplicationHelper
         'http://www.billboard.com/articles/rss.xml',
         'http://www.nme.com/rss/news'
       ]
-    elsif t == 'Movies'
+    elsif t == 'News'
       return [
-        'http://feeds.feedburner.com/thr/film',
-        'http://www.avclub.com/feed/rss/?tags=film',
-        'http://rss.feedsportal.com/c/592/f/7507/index.rss'
+        'http://rss.cnn.com/rss/edition.rss',
+        'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',
+        'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
+        'http://www.theguardian.com/international/rss',
+        'http://feeds.feedburner.com/foxnews/latest'
       ]
     elsif t == 'Photography'
       return [
@@ -100,17 +83,27 @@ module ApplicationHelper
         'http://feed.500px.com/500px-best',
         'http://feeds.feedburner.com/DigitalPhotographySchool'
       ]
-    # elsif t == 'Comics'
-    #   return [
-    #     'http://xkcd.com/rss.xml',
-    #     'http://feeds.feedburner.com/uclick/calvinandhobbes',
-    #     'http://www.smbc-comics.com/rss.php'
-    #   ]
+    elsif t == 'Science'
+      return [
+        'http://news.nationalgeographic.com/index.rss',
+        'http://syndication.howstuffworks.com/rss/science',
+        'http://www.livescience.com/home/feed/site.xml',
+        'http://feeds.sciencedaily.com/sciencedaily/top_news/top_science',
+        'http://rss.sciam.com/ScientificAmerican-Global'
+      ]
     elsif t == 'Sports'
       return [
         'http://sports.espn.go.com/espn/rss/news',
         'http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP',
         'http://feeds.bbci.co.uk/sport/0/rss.xml'
+      ]
+    elsif t == 'Technology'
+      return [
+        'http://www.cnet.com/rss/all/',
+        'http://www.engadget.com/rss.xml',
+        'http://feeds.gawker.com/gizmodo/full',
+        'http://techcrunch.com/feed/',
+        'http://www.wired.com/feed/'
       ]
     else
       return []
