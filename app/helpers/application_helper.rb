@@ -47,7 +47,11 @@ module ApplicationHelper
       ]
     elsif t == 'Design'
       return [
-        ''
+        'http://feeds.feedburner.com/fastcodesign/feed',
+        'http://www.designboom.com/feed/',
+        'http://feeds.feedburner.com/FreshInspirationForYourHome/',
+        'http://feeds.feedburner.com/dezeen',
+        'http://feeds.feedburner.com/design-milk'
       ]
     elsif t == 'Gaming'
       return [
