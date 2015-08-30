@@ -157,7 +157,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'fsdn.com') || # Slashdot
        (img.include? 'pixel.gif') || # Bleacher Rep||t
        (img.include? 'avclub/None') || # A.V. Club
-       (img.include? '0.gravatar.com') || # Feedly
+       (img.include? '.gravatar.com') || # Feedly, FB Newsroom
        (img.include? 'wordpress.com/1.0/comments') || # W||dpress
        (img.include? 'images/share') || # EFF
        (img.include? 'modules/service_links') || # KDE Dot News
