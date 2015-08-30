@@ -107,7 +107,7 @@ module ApplicationHelper
         'http://bleacherreport.com/articles/feed',
         'http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP',
         'http://feeds.bbci.co.uk/sport/0/rss.xml',
-        'http://www.skysports.com/rss/0,20514,11095,00.xml'
+        'http://feeds.gawker.com/deadspin/full'
       ]
     elsif t == 'Technology'
       return [
