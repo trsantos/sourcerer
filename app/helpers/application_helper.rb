@@ -63,14 +63,18 @@ module ApplicationHelper
       ]
     elsif t == 'Movies'
       return [
-        'http://feeds.feedburner.com/thr/film',
+        'http://feeds.feedburner.com/thr/news',
         'http://www.avclub.com/feed/rss/?tags=film',
+        'http://www.theguardian.com/uk/film/rss',
+        'http://deadline.com/feed/',
         'http://rss.feedsportal.com/c/592/f/7507/index.rss'
       ]
     elsif t == 'Music'
       return [
         'http://www.rollingstone.com/music.rss',
+        'http://www.mtv.com/news/feed/',
         'http://www.billboard.com/articles/rss.xml',
+        'http://pitchfork.com/rss/news/',
         'http://www.nme.com/rss/news'
       ]
     elsif t == 'News'
@@ -85,6 +89,8 @@ module ApplicationHelper
       return [
         'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/',
         'http://feed.500px.com/500px-best',
+        'http://www.bostonglobe.com/rss/bigpicture',
+        'http://feeds.feedburner.com/lomographic-society-international-atom',
         'http://feeds.feedburner.com/DigitalPhotographySchool'
       ]
     elsif t == 'Science'
@@ -98,8 +104,10 @@ module ApplicationHelper
     elsif t == 'Sports'
       return [
         'http://sports.espn.go.com/espn/rss/news',
+        'http://bleacherreport.com/articles/feed',
         'http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP',
-        'http://feeds.bbci.co.uk/sport/0/rss.xml'
+        'http://feeds.bbci.co.uk/sport/0/rss.xml',
+        'http://feeds.gawker.com/deadspin/full'
       ]
     elsif t == 'Technology'
       return [
