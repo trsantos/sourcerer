@@ -42,9 +42,9 @@ $fh-height: 50px;
 	.main-features {
 	    text-align: center;
 	    background-color: $fh-color;
-	    background-color: white;
+	    #background-color: white;
 	    .row {
-		#background-color: white;
+		background-color: white;
 		color: $fh-color;
 	    }
 	    i {
