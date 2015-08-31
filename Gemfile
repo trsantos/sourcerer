@@ -2,16 +2,30 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
+### Default gems ###
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
+# Use SCSS for stylesheets
 gem 'sass-rails'
+# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
+# Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
+# Use jquery as the JavaScript library
 gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-gem 'jquery-turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
+# bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', group: :doc
+# Use ActiveModel has_secure_password
 gem 'bcrypt'
+
+### end ###
+
+gem 'jquery-turbolinks'
 gem 'foundation-rails'
 gem 'feedjira'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
@@ -28,13 +42,9 @@ group :development, :test do
   gem 'faker'
   # gem 'rack-mini-profiler'
   gem 'rubocop', require: false
-  gem 'pry'
-  gem 'pry-doc'
 end
 
 group :test do
-  gem 'minitest-reporters'
-  gem 'mini_backtrace'
 end
 
 group :production do
