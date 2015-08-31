@@ -155,18 +155,19 @@ class Feed < ActiveRecord::Base
        (img.include? 'pml.png') || # Techmeme
        (img.include? 'wp-includes/images/smilies') || # Treehouse (and others)
        (img.include? 'fsdn.com') || # Slashdot
-       (img.include? 'pixel.gif') || # Bleacher Rep||t
+       (img.include? 'pixel.gif') || # Bleacher Report
        (img.include? 'avclub/None') || # A.V. Club
        (img.include? '.gravatar.com') || # Feedly, FB Newsroom
        (img.include? 'fastcompany.net/asset_files') || # Fastcompany
-       (img.include? 'wordpress.com/1.0/comments') || # W||dpress
+       (img.include? 'wordpress.com/1.0/comments') || # Wordpress
        (img.include? 'images/share') || # EFF
        (img.include? 'modules/service_links') || # KDE Dot News
-       (img.include? 'badge') || # Cato.||g
+       (img.include? 'badge') || # Cato.org
        (img.include? 'dynamic1.anandtech.com') || # Anandtech
        (img.include? '/icons/') || # EFF
+       (img.include? '/emoji/') || # Bothsides of the Table
        (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
-       (img.include? ';base64,') # Bitt||rent
+       (img.include? ';base64,') # Bittorrent
       return nil
     end
 
