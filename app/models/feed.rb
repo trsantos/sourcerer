@@ -177,7 +177,7 @@ class Feed < ActiveRecord::Base
        (img.include? '.m4a') ||
        (img.include? '.mp4') ||
        (img.include? '.psd') ||
-       (img.include? '.gif') ||
+       # (img.include? '.gif') ||
        (img.include? '.pdf') ||
        (img.include? '.webm') ||
        (img.include? '.ogv') ||
