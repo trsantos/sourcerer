@@ -57,4 +57,7 @@ logo.onload = function() {
 		logo.style.display = "none";
 	}
 }
+if (navigator.registerContentHandler != undefined) {
+	navigator.registerContentHandler("application/vnd.mozilla.maybe.feed", "https://www.sourcerer.news/feeds/new?feed=%s", "Sourcerer");
+}
 </script>
