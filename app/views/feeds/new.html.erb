@@ -8,7 +8,7 @@
 
 	<%= form_for(:feed, url: feeds_path) do |f| %>
 	    <%= f.label :feed %>
-	    <%= f.text_field :feed_url, placeholder: 'Copy the feed url here...', autofocus: true %>
+	    <%= f.text_field :feed_url, autofocus: true %>
 
 	    <%= f.submit "Submit", class: "button radius expand", data: { disable_with: "Please wait..." } %>
 	<% end %>
