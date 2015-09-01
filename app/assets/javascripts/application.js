@@ -19,6 +19,7 @@
 
 $(function(){
     Turbolinks.enableProgressBar();
-	$(document).on("page:before-change", function () { $(window).scrollTop(0) });
-	$(document).foundation({ topbar: { scrolltop: false } });
+    Turbolinks.pagesCached(0);
+    $(document).on("page:before-change", function () { $(window).scrollTop(0) });
+    $(document).foundation({ topbar: { scrolltop: false } });
 });

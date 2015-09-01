@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   def new
-    redirect_to edit_user_path current_user if logged_in?
+    return unless logged_in?
+    flash[:info] = 'Already logged in.'
+    redirect_to edit_user_path current_user
   end
 
   def create

@@ -4,6 +4,7 @@ class PasswordResetsController < ApplicationController
   before_action :check_expiration, only: [:edit, :update]
 
   def new
+    # Should not accessible for logged in users? Fix view if so.
   end
 
   def create

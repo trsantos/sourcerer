@@ -1,8 +1,10 @@
 <% provide(:title, "Forgot password") %>
 
-<div class="logo-wrap">
-    <%= link_to image_tag('logo_dark_50.png'), root_url %>
-</div>
+<% unless logged_in? %>
+    <div class="logo-wrap">
+	<%= link_to image_tag('logo_dark_50.png'), root_url %>
+    </div>
+<% end %>
 
 <div class="row simple-container">
     <div class="medium-6 large-5 medium-centered columns box">

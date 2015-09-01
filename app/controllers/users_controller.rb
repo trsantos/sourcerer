@@ -13,7 +13,10 @@ class UsersController < ApplicationController
   end
 
   def new
-    redirect_to edit_user_path current_user if logged_in?
+    if logged_in?
+      flash[:info] = 'Already logged in.'
+      redirect_to edit_user_path current_user
+    end
     @user = User.new
   end
 
