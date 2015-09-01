@@ -129,6 +129,17 @@ $fh-height: 50px;
 	    font-size: large;
 	    font-size: 18px;
 	}
+	.dropdown {
+	    .parent-link {
+		display: none !important;
+	    }
+	    .back h5 a:before {
+		content: "⬅ ";
+	    }
+	}
+	.divider {
+	    border-top: 1px solid #393D46 !important;
+	}
     }
     #favicon {
 	height: 18px;
