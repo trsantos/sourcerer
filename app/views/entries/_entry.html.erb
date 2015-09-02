@@ -21,11 +21,9 @@
 			    <%= image_tag entry.image %>
 			</a>
 		    </div>
-		    <div class="description-with-thumb-container">
-			<p class="description">
-			    <%= entry.description %>
-			</p>
-		    </div>
+		    <p class="description">
+			<%= entry.description %>
+		    </p>
 		</div>
 	    <% elsif !entry.description.blank? %>
 		<div class="small-12 columns">

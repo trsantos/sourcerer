@@ -41,7 +41,8 @@ class Feed < ActiveRecord::Base
   def update_feed_attributes(fj_feed)
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
-                      description: sanitize(strip_tags(fj_feed.description)),
+                      description: sanitize(strip_tags(fj_feed.description))
+                        .first(300),
                       logo: fj_feed.logo)
   end
 
