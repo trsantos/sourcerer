@@ -41,8 +41,7 @@ class Feed < ActiveRecord::Base
   def update_feed_attributes(fj_feed)
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
-                      description: sanitize(strip_tags(fj_feed.description))
-                        .first(300),
+                      description: sanitize(strip_tags(fj_feed.description)),
                       logo: fj_feed.logo)
   end
 
@@ -82,7 +81,7 @@ class Feed < ActiveRecord::Base
   def insert_entry(e)
     description = e.content || e.summary || ''
     entries.create(title:       (e.title unless e.title.blank?),
-                   description: sanitize(strip_tags(description)),
+                   description: sanitize(strip_tags(description)).first(300),
                    pub_date:    find_date(e.published),
                    image:       find_image(e, description),
                    url:         e.url)
