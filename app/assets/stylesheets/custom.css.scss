@@ -13,6 +13,9 @@ $fh-height: 50px;
 // Small screens
 /* Define mobile styles */
 @media only screen {
+    html.turbolinks-progress-bar::before {
+	background-color: #008CBA !important;
+    }
     #homepage {
 	height: 100%;
 	background-color: $fh-color;
