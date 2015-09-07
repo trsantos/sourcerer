@@ -24,9 +24,6 @@ $fh-height: 50px;
 	    color: white;
 	    header {
 		padding-top: 15px;
-		#logo {
-		    height: 50px;
-		}
 	    }
 	    .tagline {
 		color: white;
@@ -209,6 +206,11 @@ $fh-height: 50px;
 
 /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 @media only screen and (max-width: 40em) {
+    header {
+	.button {
+	    padding: 14px 16px;
+	}
+    }
     article img {
 	border-radius: 2px;
     }
@@ -219,6 +221,11 @@ $fh-height: 50px;
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
     #homepage {
+	header {
+	    #logo {
+		height: 50px;
+	    }
+	}
 	footer {
 	    padding-top: 40px;
 	    padding-bottom: 20px;
