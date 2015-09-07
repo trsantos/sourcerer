@@ -166,6 +166,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'dynamic1.anandtech.com') || # Anandtech
        (img.include? '/icons/') || # EFF
        (img.include? '/emoji/') || # Bothsides of the Table
+       (img.include? 'divisoriagizmodo') || # Gizmodo
        (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
        (img.include? ';base64,') # Bittorrent
       return nil
