@@ -181,6 +181,7 @@ class Feed < ActiveRecord::Base
        # (img.include? '.gif') ||
        (img.include? '.pdf') ||
        (img.include? '.webm') ||
+       (img.include? '.svg') ||
        (img.include? '.ogv') ||
        (img.include? '.opus')
       return nil
