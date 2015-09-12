@@ -49,12 +49,14 @@
 
 <script>
 var logo = document.getElementById("logo-img");
-logo.onerror = function() {
-	logo.style.display = "none";
-};
-logo.onload = function() {
-	if (logo.height < 5) {
+if (logo) {
+	logo.onerror = function() {
 		logo.style.display = "none";
+	};
+	logo.onload = function() {
+		if (logo.height < 5) {
+			logo.style.display = "none";
+		}
 	}
 }
 //navigator.registerContentHandler("application/vnd.mozilla.maybe.feed", "<%= "#{request.protocol}#{request.host_with_port}" %>/feeds/new?feed=%s", "Sourcerer");
