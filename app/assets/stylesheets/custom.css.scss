@@ -146,7 +146,7 @@ $fh-height: 50px;
 	width: 18px;
 	padding: 1px;
 	background-color: white;
-	margin-bottom: 3px;
+	vertical-align: sub;
     }
     #feeds-show-container {
 	margin-bottom: 50px;
@@ -294,6 +294,9 @@ $fh-height: 50px;
 	section ul a {
 	    line-height: $fh-height;
 	}
+    }
+    #favicon {
+	vertical-align: baseline;
     }
     #feeds-show-container {
 	margin-bottom: 0px;
