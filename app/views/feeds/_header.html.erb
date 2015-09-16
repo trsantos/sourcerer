@@ -12,7 +12,7 @@
 	    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 	</ul>
 	<section class="top-bar-section">
-	    <ul class="right controls">
+	    <ul class="right">
 		<%= render 'controls' %>
 	    </ul>
 	</section>
@@ -23,6 +23,5 @@ var img = document.getElementById("favicon");
 img.onerror = function() {
 	// img.setAttribute("src", "<%= asset_path('feed-icon-16x16.png') %>");
 	img.setAttribute("src", "http://www.google.com/s2/favicons?domain=<%= @feed.site_url %>");
-	// img.style.display = "none";
 }
 </script>
