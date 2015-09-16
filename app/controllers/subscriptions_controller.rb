@@ -11,9 +11,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    feed = Feed.find(params[:feed_id])
-    current_user.follow(feed)
-    redirect_to feed
+    @feed = Feed.find(params[:feed_id])
+    current_user.follow(@feed)
+    respond_to do |format|
+      format.html { redirect_to @feed }
+      format.js
+    end
   end
 
   def edit
@@ -24,13 +27,20 @@ class SubscriptionsController < ApplicationController
     set_update_params
     @subscription = Subscription.find(params[:id])
     @subscription.update_attributes(sub_params)
-    redirect_to @subscription.feed
+    @feed = @subscription.feed
+    respond_to do |format|
+      format.html { redirect_to @feed }
+      format.js
+    end
   end
 
   def destroy
-    feed = Subscription.find(params[:id]).feed
-    current_user.unfollow(feed)
-    redirect_to feed
+    @feed = Subscription.find(params[:id]).feed
+    current_user.unfollow(@feed)
+    respond_to do |format|
+      format.html { redirect_to @feed }
+      format.js
+    end
   end
 
   def next
