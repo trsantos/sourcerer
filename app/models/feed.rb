@@ -141,6 +141,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'rssfeeds.usatoday.com') ||
        (img.include? 'architecturaldigest.com/ad') ||
        (img.include? 'doubleclick.net') ||
+       (img.include? 'amazon-adsystem.com') ||
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil
