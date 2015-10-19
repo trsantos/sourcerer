@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721125913) do
+ActiveRecord::Schema.define(version: 20151019150958) do
 
   create_table "entries", force: :cascade do |t|
     t.text     "title"
@@ -81,11 +81,12 @@ ActiveRecord::Schema.define(version: 20150721125913) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.boolean  "admin",             default: false
+    t.boolean  "admin",                    default: false
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.string   "paypal_payment_id"
     t.datetime "expiration_date"
+    t.datetime "subscriptions_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -3,6 +3,7 @@ class FeedsController < ApplicationController
 
   before_action :logged_in_user
   before_action :check_expiration_date
+  before_action :update_feeds, only: [:show]
   after_action :mark_subscription_as_visited, only: [:show]
 
   def index
@@ -38,6 +39,14 @@ class FeedsController < ApplicationController
     elsif Time.current > user.expiration_date
       redirect_to billing_expired_path
     end
+  end
+
+  def update_feeds
+    user = current_user
+    t = user.subscriptions_updated_at
+    return unless t.nil? || t < 2.hours.ago
+    user.update_attribute(:subscriptions_updated_at, Time.zone.now)
+    user.feeds.all.each { |f| f.delay.update }
   end
 
   def mark_subscription_as_visited
