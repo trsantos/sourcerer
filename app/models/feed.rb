@@ -15,6 +15,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update
+    return if entries.any? && updated_at > 2.hours.ago
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
     # entries.delete_all
