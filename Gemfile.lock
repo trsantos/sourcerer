@@ -190,7 +190,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sidekiq (3.5.1)
+    sidekiq (3.5.3)
       celluloid (~> 0.17.2)
       connection_pool (~> 2.2, >= 2.2.0)
       json (~> 1.0)
