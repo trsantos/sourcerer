@@ -1,13 +1,10 @@
 /* Constants */
+$home-bg-color: #10141F;
 $bg-color: #EEE;
-
 $box-color: white;
-
 // $fh-color: #121B22; // old color
 $fh-color: #20242F;
-
 $fh-hover: #292D36;
-
 $fh-height: 50px;
 
 // Small screens
@@ -18,9 +15,8 @@ $fh-height: 50px;
     }
     #homepage {
 #	height: 100%;
-	background-color: $fh-color;
+	background-color: $home-bg-color;
 	#top {
-	    background-color: $fh-color;
 	    color: white;
 	    header {
 		padding-top: 15px;
@@ -46,13 +42,13 @@ $fh-height: 50px;
 	    padding: 0 0.9375rem;
 	    margin-bottom: 50px;
 	    img {
-		box-shadow: 0px 0px 5px #30343F;
+		box-shadow: 0px 0px 5px #20242F;
 		border-radius: 3px;
 	    }
 	}
 	.main-features {
 	    text-align: center;
-	    background-color: $fh-color;
+	    background-color: $home-bg-color;
 	    background-color: white;
 	    .row {
 		background-color: white;
@@ -68,7 +64,6 @@ $fh-height: 50px;
 	}
 	footer {
 	    padding-top: 20px;
-	    background-color: $fh-color;
 	    color: white;
 	    p {
 		font-size: small;
