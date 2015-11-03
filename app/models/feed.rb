@@ -151,8 +151,9 @@ class Feed < ActiveRecord::Base
     # special cases
     if (img.include? 'feedburner') ||
        (img.include? 'feedsportal') || # Various
+       (img.include? '_logo') || # Laissez Faire
        (img.include? 'share-button') || # Fapesp
-       (img.include? 'wp-content/plugins') || # W||dpress share plugins
+       (img.include? 'wp-content/plugins') || # Wordpress share plugins
        (img.include? 'clubedohardware.com.br') || # Clube do Hardware
        (img.include? 'pml.png') || # Techmeme
        (img.include? 'wp-includes/images/smilies') || # Treehouse (and others)

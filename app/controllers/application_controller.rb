@@ -3,4 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   include SessionsHelper
+
+  # Confirms a logged-in user.
+  def logged_in_user
+    return if logged_in?
+    store_location
+    flash[:alert] = 'Please log in.'
+    redirect_to login_url
+  end
+
+  def expiration_date_presence
+    user = current_user
+    return unless user.expiration_date.nil?
+    user.update_attribute(:expiration_date, 1.week.from_now)
+  end
 end

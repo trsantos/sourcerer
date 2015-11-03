@@ -2,6 +2,7 @@ class FeedsController < ApplicationController
   include ApplicationHelper
 
   before_action :logged_in_user
+  before_action :expiration_date_presence
   before_action :check_expiration_date
   before_action :update_feeds, only: [:show]
   after_action :mark_subscription_as_visited, only: [:show]
@@ -34,11 +35,8 @@ class FeedsController < ApplicationController
 
   def check_expiration_date
     user = current_user
-    if user.expiration_date.nil?
-      user.update_attribute(:expiration_date, 1.week.from_now)
-    elsif Time.current > user.expiration_date
-      redirect_to billing_expired_path
-    end
+    return unless Time.current > user.expiration_date
+    redirect_to billing_expired_path
   end
 
   def update_feeds

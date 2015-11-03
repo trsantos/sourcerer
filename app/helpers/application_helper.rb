@@ -17,14 +17,6 @@ module ApplicationHelper
       (params[:controller] == 'sessions' && params[:action] == 'new')
   end
 
-  # Confirms a logged-in user.
-  def logged_in_user
-    return if logged_in?
-    store_location
-    flash[:alert] = 'Please log in.'
-    redirect_to login_url
-  end
-
   def process_url(url)
     return nil if url.blank?
     url = url.strip

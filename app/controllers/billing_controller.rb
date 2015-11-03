@@ -3,6 +3,7 @@ class BillingController < ApplicationController
   include BillingHelper
 
   before_action :logged_in_user
+  before_action :expiration_date_presence
   before_action :expiration_date_check
 
   def expired
