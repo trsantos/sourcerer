@@ -105,7 +105,9 @@ class Feed < ActiveRecord::Base
   end
 
   def parse_image(img)
-    return img if img.start_with?('//')
+    # Need to add http here as some images won't
+    # load because ssl_error_bad_cert_domain
+    return 'http:' + img if img.start_with?('//')
     uri = URI.parse(feed_url || site_url) # just use feed_url?
     start = uri.scheme + '://' + uri.host
     return start + img if img.start_with? '/'
