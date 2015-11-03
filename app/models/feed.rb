@@ -170,6 +170,7 @@ class Feed < ActiveRecord::Base
        (img.include? '/icons/') || # EFF
        (img.include? '/emoji/') || # Bothsides of the Table
        (img.include? 'divisoriagizmodo') || # Gizmodo
+       (img.include? 'index.phpstyles') || # Forum Outerspace
        (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
        (img.include? ';base64,') # Bittorrent
       return nil
