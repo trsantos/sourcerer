@@ -6,8 +6,6 @@
 	    <h3>Import OPML</h3>
 	</header>
 
-	<p>
-
 	<%= form_for(:opml , url: opml_index_path) do |f| %>
 	    <%= f.file_field :opml_file %>
 	    <%= f.submit "Submit", class: "button radius expand", data: { disable_with: "Please wait..." } %>
