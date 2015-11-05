@@ -52,7 +52,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (6.0.2)
+    byebug (8.0.0)
     celluloid (0.17.2)
       celluloid-essentials
       celluloid-extras
