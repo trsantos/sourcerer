@@ -43,7 +43,8 @@ class Feed < ActiveRecord::Base
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
                       description: sanitize(strip_tags(fj_feed.description)),
-                      logo: fj_feed.logo)
+                      logo: fj_feed.logo,
+                      updated_at: Time.zone.now)
   end
 
   def update_entries(fj_feed)
@@ -154,6 +155,7 @@ class Feed < ActiveRecord::Base
     if (img.include? 'feedburner') ||
        (img.include? 'feedsportal') || # Various
        (img.include? '_logo') || # Laissez Faire
+       (img.include? 'forbes_200x200') || # Forbes
        (img.include? 'share-button') || # Fapesp
        (img.include? 'wp-content/plugins') || # Wordpress share plugins
        (img.include? 'clubedohardware.com.br') || # Clube do Hardware

@@ -14,7 +14,8 @@
 		    <%= link_to "Star",
 		    subscription_path(s, subscription: { starred: true }),
 		    method: :patch,
-		    remote: true %>
+		    remote: true,
+		    title: "Starred feeds will be displayed first when updated. This is for your must-reads." %>
 		</li>
 	    <% end %>
 	    <li class="divider show-for-small-only"></li>
