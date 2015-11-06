@@ -131,7 +131,7 @@ GEM
       xml-simple
     pg (0.18.3)
     powerpack (0.1.1)
-    puma (2.14.0)
+    puma (2.15.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
