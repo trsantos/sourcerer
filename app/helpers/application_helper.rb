@@ -29,13 +29,12 @@ module ApplicationHelper
   def get_feeds(topic)
     t = topic.name
     if t == 'Business'
-      # change Economist to FT?
       return [
-        'http://www.forbes.com/business/feed2/',
+        'http://www.economist.com/feeds/print-sections/77/business.xml',
         'http://www.wsj.com/xml/rss/3_7014.xml',
-        'http://rss.cnn.com/rss/money_topstories.rss',
-        'http://www.entrepreneur.com/latest.rss',
-        'http://www.ft.com/rss/home/us'
+        'http://www.forbes.com/business/feed2/',
+        'http://www.ft.com/rss/home/us',
+        'http://feeds.harvardbusiness.org/harvardbusiness/'
       ]
     elsif t == 'Design'
       return [
