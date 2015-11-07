@@ -21,6 +21,7 @@ module FeedsHelper
 
   def favicon_for(url)
     uri = URI.parse url
+    return 'dummy' if uri.host == 'www.pcgamer.com'
     return uri.scheme + '://' + uri.host + '/favicon.ico'
   rescue
     return ''
