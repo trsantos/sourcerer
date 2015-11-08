@@ -46,19 +46,19 @@ module ApplicationHelper
       ]
     elsif t == 'Gaming'
       return [
-        'http://feeds.ign.com/ign/all',
+        'http://www.gamespot.com/feeds/mashup/',
+        'https://www.gameinformer.com/feeds/thefeedrss.aspx',
+        'http://www.pcgamer.com/feed/',
         'http://feeds.gawker.com/kotaku/full',
-        'http://www.polygon.com/rss/index.xml',
-        'http://www.eurogamer.net/?format=rss',
-        'http://feeds.feedburner.com/RockPaperShotgun'
+        'http://www.polygon.com/rss/index.xml'
       ]
     elsif t == 'Movies'
       return [
-        'http://feeds.feedburner.com/thr/news',
+        'https://feeds.feedburner.com/thr/news',
+        'https://variety.com/v/film/feed/',
         'http://www.avclub.com/feed/rss/?tags=film',
-        'http://www.theguardian.com/uk/film/rss',
-        'http://deadline.com/feed/',
-        'http://rss.feedsportal.com/c/592/f/7507/index.rss'
+        'https://deadline.com/v/film/feed/',
+        'http://www.thewrap.com/category/movies/feed/'
       ]
     elsif t == 'Music'
       return [
