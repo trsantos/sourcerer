@@ -32,7 +32,7 @@ module FeedsHelper
     begin
       return base + URI.parse(feed.site_url).host
     rescue
-      return base + feed.site_url
+      return base + (feed.site_url || feed.feed_url)
     end
   end
 end
