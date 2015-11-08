@@ -146,6 +146,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'architecturaldigest.com/ad') ||
        (img.include? 'doubleclick.net') ||
        (img.include? 'amazon-adsystem.com') ||
+       (img.include? 'wordpress.com/1.0/delicious') ||
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil

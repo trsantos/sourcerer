@@ -79,10 +79,10 @@ module ApplicationHelper
     elsif t == 'Photography'
       return [
         'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/',
-        'http://feed.500px.com/500px-best',
+        'http://www.digitalcameraworld.com/feed/',
+        'https://iso.500px.com/feed',
         'http://www.bostonglobe.com/rss/bigpicture',
-        'http://feeds.feedburner.com/lomographic-society-international-atom',
-        'http://feeds.feedburner.com/DigitalPhotographySchool'
+        'https://feeds.feedburner.com/PetaPixel'
       ]
     elsif t == 'Science'
       return [
