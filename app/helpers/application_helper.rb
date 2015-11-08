@@ -62,11 +62,11 @@ module ApplicationHelper
       ]
     elsif t == 'Music'
       return [
+        'http://www.mtv.com/news/music/feed/',
         'http://www.rollingstone.com/music.rss',
-        'http://www.mtv.com/news/feed/',
         'http://www.billboard.com/articles/rss.xml',
         'http://pitchfork.com/rss/news/',
-        'http://www.nme.com/rss/news'
+        'http://www.nme.com/rss/news/music'
       ]
     elsif t == 'News'
       return [
