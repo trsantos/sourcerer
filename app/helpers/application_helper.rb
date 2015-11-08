@@ -70,11 +70,11 @@ module ApplicationHelper
       ]
     elsif t == 'News'
       return [
-        'http://rss.cnn.com/rss/edition.rss',
-        'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',
         'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
-        'http://www.theguardian.com/international/rss',
-        'http://feeds.feedburner.com/foxnews/latest'
+        'http://rss.cnn.com/rss/edition.rss',
+        'http://feeds.bbci.co.uk/news/rss.xml?edition=int',
+        'http://feeds.reuters.com/reuters/topNews',
+        'https://time.com/feed/'
       ]
     elsif t == 'Photography'
       return [

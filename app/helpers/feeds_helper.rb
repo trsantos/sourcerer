@@ -26,4 +26,13 @@ module FeedsHelper
   rescue
     return ''
   end
+
+  def google_favicon(feed)
+    base = 'http://www.google.com/s2/favicons?domain='
+    begin
+      return base + URI.parse(feed.site_url).host
+    rescue
+      return base + feed.site_url
+    end
+  end
 end

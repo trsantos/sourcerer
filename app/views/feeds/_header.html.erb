@@ -18,6 +18,6 @@
 var img = document.getElementById("favicon");
 img.onerror = function() {
 	// img.setAttribute("src", "<%= asset_path('feed-icon-16x16.png') %>");
-	img.setAttribute("src", "http://www.google.com/s2/favicons?domain=<%= URI.parse(@feed.site_url).host %>");
+	img.setAttribute("src", "<%= google_favicon @feed %>");
 }
 </script>
