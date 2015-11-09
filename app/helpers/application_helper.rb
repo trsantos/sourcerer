@@ -86,19 +86,19 @@ module ApplicationHelper
       ]
     elsif t == 'Science'
       return [
-        'http://news.nationalgeographic.com/index.rss',
-        'http://syndication.howstuffworks.com/rss/science',
-        'http://www.livescience.com/home/feed/site.xml',
-        'http://feeds.sciencedaily.com/sciencedaily/top_news/top_science',
+        'https://www.nasa.gov/rss/dyn/breaking_news.rss',
+        'https://feeds.feedburner.com/DiscoveryNews-Top-Stories',
+        'http://www.wired.com/category/science/feed/',
+        'https://www.sciencenews.org/feeds/headlines.rss',
         'http://rss.sciam.com/ScientificAmerican-Global'
       ]
     elsif t == 'Sports'
       return [
         'http://sports.espn.go.com/espn/rss/news',
-        'http://bleacherreport.com/articles/feed',
-        'http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP',
         'http://feeds.bbci.co.uk/sport/0/rss.xml',
-        'http://feeds.gawker.com/deadspin/full'
+        'http://www.si.com/rss/si_topstories.rss',
+        'http://feeds.gawker.com/deadspin/full',
+        'http://www.goal.com/en/feeds/news?fmt=rss'
       ]
     elsif t == 'Technology'
       return [
