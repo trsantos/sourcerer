@@ -30,27 +30,27 @@ module ApplicationHelper
     t = topic.name
     if t == 'Business'
       return [
-        'http://www.economist.com/feeds/print-sections/77/business.xml',
-        'http://www.wsj.com/xml/rss/3_7014.xml',
         'http://www.forbes.com/business/feed2/',
-        'http://www.ft.com/rss/home/us',
-        'http://feeds.harvardbusiness.org/harvardbusiness/'
+        'https://feeds2.feedburner.com/businessinsider',
+        'http://www.wsj.com/xml/rss/3_7014.xml',
+        'http://www.entrepreneur.com/latest.rss',
+        'http://www.ft.com/rss/home/us'
       ]
     elsif t == 'Design'
       return [
-        'https://feeds.feedburner.com/Wallpaperfeed',
-        'http://feeds.feedburner.com/design-milk',
-        'http://feeds.feedburner.com/fastcodesign/feed',
+        'https://feeds.feedburner.com/Archdaily',
+        'https://feeds.feedburner.com/fastcodesign/feed',
         'http://www.designboom.com/feed/',
-        'http://feeds.feedburner.com/FreshInspirationForYourHome/'
+        'http://feeds.feedburner.com/FreshInspirationForYourHome/',
+        'http://feeds.feedburner.com/dezeen'
       ]
     elsif t == 'Gaming'
       return [
-        'http://www.gamespot.com/feeds/mashup/',
-        'https://www.gameinformer.com/feeds/thefeedrss.aspx',
-        'http://www.pcgamer.com/feed/',
         'http://feeds.gawker.com/kotaku/full',
-        'http://www.polygon.com/rss/index.xml'
+        'http://www.polygon.com/rss/index.xml',
+        'http://www.eurogamer.net/?format=rss',
+        'https://feeds.feedburner.com/RockPaperShotgun',
+        'https://www.gameinformer.com/feeds/thefeedrss.aspx'
       ]
     elsif t == 'Movies'
       return [
@@ -62,51 +62,51 @@ module ApplicationHelper
       ]
     elsif t == 'Music'
       return [
-        'http://www.mtv.com/news/music/feed/',
         'http://www.rollingstone.com/music.rss',
+        'http://www.mtv.com/news/music/feed/',
         'http://www.billboard.com/articles/rss.xml',
         'http://pitchfork.com/rss/news/',
         'http://www.nme.com/rss/news/music'
       ]
     elsif t == 'News'
       return [
-        'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
         'http://rss.cnn.com/rss/edition.rss',
+        'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
         'http://feeds.bbci.co.uk/news/rss.xml?edition=int',
-        'http://feeds.reuters.com/reuters/topNews',
-        'https://time.com/feed/'
+        'http://rssfeeds.usatoday.com/usatoday-newstopstories',
+        'http://online.wsj.com/xml/rss/3_8068.xml'
       ]
     elsif t == 'Photography'
       return [
         'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/',
-        'http://www.digitalcameraworld.com/feed/',
         'https://iso.500px.com/feed',
-        'http://www.bostonglobe.com/rss/bigpicture',
-        'https://feeds.feedburner.com/PetaPixel'
+        'https://feeds.feedburner.com/PetaPixel',
+        'http://digital-photography-school.com/feed/',
+        'http://www.digitalcameraworld.com/feed/'
       ]
     elsif t == 'Science'
       return [
         'https://www.nasa.gov/rss/dyn/breaking_news.rss',
-        'https://feeds.feedburner.com/DiscoveryNews-Top-Stories',
-        'http://www.wired.com/category/science/feed/',
-        'https://www.sciencenews.org/feeds/headlines.rss',
-        'http://rss.sciam.com/ScientificAmerican-Global'
+        'http://news.nationalgeographic.com/rss/index.rss',
+        'http://feeds.nature.com/news/rss/news',
+        'http://www.livescience.com/home/feed/site.xml',
+        'https://feeds.feedburner.com/DiscoveryNews-Top-Stories'
       ]
     elsif t == 'Sports'
       return [
         'http://sports.espn.go.com/espn/rss/news',
         'http://feeds.bbci.co.uk/sport/0/rss.xml',
-        'http://www.si.com/rss/si_topstories.rss',
+        'http://bleacherreport.com/articles/feed',
         'http://feeds.gawker.com/deadspin/full',
-        'http://www.goal.com/en/feeds/news?fmt=rss'
+        'http://www.si.com/rss/si_topstories.rss'
       ]
     elsif t == 'Technology'
       return [
         'http://www.cnet.com/rss/all/',
         'http://www.engadget.com/rss.xml',
         'http://feeds.gawker.com/gizmodo/full',
-        'http://techcrunch.com/feed/',
-        'http://www.wired.com/feed/'
+        'https://www.theverge.com/rss/frontpage',
+        'http://techcrunch.com/feed/'
       ]
     else
       return []
