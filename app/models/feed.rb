@@ -20,6 +20,7 @@ class Feed < ActiveRecord::Base
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
     # entries.delete_all
+    # cached_images.delete_all
     update_feed_attributes fj_feed
     update_entries fj_feed
   end
@@ -160,6 +161,8 @@ class Feed < ActiveRecord::Base
       img.sub!('w=150', 'w=450')
     elsif img.include? 'static.gamespot.com'
       img.sub!('.png', '.jpg')
+      img.sub!('screen_medium', 'screen_kubrick')
+      img.sub!('static', 'static1')
     elsif img.include? 'pmcvariety.files'
       img.sub!(/w=\d*/, 'w=400')
     elsif img.include? 'pmcdeadline2.files'
