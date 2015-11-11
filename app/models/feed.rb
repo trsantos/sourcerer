@@ -19,8 +19,10 @@ class Feed < ActiveRecord::Base
     # return if entries.any? && updated_at > 2.hours.ago
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
-    # entries.delete_all
-    # cached_images.delete_all
+    if Rails.env.development?
+      entries.delete_all
+      cached_images.delete_all
+    end
     update_feed_attributes fj_feed
     update_entries fj_feed
   end
@@ -185,8 +187,10 @@ class Feed < ActiveRecord::Base
     #   elsif source == :media
     #     img.sub!('-200.jpg', '.jpg')
     #   end
-    elsif img.include? 'img.huffingtonpost.com'
+    elsif (img.include? 'img.huffingtonpost.com') || (img.include? 'i.huffpost.com')
+      return if img.include? '-mini'
       img.sub!('74_54', '1200_630')
+      img.sub!('74_58', '1200_630')
     elsif img.include? 'static.nfl.com'
       img.sub!('_thumbnail_200_150', '')
     elsif img.include? 'cbsistatic.com' # CNET
