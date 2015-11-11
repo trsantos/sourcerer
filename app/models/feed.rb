@@ -180,13 +180,6 @@ class Feed < ActiveRecord::Base
       img.sub!('thumbStandard', 'superJumbo')
     elsif img.include? 'i.livescience.com'
       img.sub!('i00', 'iFF')
-    # elsif img.include? 'static.ddmcdn.com'
-    #   img.sub!('/recipes', '')
-    #   if source == :desc
-    #     img.sub!('-200-', '670x440')
-    #   elsif source == :media
-    #     img.sub!('-200.jpg', '.jpg')
-    #   end
     elsif (img.include? 'img.huffingtonpost.com') || (img.include? 'i.huffpost.com')
       return if img.include? '-mini'
       img.sub!('74_54', '1200_630')
