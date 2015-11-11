@@ -56,7 +56,7 @@ class UsersController < ApplicationController
       user.unfollow_topic(t) if v == '0'
       user.follow_topic(t) if v == '1'
     end
-    flash[:success] = 'Topics updated. Happy reading!'
+    flash[:success] = 'Done. Happy reading!'
     redirect_to next_path
   end
 

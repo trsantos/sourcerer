@@ -7,6 +7,7 @@ class Feed < ActiveRecord::Base
   has_many :users, through: :subscriptions
 
   has_many :entries, dependent: :destroy
+  has_many :cached_images, dependent: :destroy
 
   validates :feed_url, presence: true, uniqueness: true
 
@@ -15,7 +16,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update
-    return if entries.any? && updated_at > 2.hours.ago
+    # return if entries.any? && updated_at > 2.hours.ago
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
     # entries.delete_all
@@ -24,10 +25,7 @@ class Feed < ActiveRecord::Base
   end
 
   def only_images?
-    entries.each do |e|
-      return false unless e.image && e.description.blank?
-    end
-    true
+    feed_url.start_with? 'https://www.youtube.com/feeds/videos.xml?channel_id='
   end
 
   private
@@ -83,7 +81,7 @@ class Feed < ActiveRecord::Base
   def insert_entry(e)
     description = e.content || e.summary || ''
     entries.create(title:       (e.title unless e.title.blank?),
-                   description: sanitize(strip_tags(description)).first(300),
+                   description: sanitize(strip_tags(description)),
                    pub_date:    find_date(e.published),
                    image:       find_image(e, description),
                    url:         e.url)
@@ -94,22 +92,28 @@ class Feed < ActiveRecord::Base
     pub_date
   end
 
-  def find_image(entry, description)
-    process_image(image_from_description(description)) ||
-      process_image(entry.image)
+  def find_image(entry, desc)
+    cached_images.find_by(entry_url: entry.url).image
+  rescue
+    img = (process_image image_from_description(desc), :desc) ||
+          (process_image entry.image, :media) ||
+          (process_image og_image(entry.url), :og)
+    cached_images.create(entry_url: entry.url,
+                         image: img)
+    img
   end
 
-  def process_image(img)
+  def process_image(img, source)
     return if img.blank?
-    img = parse_image img
-    filter_image img
+    img = discard_non_images parse_image img
+    hacks img, source
   end
 
   def parse_image(img)
     # Need to add http here as some images won't
     # load because ssl_error_bad_cert_domain
     return 'http:' + img if img.start_with?('//')
-    uri = URI.parse(feed_url || site_url) # just use feed_url?
+    uri = URI.parse feed_url
     start = uri.scheme + '://' + uri.host
     return start + img if img.start_with? '/'
     return start + uri.path + img unless img.start_with? 'http'
@@ -118,7 +122,7 @@ class Feed < ActiveRecord::Base
 
   def image_from_description(description)
     doc = Nokogiri::HTML description
-    return filter_image doc.css('img').first.attributes['src'].value
+    return doc.css('img').first.attributes['src'].value
   rescue
     nil
   end
@@ -132,7 +136,59 @@ class Feed < ActiveRecord::Base
     nil
   end
 
-  def filter_image(img)
+  def hacks(img, source)
+    return if img.blank?
+
+    # replaces
+    if img.start_with? 'http://i2.cdn.turner.com/cnn'
+      img.sub!('top-tease', 'horizontal-gallery')
+      img.sub!('cnn', 'cnnnext')
+    elsif img.start_with? 'http://timedotcom.files'
+      img.sub!('quality=75&strip=color&', '')
+      img.sub!(/w=\d\d\d/, 'w=400')
+    elsif img.include? 'assets.rollingstone.com'
+      img.sub!('small_square', 'medium_rect')
+      img.sub!('100x100', '720x405')
+    elsif img.include? 'imguol.com'
+      img.sub!(/\d\d\dx\d\d\d/, '615x300')
+    elsif img.include? 'carplace.uol.com'
+      img.sub!(/-\d\d\dx\d\d\d/, '')
+    elsif img.include? 'a57.foxnews.com/media.foxbusiness.com'
+      img.sub!('121/68', '605/340')
+    elsif img.include? 'fortunedotcom'
+      img.sub!('quality=80', '')
+      img.sub!('&w=150', '')
+      img += 'w=350'
+    elsif img.include? 'static.gamespot.com'
+      img.sub!('.png', '.jpg')
+    elsif img.include? 'pmcvariety.files'
+      img.sub!(/w=\d\d\d/, 'w=400')
+    elsif img.include? 'pmcdeadline2.files'
+      img.sub!(/w=\d\d\d/, 'w=400')
+    elsif img.include? 'imagesmtv-a.akamaihd.net'
+      img.sub!('quality=0.8&format=jpg&', '')
+      img.sub!('width=150&height=150', 'width=400&height=300')
+    elsif img.include? 'www.billboard.com'
+      img.sub!('promo_225', 'promo_650')
+    elsif img.include? 'graphics8.nytimes.com'
+      img.sub!('moth.jpg', 'master675.jpg')
+      img.sub!(/moth-v\d\.jpg/, 'master675.jpg')
+      img.sub!('thumbStandard', 'superJumbo')
+    elsif img.include? 'i.livescience.com'
+      img.sub!('i00', 'iFF')
+    elsif img.include? 'static.ddmcdn.com'
+      img.sub!('/recipes', '')
+      if source == :desc
+        img.sub!('-200-', '670x440')
+      elsif source == :media
+        img.sub!('-200.jpg', '.jpg')
+      end
+    elsif img.include? 'static.nfl.com'
+      img.sub!('_thumbnail_200_150', '')
+    elsif img.include? 'cbsistatic.com' # CNET
+      return if source == :media
+    end
+
     # blanks
     if (img.include? 'mf.gif') ||
        (img.include? 'blank') ||
@@ -146,6 +202,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'architecturaldigest.com/ad') ||
        (img.include? 'doubleclick.net') ||
        (img.include? 'amazon-adsystem.com') ||
+       (img.include? 'feeds.commarts.com/~/i/') ||
        (img.include? 'wordpress.com/1.0/delicious') ||
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
@@ -154,17 +211,26 @@ class Feed < ActiveRecord::Base
 
     # special cases
     if (img.include? 'feedburner') ||
+       (img == 'http://newsimg.bbc.co.uk/media/images/67165000/jpg/_67165916_67165915.jpg') || # BBC
+       (img.start_with? 'http://c.files.bbci.co.uk') && source == :media || # BBC Sport
+       (img.include? 'a57.foxnews.com') && source == :media || # FOX
+       (img == 'http://global.fncstatic.com/static/v/all/img/og/og-fn-foxnews.jpg') ||
+       (img == 'http://www.foxsports.com/content/fsdigital/fscom.img.png') ||
+       (img.include? 'images.gametrailers.com') && source == :desc || # GameTrailers
        (img.include? 'feedsportal') || # Various
+       (img.include? 'feeds.huffingtonpost.com') || # Huffington Post
        (img.include? '_logo') || # Laissez Faire
        (img.include? 'forbes_200x200') || # Forbes
+       (img.include? 'forbes_1200x1200') || # Forbes
        (img.include? 'share-button') || # Fapesp
        (img.include? 'wp-content/plugins') || # Wordpress share plugins
        (img.include? 'clubedohardware.com.br') || # Clube do Hardware
        (img.include? 'pml.png') || # Techmeme
        (img.include? 'wp-includes/images/smilies') || # Treehouse (and others)
-       (img.include? 'fsdn.com') || # Slashdot
+       (img.include? 'slashcdn.com/sd') || # Slashdot
        (img.include? 'pixel.gif') || # Bleacher Report
        (img.include? 'avclub/None') || # A.V. Club
+       (img.include? 'cdn.sstatic.net/stackoverflow') || # Stack Overflow
        (img.include? '.gravatar.com') || # Feedly, FB Newsroom
        (img.include? 'fastcompany.net/asset_files') || # Fastcompany
        (img.include? 'wordpress.com/1.0/comments') || # Wordpress
@@ -181,14 +247,15 @@ class Feed < ActiveRecord::Base
        (img.include? ';base64,') # Bittorrent
       return nil
     end
+    img
+  end
 
-    # non-image formats
+  def discard_non_images(img)
     if (img.include? '.mp3') ||
        (img.include? '.tiff') ||
        (img.include? '.m4a') ||
        (img.include? '.mp4') ||
        (img.include? '.psd') ||
-       # (img.include? '.gif') ||
        (img.include? '.pdf') ||
        (img.include? '.webm') ||
        (img.include? '.svg') ||
@@ -196,7 +263,6 @@ class Feed < ActiveRecord::Base
        (img.include? '.opus')
       return nil
     end
-
     img
   end
 end

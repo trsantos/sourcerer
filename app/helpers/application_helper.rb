@@ -34,7 +34,7 @@ module ApplicationHelper
         'https://feeds2.feedburner.com/businessinsider',
         'http://www.wsj.com/xml/rss/3_7014.xml',
         'http://www.entrepreneur.com/latest.rss',
-        'http://www.ft.com/rss/home/us'
+        'http://fortune.com/rss'
       ]
     elsif t == 'Design'
       return [
@@ -46,11 +46,11 @@ module ApplicationHelper
       ]
     elsif t == 'Gaming'
       return [
+        'http://www.gamespot.com/feeds/mashup/',
         'http://feeds.gawker.com/kotaku/full',
+        'http://www.pcgamer.com/feed/',
         'http://www.polygon.com/rss/index.xml',
-        'http://www.eurogamer.net/?format=rss',
-        'https://feeds.feedburner.com/RockPaperShotgun',
-        'https://www.gameinformer.com/feeds/thefeedrss.aspx'
+        'http://www.gamesradar.com/all-platforms/news/rss/'
       ]
     elsif t == 'Movies'
       return [
@@ -73,16 +73,16 @@ module ApplicationHelper
         'http://rss.cnn.com/rss/edition.rss',
         'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
         'http://feeds.bbci.co.uk/news/rss.xml?edition=int',
-        'http://rssfeeds.usatoday.com/usatoday-newstopstories',
-        'http://online.wsj.com/xml/rss/3_8068.xml'
+        'http://www.huffingtonpost.com/feeds/index.xml',
+        'http://www.theguardian.com/international/rss'
       ]
     elsif t == 'Photography'
       return [
         'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/',
         'https://iso.500px.com/feed',
+        'http://www.bostonglobe.com/rss/bigpicture',
         'https://feeds.feedburner.com/PetaPixel',
-        'http://digital-photography-school.com/feed/',
-        'http://www.digitalcameraworld.com/feed/'
+        'http://digital-photography-school.com/feed/'
       ]
     elsif t == 'Science'
       return [
@@ -96,9 +96,9 @@ module ApplicationHelper
       return [
         'http://sports.espn.go.com/espn/rss/news',
         'http://feeds.bbci.co.uk/sport/0/rss.xml',
+        'http://www.nfl.com/rss/rsslanding?searchString=home',
         'http://bleacherreport.com/articles/feed',
-        'http://feeds.gawker.com/deadspin/full',
-        'http://www.si.com/rss/si_topstories.rss'
+        'http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP'
       ]
     elsif t == 'Technology'
       return [

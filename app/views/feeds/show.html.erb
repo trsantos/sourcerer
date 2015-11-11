@@ -12,7 +12,7 @@
 		</div>
 	    <% end %>
 	    <% if @feed.description %>
-		<p id="aside-description"><%= @feed.description %></p>
+		<p id="aside-description"><%= sanitize @feed.description %></p>
 	    <% end %>
 	    <% unless @feed.logo or @feed.description %>
 		<p id="aside-title"><%= sub_title @feed %></p>

@@ -4,7 +4,7 @@ class FeedsController < ApplicationController
   before_action :logged_in_user
   before_action :expiration_date_presence
   before_action :check_expiration_date
-  before_action :update_feeds, only: [:show]
+  # before_action :update_feeds, only: [:show]
   after_action :mark_subscription_as_visited, only: [:show]
 
   def index
@@ -14,7 +14,7 @@ class FeedsController < ApplicationController
   def show
     @feed = Feed.find(params[:id])
     # TODO: Use Ajax to reload the page when the fetch is done.
-    @feed.update
+    @feed.update if @feed.created_at > 1.minute.ago
     @entries = @feed.entries.order(created_at: :desc)
     @only_images = @feed.only_images?
   end
