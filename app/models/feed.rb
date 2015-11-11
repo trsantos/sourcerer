@@ -145,7 +145,7 @@ class Feed < ActiveRecord::Base
       img.sub!('cnn', 'cnnnext')
     elsif img.start_with? 'http://timedotcom.files'
       img.sub!('quality=75&strip=color&', '')
-      img.sub!(/w=\d\d\d/, 'w=400')
+      img.sub!(/w=\d*/, 'w=400')
     elsif img.include? 'assets.rollingstone.com'
       img.sub!('small_square', 'medium_rect')
       img.sub!('100x100', '720x405')
@@ -156,15 +156,14 @@ class Feed < ActiveRecord::Base
     elsif img.include? 'a57.foxnews.com/media.foxbusiness.com'
       img.sub!('121/68', '605/340')
     elsif img.include? 'fortunedotcom'
-      img.sub!('quality=80', '')
-      img.sub!('&w=150', '')
-      img += 'w=350'
+      img.sub!('quality=80&', '')
+      img.sub!('w=150', 'w=450')
     elsif img.include? 'static.gamespot.com'
       img.sub!('.png', '.jpg')
     elsif img.include? 'pmcvariety.files'
-      img.sub!(/w=\d\d\d/, 'w=400')
+      img.sub!(/w=\d*/, 'w=400')
     elsif img.include? 'pmcdeadline2.files'
-      img.sub!(/w=\d\d\d/, 'w=400')
+      img.sub!(/w=\d*/, 'w=400')
     elsif img.include? 'imagesmtv-a.akamaihd.net'
       img.sub!('quality=0.8&format=jpg&', '')
       img.sub!('width=150&height=150', 'width=400&height=300')
@@ -176,13 +175,15 @@ class Feed < ActiveRecord::Base
       img.sub!('thumbStandard', 'superJumbo')
     elsif img.include? 'i.livescience.com'
       img.sub!('i00', 'iFF')
-    elsif img.include? 'static.ddmcdn.com'
-      img.sub!('/recipes', '')
-      if source == :desc
-        img.sub!('-200-', '670x440')
-      elsif source == :media
-        img.sub!('-200.jpg', '.jpg')
-      end
+    # elsif img.include? 'static.ddmcdn.com'
+    #   img.sub!('/recipes', '')
+    #   if source == :desc
+    #     img.sub!('-200-', '670x440')
+    #   elsif source == :media
+    #     img.sub!('-200.jpg', '.jpg')
+    #   end
+    elsif img.include? 'img.huffingtonpost.com'
+      img.sub!('74_54', '1200_630')
     elsif img.include? 'static.nfl.com'
       img.sub!('_thumbnail_200_150', '')
     elsif img.include? 'cbsistatic.com' # CNET
