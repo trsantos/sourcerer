@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111094354) do
+ActiveRecord::Schema.define(version: 20151111102854) do
 
   create_table "cached_images", force: :cascade do |t|
     t.integer  "feed_id"
@@ -21,7 +21,8 @@ ActiveRecord::Schema.define(version: 20151111094354) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "cached_images", ["entry_url"], name: "index_cached_images_on_entry_url", unique: true
+  add_index "cached_images", ["entry_url"], name: "index_cached_images_on_entry_url"
+  add_index "cached_images", ["feed_id", "entry_url"], name: "index_cached_images_on_feed_id_and_entry_url", unique: true
   add_index "cached_images", ["feed_id"], name: "index_cached_images_on_feed_id"
 
   create_table "entries", force: :cascade do |t|
