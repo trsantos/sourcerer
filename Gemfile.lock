@@ -52,7 +52,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (8.1.0)
+    byebug (8.2.0)
     celluloid (0.17.2)
       celluloid-essentials
       celluloid-extras
@@ -76,7 +76,7 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1.1)
+    coffee-script-source (1.10.0)
     connection_pool (2.2.0)
     debug_inspector (0.0.2)
     erubis (2.7.0)

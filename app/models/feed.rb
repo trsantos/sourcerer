@@ -177,7 +177,11 @@ class Feed < ActiveRecord::Base
     elsif img.include? 'graphics8.nytimes.com'
       img.sub!('moth.jpg', 'master675.jpg')
       img.sub!(/moth-v\d\.jpg/, 'master675.jpg')
-      img.sub!('thumbStandard', 'superJumbo')
+      if img.include? 'bits-daily-report'
+        img.sub!('thumbStandard', 'articleInline')
+      else
+        img.sub!('thumbStandard', 'superJumbo')
+      end
     elsif img.include? 'i.livescience.com'
       img.sub!('i00', 'iFF')
     elsif (img.include? 'img.huffingtonpost.com') || (img.include? 'i.huffpost.com')
