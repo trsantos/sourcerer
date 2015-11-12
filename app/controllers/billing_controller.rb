@@ -93,7 +93,7 @@ class BillingController < ApplicationController
   end
 
   def expiration_date_check
-    return if Time.current > current_user.expiration_date - 1.week
+    return if Time.current > current_user.expiration_date - 2.weeks
     flash[:info] = 'Too early to talk about money :)'
     redirect_to root_url
   end

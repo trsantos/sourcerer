@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
   def expiration_date_presence
     user = current_user
     return unless user.expiration_date.nil?
-    user.update_attribute(:expiration_date, 1.week.from_now)
+    user.update_attribute(:expiration_date, 2.weeks.from_now)
   end
 end

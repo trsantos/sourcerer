@@ -23,7 +23,7 @@
 		    <%= link_to "Raw feed", @feed.feed_url, target: "_blank" %>
 		</strong>
 	    </div>
-	    <% if Time.current > current_user.expiration_date - 1.week %>
+	    <% if Time.current > current_user.expiration_date - 2.weeks %>
 		<div class="aside-sep"></div>
 		<p class="section-heading">Important</p>
 		<div id="aside-sub">
