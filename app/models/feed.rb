@@ -38,7 +38,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update_feed_attributes(fj_feed)
-    fj_feed.logo = nil if fj_feed.logo == 'https://s2.wp.com/i/buttonw-com.png'
+    fj_feed.logo = nil if (fj_feed.logo == 'https://s2.wp.com/i/buttonw-com.png') || (fj_feed.logo.include? 'creativecommons.org/images/public')
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
                       description: sanitize(strip_tags(fj_feed.description)),
@@ -273,6 +273,7 @@ class Feed < ActiveRecord::Base
        (img.include? 's.conjur.com.br/img/a/og.png') || # Conjur
        (img.include? 'shim-640x20.png') || # EO Wilson
        (img.include? 'ephotozine.com') || # ePHOTOzine
+       (img.include? 'glbimg.com') && source == :desc || # Globo
        (img.include? ';base64,') # Bittorrent
       return nil
     end
