@@ -38,6 +38,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update_feed_attributes(fj_feed)
+    fj_feed.logo = nil if fj_feed.logo == 'https://s2.wp.com/i/buttonw-com.png'
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
                       description: sanitize(strip_tags(fj_feed.description)),
@@ -186,6 +187,12 @@ class Feed < ActiveRecord::Base
       img.sub!('_thumbnail_200_150', '')
     elsif img.include? 'cbsistatic.com' # CNET
       return if source == :media
+    elsif img.include? 'media.breitbart.com'
+      img.sub!(/-\d\d\dx\d\d\d/, '')
+    elsif img.include? 'img.youtube.com'
+      img.sub!(/default/, 'hqdefault')
+    elsif img.include? 'blog.caranddriver.com'
+      img.sub!(/-150x150/, '-876x535')
     end
 
     # blanks
@@ -204,6 +211,8 @@ class Feed < ActiveRecord::Base
        (img.include? 'feeds.commarts.com/~/i/') ||
        (img.include? 'wordpress.com/1.0/delicious') ||
        (img.include? 'img/.jpg') ||
+       (img.include? 'AD5.') || # bip-online
+       (img.include? 'wp-content/themes') || # Intel Blogs
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil
@@ -248,6 +257,7 @@ class Feed < ActiveRecord::Base
        (img.include? '/blog_images/') || # ignorethecode.net
        (img.include? 'wp.com/latex.php') || # Wordpress
        (img.include? 'assets/img/favicons') || # A List Apart
+       (img.include? 'home_pensmall.jpg') || # Econlib
        (img.include? ';base64,') # Bittorrent
       return nil
     end
