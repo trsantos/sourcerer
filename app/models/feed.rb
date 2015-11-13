@@ -193,6 +193,10 @@ class Feed < ActiveRecord::Base
       img.sub!(/default/, 'hqdefault')
     elsif img.include? 'blog.caranddriver.com'
       img.sub!(/-150x150/, '-876x535')
+    elsif img.include? 'cienciahoje.uol.com.br'
+      img.sub!('/image_mini', '')
+    elsif img.include? 'news.sciencemag.org'
+      img.sub!('styles/square_60x60/public', '')
     end
 
     # blanks
@@ -226,6 +230,7 @@ class Feed < ActiveRecord::Base
        (img == 'http://global.fncstatic.com/static/v/all/img/og/og-fn-foxnews.jpg') ||
        (img == 'http://www.foxsports.com/content/fsdigital/fscom.img.png') ||
        (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
+       (img.include? 'media.guim.co.uk') || # Guardian
        (img.include? 'images.gametrailers.com') && source == :desc || # GameTrailers
        (img.include? 'feedsportal') || # Various
        (img.include? 'feeds.huffingtonpost.com') || # Huffington Post
@@ -258,6 +263,8 @@ class Feed < ActiveRecord::Base
        (img.include? 'wp.com/latex.php') || # Wordpress
        (img.include? 'assets/img/favicons') || # A List Apart
        (img.include? 'home_pensmall.jpg') || # Econlib
+       (img.include? 'css-tricks-star.png') || # CSS Tricks
+       (img.include? 's.conjur.com.br/img/a/og.png') || # Conjur
        (img.include? ';base64,') # Bittorrent
       return nil
     end
