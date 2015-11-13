@@ -24,8 +24,8 @@ class Feed < ActiveRecord::Base
   end
 
   def only_images?
-    (feed_url.start_with? 'https://www.youtube.com/feeds/videos.xml?channel_id=') ||
-      (feed_url.start_with? 'http://expo.getbootstrap.com/feed.xml')
+    (feed_url.include? 'youtube.com/feeds/videos.xml?channel_id=') ||
+      (feed_url.include? 'expo.getbootstrap.com')
   end
 
   private
@@ -247,6 +247,7 @@ class Feed < ActiveRecord::Base
        (img.include? 's3.cooperpress.com') || # HTML5 Weekly
        (img.include? '/blog_images/') || # ignorethecode.net
        (img.include? 'wp.com/latex.php') || # Wordpress
+       (img.include? 'assets/img/favicons') || # A List Apart
        (img.include? ';base64,') # Bittorrent
       return nil
     end
