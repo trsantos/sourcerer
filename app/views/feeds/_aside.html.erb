@@ -14,6 +14,7 @@
 	<% end %>
 	<div id="resources">
 	    <strong>
+		<%= link_to "On feedly", 'https://feedly.com/i/subscription/feed/' + @feed.feed_url, target: "_blank" %>
 		<%= link_to "Website", sub_url(@feed), target: "_blank" %><br/>
 		<%= link_to "Raw feed", @feed.feed_url, target: "_blank" %>
 	    </strong>
