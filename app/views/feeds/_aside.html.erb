@@ -1,0 +1,30 @@
+<aside>
+    <div class="large-3 columns show-for-large-up">
+	<p class="section-heading">Feed info</p>
+	<% if @feed.logo %>
+	    <div id="feed-logo">
+		<img id="logo-img" src="<%= @feed.logo %>"/>
+	    </div>
+	<% end %>
+	<% if @feed.description %>
+	    <p id="aside-description"><%= sanitize @feed.description %></p>
+	<% end %>
+	<% unless @feed.logo or @feed.description %>
+	    <p id="aside-title"><%= sub_title @feed %></p>
+	<% end %>
+	<div id="resources">
+	    <strong>
+		<%= link_to "Website", sub_url(@feed), target: "_blank" %><br/>
+		<%= link_to "Raw feed", @feed.feed_url, target: "_blank" %>
+	    </strong>
+	</div>
+	<% if Time.current > current_user.expiration_date - 2.weeks %>
+	    <div class="aside-sep"></div>
+	    <p class="section-heading">Important</p>
+	    <div id="aside-sub">
+		<p>Your subscription is about to end.</p>
+		<strong><%= link_to 'Renew it now', billing_expired_path %></strong>
+	    </div>
+	<% end %>
+    </div>
+</aside>

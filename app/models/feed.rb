@@ -87,9 +87,9 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, desc)
-    # (process_image image_from_description(desc), :desc) ||
-    #   (process_image entry.image, :media) ||
-    (process_image og_image(entry.url), :og)
+    (process_image image_from_description(desc), :desc) ||
+      (process_image entry.image, :media) ||
+      (process_image og_image(entry.url), :og)
   end
 
   def process_image(img, source)
@@ -111,6 +111,14 @@ class Feed < ActiveRecord::Base
 
   def image_from_description(description)
     doc = Nokogiri::HTML description
+    # doc.css('*').each do |e|
+    #   if e.name == 'img'
+    #     return e.attributes['src'].value
+    #   elsif e.name == 'p' && !e.text.blank?
+    #     break
+    #   end
+    # end
+    # nil
     return doc.css('img').first.attributes['src'].value
   rescue
     nil
@@ -237,7 +245,8 @@ class Feed < ActiveRecord::Base
        (img.include? 'index.phpstyles') || # Forum Outerspace
        (img.include? 'advertisement.') || # Smashing
        (img.include? 's3.cooperpress.com') || # HTML5 Weekly
-       (img.include? '/blog_images/') || # HTML5 Weekly
+       (img.include? '/blog_images/') || # ignorethecode.net
+       (img.include? 'wp.com/latex.php') || # Wordpress
        (img.include? ';base64,') # Bittorrent
       return nil
     end
