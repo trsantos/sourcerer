@@ -13,18 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151111102854) do
 
-  create_table "cached_images", force: :cascade do |t|
-    t.integer  "feed_id"
-    t.text     "entry_url"
-    t.text     "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "cached_images", ["entry_url"], name: "index_cached_images_on_entry_url"
-  add_index "cached_images", ["feed_id", "entry_url"], name: "index_cached_images_on_feed_id_and_entry_url", unique: true
-  add_index "cached_images", ["feed_id"], name: "index_cached_images_on_feed_id"
-
   create_table "entries", force: :cascade do |t|
     t.text     "title"
     t.text     "description"

@@ -28,7 +28,8 @@ class Feed < ActiveRecord::Base
   end
 
   def only_images?
-    feed_url.start_with? 'https://www.youtube.com/feeds/videos.xml?channel_id='
+    (feed_url.start_with? 'https://www.youtube.com/feeds/videos.xml?channel_id=') ||
+      (feed_url.start_with? 'http://expo.getbootstrap.com/feed.xml')
   end
 
   private
@@ -48,15 +49,6 @@ class Feed < ActiveRecord::Base
                       updated_at: Time.zone.now)
   end
 
-  # def update_entries(fj_feed)
-  #   return unless new_entries? fj_feed
-  #   entries.delete_all
-  #   insert_new_entries fj_feed
-  #   subscriptions.each do |s|
-  #     s.update_attribute(:updated, true)
-  #   end
-  # end
-
   def update_entries(fj_feed)
     updated = false
     fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |e|
@@ -74,21 +66,6 @@ class Feed < ActiveRecord::Base
       s.update_attribute(:updated, true)
     end
   end
-
-  # def new_entries?(fj_feed)
-  #   fj_entries = fj_feed.entries.first(3)
-  #   fj_entries.each do |e|
-  #     return true unless entries.find_by(url: e.url)
-  #   end
-  #   false
-  # end
-
-  # def insert_new_entries(fj_feed)
-  #   fj_entries = fj_feed.entries.first(Feed.entries_per_feed).reverse
-  #   fj_entries.each do |e|
-  #     insert_entry e
-  #   end
-  # end
 
   def setup_fj
     Feedjira::Feed.add_common_feed_entry_element(:enclosure, value: :url, as: :image)
@@ -118,17 +95,6 @@ class Feed < ActiveRecord::Base
       (process_image entry.image, :media) ||
       (process_image og_image(entry.url), :og)
   end
-
-  # def find_image(entry, desc)
-  #   cached_images.find_by(entry_url: entry.url).image
-  # rescue
-  #   img = (process_image image_from_description(desc), :desc) ||
-  #         (process_image entry.image, :media) ||
-  #         (process_image og_image(entry.url), :og)
-  #   cached_images.create(entry_url: entry.url,
-  #                        image: img)
-  #   img
-  # end
 
   def process_image(img, source)
     return if img.blank?
@@ -273,7 +239,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'divisoriagizmodo') || # Gizmodo
        (img.include? 'index.phpstyles') || # Forum Outerspace
        (img.include? 'advertisement.') || # Smashing
-       (img.include? 's3.cooperpress.com/') || # HTML5 Weekly
+       (img.include? 's3.cooperpress.com') || # HTML5 Weekly
        (img.include? ';base64,') # Bittorrent
       return nil
     end
