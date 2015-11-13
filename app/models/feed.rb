@@ -172,9 +172,9 @@ class Feed < ActiveRecord::Base
       img.sub!('moth.jpg', 'master675.jpg')
       img.sub!(/moth-v\d\.jpg/, 'master675.jpg')
       if img.include? 'bits-daily-report'
-        img.sub!('thumbStandard', 'articleInline')
+        img.sub!(/thumbStandard(-v\d|)/, 'articleInline')
       else
-        img.sub!('thumbStandard', 'superJumbo')
+        img.sub!(/thumbStandard(-v\d|)/, 'superJumbo')
       end
     elsif img.include? 'i.livescience.com'
       img.sub!('i00', 'iFF')
