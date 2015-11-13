@@ -24,7 +24,7 @@ class Feed < ActiveRecord::Base
   end
 
   def only_images?
-    (feed_url.include? 'youtube.com/feeds/videos.xml?channel_id=') ||
+    (feed_url.include? 'youtube.com/feeds/videos.xml') ||
       (feed_url.include? 'expo.getbootstrap.com')
   end
 
@@ -197,6 +197,10 @@ class Feed < ActiveRecord::Base
       img.sub!('/image_mini', '')
     elsif img.include? 'news.sciencemag.org'
       img.sub!('styles/square_60x60/public', '')
+    elsif img.include? 'images.eonline.com'
+      img.sub!('/resize/66/66/', '')
+    elsif img.include? 'fifa.com'
+      img.sub!('small.', 'full-lnd.')
     end
 
     # blanks
@@ -217,6 +221,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'img/.jpg') ||
        (img.include? 'AD5.') || # bip-online
        (img.include? 'wp-content/themes') || # Intel Blogs
+       (img.include? 'GhOtcum4rbpO2RRCDXxaJDTBfc_large.png') || # Dustin Curtis
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil
@@ -231,6 +236,7 @@ class Feed < ActiveRecord::Base
        (img == 'http://www.foxsports.com/content/fsdigital/fscom.img.png') ||
        (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
        (img.include? 'media.guim.co.uk') || # Guardian
+       (img.include? 'the-economist-logo.gif') || # The Economist
        (img.include? 'images.gametrailers.com') && source == :desc || # GameTrailers
        (img.include? 'feedsportal') || # Various
        (img.include? 'feeds.huffingtonpost.com') || # Huffington Post
@@ -265,6 +271,8 @@ class Feed < ActiveRecord::Base
        (img.include? 'home_pensmall.jpg') || # Econlib
        (img.include? 'css-tricks-star.png') || # CSS Tricks
        (img.include? 's.conjur.com.br/img/a/og.png') || # Conjur
+       (img.include? 'shim-640x20.png') || # EO Wilson
+       (img.include? 'ephotozine.com') || # ePHOTOzine
        (img.include? ';base64,') # Bittorrent
       return nil
     end
