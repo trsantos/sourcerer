@@ -16,7 +16,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update
-    # return if entries.any? && updated_at > 2.hours.ago
+    # return if entries.any? && updated_at > 2.hours.ago && Rails.env.production?
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
     if Rails.env.development?
@@ -91,7 +91,7 @@ class Feed < ActiveRecord::Base
   end
 
   def find_date(pub_date)
-    return Time.zone.now if pub_date.nil? || pub_date > Time.zone.now
+    return Time.current if pub_date.nil? || pub_date > Time.zone.now
     pub_date
   end
 
