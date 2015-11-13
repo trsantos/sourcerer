@@ -7,7 +7,6 @@ class Feed < ActiveRecord::Base
   has_many :users, through: :subscriptions
 
   has_many :entries, dependent: :destroy
-  has_many :cached_images, dependent: :destroy
 
   validates :feed_url, presence: true, uniqueness: true
 
@@ -19,10 +18,7 @@ class Feed < ActiveRecord::Base
     # return if entries.any? && updated_at > 2.hours.ago && Rails.env.production?
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
-    if Rails.env.development?
-      entries.delete_all
-      cached_images.delete_all
-    end
+    entries.delete_all if Rails.env.development?
     update_feed_attributes fj_feed
     update_entries fj_feed
   end
@@ -199,6 +195,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'amazon-adsystem.com') ||
        (img.include? 'feeds.commarts.com/~/i/') ||
        (img.include? 'wordpress.com/1.0/delicious') ||
+       (img.include? 'img/.jpg') ||
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil
@@ -240,6 +237,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'index.phpstyles') || # Forum Outerspace
        (img.include? 'advertisement.') || # Smashing
        (img.include? 's3.cooperpress.com') || # HTML5 Weekly
+       (img.include? '/blog_images/') || # HTML5 Weekly
        (img.include? ';base64,') # Bittorrent
       return nil
     end
