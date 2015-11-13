@@ -245,6 +245,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'a57.foxnews.com') && source == :media || # FOX
        (img == 'http://global.fncstatic.com/static/v/all/img/og/og-fn-foxnews.jpg') ||
        (img == 'http://www.foxsports.com/content/fsdigital/fscom.img.png') ||
+       (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
        (img.include? 'images.gametrailers.com') && source == :desc || # GameTrailers
        (img.include? 'feedsportal') || # Various
        (img.include? 'feeds.huffingtonpost.com') || # Huffington Post
@@ -272,7 +273,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'divisoriagizmodo') || # Gizmodo
        (img.include? 'index.phpstyles') || # Forum Outerspace
        (img.include? 'advertisement.') || # Smashing
-       (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
+       (img.include? 's3.cooperpress.com/') || # HTML5 Weekly
        (img.include? ';base64,') # Bittorrent
       return nil
     end
