@@ -151,9 +151,9 @@ class Feed < ActiveRecord::Base
     if img.start_with? 'http://i2.cdn.turner.com/cnn'
       img.sub!('top-tease', 'horizontal-gallery')
       img.sub!('cnn', 'cnnnext')
-    elsif img.start_with? 'http://timedotcom.files'
-      img.sub!('quality=75&strip=color&', '')
+    elsif img.include? 'wordpress.com'
       img.sub!(/w=\d*/, 'w=400')
+      img.sub!(/quality=\d*/, '')
     elsif img.include? 'assets.rollingstone.com'
       img.sub!('small_square', 'medium_rect')
       img.sub!('100x100', '720x405')
@@ -163,25 +163,19 @@ class Feed < ActiveRecord::Base
       img.sub!(/-\d\d\dx\d\d\d/, '')
     elsif img.include? 'a57.foxnews.com/media.foxbusiness.com'
       img.sub!('121/68', '605/340')
-    elsif img.include? 'fortunedotcom'
-      img.sub!('quality=80&', '')
-      img.sub!('w=150', 'w=450')
     elsif img.include? 'static.gamespot.com'
       img.sub!('.png', '.jpg')
       img.sub!('screen_medium', 'screen_kubrick')
       img.sub!('static', 'static1')
-    elsif img.include? 'pmcvariety.files'
-      img.sub!(/w=\d*/, 'w=400')
-    elsif img.include? 'pmcdeadline2.files'
-      img.sub!(/w=\d*/, 'w=400')
     elsif img.include? 'imagesmtv-a.akamaihd.net'
       img.sub!('quality=0.8&format=jpg&', '')
       img.sub!('width=150&height=150', 'width=400&height=300')
     elsif img.include? 'www.billboard.com'
       img.sub!('promo_225', 'promo_650')
     elsif img.include? 'graphics8.nytimes.com'
-      img.sub!('moth.jpg', 'master675.jpg')
-      img.sub!(/moth-v\d\.jpg/, 'master675.jpg')
+      # img.sub!('moth', 'master675')
+      img.sub!(/moth(\-v\d+|)/, 'master675')
+      img.sub!('sub-', 'dd-')
       if img.include? 'bits-daily-report'
         img.sub!(/thumbStandard(-v\d|)/, 'articleInline')
       else
@@ -201,6 +195,8 @@ class Feed < ActiveRecord::Base
       img.sub!(/-\d\d\dx\d\d\d/, '')
     elsif img.include? 'img.youtube.com'
       img.sub!(/default/, 'hqdefault')
+    elsif img.include? 'i.ytimg.com'
+      img.sub!(/default/, 'hqdefault')
     elsif img.include? 'blog.caranddriver.com'
       img.sub!(/-150x150/, '-876x535')
     elsif img.include? 'cienciahoje.uol.com.br'
@@ -213,6 +209,23 @@ class Feed < ActiveRecord::Base
       img.sub!('small.', 'full-lnd.')
     elsif img.include? 'scontent.cdninstagram.com'
       img.sub!('s150x150', 's320x320')
+    elsif img.include? 'img.washingtonpost.com'
+      img.sub!('_90w', '_1024w')
+      img.sub!('w=90', 'w=1024')
+    elsif img.include? 'media.bestofmicro.com'
+      img.sub!(/rc_120x90/, 'w_600')
+    elsif img.include? 'nikkei.com'
+      img.sub!('thumbnail.jpg', '_main_image.jpg')
+    elsif img.include? 'cdn.phys.org'
+      img.sub!('tmb', '800')
+    elsif img.include? 'scientificamerican.com'
+      img.sub!('_small', '')
+    elsif img.include? '365dm.com'
+      img.sub!('128x67', '768x432')
+    elsif img.include? 'i.space.com'
+      img.sub!('i00', 'i02')
+    elsif img.include? 'static.spin.com'
+      img.sub!(/\d\d\dx\d\d\d/, '640x474')
     end
 
     # blanks
@@ -234,6 +247,7 @@ class Feed < ActiveRecord::Base
        (img.include? 'AD5.') || # bip-online
        (img.include? 'wp-content/themes') || # Intel Blogs
        (img.include? 'GhOtcum4rbpO2RRCDXxaJDTBfc_large.png') || # Dustin Curtis
+       (img.include? 'subscribe') || # Plataformatec
        (img == 'http://www.scientificamerican.com') ||
        (img == 'http://eu.square-enix.com')
       return nil
@@ -293,6 +307,13 @@ class Feed < ActiveRecord::Base
        (img.include? 'hands-anim.gif') || # jwz
        (img.include? '_logo') || # Laissez Faire
        (img.include? 'facebook.gif') || # KDE
+       (img.include? 's.w.org/images/core/emoji') || # Wordpress
+       (img.include? 'google-postcard.jpg') || # Libertarianism
+       (img.include? 'mediagazer.com') || # Mediagazer
+       (img.include? 'techmeme.com') || # Techmeme
+       (img.include? 'msf-logo') || # MSF
+       (img.include? 'fb-share-icon') || # Space.com
+       (img.include? 'www.spiegel.de/images') && source != :og || # Spiegel
        (img.include? 'glbimg.com') && source == :desc || # Globo
        (img.include? 'golem.de') && source == :desc || # Golem.de
        (img.include? 'media.mmo-champion.com') && source == :desc || # Heroes Nexus
