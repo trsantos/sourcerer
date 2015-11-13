@@ -38,12 +38,22 @@ class Feed < ActiveRecord::Base
   end
 
   def update_feed_attributes(fj_feed)
-    fj_feed.logo = nil if (fj_feed.logo == 'https://s2.wp.com/i/buttonw-com.png') || (fj_feed.logo.include? 'creativecommons.org/images/public')
+    logo = check_feed_logo(fj_feed.logo)
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
                       description: sanitize(strip_tags(fj_feed.description)),
-                      logo: fj_feed.logo,
+                      logo: logo,
                       updated_at: Time.zone.now)
+  end
+
+  def check_feed_logo(logo)
+    return if logo.nil?
+    if (logo == 'https://s2.wp.com/i/buttonw-com.png') ||
+       (logo.include? 'creativecommons.org/images/public')
+      nil
+    else
+      logo
+    end
   end
 
   def update_entries(fj_feed)
@@ -201,6 +211,8 @@ class Feed < ActiveRecord::Base
       img.sub!('/resize/66/66/', '')
     elsif img.include? 'fifa.com'
       img.sub!('small.', 'full-lnd.')
+    elsif img.include? 'scontent.cdninstagram.com'
+      img.sub!('s150x150', 's320x320')
     end
 
     # blanks
@@ -240,9 +252,9 @@ class Feed < ActiveRecord::Base
        (img.include? 'images.gametrailers.com') && source == :desc || # GameTrailers
        (img.include? 'feedsportal') || # Various
        (img.include? 'feeds.huffingtonpost.com') || # Huffington Post
-       (img.include? '_logo') || # Laissez Faire
        (img.include? 'forbes_200x200') || # Forbes
        (img.include? 'forbes_1200x1200') || # Forbes
+       (img.include? 'text_200.png') || # Tumblr
        (img.include? 'share-button') || # Fapesp
        (img.include? 'wp-content/plugins') || # Wordpress share plugins
        (img.include? 'clubedohardware.com.br') || # Clube do Hardware
@@ -273,7 +285,17 @@ class Feed < ActiveRecord::Base
        (img.include? 's.conjur.com.br/img/a/og.png') || # Conjur
        (img.include? 'shim-640x20.png') || # EO Wilson
        (img.include? 'ephotozine.com') || # ePHOTOzine
+       (img.include? 'logo-epoca-novo.png') || # Epoca
+       (img.include? 'devimpact-fb-icon.png') || # Impact Evaluations
+       (img.include? 'logo-') || # InfoQ
+       (img.include? 'logo_') || # InfoQ
+       (img.include? 'facebook_icon') || # Inside Higher Ed
+       (img.include? 'hands-anim.gif') || # jwz
+       (img.include? '_logo') || # Laissez Faire
+       (img.include? 'facebook.gif') || # KDE
        (img.include? 'glbimg.com') && source == :desc || # Globo
+       (img.include? 'golem.de') && source == :desc || # Golem.de
+       (img.include? 'media.mmo-champion.com') && source == :desc || # Heroes Nexus
        (img.include? ';base64,') # Bittorrent
       return nil
     end

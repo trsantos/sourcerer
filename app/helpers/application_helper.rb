@@ -90,7 +90,7 @@ module ApplicationHelper
         'http://news.nationalgeographic.com/rss/index.rss',
         'http://feeds.nature.com/news/rss/news',
         'http://www.livescience.com/home/feed/site.xml',
-        'http://feeds.sciencedaily.com/sciencedaily'
+        'https://feeds.feedburner.com/DiscoveryNews-Top-Stories'
       ]
     elsif t == 'Sports'
       return [
