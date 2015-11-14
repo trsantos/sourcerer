@@ -182,6 +182,9 @@ $fh-height: 50px;
 	    overflow: hidden;
 	    margin-top: 0px;
 	    margin-bottom: 5px;
+	    a {
+		text-decoration: underline dashed;
+	    }
 	}
 	.timestamp {
 	    font-size: small;

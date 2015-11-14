@@ -97,7 +97,7 @@ class Feed < ActiveRecord::Base
   def insert_entry(e)
     description = e.content || e.summary || ''
     entries.create(title:       (e.title unless e.title.blank?),
-                   description: sanitize(strip_tags(description)),
+                   description: sanitize(description, tags: ['a'], attributes: ['href']),
                    pub_date:    find_date(e.published),
                    image:       find_image(e, description),
                    url:         e.url)
@@ -109,9 +109,13 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, desc)
-    (process_image image_from_description(desc), :desc) ||
-      (process_image entry.image, :media) ||
+    from_feed =  (process_image image_from_description(desc), :desc) ||
+                 (process_image entry.image, :media)
+    if from_feed.nil? && Rails.env.production?
       (process_image og_image(entry.url), :og)
+    else
+      from_feed
+    end
   end
 
   def process_image(img, source)
