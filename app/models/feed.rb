@@ -29,6 +29,16 @@ class Feed < ActiveRecord::Base
       (feed_url.include? 'xkcd.com/rss.xml')
   end
 
+  def refresh_images
+    fj_feed = fetch_and_parse
+    return if fj_feed.is_a? Integer
+    entries.delete_all
+    fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |e|
+      insert_entry e
+    end
+    self.entries = entries.order(created_at: :desc).first(Feed.entries_per_feed)
+  end
+
   private
 
   def fetch_and_parse
