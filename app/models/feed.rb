@@ -286,6 +286,7 @@ class Feed < ActiveRecord::Base
        (img.include? '/smilies/') ||
        (img.include? '/emoji/') ||
        (img.include? '/smileys/') ||
+       (img.include? '/comments/') ||
        (img.include? 'a57.foxnews.com') && source == :media || # FOX
        (img == 'http://global.fncstatic.com/static/v/all/img/og/og-fn-foxnews.jpg') ||
        (img == 'http://www.foxsports.com/content/fsdigital/fscom.img.png') ||
