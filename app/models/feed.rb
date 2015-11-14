@@ -25,7 +25,8 @@ class Feed < ActiveRecord::Base
 
   def only_images?
     (feed_url.include? 'youtube.com/feeds/videos.xml') ||
-      (feed_url.include? 'expo.getbootstrap.com')
+      (feed_url.include? 'expo.getbootstrap.com') ||
+      (feed_url.include? 'xkcd.com/rss.xml')
   end
 
   private
@@ -48,7 +49,7 @@ class Feed < ActiveRecord::Base
 
   def check_feed_logo(logo)
     return if logo.nil?
-    if (logo == 'https://s2.wp.com/i/buttonw-com.png') ||
+    if (logo.include? 'wp.com/i/buttonw-com') ||
        (logo.include? 'creativecommons.org/images/public')
       nil
     else
@@ -122,15 +123,20 @@ class Feed < ActiveRecord::Base
 
   def image_from_description(description)
     doc = Nokogiri::HTML description
-    # doc.css('*').each do |e|
-    #   if e.name == 'img'
-    #     return e.attributes['src'].value
-    #   elsif e.name == 'p' && !e.text.blank?
-    #     break
-    #   end
-    # end
-    # nil
-    return doc.css('img').first.attributes['src'].value
+    seen_text = false
+    doc.css('*').each do |e|
+      if e.name == 'img'
+        return e.attributes['src'].value
+      elsif e.name == 'p' && !e.text.blank?
+        if seen_text
+          break
+        else
+          seen_text = true
+        end
+      end
+    end
+    nil
+    # return doc.css('img').first.attributes['src'].value
   rescue
     nil
   end
@@ -148,9 +154,12 @@ class Feed < ActiveRecord::Base
     return if img.blank?
 
     # replaces
-    if img.start_with? 'http://i2.cdn.turner.com/cnn'
-      img.sub!('top-tease', 'horizontal-gallery')
-      img.sub!('cnn', 'cnnnext')
+    if img.include? 'pitchfork.com'
+      img.sub! 'pagination.', 'ticker.'
+    elsif img.include? 'cdn.turner.com'
+      img.sub! 'top-tease', 'horizontal-gallery'
+      img.sub! 'cnn', 'cnnnext'
+      img.sub! '120x90', '780x439'
     elsif img.include? 'wordpress.com'
       img.sub!(/w=\d*/, 'w=400')
       img.sub!(/quality=\d*/, '')
@@ -175,7 +184,7 @@ class Feed < ActiveRecord::Base
     elsif img.include? 'graphics8.nytimes.com'
       # img.sub!('moth', 'master675')
       img.sub!(/moth(\-v\d+|)/, 'master675')
-      img.sub!('sub-', 'dd-')
+      img.sub! 'sub-', 'dd-'
       if img.include? 'bits-daily-report'
         img.sub!(/thumbStandard(-v\d|)/, 'articleInline')
       else
@@ -194,13 +203,13 @@ class Feed < ActiveRecord::Base
     elsif img.include? 'media.breitbart.com'
       img.sub!(/-\d\d\dx\d\d\d/, '')
     elsif img.include? 'img.youtube.com'
-      img.sub!(/default/, 'hqdefault')
+      img.sub! '/default', '/hqdefault'
     elsif img.include? 'i.ytimg.com'
-      img.sub!(/default/, 'hqdefault')
+      img.sub! '/default', '/hqdefault'
     elsif img.include? 'blog.caranddriver.com'
       img.sub!(/-150x150/, '-876x535')
     elsif img.include? 'cienciahoje.uol.com.br'
-      img.sub!('/image_mini', '')
+      img.sub! '/image_mini', ''
     elsif img.include? 'news.sciencemag.org'
       img.sub!('styles/square_60x60/public', '')
     elsif img.include? 'images.eonline.com'
@@ -210,8 +219,9 @@ class Feed < ActiveRecord::Base
     elsif img.include? 'scontent.cdninstagram.com'
       img.sub!('s150x150', 's320x320')
     elsif img.include? 'img.washingtonpost.com'
-      img.sub!('_90w', '_1024w')
-      img.sub!('w=90', 'w=1024')
+      return if img.include? '.html'
+      img.sub! '_90w', '_1024w'
+      img.sub! 'w=90', 'w=1024'
     elsif img.include? 'media.bestofmicro.com'
       img.sub!(/rc_120x90/, 'w_600')
     elsif img.include? 'nikkei.com'
@@ -221,103 +231,82 @@ class Feed < ActiveRecord::Base
     elsif img.include? 'scientificamerican.com'
       img.sub!('_small', '')
     elsif img.include? '365dm.com'
-      img.sub!('128x67', '768x432')
+      img.sub! '128x67', '768x432'
+      img.sub! '150x150', '768x432'
     elsif img.include? 'i.space.com'
       img.sub!('i00', 'i02')
     elsif img.include? 'static.spin.com'
-      img.sub!(/\d\d\dx\d\d\d/, '640x474')
+      img.sub!(/-\d\d\dx\d\d\d/, '')
+    elsif img.include? 'venturebeat.com'
+      img.sub! '-160x140', ''
+    elsif (img.include? 'googleusercontent.com') ||
+          (img.include? 'blogspot.com')
+      img.sub! 's72-c', 's640'
     end
 
     # blanks
     if (img.include? 'mf.gif') ||
-       (img.include? 'blank') ||
-       (img.include? 'pixel.wp') ||
+       (img.include? 'blank') || # Wordpress
+       (img.include? 'pixel.wp') || # Wordpress
        (img.include? 'pixel.gif') ||
-       (img.include? 'Badge') ||
-       (img.include? 'ptq.gif') ||
-       (img.include? 'wirecutter-deals-300x250.png') ||
-       (img.include? 'beacon') ||
+       (img.include? 'beacon') || # Intel Blogs
        (img.include? 'rssfeeds.usatoday.com') ||
-       (img.include? 'architecturaldigest.com/ad') ||
        (img.include? 'doubleclick.net') ||
-       (img.include? 'amazon-adsystem.com') ||
        (img.include? 'feeds.commarts.com/~/i/') ||
-       (img.include? 'wordpress.com/1.0/delicious') ||
-       (img.include? 'img/.jpg') ||
+       (img.include? 'img/.jpg') || # jezenthomas
        (img.include? 'AD5.') || # bip-online
-       (img.include? 'wp-content/themes') || # Intel Blogs
        (img.include? 'GhOtcum4rbpO2RRCDXxaJDTBfc_large.png') || # Dustin Curtis
-       (img.include? 'subscribe') || # Plataformatec
        (img == 'http://www.scientificamerican.com') ||
-       (img == 'http://eu.square-enix.com')
+       (img == 'http://eu.square-enix.com') || # Square
+       (img.include? 'wp-content/themes') # Intel Blogs
       return nil
     end
 
-    # special cases
-    if (img.include? 'feedburner') ||
-       (img == 'http://newsimg.bbc.co.uk/media/images/67165000/jpg/_67165916_67165915.jpg') || # BBC
-       (img.start_with? 'http://c.files.bbci.co.uk') && source == :media || # BBC Sport
+    # # special cases
+    if (img.include? 'feedburner.com') ||
+       (img.include? 'logo') ||
+       (img.include? 'icon') ||
+       (img.include? '/themes/') ||
+       (img.include? '/plugins/') ||
+       (img.include? '/smilies/') ||
+       (img.include? '/emoji/') ||
+       (img.include? '/smileys/') ||
        (img.include? 'a57.foxnews.com') && source == :media || # FOX
        (img == 'http://global.fncstatic.com/static/v/all/img/og/og-fn-foxnews.jpg') ||
        (img == 'http://www.foxsports.com/content/fsdigital/fscom.img.png') ||
+       (img == 'http://newsimg.bbc.co.uk/media/images/67165000/jpg/_67165916_67165915.jpg') ||
        (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
        (img.include? 'media.guim.co.uk') || # Guardian
-       (img.include? 'the-economist-logo.gif') || # The Economist
        (img.include? 'images.gametrailers.com') && source == :desc || # GameTrailers
-       (img.include? 'feedsportal') || # Various
+       (img.include? 'feedsportal.com') || # Various
        (img.include? 'feeds.huffingtonpost.com') || # Huffington Post
        (img.include? 'forbes_200x200') || # Forbes
        (img.include? 'forbes_1200x1200') || # Forbes
        (img.include? 'text_200.png') || # Tumblr
-       (img.include? 'share-button') || # Fapesp
-       (img.include? 'wp-content/plugins') || # Wordpress share plugins
+       (img.include? 'tumblr.com/avatar') || # Tumblr
        (img.include? 'clubedohardware.com.br') || # Clube do Hardware
-       (img.include? 'pml.png') || # Techmeme
-       (img.include? 'wp-includes/images/smilies') || # Treehouse (and others)
-       (img.include? 'slashcdn.com/sd') || # Slashdot
-       (img.include? 'pixel.gif') || # Bleacher Report
+       (img.include? 'techmeme.com') || # Techmeme
+       (img.include? 'twitter_icon_large') || # Slashdot
        (img.include? 'avclub/None') || # A.V. Club
        (img.include? 'cdn.sstatic.net/stackoverflow') || # Stack Overflow
-       (img.include? '.gravatar.com') || # Feedly, FB Newsroom
+       (img.include? 'gravatar.com') || # Feedly, FB Newsroom
        (img.include? 'fastcompany.net/asset_files') || # Fastcompany
-       (img.include? 'wordpress.com/1.0/comments') || # Wordpress
-       (img.include? 'images/share') || # EFF
-       (img.include? 'modules/service_links') || # KDE Dot News
-       (img.include? 'badge') || # Cato.org
-       (img.include? 'dynamic1.anandtech.com') || # Anandtech
-       (img.include? '/icons/') || # EFF
-       (img.include? '/emoji/') || # Bothsides of the Table
-       (img.include? 'divisoriagizmodo') || # Gizmodo
-       (img.include? 'index.phpstyles') || # Forum Outerspace
        (img.include? 'advertisement.') || # Smashing
        (img.include? 's3.cooperpress.com') || # HTML5 Weekly
-       (img.include? '/blog_images/') || # ignorethecode.net
        (img.include? 'wp.com/latex.php') || # Wordpress
-       (img.include? 'assets/img/favicons') || # A List Apart
-       (img.include? 'home_pensmall.jpg') || # Econlib
        (img.include? 'css-tricks-star.png') || # CSS Tricks
        (img.include? 's.conjur.com.br/img/a/og.png') || # Conjur
        (img.include? 'shim-640x20.png') || # EO Wilson
        (img.include? 'ephotozine.com') || # ePHOTOzine
-       (img.include? 'logo-epoca-novo.png') || # Epoca
-       (img.include? 'devimpact-fb-icon.png') || # Impact Evaluations
-       (img.include? 'logo-') || # InfoQ
-       (img.include? 'logo_') || # InfoQ
-       (img.include? 'facebook_icon') || # Inside Higher Ed
        (img.include? 'hands-anim.gif') || # jwz
-       (img.include? '_logo') || # Laissez Faire
-       (img.include? 'facebook.gif') || # KDE
-       (img.include? 's.w.org/images/core/emoji') || # Wordpress
-       (img.include? 'google-postcard.jpg') || # Libertarianism
        (img.include? 'mediagazer.com') || # Mediagazer
-       (img.include? 'techmeme.com') || # Techmeme
-       (img.include? 'msf-logo') || # MSF
-       (img.include? 'fb-share-icon') || # Space.com
        (img.include? 'www.spiegel.de/images') && source != :og || # Spiegel
-       (img.include? 'glbimg.com') && source == :desc || # Globo
        (img.include? 'golem.de') && source == :desc || # Golem.de
-       (img.include? 'media.mmo-champion.com') && source == :desc || # Heroes Nexus
-       (img.include? ';base64,') # Bittorrent
+       (img.include? 'media.mmo-champion.com') || # Heroes Nexus
+       (img.include? 'alternativeto-a.png') || # AlternativeTo
+       (img.include? 'buffed.de') ||
+       (img.include? 'dx.plos.org') ||
+       (img.start_with? 'http://c.files.bbci.co.uk') && source == :media
       return nil
     end
     img
