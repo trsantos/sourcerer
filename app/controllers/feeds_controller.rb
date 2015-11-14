@@ -4,6 +4,7 @@ class FeedsController < ApplicationController
   before_action :logged_in_user
   before_action :expiration_date_presence
   before_action :check_expiration_date
+  before_action :update_last_activity
   # before_action :update_feeds, only: [:show]
   after_action :mark_subscription_as_visited, only: [:show]
 
@@ -54,5 +55,9 @@ class FeedsController < ApplicationController
     end
   rescue
     nil
+  end
+
+  def update_last_activity
+    current_user.update_attribute :last_activity, Time.current
   end
 end

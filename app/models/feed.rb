@@ -266,7 +266,8 @@ class Feed < ActiveRecord::Base
        (img.include? 'beacon') || # Intel Blogs
        (img.include? 'rssfeeds.usatoday.com') ||
        (img.include? 'doubleclick.net') ||
-       (img.include? 'feeds.commarts.com/~/i/') ||
+       # (img.include? 'feeds.commarts.com/~/i/') ||
+       (img.include? '/~/i/') || # Royal Society
        (img.include? 'img/.jpg') || # jezenthomas
        (img.include? 'AD5.') || # bip-online
        (img.include? 'GhOtcum4rbpO2RRCDXxaJDTBfc_large.png') || # Dustin Curtis
