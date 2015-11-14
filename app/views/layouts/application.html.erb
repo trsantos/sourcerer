@@ -22,7 +22,10 @@
 	    <% end %>
 	<% end %>
 	<% flash.each do |message_type, message| %>
-	    <%= content_tag(:div, message, class: "alert-box #{message_type}") %>
+	    <div data-alert class="alert-box <%= message_type %>">
+		<%= message %>
+		<%= link_to '×', '#', class: 'close' %>
+	    </div>
 	<% end %>
 	<% if logged_in? && !in_feeds_show %>
 	    <div id="neg-nav-sep"></div>
