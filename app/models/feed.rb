@@ -121,7 +121,17 @@ class Feed < ActiveRecord::Base
   def process_image(img, source)
     return if img.blank?
     img = discard_non_images parse_image img
-    hacks img, source
+    img = hacks img, source
+    img if img_exists?(img)
+  end
+
+  def img_exists?(img)
+    url = URI.parse(img)
+    Net::HTTP.start(url.host, url.port) do |http|
+      http.head(url.request_uri).code != '404'
+    end
+  rescue
+    false
   end
 
   def parse_image(img)
@@ -186,10 +196,12 @@ class Feed < ActiveRecord::Base
       img.sub!(/-\d\d\dx\d\d\d/, '')
     elsif img.include? 'a57.foxnews.com/media.foxbusiness.com'
       img.sub!('121/68', '605/340')
-    elsif img.include? 'static.gamespot.com'
-      img.sub!('.png', '.jpg')
-      img.sub!('screen_medium', 'screen_kubrick')
-      img.sub!('static', 'static1')
+    elsif img.include? 'gamespot.com'
+      # img.sub!('.png', '.jpg')
+      # img.sub!('screen_medium', 'screen_kubrick')
+      # img.sub!('static', 'static1')
+      img.sub!('square_avatar', 'scale_super')
+      img.sub!('screen_medium', 'scale_super')
     elsif img.include? 'imagesmtv-a.akamaihd.net'
       img.sub!('quality=0.8&format=jpg&', '')
       img.sub!('width=150&height=150', 'width=400&height=300')
