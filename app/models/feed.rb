@@ -121,16 +121,18 @@ class Feed < ActiveRecord::Base
   def process_image(img, source)
     return if img.blank?
     img = discard_non_images parse_image img
-    hacks img, source
-    # img if img_exists?(img)
+    img = hacks img, source
+    img if img_exists?(img)
   end
 
   def img_exists?(img)
     # return if Rails.env.development?
     url = URI.parse(img)
-    Net::HTTP.start(url.host, url.port) do |http|
-      http.head(url.request_uri).code != '404'
-    end
+    req = Net::HTTP.new(url.host, url.port)
+    req.use_ssl = (url.scheme == 'https')
+    path = url.path if url.path.present?
+    res = req.request_head(path || '/')
+    res.code != '404'
   rescue
     false
   end
