@@ -111,7 +111,7 @@ class Feed < ActiveRecord::Base
   def find_image(entry, desc)
     from_feed =  (process_image image_from_description(desc), :desc) ||
                  (process_image entry.image, :media)
-    if from_feed.nil? && Rails.env.production?
+    if from_feed.nil? # && Rails.env.production?
       (process_image og_image(entry.url), :og)
     else
       from_feed
@@ -121,11 +121,12 @@ class Feed < ActiveRecord::Base
   def process_image(img, source)
     return if img.blank?
     img = discard_non_images parse_image img
-    img = hacks img, source
-    img if img_exists?(img)
+    hacks img, source
+    # img if img_exists?(img)
   end
 
   def img_exists?(img)
+    # return if Rails.env.development?
     url = URI.parse(img)
     Net::HTTP.start(url.host, url.port) do |http|
       http.head(url.request_uri).code != '404'
