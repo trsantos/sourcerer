@@ -126,7 +126,7 @@ class Feed < ActiveRecord::Base
   end
 
   def img_exists?(img)
-    # return if Rails.env.development?
+    # return true
     url = URI.parse(img)
     req = Net::HTTP.new(url.host, url.port)
     req.use_ssl = (url.scheme == 'https')
