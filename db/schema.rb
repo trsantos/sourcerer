@@ -11,29 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114190230) do
+ActiveRecord::Schema.define(version: 20151128205218) do
 
   create_table "entries", force: :cascade do |t|
-    t.text     "title"
+    t.string   "title"
     t.text     "description"
     t.datetime "pub_date"
-    t.text     "url"
+    t.string   "url"
     t.integer  "feed_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.text     "image"
+    t.string   "image"
   end
 
   add_index "entries", ["feed_id"], name: "index_entries_on_feed_id"
   add_index "entries", ["title"], name: "index_entries_on_title"
 
   create_table "feeds", force: :cascade do |t|
-    t.text     "title"
-    t.text     "feed_url"
-    t.text     "site_url"
+    t.string   "title"
+    t.string   "feed_url"
+    t.string   "site_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.text     "logo"
+    t.string   "logo"
     t.text     "description"
   end
 
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20151114190230) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "feed_id"
-    t.text     "title"
-    t.text     "site_url"
+    t.string   "title"
+    t.string   "site_url"
     t.datetime "visited_at"
     t.boolean  "starred",    default: false
     t.datetime "created_at",                 null: false
@@ -81,12 +81,11 @@ ActiveRecord::Schema.define(version: 20151114190230) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.boolean  "admin",                    default: false
+    t.boolean  "admin",             default: false
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.string   "paypal_payment_id"
     t.datetime "expiration_date"
-    t.datetime "subscriptions_updated_at"
     t.datetime "last_activity"
   end
 

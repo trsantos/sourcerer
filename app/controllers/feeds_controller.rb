@@ -3,10 +3,9 @@ class FeedsController < ApplicationController
 
   before_action :logged_in_user
   before_action :expiration_date_presence
-  before_action :check_expiration_date
-  before_action :update_last_activity
-  # before_action :update_feeds, only: [:show]
+  before_action :expiration_date
   after_action :mark_subscription_as_visited, only: [:show]
+  after_action :update_last_activity
 
   def index
     @feeds = Feed.order(title: :asc).all
@@ -17,7 +16,6 @@ class FeedsController < ApplicationController
     # TODO: Use Ajax to reload the page when the fetch is done.
     @feed.update if @feed.created_at > 1.minute.ago || Rails.env.development?
     @entries = @feed.entries.order(pub_date: :desc)
-    @only_images = @feed.only_images?
   end
 
   def new
@@ -34,18 +32,10 @@ class FeedsController < ApplicationController
 
   private
 
-  def check_expiration_date
+  def expiration_date
     user = current_user
     return unless Time.current > user.expiration_date
     redirect_to billing_expired_path
-  end
-
-  def update_feeds
-    user = current_user
-    t = user.subscriptions_updated_at
-    return unless t.nil? || t < 2.hours.ago
-    user.update_attribute(:subscriptions_updated_at, Time.zone.now)
-    user.feeds.all.each { |f| f.delay.update }
   end
 
   def mark_subscription_as_visited
