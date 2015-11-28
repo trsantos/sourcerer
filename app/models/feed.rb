@@ -30,21 +30,11 @@ class Feed < ActiveRecord::Base
     true
   end
 
-  def refresh_images
-    fj_feed = fetch_and_parse
-    return if fj_feed.is_a? Integer
-    entries.delete_all
-    fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |e|
-      insert_entry e
-    end
-    self.entries = entries.order(created_at: :desc).first(Feed.entries_per_feed)
-  end
-
   private
 
   def fetch_and_parse
     setup_fj
-    return Feedjira::Feed.fetch_and_parse feed_url
+    Feedjira::Feed.fetch_and_parse feed_url
   rescue
     0
   end
@@ -86,10 +76,14 @@ class Feed < ActiveRecord::Base
     end
   end
 
+  # This should be done only once...
   def setup_fj
-    Feedjira::Feed.add_common_feed_entry_element(:enclosure, value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail', value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:content', value: :url, as: :image)
+    Feedjira::Feed.add_common_feed_entry_element(:enclosure,
+                                                 value: :url, as: :image)
+    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
+                                                 value: :url, as: :image)
+    Feedjira::Feed.add_common_feed_entry_element('media:content',
+                                                 value: :url, as: :image)
     Feedjira::Feed.add_common_feed_entry_element(:img, value: :scr, as: :image)
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
     Feedjira::Feed.add_common_feed_element(:logo, as: :logo)
@@ -110,12 +104,12 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, desc)
-    (process_image entry.image) ||
-      (process_image image_from_description(desc))
+    process_image entry.image || image_from_description(desc)
+  rescue
+    nil
   end
 
   def process_image(img)
-    return if img.blank?
     hacks discard_non_images parse_image img
   end
 
@@ -126,6 +120,7 @@ class Feed < ActiveRecord::Base
     uri = URI.parse feed_url
     start = uri.scheme + '://' + uri.host
     return start + img if img.start_with? '/'
+    # I don't remeber why this is here. Maybe not needed?
     return start + uri.path + img unless img.start_with? 'http'
     img
   end
@@ -133,22 +128,16 @@ class Feed < ActiveRecord::Base
   def image_from_description(description)
     doc = Nokogiri::HTML description
     doc.css('img').first.attributes['src'].value
-  rescue
-    nil
   end
 
   def og_image(url)
     require 'open-uri'
     doc = Nokogiri::HTML(open(URI.escape(url.strip.split(/#/).first)))
     img = doc.css("meta[property='og:image']").first
-    return img.attributes['content'].value
-  rescue
-    nil
+    img.attributes['content'].value
   end
 
   def hacks(img)
-    return if img.blank?
-
     # replaces
     if img.include? 'wordpress.com'
       img.sub!(/\?.*/, '')
