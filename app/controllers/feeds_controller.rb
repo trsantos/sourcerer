@@ -13,7 +13,6 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    # TODO: Use Ajax to reload the page when the fetch is done.
     @feed.update if @feed.created_at > 1.minute.ago || Rails.env.development?
     @entries = @feed.entries.order(pub_date: :desc)
   end

@@ -15,7 +15,6 @@ class Feed < ActiveRecord::Base
   end
 
   def update
-    # return if entries.any? && updated_at > 2.hours.ago && Rails.env.production?
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
     entries.delete_all if Rails.env.development?
@@ -92,7 +91,9 @@ class Feed < ActiveRecord::Base
   def insert_entry(e)
     description = e.content || e.summary || ''
     entries.create(title:       (e.title unless e.title.blank?),
-                   description: sanitize(description, tags: ['a'], attributes: ['href']),
+                   description: sanitize(description,
+                                         tags: ['a'],
+                                         attributes: ['href']),
                    pub_date:    find_date(e.published),
                    image:       find_image(e, description),
                    url:         e.url)
