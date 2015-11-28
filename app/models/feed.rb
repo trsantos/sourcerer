@@ -24,9 +24,10 @@ class Feed < ActiveRecord::Base
   end
 
   def only_images?
-    (feed_url.include? 'youtube.com/feeds/videos.xml') ||
-      (feed_url.include? 'expo.getbootstrap.com') ||
-      (feed_url.include? 'xkcd.com/rss.xml')
+    entries.each do |e|
+      return false unless e.image && e.description.blank?
+    end
+    true
   end
 
   def refresh_images
@@ -109,32 +110,13 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, desc)
-    from_feed =  (process_image image_from_description(desc), :desc) ||
-                 (process_image entry.image, :media)
-    if from_feed.nil? # && Rails.env.production?
-      (process_image og_image(entry.url), :og)
-    else
-      from_feed
-    end
+    (process_image entry.image) ||
+      (process_image image_from_description(desc))
   end
 
-  def process_image(img, source)
+  def process_image(img)
     return if img.blank?
-    img = discard_non_images parse_image img
-    img = hacks img, source
-    img if img_exists?(img)
-  end
-
-  def img_exists?(img)
-    # return true
-    url = URI.parse(img)
-    req = Net::HTTP.new(url.host, url.port)
-    req.use_ssl = (url.scheme == 'https')
-    path = url.path if url.path.present?
-    res = req.request_head(path || '/')
-    res.code != '404'
-  rescue
-    false
+    hacks discard_non_images parse_image img
   end
 
   def parse_image(img)
@@ -150,20 +132,7 @@ class Feed < ActiveRecord::Base
 
   def image_from_description(description)
     doc = Nokogiri::HTML description
-    seen_text = false
-    doc.css('*').each do |e|
-      if e.name == 'img'
-        return e.attributes['src'].value
-      elsif e.name == 'p' && !e.text.blank?
-        if seen_text
-          break
-        else
-          seen_text = true
-        end
-      end
-    end
-    nil
-    # return doc.css('img').first.attributes['src'].value
+    doc.css('img').first.attributes['src'].value
   rescue
     nil
   end
@@ -177,169 +146,28 @@ class Feed < ActiveRecord::Base
     nil
   end
 
-  def hacks(img, source)
+  def hacks(img)
     return if img.blank?
 
     # replaces
-    if img.include? 'pitchfork.com'
-      img.sub! 'pagination.', 'ticker.'
-    elsif img.include? 'cdn.turner.com'
-      img.sub! 'top-tease', 'horizontal-gallery'
-      img.sub! 'cnn', 'cnnnext'
-      img.sub! '120x90', '780x439'
-    elsif img.include? 'wordpress.com'
-      img.sub!(/w=\d*/, 'w=400')
-      img.sub!(/quality=\d*/, '')
-    elsif img.include? 'assets.rollingstone.com'
-      img.sub!('small_square', 'medium_rect')
-      img.sub!('100x100', '720x405')
-    elsif img.include? 'imguol.com'
-      img.sub!(/\d\d\dx\d\d\d/, '615x300')
-    elsif img.include? 'carplace.uol.com'
-      img.sub!(/-\d\d\dx\d\d\d/, '')
-    elsif img.include? 'a57.foxnews.com/media.foxbusiness.com'
-      img.sub!('121/68', '605/340')
-    elsif img.include? 'gamespot.com'
-      # img.sub!('.png', '.jpg')
-      # img.sub!('screen_medium', 'screen_kubrick')
-      # img.sub!('static', 'static1')
-      img.sub!('square_avatar', 'scale_super')
-      img.sub!('screen_medium', 'scale_super')
-    elsif img.include? 'imagesmtv-a.akamaihd.net'
-      img.sub!('quality=0.8&format=jpg&', '')
-      img.sub!('width=150&height=150', 'width=400&height=300')
-    elsif img.include? 'www.billboard.com'
-      img.sub!('promo_225', 'promo_650')
-    elsif img.include? 'graphics8.nytimes.com'
-      # img.sub!('moth', 'master675')
-      img.sub!(/moth(\-v\d+|)/, 'master675')
-      img.sub! 'sub-', 'dd-'
-      if img.include? 'bits-daily-report'
-        img.sub!(/thumbStandard(-v\d|)/, 'articleInline')
-      else
-        img.sub!(/thumbStandard(-v\d|)/, 'superJumbo')
-      end
-    elsif img.include? 'i.livescience.com'
-      img.sub!('i00', 'iFF')
-    elsif (img.include? 'img.huffingtonpost.com') || (img.include? 'i.huffpost.com')
-      return if img.include? '-mini'
-      img.sub!('74_54', '1200_630')
-      img.sub!('74_58', '1200_630')
-    elsif img.include? 'static.nfl.com'
-      img.sub!('_thumbnail_200_150', '')
-    elsif img.include? 'cbsistatic.com' # CNET
-      return if source == :media
-    elsif img.include? 'media.breitbart.com'
-      img.sub!(/-\d\d\dx\d\d\d/, '')
-    elsif img.include? 'img.youtube.com'
+    if img.include? 'wordpress.com'
+      img.sub!(/\?.*/, '')
+      img += '?w=400'
+    elsif (img.include? 'img.youtube.com') ||
+          (img.include? 'i.ytimg.com')
       img.sub! '/default', '/hqdefault'
-    elsif img.include? 'i.ytimg.com'
-      img.sub! '/default', '/hqdefault'
-    elsif img.include? 'blog.caranddriver.com'
-      img.sub!(/-150x150/, '-876x535')
-    elsif img.include? 'cienciahoje.uol.com.br'
-      img.sub! '/image_mini', ''
-    elsif img.include? 'news.sciencemag.org'
-      img.sub!('styles/square_60x60/public', '')
-    elsif img.include? 'images.eonline.com'
-      img.sub!('/resize/66/66/', '')
-    elsif img.include? 'fifa.com'
-      img.sub!('small.', 'full-lnd.')
-    elsif img.include? 'scontent.cdninstagram.com'
-      img.sub!('s150x150', 's320x320')
-    elsif img.include? 'img.washingtonpost.com'
-      return if img.include? '.html'
-      img.sub! '_90w', '_1024w'
-      img.sub! 'w=90', 'w=1024'
-    elsif img.include? 'media.bestofmicro.com'
-      img.sub!(/rc_120x90/, 'w_600')
-    elsif img.include? 'nikkei.com'
-      img.sub!('thumbnail.jpg', '_main_image.jpg')
-    elsif img.include? 'cdn.phys.org'
-      img.sub!('tmb', '800')
-    elsif img.include? 'scientificamerican.com'
-      img.sub!('_small', '')
-    elsif img.include? '365dm.com'
-      img.sub! '128x67', '768x432'
-      img.sub! '150x150', '768x432'
-    elsif img.include? 'i.space.com'
-      img.sub!('i00', 'i02')
-    elsif img.include? 'static.spin.com'
-      img.sub!(/-\d\d\dx\d\d\d/, '')
-    elsif img.include? 'venturebeat.com'
-      img.sub! '-160x140', ''
     elsif (img.include? 'googleusercontent.com') ||
           (img.include? 'blogspot.com')
       img.sub! 's72-c', 's640'
     end
 
-    # blanks
-    if (img.include? 'mf.gif') ||
-       (img.include? 'blank') || # Wordpress
-       (img.include? 'pixel.wp') || # Wordpress
-       (img.include? 'pixel.gif') ||
-       (img.include? 'beacon') || # Intel Blogs
-       (img.include? 'rssfeeds.usatoday.com') ||
-       (img.include? 'doubleclick.net') ||
-       # (img.include? 'feeds.commarts.com/~/i/') ||
-       (img.include? '/~/i/') || # Royal Society
-       (img.include? 'img/.jpg') || # jezenthomas
-       (img.include? 'AD5.') || # bip-online
-       (img.include? 'GhOtcum4rbpO2RRCDXxaJDTBfc_large.png') || # Dustin Curtis
-       (img == 'http://www.scientificamerican.com') ||
-       (img == 'http://eu.square-enix.com') || # Square
-       (img.include? 'wp-content/themes') # Intel Blogs
+    # special cases
+    if (img.include? 'feedburner.com') ||
+       (img.include? 'feedsportal.com') ||
+       (img.include? '/comments/') # Wordpress
       return nil
     end
 
-    # # special cases
-    if (img.include? 'feedburner.com') ||
-       (img.include? 'logo') ||
-       (img.include? 'icon') ||
-       (img.include? '/themes/') ||
-       (img.include? '/plugins/') ||
-       (img.include? '/smilies/') ||
-       (img.include? '/emoji/') ||
-       (img.include? '/smileys/') ||
-       (img.include? '/comments/') ||
-       (img.include? 'a57.foxnews.com') && source == :media || # FOX
-       (img == 'http://global.fncstatic.com/static/v/all/img/og/og-fn-foxnews.jpg') ||
-       (img == 'http://www.foxsports.com/content/fsdigital/fscom.img.png') ||
-       (img == 'http://newsimg.bbc.co.uk/media/images/67165000/jpg/_67165916_67165915.jpg') ||
-       (img.include?('_thumb') && img.include?('goal.com')) || # Goal.com
-       (img.include? 'media.guim.co.uk') || # Guardian
-       (img.include? 'images.gametrailers.com') && source == :desc || # GameTrailers
-       (img.include? 'feedsportal.com') || # Various
-       (img.include? 'feeds.huffingtonpost.com') || # Huffington Post
-       (img.include? 'forbes_200x200') || # Forbes
-       (img.include? 'forbes_1200x1200') || # Forbes
-       (img.include? 'text_200.png') || # Tumblr
-       (img.include? 'tumblr.com/avatar') || # Tumblr
-       (img.include? 'clubedohardware.com.br') || # Clube do Hardware
-       (img.include? 'techmeme.com') || # Techmeme
-       (img.include? 'twitter_icon_large') || # Slashdot
-       (img.include? 'avclub/None') || # A.V. Club
-       (img.include? 'cdn.sstatic.net/stackoverflow') || # Stack Overflow
-       (img.include? 'gravatar.com') || # Feedly, FB Newsroom
-       (img.include? 'fastcompany.net/asset_files') || # Fastcompany
-       (img.include? 'advertisement.') || # Smashing
-       (img.include? 's3.cooperpress.com') || # HTML5 Weekly
-       (img.include? 'wp.com/latex.php') || # Wordpress
-       (img.include? 'css-tricks-star.png') || # CSS Tricks
-       (img.include? 's.conjur.com.br/img/a/og.png') || # Conjur
-       (img.include? 'shim-640x20.png') || # EO Wilson
-       (img.include? 'ephotozine.com') || # ePHOTOzine
-       (img.include? 'hands-anim.gif') || # jwz
-       (img.include? 'mediagazer.com') || # Mediagazer
-       (img.include? 'www.spiegel.de/images') && source != :og || # Spiegel
-       (img.include? 'golem.de') && source == :desc || # Golem.de
-       (img.include? 'media.mmo-champion.com') || # Heroes Nexus
-       (img.include? 'alternativeto-a.png') || # AlternativeTo
-       (img.include? 'buffed.de') ||
-       (img.include? 'dx.plos.org') ||
-       (img.start_with? 'http://c.files.bbci.co.uk') && source == :media
-      return nil
-    end
     img
   end
 
