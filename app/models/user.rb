@@ -79,8 +79,7 @@ class User < ActiveRecord::Base
 
   def unfollow(feed)
     s = subscriptions.find_by(feed_id: feed.id)
-    return if s.nil?
-    s.destroy
+    s.destroy if s
   end
 
   def following?(feed)
