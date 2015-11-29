@@ -3,6 +3,8 @@ class Feed < ActiveRecord::Base
   include ApplicationHelper
   include EntriesHelper
 
+  belongs_to :topic
+
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
 
@@ -139,6 +141,7 @@ class Feed < ActiveRecord::Base
   end
 
   def hacks(img)
+
     # replaces
     if img.include? 'wordpress.com'
       img.sub!(/\?.*/, '')

@@ -50,7 +50,6 @@ class UsersController < ApplicationController
 
   def update_topics
     user = current_user
-    user.topics = []
     params[:topic].each do |t, v|
       t = Topic.find_by(name: t)
       user.unfollow_topic(t) if v == '0'

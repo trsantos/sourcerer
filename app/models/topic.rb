@@ -1,4 +1,5 @@
 class Topic < ActiveRecord::Base
-  has_many :topic_subscriptions
-  has_many :users, through: :topic_subscriptions
+  has_and_belongs_to_many :users
+  has_many :subscriptions
+  has_many :feeds
 end

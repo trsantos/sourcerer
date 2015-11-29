@@ -13,7 +13,7 @@ class OpmlController < ApplicationController
     opml.feeds.each do |f|
       new_feed = Feed.find_or_create_by(feed_url: process_url(f[:xml_url]))
       current_user.follow(new_feed)
-      new_feed.delay.update if Rails.env.production? && new_feed.created_at > 10.seconds.ago
+      new_feed.delay.update if Rails.env.production? && new_feed.created_at > 30.seconds.ago
     end
     flash[:info] = 'OPML file imported. Happy reading!'
     redirect_to next_path

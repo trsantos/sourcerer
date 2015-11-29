@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128205218) do
+ActiveRecord::Schema.define(version: 20151129154840) do
 
   create_table "entries", force: :cascade do |t|
     t.string   "title"
@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(version: 20151128205218) do
     t.datetime "updated_at",  null: false
     t.string   "logo"
     t.text     "description"
+    t.integer  "topic_id"
   end
 
   add_index "feeds", ["feed_url"], name: "index_feeds_on_feed_url", unique: true
+  add_index "feeds", ["topic_id"], name: "index_feeds_on_topic_id"
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
@@ -50,29 +52,28 @@ ActiveRecord::Schema.define(version: 20151128205218) do
     t.datetime "updated_at",                 null: false
     t.boolean  "from_topic", default: false
     t.boolean  "updated",    default: true
+    t.integer  "topic_id"
   end
 
   add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id"
+  add_index "subscriptions", ["topic_id"], name: "index_subscriptions_on_topic_id"
   add_index "subscriptions", ["updated"], name: "index_subscriptions_on_updated"
   add_index "subscriptions", ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
-
-  create_table "topic_subscriptions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "topic_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "topic_subscriptions", ["topic_id"], name: "index_topic_subscriptions_on_topic_id"
-  add_index "topic_subscriptions", ["user_id", "topic_id"], name: "index_topic_subscriptions_on_user_id_and_topic_id", unique: true
-  add_index "topic_subscriptions", ["user_id"], name: "index_topic_subscriptions_on_user_id"
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "topics_users", id: false, force: :cascade do |t|
+    t.integer "topic_id"
+    t.integer "user_id"
+  end
+
+  add_index "topics_users", ["topic_id"], name: "index_topics_users_on_topic_id"
+  add_index "topics_users", ["user_id"], name: "index_topics_users_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

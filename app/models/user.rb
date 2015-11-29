@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   include ApplicationHelper
 
-  has_many :topic_subscriptions, dependent: :destroy
-  has_many :topics, through: :topic_subscriptions
+  has_and_belongs_to_many :topics
 
   has_many :subscriptions, dependent: :destroy
   has_many :feeds, through: :subscriptions
@@ -72,42 +71,34 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
-  # Follow a feed. Last arg should be a hash
-  def follow(feed, from_topic = false)
-    return if following? feed
-    subscriptions.create(feed_id: feed.id,
-                         updated: feed.entries.any?,
-                         from_topic: from_topic)
+  def follow(feed, options)
+    s = subscriptions.find_or_create_by(feed_id: feed.id)
+    s.topic = options[:topic]
+    s.save
   end
 
-  # Unfollow a feed
   def unfollow(feed)
     s = subscriptions.find_by(feed_id: feed.id)
     return if s.nil?
     s.destroy
   end
 
-  # True if current user is following the given feed
   def following?(feed)
     feeds.include?(feed)
   end
 
   def follow_topic(topic)
-    self.topics += [topic]
-    get_feeds(topic).each do |url|
-      follow(Feed.find_or_create_by(feed_url: url), true)
+    topics.append topic unless topics.include? topic
+    topic.feeds.each do |f|
+      follow(f, topic: topic)
     end
-    # topic.feeds.each do |f|
-    #   follow(f)
-    # end
   end
 
   def unfollow_topic(topic)
-    get_feeds(topic).each do |url|
-      f = Feed.find_or_create_by(feed_url: url)
+    topics.delete topic
+    topic.feeds.each do |f|
       s = subscriptions.find_by(feed_id: f.id)
-      next unless s && s.from_topic
-      s.destroy
+      s.destroy if s && (s.topic == topic)
     end
   end
 
