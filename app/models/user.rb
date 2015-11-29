@@ -71,10 +71,10 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
-  def follow(feed, options)
-    s = subscriptions.find_or_create_by(feed_id: feed.id)
-    s.topic = options[:topic]
-    s.save
+  def follow(feed, options = {})
+    return if following? feed
+    subscriptions.create(feed_id: feed.id,
+                         topic: options[:topic])
   end
 
   def unfollow(feed)

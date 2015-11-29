@@ -103,4 +103,4 @@ seed_topic 'Technology',
              'http://techcrunch.com/feed/'
            ]
 
-Topic.all.each { |t| t.feeds.all.each(&:update) } if Rails.env.production?
+Topic.all.each { |t| t.feeds.all.each { |f| f.delay.update } } if Rails.env.production?
