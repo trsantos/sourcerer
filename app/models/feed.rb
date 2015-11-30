@@ -84,11 +84,7 @@ class Feed < ActiveRecord::Base
 
   # This should be done only once...
   def setup_fj
-    Feedjira::Feed.add_common_feed_entry_element(:enclosure,
-                                                 value: :url, as: :image)
     Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
-                                                 value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:content',
                                                  value: :url, as: :image)
     Feedjira::Feed.add_common_feed_entry_element(:img, value: :scr, as: :image)
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)

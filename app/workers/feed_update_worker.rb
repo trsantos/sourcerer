@@ -3,6 +3,7 @@ class FeedUpdateWorker
   sidekiq_options retry: false
 
   def perform(id)
-    Feed.find(id).update
+    Feedjira::Feed.fetch_and_parse Feed.find(id).feed_url
+#    Feed.find(id).update
   end
 end
