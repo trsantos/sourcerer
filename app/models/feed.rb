@@ -67,7 +67,7 @@ class Feed < ActiveRecord::Base
   def update_entries(fj_feed)
     updated = false
     fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |e|
-      unless entries.find_by(url: e.url)
+      unless entries.exists?(url: e.url)
         insert_entry e
         updated = true
       end
@@ -77,7 +77,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update_subscriptions
-    subscriptions.each do |s|
+    subscriptions.select(:updated).where(updated: false).find_each do |s|
       s.update_attribute(:updated, true)
     end
   end
@@ -142,7 +142,6 @@ class Feed < ActiveRecord::Base
   end
 
   def hacks(img)
-
     # replaces
     if img.include? 'wordpress.com'
       img.sub!(/\?.*/, '')
