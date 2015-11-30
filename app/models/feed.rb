@@ -16,6 +16,12 @@ class Feed < ActiveRecord::Base
     10
   end
 
+  def self.update_all
+    Feed.select(:id).each do |f|
+      FeedUpdateWorker.perform_async f.id
+    end
+  end
+
   def update
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
