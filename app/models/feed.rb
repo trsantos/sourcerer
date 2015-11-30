@@ -1,7 +1,6 @@
 class Feed < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include ApplicationHelper
-  include EntriesHelper
 
   belongs_to :topic
 
