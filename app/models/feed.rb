@@ -77,7 +77,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update_subscriptions
-    subscriptions.select(:updated).where(updated: false).find_each do |s|
+    subscriptions.select(:id, :updated).where(updated: false).find_each do |s|
       s.update_attribute(:updated, true)
     end
   end
