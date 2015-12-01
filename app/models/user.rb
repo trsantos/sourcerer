@@ -106,13 +106,10 @@ class User < ActiveRecord::Base
   end
 
   def next_feed
-    if subscriptions.where(updated: true).any?
-      updated_feed
-    elsif subscriptions.any?
-      random_feed
-    else
-      self
-    end
+    sub = updated_sub || random_sub
+    sub.feed
+  rescue
+    self
   end
 
   private
@@ -122,12 +119,12 @@ class User < ActiveRecord::Base
     self.email = email.downcase
   end
 
-  def updated_feed
+  def updated_sub
     subscriptions.where(updated: true)
-      .order(starred: :desc, visited_at: :asc).first.feed
+      .order(starred: :desc, visited_at: :asc).first
   end
 
-  def random_feed
-    subscriptions.order('RANDOM()').take.feed
+  def random_sub
+    subscriptions.order('RANDOM()').take
   end
 end

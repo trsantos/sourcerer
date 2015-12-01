@@ -1,7 +1,6 @@
 <% id = entry.id.to_s %>
 <article>
     <header>
-	<!-- <h5 class="<%= 'old' if old? entry %>"> -->
 	<h5>
 	    <strong>
 		<%= link_to sanitize(entry.title), entry.url, class: "entry-title", target: "_blank" %>
@@ -9,7 +8,7 @@
 	</h5>
     </header>
     <div class="row">
-	<% if @feed.only_images? %>
+	<% if @only_images %>
 	    <div class="small-12 columns big-thumb-container">
 		<a href="<%= entry.url %>" target="_blank" style="color: #222">
 		    <%= image_tag entry.image, id: "img-#{id}" %>

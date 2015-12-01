@@ -16,6 +16,8 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
     @feed.update if @feed.created_at > 1.minute.ago
     @entries = @feed.entries.order(pub_date: :desc)
+    @only_images = @feed.only_images?
+    @subscription = @user.subscriptions.find_by(feed_id: @feed.id)
   end
 
   def new

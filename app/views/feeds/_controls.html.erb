@@ -1,17 +1,16 @@
 <div id="feed_controls">
-    <% if @user.following?(@feed) %>
-	<% s = @user.subscriptions.find_by(feed_id: @feed.id) %>
-	<% if s.starred %>
+    <% if @subscription %>
+	<% if @subscription.starred %>
 	    <li>
 		<%= link_to "Unstar",
-		subscription_path(s, subscription: { starred: false }),
+		subscription_path(@subscription, subscription: { starred: false }),
 		remote: true,
 		method: :patch %>
 	    </li>
 	<% else %>
 	    <li>
 		<%= link_to "Star",
-		subscription_path(s, subscription: { starred: true }),
+		subscription_path(@subscription, subscription: { starred: true }),
 		remote: true,
 		method: :patch,
 		title: "Starred feeds will be displayed first when updated. This is for your must-reads." %>
@@ -19,12 +18,12 @@
 	<% end %>
 	<li class="divider show-for-small-only"></li>
 	<li>
-	    <%= link_to "Edit", edit_subscription_path(s) %>
+	    <%= link_to "Edit", edit_subscription_path(@subscription) %>
 	</li>
 	<li class="divider show-for-small-only"></li>
 	<li>
 	    <%= link_to "Unsubscribe",
-	    subscription_path(s),
+	    subscription_path(@subscription),
 	    remote: true,
 	    method: :delete %>
 	</li>

@@ -1,21 +1,17 @@
 module FeedsHelper
   def sub_title(feed)
-    default = feed.title || "(Untitled | #{feed.id})"
-    sub = current_user.subscriptions.find_by(feed_id: feed.id)
-    if sub
-      return sub.title || default
+    if @subscription
+      @subscription.title || feed.title
     else
-      return default
+      feed.title
     end
   end
 
   def sub_url(feed)
-    default = feed.site_url || ''
-    sub = current_user.subscriptions.find_by(feed_id: feed.id)
-    if sub
-      return sub.site_url || default
+    if @subscription
+      @subscription.site_url || feed.site_url
     else
-      return default
+      feed.site_url
     end
   end
 
