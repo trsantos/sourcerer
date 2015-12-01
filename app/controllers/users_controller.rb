@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   # Used when updating topics
   def set_flash_message
     if current_user.subscriptions.any?
-      flash[:info] = 'Ok, done! You Happy reading.'
+      flash[:info] = 'Ok, done! Happy reading.'
     else
       flash[:alert] = 'Sourcerer is useful only if you subscribe to some '\
                       'feeds. Please, choose some topics or import an OPML'\
