@@ -105,10 +105,29 @@ class User < ActiveRecord::Base
     topics.include?(topic)
   end
 
+  def next_feed
+    if subscriptions.where(updated: true).any?
+      updated_feed
+    elsif subscriptions.any?
+      random_feed
+    else
+      self
+    end
+  end
+
   private
 
   # Converts email to all lower-case.
   def downcase_email
     self.email = email.downcase
+  end
+
+  def updated_feed
+    subscriptions.where(updated: true)
+      .order(starred: :desc, visited_at: :asc).first.feed
+  end
+
+  def random_feed
+    subscriptions.order('RANDOM()').take.feed
   end
 end

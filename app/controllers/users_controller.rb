@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :expiration_date_presence, only: [:edit]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy,
+                                        :update_topics]
   before_action :correct_user,   only: [:show, :edit, :update, :destroy]
   before_action :admin_user,     only: [:destroy, :index]
 
@@ -55,8 +55,8 @@ class UsersController < ApplicationController
       user.unfollow_topic(t) if v == '0'
       user.follow_topic(t) if v == '1'
     end
-    flash[:success] = 'Done. Happy reading!'
-    redirect_to next_path
+    set_flash_message
+    redirect_to user.next_feed
   end
 
   private
@@ -75,5 +75,16 @@ class UsersController < ApplicationController
   # Confirms an admin user.
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+  # Used when updating topics
+  def set_flash_message
+    if current_user.subscriptions.any?
+      flash[:info] = 'Ok, done! You Happy reading.'
+    else
+      flash[:alert] = 'Sourcerer is useful only if you subscribe to some '\
+                      'feeds. Please, choose some topics or import an OPML'\
+                      "file, if you're coming from another reader."
+    end
   end
 end

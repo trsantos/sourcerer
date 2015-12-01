@@ -13,11 +13,11 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-// require foundation
 //= require foundation/foundation
+//= require foundation/foundation.alert
+//= require foundation/foundation.topbar
 // require foundation/foundation.abide
 // require foundation/foundation.accordion
-//= require foundation/foundation.alert
 // require foundation/foundation.clearing
 // require foundation/foundation.dropdown
 // require foundation/foundation.equalizer
@@ -30,7 +30,6 @@
 // require foundation/foundation.slider
 // require foundation/foundation.tab
 // require foundation/foundation.tooltip
-//= require foundation/foundation.topbar
 //= require turbolinks
 //= require_tree .
 

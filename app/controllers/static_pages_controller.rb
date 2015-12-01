@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    redirect_to next_path if logged_in?
+    redirect_to current_user.next_feed if logged_in?
   end
 
   # maybe require login here?

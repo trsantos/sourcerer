@@ -17,7 +17,6 @@ Rails.application.routes.draw do
                                      :update, :destroy]
   resources :opml,            only: [:new, :create]
   get 'opml/export' => 'opml#export'
-  get 'next' => 'subscriptions#next'
   get 'billing/expired' => 'billing#expired'
   get 'billing/checkout' => 'billing#checkout'
   get 'billing/confirm' => 'billing#confirm'

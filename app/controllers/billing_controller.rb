@@ -3,7 +3,6 @@ class BillingController < ApplicationController
   include BillingHelper
 
   before_action :logged_in_user
-  before_action :expiration_date_presence
   before_action :expiration_date_check
 
   def expired
@@ -34,7 +33,7 @@ class BillingController < ApplicationController
       extend_expiration_date
       flash[:success] =
         'Your\'re now subscribed to 1 year of Sourcerer. Thank you!'
-      redirect_to next_path
+      redirect_to current_user.next_feed
     else
       flash[:alert] = 'An error ocurred while executing payment.'
       redirect_to root_url

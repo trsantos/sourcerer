@@ -24,8 +24,8 @@ class Feed < ActiveRecord::Base
   def update
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
-    entries.delete_all if Rails.env.development?
     update_feed_attributes fj_feed
+    entries.delete_all if Rails.env.development?
     update_entries fj_feed
   end
 

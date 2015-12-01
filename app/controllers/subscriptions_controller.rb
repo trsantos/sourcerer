@@ -46,16 +46,6 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def next
-    next_sub = find_next_sub
-    if next_sub
-      redirect_to next_sub.feed
-      return
-    end
-    flash[:alert] = "Sourcerer is useful only if you subscribe to some feeds. Please, choose some topics or import an OPML file, if you're coming from another reader."
-    redirect_to current_user
-  end
-
   private
 
   def sub_params
@@ -76,18 +66,6 @@ class SubscriptionsController < ApplicationController
     site_url = params[:subscription][:site_url]
     return if site_url.nil?
     params[:subscription][:site_url] = process_url site_url
-  end
-
-  def find_next_sub
-    user = current_user
-    if (sub = user.subscriptions.where(updated: true)
-              .order(starred: :desc, visited_at: :asc).first)
-      sub
-    elsif (random_sub = user.subscriptions.order('RANDOM()').first)
-      flash[:info] =
-        'You have no updated feeds right now. Check back later!'
-      random_sub
-    end
   end
 
   def correct_user

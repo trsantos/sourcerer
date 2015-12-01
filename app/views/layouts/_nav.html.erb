@@ -3,7 +3,7 @@
 	<ul class="title-area">
 	    <li class="name">
 		<h1>
-		    <%= link_to image_tag('logo_nav_17.png'), @feed || next_path, id: 'logo' %>
+		    <%= link_to image_tag('logo_nav_17.png'), @feed || @user.next_feed, id: 'logo' %>
 		</h1>
 	    </li>
 	    <li class="toggle-topbar menu-icon">
@@ -14,7 +14,7 @@
 	    <ul class="right">
 		<li class="show-for-medium-up"><%= link_to "Add feed", new_feed_path %></li>
 		<li class="active show-for-small-only">
-		    <%= link_to "Back to reading", next_path %>
+		    <%= link_to "Back to reading", @user.next_feed %>
 		</li>
 		<li class="has-dropdown">
 		    <%= link_to current_user.name.split.first, '#' %>

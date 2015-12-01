@@ -2,18 +2,19 @@ class FeedsController < ApplicationController
   include ApplicationHelper
 
   before_action :logged_in_user
-  before_action :expiration_date_presence
+  before_action :update_last_activity
   before_action :expiration_date
-  after_action :mark_subscription_as_visited, only: [:show]
-  after_action :update_last_activity
+  before_action :mark_subscription_as_visited, only: [:show]
+  before_action :no_updated_feeds_left, only: [:show]
 
   def index
     @feeds = Feed.order(title: :asc).all
   end
 
   def show
+    @user = current_user
     @feed = Feed.find(params[:id])
-    @feed.update if @feed.created_at > 1.minute.ago || Rails.env.development?
+    @feed.update if @feed.created_at > 1.minute.ago
     @entries = @feed.entries.order(pub_date: :desc)
   end
 
@@ -32,15 +33,14 @@ class FeedsController < ApplicationController
   private
 
   def expiration_date
-    user = current_user
-    return unless Time.current > user.expiration_date
+    return unless Time.current > current_user.expiration_date
     redirect_to billing_expired_path
   end
 
   def mark_subscription_as_visited
-    sub = current_user.subscriptions.find_by(feed_id: @feed.id)
+    sub = current_user.subscriptions.find_by(feed_id: params[:id])
     if sub.updated?
-      sub.update_attributes(visited_at: Time.zone.now, updated: false)
+      sub.update_attributes(visited_at: Time.current, updated: false)
     end
   rescue
     nil
@@ -48,5 +48,10 @@ class FeedsController < ApplicationController
 
   def update_last_activity
     current_user.update_attribute :last_activity, Time.current
+  end
+
+  def no_updated_feeds_left
+    return if current_user.subscriptions.exists?(updated: true)
+    flash.now[:info] = 'You have no updated feeds right now. Check back later!'
   end
 end

@@ -1,6 +1,6 @@
 <div id="feed_controls">
-    <% if current_user.following?(@feed) %>
-	<% s = current_user.subscriptions.find_by(feed_id: @feed.id) %>
+    <% if @user.following?(@feed) %>
+	<% s = @user.subscriptions.find_by(feed_id: @feed.id) %>
 	<% if s.starred %>
 	    <li>
 		<%= link_to "Unstar",
@@ -38,6 +38,6 @@
     <% end %>
     <li class="divider show-for-small-only"></li>
     <li class="active show-for-medium-up">
-	<%= link_to "Next feed", next_path %>
+	<%= link_to "Next feed", @user.next_feed %>
     </li>
 </div>
