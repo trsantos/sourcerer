@@ -1,2 +1,2 @@
 web: bundle exec puma -C config/puma.rb
-worker: rake jobs:work
+worker: bundle exec bin/delayed_job -n 4 start

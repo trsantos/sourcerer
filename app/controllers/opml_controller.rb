@@ -14,9 +14,7 @@ class OpmlController < ApplicationController
     opml.feeds.each do |f|
       new_feed = Feed.find_or_create_by(feed_url: process_url(f[:xml_url]))
       user.follow(new_feed)
-      if new_feed.created_at > 1.minute.ago
-        FeedUpdateWorker.perform_async new_feed.id
-      end
+      new_feed.delay.update if new_feed.created_at > 1.minute.ago
     end
     flash[:info] = 'OPML file imported. Happy reading!'
     redirect_to user.next_feed

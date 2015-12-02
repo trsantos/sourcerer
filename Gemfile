@@ -20,9 +20,8 @@ gem 'jquery-turbolinks'
 gem 'foundation-rails'
 gem 'feedjira'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
-# gem 'sidekiq'
-# gem 'sinatra', require: nil
 gem 'delayed_job_active_record'
+gem 'daemons'
 gem 'paypal-sdk-rest'
 gem 'font-awesome-sass'
 
