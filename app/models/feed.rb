@@ -19,6 +19,7 @@ class Feed < ActiveRecord::Base
     Feed.select(:id).each do |f|
       FeedUpdateWorker.perform_async f.id
     end
+    GC.start
   end
 
   def update
