@@ -2,6 +2,7 @@ class FeedsController < ApplicationController
   include ApplicationHelper
 
   before_action :logged_in_user
+  before_action :set_user
   before_action :update_last_activity
   before_action :expiration_date
   before_action :mark_subscription_as_visited, only: [:show]
@@ -12,7 +13,6 @@ class FeedsController < ApplicationController
   end
 
   def show
-    @user = current_user
     @feed = Feed.find(params[:id])
     @entries = @feed.entries.order(pub_date: :desc)
     @only_images = @feed.only_images?
@@ -33,6 +33,10 @@ class FeedsController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = current_user
+  end
 
   def expiration_date
     return unless Time.current > current_user.expiration_date
