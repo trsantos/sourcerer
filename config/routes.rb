@@ -1,4 +1,4 @@
-require 'sidekiq/web'
+# require 'sidekiq/web'
 
 Rails.application.routes.draw do
   root 'static_pages#home'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'billing/confirm' => 'billing#confirm'
   get 'billing/finalize' => 'billing#finalize'
   get 'feedback' => 'static_pages#feedback'
-  mount Sidekiq::Web => '/sidekiq'
+  # mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

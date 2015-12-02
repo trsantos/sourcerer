@@ -16,10 +16,10 @@ class Feed < ActiveRecord::Base
   end
 
   def self.update_all
-    Feed.select(:id).each do |f|
-      FeedUpdateWorker.perform_async f.id
-    end
-    GC.start
+    # Feed.select(:id).each do |f|
+    #   FeedUpdateWorker.perform_async f.id
+    # end
+    Feed.find_each { |f| f.delay.update }
   end
 
   def update
