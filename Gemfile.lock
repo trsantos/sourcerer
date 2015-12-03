@@ -112,7 +112,7 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     parser (2.2.3.0)
       ast (>= 1.1, < 3.0)
-    paypal-sdk-rest (1.3.5)
+    paypal-sdk-rest (1.4.1)
       multi_json (~> 1.0)
       uuidtools (~> 2.1)
       xml-simple
@@ -120,8 +120,6 @@ GEM
     powerpack (0.1.1)
     puma (2.15.3)
     rack (1.6.4)
-    rack-mini-profiler (0.9.8)
-      rack (>= 1.1.3)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5)
@@ -222,7 +220,6 @@ DEPENDENCIES
   paypal-sdk-rest
   pg
   puma
-  rack-mini-profiler
   rails
   rails_12factor
   rubocop

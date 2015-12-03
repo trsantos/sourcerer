@@ -15,16 +15,16 @@ class Feed < ActiveRecord::Base
     10
   end
 
-  def self.update_all
-    Feed.find_each { |f| f.delay.update }
-  end
-
   def update
     fj_feed = fetch_and_parse
-    return if fj_feed.is_a? Integer
-    update_feed_attributes fj_feed
-    entries.delete_all if Rails.env.development?
-    update_entries fj_feed
+    if fj_feed.is_a? Integer
+      update_attributes(updated_at: Time.current, fetching: false)
+    else
+      transaction do
+        update_entries fj_feed
+        update_feed_attributes fj_feed
+      end
+    end
   end
 
   def only_images?
@@ -49,7 +49,8 @@ class Feed < ActiveRecord::Base
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
                       description: sanitize(strip_tags(fj_feed.description)),
                       logo: logo,
-                      updated_at: Time.zone.now)
+                      updated_at: Time.current,
+                      fetching: false)
   end
 
   def check_feed_logo(logo)

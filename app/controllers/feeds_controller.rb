@@ -7,6 +7,7 @@ class FeedsController < ApplicationController
   before_action :expiration_date
   before_action :mark_subscription_as_visited, only: [:show]
   before_action :no_updated_feeds_left, only: [:show]
+  after_action :update_next_feeds, only: [:show]
 
   def index
     @feeds = Feed.order(title: :asc).all
@@ -14,9 +15,14 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    @entries = @feed.entries.order(pub_date: :desc)
-    @only_images = @feed.only_images?
     @subscription = @user.subscriptions.find_by(feed_id: @feed.id)
+    if @feed.updated_at < 1.hour.ago && !@feed.fetching
+      @feed.update_attribute :fetching, true
+      @feed.delay.update
+    else
+      @entries = @feed.entries.order(pub_date: :desc)
+      @only_images = @feed.only_images?
+    end
   end
 
   def new
@@ -59,5 +65,13 @@ class FeedsController < ApplicationController
   def no_updated_feeds_left
     return if current_user.subscriptions.exists?(updated: true)
     flash.now[:info] = 'You have no updated feeds right now. Check back later!'
+  end
+
+  def update_next_feeds
+    return if @feed.fetching
+    feed = @user.next_feed
+    feed.delay.update if (feed.is_a? Feed) && feed.updated_at < 1.hour.ago
+    other = @user.feeds.order(updated_at: :asc).take
+    other.delay.update if other && other.updated_at < 1.hour.ago
   end
 end
