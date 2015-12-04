@@ -24,11 +24,13 @@ class Feed < ActiveRecord::Base
       Thread.new do
         begin
           until work_q.empty?
+            puts Thread.current.object_id
             id = work_q.pop
             Feed.find(id).update
             puts 'updating feed: ' + id.to_s
-            puts Thread.current.object_id
           end
+        rescue
+          puts 'error'
         end
       end
     end
