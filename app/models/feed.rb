@@ -15,28 +15,6 @@ class Feed < ActiveRecord::Base
     10
   end
 
-  def self.update_all
-    require 'thread'
-    work_q = Queue.new
-    Feed.select(:id).each { |f| work_q.push f.id }
-    puts work_q
-    workers = (0...4).map do
-      Thread.new do
-        begin
-          until work_q.empty?
-            puts Thread.current.object_id
-            id = work_q.pop
-            Feed.find(id).update
-            puts 'updating feed: ' + id.to_s
-          end
-        rescue
-          puts 'error'
-        end
-      end
-    end
-    workers.map(&:join)
-  end
-
   def update
     fj_feed = fetch_and_parse
     if fj_feed.is_a? Integer
