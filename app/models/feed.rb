@@ -15,6 +15,26 @@ class Feed < ActiveRecord::Base
     10
   end
 
+  def self.update_all
+    require 'thread'
+    work_q = Queue.new
+    Feed.select(:id).each { |f| work_q.push f.id }
+    puts work_q
+    workers = (0...4).map do
+      Thread.new do
+        begin
+          until work_q.empty?
+            id = work_q.pop
+            Feed.find(id).update
+            puts 'updating feed: ' + id.to_s
+            puts Thread.current.object_id
+          end
+        end
+      end
+    end
+    workers.map(&:join)
+  end
+
   def update
     fj_feed = fetch_and_parse
     if fj_feed.is_a? Integer
@@ -102,7 +122,7 @@ class Feed < ActiveRecord::Base
   end
 
   def find_date(pub_date)
-    return Time.current if pub_date.nil? || pub_date > Time.zone.now
+    return Time.current if pub_date.nil? || pub_date > Time.current
     pub_date
   end
 
