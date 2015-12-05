@@ -14,6 +14,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
+    @feed.update if @feed.created_at > 1.minute.ago
     @entries = @feed.entries.order(pub_date: :desc)
     @only_images = @feed.only_images?
   end
@@ -27,7 +28,6 @@ class FeedsController < ApplicationController
   def create
     url = params[:feed][:feed_url]
     feed = Feed.find_or_create_by(feed_url: process_url(url))
-    feed.update
     redirect_to feed
   end
 
