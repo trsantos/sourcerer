@@ -17,13 +17,10 @@ class Feed < ActiveRecord::Base
 
   def update
     fj_feed = fetch_and_parse
-    if fj_feed.is_a? Integer
-      update_attributes(updated_at: Time.current, fetching: false)
-    else
-      transaction do
-        update_entries fj_feed
-        update_feed_attributes fj_feed
-      end
+    return if fj_feed.is_a? Integer
+    transaction do
+      update_entries fj_feed
+      update_feed_attributes fj_feed
     end
   end
 
@@ -49,8 +46,7 @@ class Feed < ActiveRecord::Base
                       site_url: process_url(fj_feed.url || fj_feed.feed_url),
                       description: sanitize(strip_tags(fj_feed.description)),
                       logo: logo,
-                      updated_at: Time.current,
-                      fetching: false)
+                      updated_at: Time.current)
   end
 
   def check_feed_logo(logo)
@@ -76,9 +72,7 @@ class Feed < ActiveRecord::Base
   end
 
   def update_subscriptions
-    subscriptions.select(:id, :updated).where(updated: false).find_each do |s|
-      s.update_attribute(:updated, true)
-    end
+    subscriptions.where(updated: false).update_all(updated: true)
   end
 
   # This should be done only once...
