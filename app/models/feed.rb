@@ -15,6 +15,10 @@ class Feed < ActiveRecord::Base
     10
   end
 
+  def self.update_all
+    find_each { |f| f.delay.update }
+  end
+
   def update
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
