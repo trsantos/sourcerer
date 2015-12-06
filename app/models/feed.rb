@@ -43,7 +43,7 @@ class Feed < ActiveRecord::Base
   def update_feed_attributes(fj_feed)
     logo = check_feed_logo(fj_feed.logo)
     update_attributes(title: fj_feed.title,
-                      site_url: process_url(fj_feed.url || fj_feed.feed_url),
+                      site_url: process_url(fj_feed.url),
                       description: sanitize(strip_tags(fj_feed.description)),
                       logo: logo,
                       updated_at: Time.current)
