@@ -64,24 +64,28 @@ class Feed < ActiveRecord::Base
   end
 
   def update_entries(fj_feed)
-    updated = false
+    return unless new_entries? fj_feed
+    entries.delete_all
     fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |e|
-      unless entries.exists?(url: e.url)
-        insert_entry e
-        updated = true
-      end
+      insert_entry e
     end
-    self.entries = entries.order(created_at: :desc).first(Feed.entries_per_feed)
-    update_subscriptions if updated
+    subscriptions.where(updated: false).update_all(updated: true)
   end
 
-  def update_subscriptions
-    subscriptions.where(updated: false).update_all(updated: true)
+  def new_entries?(fj_feed)
+    fj_feed.entries.first(3).each do |e|
+      return true unless entries.exists?(url: e.url)
+    end
+    false
   end
 
   # This should be done only once...
   def setup_fj
+    Feedjira::Feed.add_common_feed_entry_element(:enclosure,
+                                                 value: :url, as: :image)
     Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
+                                                 value: :url, as: :image)
+    Feedjira::Feed.add_common_feed_entry_element('media:content',
                                                  value: :url, as: :image)
     Feedjira::Feed.add_common_feed_entry_element(:img, value: :scr, as: :image)
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
