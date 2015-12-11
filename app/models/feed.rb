@@ -83,9 +83,9 @@ class Feed < ActiveRecord::Base
   def setup_fj
     Feedjira::Feed.add_common_feed_entry_element(:enclosure,
                                                  value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
+    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail'.freeze,
                                                  value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:content',
+    Feedjira::Feed.add_common_feed_entry_element('media:content'.freeze,
                                                  value: :url, as: :image)
     Feedjira::Feed.add_common_feed_entry_element(:img, value: :scr, as: :image)
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
@@ -93,7 +93,7 @@ class Feed < ActiveRecord::Base
   end
 
   def insert_entry(e)
-    description = e.content || e.summary || ''
+    description = e.content || e.summary || ''.freeze
     entries.create(title:       (e.title unless e.title.blank?),
                    description: sanitize(strip_tags(description)),
                    pub_date:    find_date(e.published),
