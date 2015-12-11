@@ -55,8 +55,8 @@ class Feed < ActiveRecord::Base
 
   def check_feed_logo(logo)
     return if logo.nil?
-    if (logo.include? 'wp.com/i/buttonw-com') ||
-       (logo.include? 'creativecommons.org/images/public')
+    if (logo.include? 'wp.com/i/buttonw-com'.freeze) ||
+       (logo.include? 'creativecommons.org/images/public'.freeze)
       nil
     else
       logo
@@ -95,9 +95,7 @@ class Feed < ActiveRecord::Base
   def insert_entry(e)
     description = e.content || e.summary || ''
     entries.create(title:       (e.title unless e.title.blank?),
-                   description: sanitize(description,
-                                         tags: ['a'],
-                                         attributes: ['href']),
+                   description: sanitize(strip_tags(description)),
                    pub_date:    find_date(e.published),
                    image:       find_image(e, description),
                    url:         e.url)
@@ -121,44 +119,44 @@ class Feed < ActiveRecord::Base
   def parse_image(img)
     # Need to add http here as some images won't
     # load because ssl_error_bad_cert_domain
-    return 'http:' + img if img.start_with?('//')
+    return 'http:'.freeze + img if img.start_with?('//'.freeze)
     uri = URI.parse feed_url
-    start = uri.scheme + '://' + uri.host
-    return start + img if img.start_with? '/'
+    start = uri.scheme + '://'.freeze + uri.host
+    return start + img if img.start_with? '/'.freeze
     # I don't remeber why this is here. Maybe not needed?
-    return start + uri.path + img unless img.start_with? 'http'
+    return start + uri.path + img unless img.start_with? 'http'.freeze
     img
   end
 
   def image_from_description(description)
     doc = Nokogiri::HTML description
-    doc.css('img').first.attributes['src'].value
+    doc.css('img'.freeze).first.attributes['src'.freeze].value
   end
 
   def og_image(url)
     require 'open-uri'
     doc = Nokogiri::HTML(open(URI.escape(url.strip.split(/#/).first)))
-    img = doc.css("meta[property='og:image']").first
-    img.attributes['content'].value
+    img = doc.css("meta[property='og:image']".freeze).first
+    img.attributes['content'.freeze].value
   end
 
   def hacks(img)
     # replaces
-    if img.include? 'wordpress.com'
-      img.sub!(/\?.*/, '')
-      img += '?w=400'
-    elsif (img.include? 'img.youtube.com') ||
-          (img.include? 'i.ytimg.com')
-      img.sub! '/default', '/hqdefault'
-    elsif (img.include? 'googleusercontent.com') ||
-          (img.include? 'blogspot.com')
-      img.sub! 's72-c', 's640'
+    if img.include? 'wordpress.com'.freeze
+      img.sub!(/\?.*/, ''.freeze)
+      img += '?w=400'.freeze
+    elsif (img.include? 'img.youtube.com'.freeze) ||
+          (img.include? 'i.ytimg.com'.freeze)
+      img.sub! '/default'.freeze, '/hqdefault'.freeze
+    elsif (img.include? 'googleusercontent.com'.freeze) ||
+          (img.include? 'blogspot.com'.freeze)
+      img.sub! 's72-c'.freeze, 's640'.freeze
     end
 
     # special cases
-    if (img.include? 'feedburner.com') ||
-       (img.include? 'feedsportal.com') ||
-       (img.include? '/comments/') # Wordpress
+    if (img.include? 'feedburner.com'.freeze) ||
+       (img.include? 'feedsportal.com'.freeze) ||
+       (img.include? '/comments/'.freeze) # Wordpress
       return nil
     end
 
@@ -166,16 +164,16 @@ class Feed < ActiveRecord::Base
   end
 
   def discard_non_images(img)
-    if (img.include? '.mp3') ||
-       (img.include? '.tiff') ||
-       (img.include? '.m4a') ||
-       (img.include? '.mp4') ||
-       (img.include? '.psd') ||
-       (img.include? '.pdf') ||
-       (img.include? '.webm') ||
-       (img.include? '.svg') ||
-       (img.include? '.ogv') ||
-       (img.include? '.opus')
+    if (img.include? '.mp3'.freeze) ||
+       (img.include? '.tiff'.freeze) ||
+       (img.include? '.m4a'.freeze) ||
+       (img.include? '.mp4'.freeze) ||
+       (img.include? '.psd'.freeze) ||
+       (img.include? '.pdf'.freeze) ||
+       (img.include? '.webm'.freeze) ||
+       (img.include? '.svg'.freeze) ||
+       (img.include? '.ogv'.freeze) ||
+       (img.include? '.opus'.freeze)
       return nil
     end
     img
