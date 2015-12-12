@@ -24,6 +24,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'paypal-sdk-rest'
 gem 'font-awesome-sass'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'sqlite3'
