@@ -17,6 +17,18 @@ class Feed < ActiveRecord::Base
     10
   end
 
+  def self.update_all
+    require 'thread/pool'
+    pool = Thread.pool(7)
+    Feed.find_each do |f|
+      pool.process do
+        f.update
+        ActiveRecord::Base.connection.close
+      end
+    end
+    pool.shutdown
+  end
+
   def update
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
@@ -24,7 +36,6 @@ class Feed < ActiveRecord::Base
       update_entries fj_feed
       update_feed_attributes fj_feed
     end
-    ActiveRecord::Base.connection.close
   end
 
   def only_images?
