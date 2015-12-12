@@ -83,7 +83,7 @@ class Feed < ActiveRecord::Base
   end
 
   def new_entries?(fj_feed)
-    fj_feed.entries.first(2).each do |e|
+    fj_feed.entries.first(3).each do |e|
       return true unless entries.exists?(url: e.url)
     end
     false
