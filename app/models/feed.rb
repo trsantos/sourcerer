@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Feed < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include ApplicationHelper
@@ -13,10 +15,6 @@ class Feed < ActiveRecord::Base
 
   def self.entries_per_feed
     10
-  end
-
-  def self.update_all
-    find_each { |f| f.delay.update }
   end
 
   def update
@@ -80,7 +78,6 @@ class Feed < ActiveRecord::Base
     false
   end
 
-  # This should be done only once...
   def setup_fj
     Feedjira::Feed.add_common_feed_entry_element(:enclosure,
                                                  value: :url, as: :image)
