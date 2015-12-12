@@ -26,6 +26,7 @@ class Feed < ActiveRecord::Base
       update_entries fj_feed
       update_feed_attributes fj_feed
     end
+    ActiveRecord::Base.connection.close
   end
 
   def only_images?
@@ -55,8 +56,8 @@ class Feed < ActiveRecord::Base
 
   def check_feed_logo(logo)
     return if logo.nil?
-    if (logo.include? 'wp.com/i/buttonw-com'.freeze) ||
-       (logo.include? 'creativecommons.org/images/public'.freeze)
+    if (logo.include? 'wp.com/i/buttonw-com') ||
+       (logo.include? 'creativecommons.org/images/public')
       nil
     else
       logo
@@ -83,9 +84,9 @@ class Feed < ActiveRecord::Base
   def setup_fj
     Feedjira::Feed.add_common_feed_entry_element(:enclosure,
                                                  value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail'.freeze,
+    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
                                                  value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:content'.freeze,
+    Feedjira::Feed.add_common_feed_entry_element('media:content',
                                                  value: :url, as: :image)
     Feedjira::Feed.add_common_feed_entry_element(:img, value: :scr, as: :image)
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
@@ -93,7 +94,7 @@ class Feed < ActiveRecord::Base
   end
 
   def insert_entry(e)
-    description = e.content || e.summary || ''.freeze
+    description = e.content || e.summary || ''
     entries.create(title:       (e.title unless e.title.blank?),
                    description: sanitize(strip_tags(description)),
                    pub_date:    find_date(e.published),
@@ -119,44 +120,44 @@ class Feed < ActiveRecord::Base
   def parse_image(img)
     # Need to add http here as some images won't
     # load because ssl_error_bad_cert_domain
-    return 'http:'.freeze + img if img.start_with?('//'.freeze)
+    return 'http:' + img if img.start_with?('//')
     uri = URI.parse feed_url
-    start = uri.scheme + '://'.freeze + uri.host
-    return start + img if img.start_with? '/'.freeze
+    start = uri.scheme + '://' + uri.host
+    return start + img if img.start_with? '/'
     # I don't remeber why this is here. Maybe not needed?
-    return start + uri.path + img unless img.start_with? 'http'.freeze
+    return start + uri.path + img unless img.start_with? 'http'
     img
   end
 
   def image_from_description(description)
     doc = Nokogiri::HTML description
-    doc.css('img'.freeze).first.attributes['src'.freeze].value
+    doc.css('img').first.attributes['src'].value
   end
 
   def og_image(url)
     require 'open-uri'
     doc = Nokogiri::HTML(open(URI.escape(url.strip.split(/#/).first)))
-    img = doc.css("meta[property='og:image']".freeze).first
-    img.attributes['content'.freeze].value
+    img = doc.css("meta[property='og:image']").first
+    img.attributes['content'].value
   end
 
   def hacks(img)
     # replaces
-    if img.include? 'wordpress.com'.freeze
-      img.sub!(/\?.*/, ''.freeze)
-      img += '?w=400'.freeze
-    elsif (img.include? 'img.youtube.com'.freeze) ||
-          (img.include? 'i.ytimg.com'.freeze)
-      img.sub! '/default'.freeze, '/hqdefault'.freeze
-    elsif (img.include? 'googleusercontent.com'.freeze) ||
-          (img.include? 'blogspot.com'.freeze)
-      img.sub! 's72-c'.freeze, 's640'.freeze
+    if img.include? 'wordpress.com'
+      img.sub!(/\?.*/, '')
+      img += '?w=400'
+    elsif (img.include? 'img.youtube.com') ||
+          (img.include? 'i.ytimg.com')
+      img.sub! '/default', '/hqdefault'
+    elsif (img.include? 'googleusercontent.com') ||
+          (img.include? 'blogspot.com')
+      img.sub! 's72-c', 's640'
     end
 
     # special cases
-    if (img.include? 'feedburner.com'.freeze) ||
-       (img.include? 'feedsportal.com'.freeze) ||
-       (img.include? '/comments/'.freeze) # Wordpress
+    if (img.include? 'feedburner.com') ||
+       (img.include? 'feedsportal.com') ||
+       (img.include? '/comments/') # Wordpress
       return nil
     end
 
@@ -164,16 +165,16 @@ class Feed < ActiveRecord::Base
   end
 
   def discard_non_images(img)
-    if (img.include? '.mp3'.freeze) ||
-       (img.include? '.tiff'.freeze) ||
-       (img.include? '.m4a'.freeze) ||
-       (img.include? '.mp4'.freeze) ||
-       (img.include? '.psd'.freeze) ||
-       (img.include? '.pdf'.freeze) ||
-       (img.include? '.webm'.freeze) ||
-       (img.include? '.svg'.freeze) ||
-       (img.include? '.ogv'.freeze) ||
-       (img.include? '.opus'.freeze)
+    if (img.include? '.mp3') ||
+       (img.include? '.tiff') ||
+       (img.include? '.m4a') ||
+       (img.include? '.mp4') ||
+       (img.include? '.psd') ||
+       (img.include? '.pdf') ||
+       (img.include? '.webm') ||
+       (img.include? '.svg') ||
+       (img.include? '.ogv') ||
+       (img.include? '.opus')
       return nil
     end
     img
