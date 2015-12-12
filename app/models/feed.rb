@@ -93,7 +93,7 @@ class Feed < ActiveRecord::Base
   def insert_entry(e)
     description = e.content || e.summary || ''
     entries.create(title:       (e.title unless e.title.blank?),
-                   description: sanitize(strip_tags(description)),
+                   description: sanitize(strip_tags(description)).first(400),
                    pub_date:    find_date(e.published),
                    image:       find_image(e, description),
                    url:         e.url)

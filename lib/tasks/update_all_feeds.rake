@@ -1,6 +1,6 @@
 desc 'Update ALL feeds in database'
 task update_all_feeds: :environment do
-  if Time.current.hour.modulo(1) == 0
+  if Time.current.hour.modulo(2) == 0
     require 'thread/pool'
     pool = Thread.pool(7)
     Feed.find_each do |f|
