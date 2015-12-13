@@ -7,12 +7,12 @@ class SubscriptionsController < ApplicationController
 
   def index
     @subscriptions =
-      @user.subscriptions.includes(:feed).order(updated: :desc, starred: :desc)
+      current_user.subscriptions.includes(:feed).order(updated: :desc, starred: :desc)
   end
 
   def create
     @feed = Feed.find(params[:feed_id])
-    @subscription = @user.follow(@feed)
+    @subscription = current_user.follow(@feed)
     if @subscription.updated?
       @subscription.update_attributes(visited_at: Time.zone.now, updated: false)
     end

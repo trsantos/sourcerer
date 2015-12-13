@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 class Feed < ActiveRecord::Base
+  include ActionView::Helpers::SanitizeHelper
   include ApplicationHelper
 
   belongs_to :topic
@@ -33,13 +35,13 @@ class Feed < ActiveRecord::Base
       update_feed_attributes fj_feed
     end
   rescue StandardError => e
-    p "retrying... #{e} #{id}"
+    puts "retrying... #{e} #{id}"
     retry
   end
 
   def only_images?
     entries.each do |e|
-      return false unless e.image && e.description.blank?
+      return false unless e.image && (strip_tags e.description).blank?
     end
     true
   end
@@ -59,6 +61,7 @@ class Feed < ActiveRecord::Base
                       site_url: process_url(fj_feed.url),
                       description: fj_feed.description,
                       logo: logo,
+                      has_only_images: only_images?,
                       updated_at: Time.current)
   end
 
@@ -160,14 +163,12 @@ class Feed < ActiveRecord::Base
           (img.include? 'blogspot.com')
       img.sub! 's72-c', 's640'
     end
-
     # special cases
     if (img.include? 'feedburner.com') ||
        (img.include? 'feedsportal.com') ||
        (img.include? '/comments/') # Wordpress
       return nil
     end
-
     img
   end
 
