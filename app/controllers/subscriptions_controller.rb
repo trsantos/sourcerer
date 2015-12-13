@@ -12,7 +12,8 @@ class SubscriptionsController < ApplicationController
 
   def create
     @feed = Feed.find(params[:feed_id])
-    @subscription = current_user.follow(@feed)
+    @user = current_user
+    @subscription = @user.follow(@feed)
     if @subscription.updated?
       @subscription.update_attributes(visited_at: Time.zone.now, updated: false)
     end
