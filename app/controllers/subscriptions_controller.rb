@@ -6,13 +6,11 @@ class SubscriptionsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @user = current_user
     @subscriptions =
       @user.subscriptions.includes(:feed).order(updated: :desc, starred: :desc)
   end
 
   def create
-    @user = current_user
     @feed = Feed.find(params[:feed_id])
     @subscription = @user.follow(@feed)
     if @subscription.updated?
@@ -46,6 +44,10 @@ class SubscriptionsController < ApplicationController
       format.html { redirect_to @feed }
       format.js
     end
+  end
+
+  def next
+    current_user.next_feed
   end
 
   private
