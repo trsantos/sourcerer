@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include ApplicationHelper
 
   has_and_belongs_to_many :topics
-  has_many :subscriptions, dependent: :destroy
+  has_many :subscriptions, dependent: :delete_all
   has_many :feeds, through: :subscriptions
   has_many :entries, through: :feeds
 

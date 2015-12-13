@@ -5,9 +5,9 @@ class Feed < ActiveRecord::Base
   include ApplicationHelper
 
   belongs_to :topic
-  has_many :subscriptions, dependent: :destroy
+  has_many :subscriptions, dependent: :delete_all
   has_many :users, through: :subscriptions
-  has_many :entries, dependent: :destroy
+  has_many :entries, dependent: :delete_all
 
   validates :feed_url, presence: true, uniqueness: true
 
