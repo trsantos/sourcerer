@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
     @user = current_user
     @subscription = @user.follow(@feed)
     if @subscription.updated?
-      @subscription.update_attributes(visited_at: Time.zone.now, updated: false)
+      @subscription.update_attributes(visited_at: Time.current, updated: false)
     end
     respond_to do |format|
       format.html { redirect_to @feed }
