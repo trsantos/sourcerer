@@ -47,7 +47,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
-    current_user.next_feed
+    redirect_to current_user.next_feed
   end
 
   private
