@@ -23,13 +23,13 @@
 			</a>
 		    </div>
 		    <p class="description">
-			<%= sanitize entry.description %>
+			<%= strip_tags entry.description %>
 		    </p>
 		</div>
 	    <% elsif !entry.description.blank? %>
 		<div class="small-12 columns">
 		    <p class="description">
-			<%= sanitize entry.description %>
+			<%= strip_tags entry.description %>
 		    </p>
 		</div>
 	    <% end %>

@@ -1,14 +1,10 @@
 # frozen_string_literal: true
-
 class Feed < ActiveRecord::Base
-  include ActionView::Helpers::SanitizeHelper
   include ApplicationHelper
 
   belongs_to :topic
-
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
-
   has_many :entries, dependent: :destroy
 
   validates :feed_url, presence: true, uniqueness: true
@@ -36,6 +32,9 @@ class Feed < ActiveRecord::Base
       update_entries fj_feed
       update_feed_attributes fj_feed
     end
+  rescue StandardError => e
+    p "retrying... #{e} #{id}"
+    retry
   end
 
   def only_images?
@@ -58,7 +57,7 @@ class Feed < ActiveRecord::Base
     logo = check_feed_logo(fj_feed.logo)
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url),
-                      description: sanitize(strip_tags(fj_feed.description)),
+                      description: fj_feed.description,
                       logo: logo,
                       updated_at: Time.current)
   end
@@ -104,7 +103,7 @@ class Feed < ActiveRecord::Base
   def insert_entry(e)
     description = e.content || e.summary || ''
     entries.create(title:       (e.title unless e.title.blank?),
-                   description: sanitize(strip_tags(description)).first(400),
+                   description: description,
                    pub_date:    find_date(e.published),
                    image:       find_image(e, description),
                    url:         e.url)
