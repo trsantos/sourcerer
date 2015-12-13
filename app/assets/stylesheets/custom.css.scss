@@ -162,7 +162,7 @@ $fh-height: 50px;
 		margin-top: 0px;
 		margin-bottom: 5px;
 		font-size: large;
-		font-size: 18px;
+		font-size: 17px;
 	    }
 	    .old a {
 		color: #666;
@@ -177,8 +177,8 @@ $fh-height: 50px;
 	}
 	.description {
 	    font-size: medium;
-	    font-size: 16px;
-	    max-height: 6.4rem;
+	    font-size: 15px;
+	    max-height: 6.0rem;
 	    overflow: hidden;
 	    margin-top: 0px;
 	    margin-bottom: 5px;
@@ -188,7 +188,7 @@ $fh-height: 50px;
 	}
 	.timestamp {
 	    font-size: small;
-	    font-size: 13px;
+	    font-size: 12px;
 	    color: #444;
 	    margin-top: 0px;
 	    margin-bottom: 5px;
@@ -321,7 +321,7 @@ $fh-height: 50px;
 	    border: 1px solid rgba(0, 0, 0, 0.2);
 	}
 	.description {
-	    max-height: 4.8rem;
+	    max-height: 4.5rem;
 	    #max-height: 100%;
 	}
     }
