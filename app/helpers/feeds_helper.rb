@@ -20,7 +20,7 @@ module FeedsHelper
     return 'dummy' if (uri.host == 'www.pcgamer.com') || (uri.host == 'www.maximumpc.com')
     return uri.scheme + '://' + uri.host + '/favicon.ico'
   rescue
-    return ''
+    return 'hi'
   end
 
   def google_favicon(feed)
