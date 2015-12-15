@@ -18,17 +18,17 @@ module FeedsHelper
   def favicon_for(url)
     uri = URI.parse url
     return 'dummy' if (uri.host == 'www.pcgamer.com') || (uri.host == 'www.maximumpc.com')
-    return uri.scheme + '://' + uri.host + '/favicon.ico'
+    uri.scheme + '://' + uri.host + '/favicon.ico'
   rescue
-    return 'hi'
+    ' '
   end
 
   def google_favicon(feed)
     base = 'http://www.google.com/s2/favicons?domain='
     begin
-      return base + URI.parse(feed.site_url).host
+      base + URI.parse(feed.site_url).host
     rescue
-      return base + (feed.site_url || feed.feed_url)
+      base + (feed.site_url || feed.feed_url)
     end
   end
 end
