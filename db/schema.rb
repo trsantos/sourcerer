@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213135838) do
+ActiveRecord::Schema.define(version: 20151215021225) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -47,12 +47,13 @@ ActiveRecord::Schema.define(version: 20151213135838) do
     t.string   "title"
     t.string   "feed_url"
     t.string   "site_url"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "logo"
     t.text     "description"
     t.integer  "topic_id"
     t.boolean  "has_only_images"
+    t.boolean  "fetching",        default: true
   end
 
   add_index "feeds", ["feed_url"], name: "index_feeds_on_feed_url", unique: true

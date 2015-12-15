@@ -14,8 +14,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    @feed.update if @feed.created_at > 1.minute.ago
-    @entries = @feed.entries.order(created_at: :desc)
+    @entries = @feed.entries.order(created_at: :desc) unless @feed.fetching
   end
 
   def new

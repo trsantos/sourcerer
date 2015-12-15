@@ -10,6 +10,7 @@ class Feed < ActiveRecord::Base
   has_many :entries, dependent: :delete_all
 
   validates :feed_url, presence: true, uniqueness: true
+  after_create :delayed_update
 
   def self.entries_per_feed
     10
@@ -52,6 +53,7 @@ class Feed < ActiveRecord::Base
     setup_fj
     Feedjira::Feed.fetch_and_parse feed_url
   rescue
+    update_attribute :fetching, false
     0
   end
 
@@ -62,6 +64,7 @@ class Feed < ActiveRecord::Base
                       description: fj_feed.description,
                       logo: logo,
                       has_only_images: only_images?,
+                      fetching: false,
                       updated_at: Time.current)
   end
 
@@ -186,5 +189,9 @@ class Feed < ActiveRecord::Base
       return nil
     end
     img
+  end
+
+  def delayed_update
+    delay.update
   end
 end
