@@ -1,4 +1,4 @@
-Feed.update_all topic: nil
+Feed.update_all topic_id: nil
 
 def seed_topic(topic_name, urls)
   t = Topic.find_or_create_by(name: topic_name)
