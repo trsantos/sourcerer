@@ -1,10 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+Feed.update_all topic: nil
 
 def seed_topic(topic_name, urls)
   t = Topic.find_or_create_by(name: topic_name)
@@ -16,8 +10,8 @@ end
 seed_topic 'Business',
            [
              'http://www.forbes.com/business/feed2/',
-             'https://feeds2.feedburner.com/businessinsider',
              'http://www.wsj.com/xml/rss/3_7014.xml',
+             'http://feeds.reuters.com/reuters/businessNews',
              'http://www.entrepreneur.com/latest.rss',
              'http://fortune.com/rss'
            ]
@@ -27,8 +21,8 @@ seed_topic 'Design',
              'https://feeds.feedburner.com/Archdaily',
              'https://feeds.feedburner.com/fastcodesign/feed',
              'http://www.designboom.com/feed/',
-             'http://feeds.feedburner.com/FreshInspirationForYourHome/',
-             'http://feeds.feedburner.com/dezeen'
+             'http://feeds.feedburner.com/dezeen',
+             'http://feeds.feedburner.com/FreshInspirationForYourHome/'
            ]
 
 seed_topic 'Gaming',
@@ -45,8 +39,8 @@ seed_topic 'Movies',
              'https://feeds.feedburner.com/thr/news',
              'https://variety.com/v/film/feed/',
              'http://www.avclub.com/feed/rss/?tags=film',
-             'https://deadline.com/v/film/feed/',
-             'http://www.thewrap.com/category/movies/feed/'
+             'http://screenrant.com/feed/',
+             'https://deadline.com/v/film/feed/'
            ]
 
 seed_topic 'Music',
@@ -63,17 +57,17 @@ seed_topic 'News',
              'http://rss.cnn.com/rss/edition.rss',
              'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
              'http://feeds.bbci.co.uk/news/rss.xml?edition=int',
-             'http://www.huffingtonpost.com/feeds/index.xml',
+             'http://feeds.huffingtonpost.com/c/35496/f/677497/index.rss',
              'http://www.theguardian.com/international/rss'
            ]
 
 seed_topic 'Photography',
            [
+             'http://www.nasa.gov/rss/image_of_the_day.rss',
              'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/',
              'https://iso.500px.com/feed',
              'http://www.bostonglobe.com/rss/bigpicture',
-             'https://feeds.feedburner.com/PetaPixel',
-             'http://digital-photography-school.com/feed/'
+             'https://feeds.feedburner.com/PetaPixel'
            ]
 
 seed_topic 'Science',
@@ -102,5 +96,3 @@ seed_topic 'Technology',
              'https://www.theverge.com/rss/frontpage',
              'http://techcrunch.com/feed/'
            ]
-
-Topic.all.each { |t| t.feeds.all.each { |f| f.update } } if Rails.env.production?
