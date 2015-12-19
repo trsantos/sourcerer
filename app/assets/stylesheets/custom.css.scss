@@ -280,6 +280,9 @@ $fh-height: 50px;
 	    background-color: $fh-hover;
 	}
     }
+    #app-header .right {
+	margin-right: -10px;
+    }
     #feed-header {
 	background-color: $fh-color;
 	.top-bar {
