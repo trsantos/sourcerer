@@ -117,8 +117,8 @@ class Feed < ActiveRecord::Base
       .add_common_feed_entry_element('media:thumbnail', value: :url, as: :image)
     Feedjira::Feed
       .add_common_feed_entry_element('media:content', value: :url, as: :image)
-    Feedjira::Feed
-      .add_common_feed_entry_element(:img, value: :scr, as: :image)
+    # Feedjira::Feed
+    #   .add_common_feed_entry_element(:img, value: :scr, as: :image)
 
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
     Feedjira::Feed.add_common_feed_element(:logo, as: :logo)
