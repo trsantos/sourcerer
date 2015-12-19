@@ -82,34 +82,44 @@ class Feed < ActiveRecord::Base
     fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |fj_entry|
       insert_or_update_entry fj_entry
     end
-    return unless entries.count > 10
-    self.entries = entries.order(updated_at: :desc).first(10)
+    return unless entries.count > Feed.entries_per_feed
+    discard_old_entries
+    mark_subscriptions_as_updated
+  end
+
+  def discard_old_entries
+    self.entries = entries.order(updated_at: :desc).first(Feed.entries_per_feed)
+  end
+
+  def mark_subscriptions_as_updated
     subscriptions.where(updated: false).update_all(updated: true)
   end
 
   def insert_or_update_entry(fj_entry)
-    entry = entries.find_or_create_by(url: fj_entry.url) do |e|
-      set_new_entry_attributes e, fj_entry
-    end
-    entry.update_attribute(:updated_at, Time.current)
+    entries.find_by(url: fj_entry.url).touch
+  rescue
+    insert_entry fj_entry
   end
 
-  def set_new_entry_attributes(e, fj_entry)
-    e.title       = (fj_entry.title unless fj_entry.title.blank?)
-    e.pub_date    = find_date(fj_entry.published)
-    description   = fj_entry.content || fj_entry.summary || ''
-    e.description = description
-    e.image       = find_image(fj_entry, description)
+  def insert_entry(e)
+    description = e.content || e.summary || ''
+    entries.create(title:       (e.title unless e.title.blank?),
+                   description: description,
+                   pub_date:    find_date(e.published),
+                   image:       find_image(e, description),
+                   url:         e.url)
   end
 
   def setup_fj
-    Feedjira::Feed.add_common_feed_entry_element(:enclosure,
-                                                 value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:thumbnail',
-                                                 value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element('media:content',
-                                                 value: :url, as: :image)
-    Feedjira::Feed.add_common_feed_entry_element(:img, value: :scr, as: :image)
+    Feedjira::Feed
+      .add_common_feed_entry_element(:enclosure, value: :url, as: :image)
+    Feedjira::Feed
+      .add_common_feed_entry_element('media:thumbnail', value: :url, as: :image)
+    Feedjira::Feed
+      .add_common_feed_entry_element('media:content', value: :url, as: :image)
+    Feedjira::Feed
+      .add_common_feed_entry_element(:img, value: :scr, as: :image)
+
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
     Feedjira::Feed.add_common_feed_element(:logo, as: :logo)
   end
