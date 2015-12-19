@@ -79,19 +79,27 @@ class Feed < ActiveRecord::Base
   end
 
   def update_entries(fj_feed)
-    return unless new_entries? fj_feed
-    entries.delete_all
-    fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |e|
-      insert_entry e
+    fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |fj_entry|
+      insert_or_update_entry fj_entry
     end
+    return unless entries.count > 10
+    self.entries = entries.order(updated_at: :desc).first(10)
     subscriptions.where(updated: false).update_all(updated: true)
   end
 
-  def new_entries?(fj_feed)
-    fj_feed.entries.first(3).each do |e|
-      return true unless entries.exists?(url: e.url)
+  def insert_or_update_entry(fj_entry)
+    entry = entries.find_or_create_by(url: fj_entry.url) do |e|
+      set_new_entry_attributes e, fj_entry
     end
-    false
+    entry.update_attribute(:updated_at, Time.current)
+  end
+
+  def set_new_entry_attributes(e, fj_entry)
+    e.title       = (fj_entry.title unless fj_entry.title.blank?)
+    e.pub_date    = find_date(fj_entry.published)
+    description   = fj_entry.content || fj_entry.summary || ''
+    e.description = description
+    e.image       = find_image(fj_entry, description)
   end
 
   def setup_fj
@@ -104,15 +112,6 @@ class Feed < ActiveRecord::Base
     Feedjira::Feed.add_common_feed_entry_element(:img, value: :scr, as: :image)
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
     Feedjira::Feed.add_common_feed_element(:logo, as: :logo)
-  end
-
-  def insert_entry(e)
-    description = e.content || e.summary || ''
-    entries.create(title:       (e.title unless e.title.blank?),
-                   description: description,
-                   pub_date:    find_date(e.published),
-                   image:       find_image(e, description),
-                   url:         e.url)
   end
 
   def find_date(pub_date)

@@ -21,7 +21,6 @@ gem 'foundation-rails'
 gem 'feedjira'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
 gem 'delayed_job_active_record'
-gem 'daemons'
 gem 'paypal-sdk-rest'
 gem 'font-awesome-sass'
 gem 'thread'
@@ -29,11 +28,14 @@ gem 'thread'
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
-  gem 'web-console'
   gem 'spring'
   gem 'faker'
   # gem 'rack-mini-profiler'
   gem 'rubocop', require: false
+end
+
+group :development do
+  gem 'web-console'
 end
 
 group :test do

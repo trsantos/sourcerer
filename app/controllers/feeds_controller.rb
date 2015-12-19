@@ -42,6 +42,7 @@ class FeedsController < ApplicationController
 
   def mark_as_read
     @subscription = @user.subscriptions.find_by(feed_id: params[:id])
+    @last_visit = @subscription.visited_at
     if @subscription.updated?
       @subscription.update_attributes(visited_at: Time.current, updated: false)
     end
