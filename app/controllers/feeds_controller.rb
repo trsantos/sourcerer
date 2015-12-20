@@ -3,7 +3,6 @@ class FeedsController < ApplicationController
 
   before_action :logged_in_user
   before_action :set_user
-  before_action :update_last_activity
   before_action :expiration_date
   before_action :no_updated_feeds_left, only: [:show]
   before_action :mark_as_read, only: [:show]
@@ -33,6 +32,7 @@ class FeedsController < ApplicationController
 
   def set_user
     @user = current_user
+    @user.touch
   end
 
   def expiration_date
@@ -48,10 +48,6 @@ class FeedsController < ApplicationController
     end
   rescue
     nil
-  end
-
-  def update_last_activity
-    @user.update_attribute :last_activity, Time.current
   end
 
   def no_updated_feeds_left

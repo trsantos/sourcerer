@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215021225) do
+ActiveRecord::Schema.define(version: 20151220190918) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 20151215021225) do
     t.datetime "reset_sent_at"
     t.string   "paypal_payment_id"
     t.datetime "expiration_date"
-    t.datetime "last_activity"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
