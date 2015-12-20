@@ -58,11 +58,10 @@ class Feed < ActiveRecord::Base
   end
 
   def update_feed_attributes(fj_feed)
-    logo = check_feed_logo(fj_feed.logo)
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url),
                       description: fj_feed.description,
-                      logo: logo,
+                      logo: check_feed_logo(fj_feed.logo),
                       has_only_images: only_images?,
                       fetching: false,
                       updated_at: Time.current)

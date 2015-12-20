@@ -1,4 +1,6 @@
 class FeedsController < ApplicationController
+  include ApplicationHelper
+
   before_action :logged_in_user
   before_action :set_user
   before_action :expiration_date
