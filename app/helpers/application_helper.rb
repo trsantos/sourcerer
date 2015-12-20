@@ -16,13 +16,4 @@ module ApplicationHelper
     (params[:controller] == 'users' && params[:action] == 'new') ||
       (params[:controller] == 'sessions' && params[:action] == 'new')
   end
-
-  def process_url(url)
-    return nil if url.blank?
-    url = url.strip
-    unless url.start_with?('http:') || url.start_with?('https:')
-      url = 'http://' + url
-    end
-    url
-  end
 end

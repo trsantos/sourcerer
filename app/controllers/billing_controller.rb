@@ -1,5 +1,4 @@
 class BillingController < ApplicationController
-  include ApplicationHelper
   include BillingHelper
 
   before_action :logged_in_user

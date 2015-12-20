@@ -11,4 +11,13 @@ class ApplicationController < ActionController::Base
     flash[:alert] = 'Please log in.'
     redirect_to login_url
   end
+
+  def process_url(url)
+    return nil if url.blank?
+    url = url.strip
+    unless url.start_with?('http:') || url.start_with?('https:')
+      url = 'http://' + url
+    end
+    url
+  end
 end
