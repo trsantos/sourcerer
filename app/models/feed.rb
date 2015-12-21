@@ -35,9 +35,6 @@ class Feed < ActiveRecord::Base
       update_entries fj_feed
       update_feed_attributes fj_feed
     end
-    # rescue StandardError => e
-    # puts "retrying... #{e} #{id}"
-    # retry
   end
 
   def only_images?
