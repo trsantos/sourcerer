@@ -8,10 +8,10 @@
 	<% if @feed.fetching %>
 	    <p style="margin-top: 1.25rem">Please wait...</p>
             <script>
-            window.setTimeout(function () {
-                    Turbolinks.enableProgressBar(false);
-                    Turbolinks.visit();
-            }, 1000 );
+             window.setTimeout(function () {
+                 Turbolinks.enableProgressBar(false);
+                 Turbolinks.visit();
+             }, 1000 );
             </script>
 	<% else %>
 	    <% if @feed.entries.any? %>
@@ -29,16 +29,16 @@
 <%= link_to "Next feed", @user.next_feed, class: "show-for-small-only button expand", id: "next" %>
 
 <script>
-var logo = document.getElementById("logo-img");
-if (logo) {
-	logo.onerror = function() {
-		logo.style.display = "none";
-	};
-	logo.onload = function() {
-		if (logo.width < 20) {
-			logo.style.display = "none";
-		}
-	}
-}
-//navigator.registerContentHandler("application/vnd.mozilla.maybe.feed", "<%= "#{request.protocol}#{request.host_with_port}" %>/feeds/new?feed=%s", "Sourcerer");
+ var logo = document.getElementById("logo-img");
+ if (logo) {
+     logo.onerror = function() {
+	 logo.style.display = "none";
+     };
+     logo.onload = function() {
+	 if (logo.width < 20) {
+	     logo.style.display = "none";
+	 }
+     }
+ }
+ // navigator.registerContentHandler("application/vnd.mozilla.maybe.feed", "<%= "#{request.protocol}#{request.host_with_port}" %>/feeds/new?feed=%s", "Sourcerer");
 </script>
