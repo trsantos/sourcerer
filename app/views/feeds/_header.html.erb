@@ -32,9 +32,9 @@
     </nav>
 </div>
 <script>
-var favicon = document.getElementById("favicon");
-favicon.onerror = function() {
-	//favicon.setAttribute("src", "<%= asset_path('feed-icon-16x16.png') %>");
-	favicon.setAttribute("src", "<%= google_favicon @feed %>");
-}
+ var favicon = document.getElementById("favicon");
+ favicon.onerror = function() {
+     favicon.setAttribute("src", "<%= google_favicon @feed %>");
+     favicon.onerror = null;
+ }
 </script>
