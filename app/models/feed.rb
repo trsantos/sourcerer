@@ -18,7 +18,7 @@ class Feed < ActiveRecord::Base
 
   def self.update_all_feeds
     require 'thread/pool'
-    pool = Thread.pool(7)
+    pool = Thread.pool(20)
     Feed.find_each do |f|
       pool.process do
         f.update
@@ -37,6 +37,7 @@ class Feed < ActiveRecord::Base
       update_feed_attributes fj_feed
     end
   rescue
+    puts "retry"
     retry
   end
 
@@ -116,8 +117,6 @@ class Feed < ActiveRecord::Base
       .add_common_feed_entry_element('media:thumbnail', value: :url, as: :image)
     Feedjira::Feed
       .add_common_feed_entry_element('media:content', value: :url, as: :image)
-    # Feedjira::Feed
-    #   .add_common_feed_entry_element(:img, value: :scr, as: :image)
 
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
     Feedjira::Feed.add_common_feed_element(:logo, as: :logo)
