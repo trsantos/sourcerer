@@ -16,9 +16,9 @@ class Feed < ActiveRecord::Base
     10
   end
 
-  def self.update_all_feeds
+  def self.update_all_feeds(pool_size = 40)
     require 'thread/pool'
-    pool = Thread.pool(40)
+    pool = Thread.pool(pool_size)
     Feed.find_each do |f|
       pool.process do
         f.update
