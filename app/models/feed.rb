@@ -29,12 +29,15 @@ class Feed < ActiveRecord::Base
   end
 
   def update
+    puts id
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
     transaction do
       update_entries fj_feed
       update_feed_attributes fj_feed
     end
+  rescue
+    retry
   end
 
   def only_images?
@@ -132,7 +135,7 @@ class Feed < ActiveRecord::Base
   end
 
   def process_image(img)
-    hacks discard_non_images parse_image img
+    hacks parse_image img
   end
 
   def parse_image(img)
@@ -175,22 +178,6 @@ class Feed < ActiveRecord::Base
     if (img.include? 'feedburner.com') ||
        (img.include? 'feedsportal.com') ||
        (img.include? '/comments/') # Wordpress
-      return nil
-    end
-    img
-  end
-
-  def discard_non_images(img)
-    if (img.include? '.mp3') ||
-       (img.include? '.tiff') ||
-       (img.include? '.m4a') ||
-       (img.include? '.mp4') ||
-       (img.include? '.psd') ||
-       (img.include? '.pdf') ||
-       (img.include? '.webm') ||
-       (img.include? '.svg') ||
-       (img.include? '.ogv') ||
-       (img.include? '.opus')
       return nil
     end
     img
