@@ -165,7 +165,7 @@ class Feed < ActiveRecord::Base
     # replaces
     if img.include? 'wordpress.com'
       img.sub!(/\?.*/, '')
-      img += '?w=1200'
+      img += '?w=800'
     elsif (img.include? 'img.youtube.com') ||
           (img.include? 'i.ytimg.com')
       img.sub! '/default', '/hqdefault'
