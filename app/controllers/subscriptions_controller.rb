@@ -15,7 +15,6 @@ class SubscriptionsController < ApplicationController
     @subscription = @user.subscriptions.create(feed_id: @feed.id,
                                                visited_at: Time.current,
                                                updated: false)
-    @next_feed = @user.next_feed
     respond_to do |format|
       format.html { redirect_to @feed }
       format.js
@@ -23,12 +22,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def edit
-    @subscription = Subscription.find(params[:id])
   end
 
   def update
     set_update_params
-    @subscription = Subscription.find(params[:id])
     @subscription.update_attributes(sub_params)
     @feed = @subscription.feed
     respond_to do |format|
@@ -38,8 +35,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @feed = Subscription.find(params[:id]).feed
-    current_user.unfollow(@feed)
+    @feed = @subscription.feed
+    @user.unfollow(@feed)
+    @subscription = nil
     respond_to do |format|
       format.html { redirect_to @feed }
       format.js
@@ -73,7 +71,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def correct_user
-    @user = User.find(Subscription.find(params[:id]).user_id)
+    @subscription = Subscription.find(params[:id])
+    @user = User.find(@subscription.user_id)
     redirect_to root_url unless current_user?(@user) || current_user.admin?
   end
 end

@@ -14,7 +14,6 @@ class FeedsController < ApplicationController
   def show
     @feed = Feed.find(params[:id])
     @entries = @feed.entries.order(created_at: :desc) unless @feed.fetching
-    @next_feed = @user.next_feed
   end
 
   def new
