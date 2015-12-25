@@ -12,10 +12,10 @@ class SubscriptionsController < ApplicationController
   def create
     @feed = Feed.find(params[:feed_id])
     @user = current_user
-    @subscription = @user.follow(@feed)
-    if @subscription.updated?
-      @subscription.update_attributes(visited_at: Time.current, updated: false)
-    end
+    @subscription = @user.subscriptions.create(feed_id: @feed.id,
+                                               visited_at: Time.current,
+                                               updated: false)
+    @next_feed = @user.next_feed
     respond_to do |format|
       format.html { redirect_to @feed }
       format.js
