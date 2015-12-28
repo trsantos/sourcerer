@@ -128,12 +128,11 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, desc)
-    img = og_image(entry.url) || entry.image || image_from_description(desc)
-    return if img.nil?
-    process_image img
+    process_image entry.image || image_from_description(desc)
   end
 
   def process_image(img)
+    return if img.nil?
     hacks parse_image img
   end
 
@@ -187,6 +186,10 @@ class Feed < ActiveRecord::Base
   end
 
   def delayed_update
-    delay.update
+    if Rails.env.production?
+      delay.update
+    else
+      update
+    end
   end
 end
