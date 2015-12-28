@@ -16,13 +16,14 @@ gem 'bcrypt'
 
 ### end ###
 
+gem 'browser'
+gem 'delayed_job_active_record'
+gem 'feedjira'
+gem 'font-awesome-sass'
 gem 'foundation-rails'
 gem 'jquery-turbolinks'
-gem 'feedjira'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
-gem 'delayed_job_active_record'
 gem 'paypal-sdk-rest'
-gem 'font-awesome-sass'
 gem 'thread'
 
 group :development, :test do
