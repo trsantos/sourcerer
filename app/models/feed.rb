@@ -128,9 +128,9 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, desc)
-    process_image entry.image || image_from_description(desc)
-  rescue
-    nil
+    img = og_image(entry.url) || entry.image || image_from_description(desc)
+    return if img.nil?
+    process_image img
   end
 
   def process_image(img)
@@ -152,6 +152,8 @@ class Feed < ActiveRecord::Base
   def image_from_description(description)
     doc = Nokogiri::HTML description
     doc.css('img').first.attributes['src'].value
+  rescue
+    nil
   end
 
   def og_image(url)
@@ -159,6 +161,8 @@ class Feed < ActiveRecord::Base
     doc = Nokogiri::HTML(open(URI.escape(url.strip.split(/#/).first)))
     img = doc.css("meta[property='og:image']").first
     img.attributes['content'].value
+  rescue
+    nil
   end
 
   def hacks(img)
