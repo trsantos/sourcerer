@@ -1,7 +1,7 @@
 <% provide(:title, 'Your subscriptions') %>
 
 <div class="row simple-container">
-    <div class="medium-9 medium-centered large-8 columns box">
+    <div class="medium-9 medium-centered columns box">
 
 	<header>
 	    <h3>Your subscriptions [<%= current_user.subscriptions.where(updated: true).count %> updated, <%= current_user.subscriptions.count %> total]</h3>
