@@ -186,7 +186,7 @@ class Feed < ActiveRecord::Base
     elsif img.include? 'i.onionstatic.com' # Avclub
       img.sub!('565.', '1200.')
     elsif img.include? 'imagesmtv-a.akamaihd.net' #  MTV
-      img.sub!('width=150&height=150', 'width=1600&height=1000')
+      img.sub!('width=150&height=150', 'width=800&height=500')
     elsif img.include? 'www.billboard.com'
       img.sub!('promo_225', 'promo_650')
     elsif img.include? 'static.nfl.com'
