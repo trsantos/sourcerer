@@ -28,11 +28,11 @@ group :development, :test do
   gem 'faker'
   # gem 'rack-mini-profiler'
   gem 'rubocop', require: false
-  gem 'spring'
   gem 'sqlite3'
 end
 
 group :development do
+  gem 'spring'
   gem 'web-console'
 end
 
