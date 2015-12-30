@@ -4,8 +4,8 @@ class FeedsController < ApplicationController
   before_action :logged_in_user
   before_action :set_user
   before_action :expiration_date
-  before_action :no_updated_feeds_left, only: [:show]
   before_action :mark_as_read, only: [:show]
+  before_action :no_updated_feeds_left, only: [:show]
 
   def index
     @feeds = Feed.order(title: :asc).all
@@ -41,6 +41,7 @@ class FeedsController < ApplicationController
   end
 
   def no_updated_feeds_left
+    return unless @subscription
     return if @user.subscriptions.exists?(updated: true)
     flash.now[:info] = 'You have no updated feeds right now. Check back later!'
   end
