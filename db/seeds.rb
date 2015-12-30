@@ -31,7 +31,7 @@ seed_topic 'Gaming',
              'http://feeds.gawker.com/kotaku/full',
              'http://www.pcgamer.com/feed/',
              'http://www.polygon.com/rss/index.xml',
-             'http://www.gamesradar.com/all-platforms/news/rss/'
+             'http://www.eurogamer.net/?format=rss'
            ]
 
 seed_topic 'Movies',

@@ -195,6 +195,8 @@ class Feed < ActiveRecord::Base
       img.sub!('thumbnail/300x230/', '')
     elsif img.include? 'livescience.com'
       img.sub!('i00', 'original')
+    elsif img.include? 'eurogamer.net'
+      img.sub!(/.jpg.*/, '.jpg')
     end
 
     img
