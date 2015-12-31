@@ -8,7 +8,7 @@
 	</h5>
     </header>
     <div class="row">
-	<% if @feed.has_only_images %>
+	<% if @feed&.has_only_images %>
 	    <div class="small-12 columns big-thumb-container">
 		<a href="<%= entry.url %>" target="_blank">
 		    <%= image_tag entry.image, id: "img#{id}" %>
@@ -36,6 +36,9 @@
 	<% end %>
     </div>
     <p class="timestamp">
+	<% if @river %>
+	    <%= link_to entry.feed.title, entry.feed %> ::
+	<% end %>
 	<%= time_ago_in_words(entry.pub_date).capitalize %> ago
     </p>
     <script>

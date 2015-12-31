@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def new
     if logged_in?
       flash[:info] = 'Already logged in.'
-      redirect_to edit_user_path current_user
+      redirect_to river_path
     end
     @user = User.new
   end
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   # Confirms the correct user.
   def correct_user
     @user = User.find(params[:id])
-    redirect_to edit_user_path current_user unless current_user?(@user)
+    redirect_to river_path unless current_user?(@user)
   end
 
   # Confirms an admin user.

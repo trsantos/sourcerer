@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def new
     return unless logged_in?
     flash[:info] = 'Already logged in.'
-    redirect_to edit_user_path current_user
+    redirect_to river_path
   end
 
   def create
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:session][:password])
       log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_back_or @user.next_feed
+      redirect_back_or river_path
     else
       flash.now[:alert] = 'Invalid email/password combination' # Not quite right!
       render 'new'
