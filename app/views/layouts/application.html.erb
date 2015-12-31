@@ -14,10 +14,10 @@
 	<% if logged_in? %>
 	    <header id="combined-header" class="contain-to-grid fixed">
 		<%= render 'layouts/nav' %>
-		<%= render 'feeds/header' if @river || in_feeds_show %>
+		<%= render 'feeds/header' if in_feeds_show %>
 	    </header>
 	    <div id="nav-sep"></div>
-	    <% if @river || in_feeds_show %>
+	    <% if in_feeds_show %>
 		<div id="fs-fh-sep"></div>
 	    <% end %>
 	<% end %>
@@ -27,7 +27,7 @@
 		<%= link_to '×', '#', class: 'close' %>
 	    </div>
 	<% end %>
-	<% if logged_in? && !@river && !in_feeds_show %>
+	<% if logged_in? && !in_feeds_show %>
 	    <div id="neg-nav-sep"></div>
 	<% end %>
 	<%= yield %>

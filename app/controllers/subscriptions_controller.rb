@@ -48,12 +48,6 @@ class SubscriptionsController < ApplicationController
     redirect_to current_user.next_feed
   end
 
-  def river
-    @river = true
-    @user = current_user
-    @entries = @user.entries.includes(:feed).order(pub_date: :desc).first(30)
-  end
-
   private
 
   def sub_params

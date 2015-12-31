@@ -3,21 +3,17 @@
 	<ul class="title-area">
 	    <li class="name">
 		<h1>
-		    <% if @river %>
-			<%= link_to 'River of News', river_path, id: 'feed-title' %>
-		    <% else %>
-			<a href="<%= sub_url(@feed) %>" id="feed-title" target="_blank">
-			    <img id="favicon" src="<%= favicon_for(sub_url(@feed)) %>"/>
-			    <%= sub_title(@feed) %>
-			</a>
-		    <% end %>
+		    <a href="<%= sub_url(@feed) %>" id="feed-title" target="_blank">
+			<img id="favicon" src="<%= favicon_for(sub_url(@feed)) %>"/>
+			<%= sub_title(@feed) %>
+		    </a>
 		</h1>
 	    </li>
 	    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 	</ul>
 	<section class="top-bar-section">
 	    <ul class="right">
-		<%= render 'feeds/controls' %>
+		<%= render 'controls' %>
 		<li class="has-dropdown show-for-small-only">
 		    <%= link_to current_user.name.split.first, '#' %>
 		    <ul class="dropdown">
@@ -35,12 +31,10 @@
 	</section>
     </nav>
 </div>
-<% unless @river %>
-    <script>
-     var favicon = document.getElementById("favicon");
-     favicon.onerror = function() {
-	 favicon.setAttribute("src", "<%= google_favicon @feed %>");
-	 favicon.onerror = null;
-     }
-    </script>
-<% end %>
+<script>
+ var favicon = document.getElementById("favicon");
+ favicon.onerror = function() {
+     favicon.setAttribute("src", "<%= google_favicon @feed %>");
+     favicon.onerror = null;
+ }
+</script>

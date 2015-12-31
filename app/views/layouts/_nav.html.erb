@@ -1,9 +1,9 @@
-<div id="app-header" class="<%= in_feeds_show || @river ? "show-for-medium-up" : "" %>">
+<div id="app-header" class="<%= in_feeds_show ? "show-for-medium-up" : "" %>">
     <nav class="top-bar" data-topbar>
 	<ul class="title-area">
 	    <li class="name">
 		<h1>
-		    <%= link_to image_tag('logo_nav.png'), river_path, id: 'logo' %>
+		    <%= link_to image_tag('logo_nav.png'), @feed || next_path, id: 'logo' %>
 		</h1>
 	    </li>
 	    <li class="toggle-topbar menu-icon">

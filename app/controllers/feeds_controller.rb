@@ -13,7 +13,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    @entries = @feed.entries.order(created_at: :desc) unless @feed.fetching
+    @entries = @feed.entries.order(updated_at: :desc) unless @feed.fetching
   end
 
   def new

@@ -21,5 +21,4 @@ Rails.application.routes.draw do
   get 'feedback' => 'static_pages#feedback'
   get 'next' => 'subscriptions#next'
   get 'opml/export' => 'opml#export'
-  get 'river' => 'subscriptions#river'
 end

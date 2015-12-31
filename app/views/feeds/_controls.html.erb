@@ -1,41 +1,39 @@
 <div id="feed_controls">
-    <% unless @river %>
-	<% if @subscription %>
-	    <% if @subscription.starred %>
-		<li>
-		    <%= link_to "Unstar",
-		    subscription_path(@subscription, subscription: { starred: false }),
-		    remote: true,
-		    method: :patch %>
-		</li>
-	    <% else %>
-		<li>
-		    <%= link_to "Star",
-		    subscription_path(@subscription, subscription: { starred: true }),
-		    remote: true,
-		    method: :patch,
-		    title: "Starred feeds will be displayed first when updated. This is for your must-reads." %>
-		</li>
-	    <% end %>
-	    <li class="divider show-for-small-only"></li>
+    <% if @subscription %>
+	<% if @subscription.starred %>
 	    <li>
-		<%= link_to "Edit", edit_subscription_path(@subscription) %>
-	    </li>
-	    <li class="divider show-for-small-only"></li>
-	    <li>
-		<%= link_to "Unsubscribe",
-		subscription_path(@subscription),
+		<%= link_to "Unstar",
+		subscription_path(@subscription, subscription: { starred: false }),
 		remote: true,
-		method: :delete %>
+		method: :patch %>
 	    </li>
 	<% else %>
 	    <li>
-		<%= link_to "Subscribe",
-		subscriptions_path(feed_id: @feed.id),
+		<%= link_to "Star",
+		subscription_path(@subscription, subscription: { starred: true }),
 		remote: true,
-		method: :post %>
+		method: :patch,
+		title: "Starred feeds will be displayed first when updated. This is for your must-reads." %>
 	    </li>
 	<% end %>
+	<li class="divider show-for-small-only"></li>
+	<li>
+	    <%= link_to "Edit", edit_subscription_path(@subscription) %>
+	</li>
+	<li class="divider show-for-small-only"></li>
+	<li>
+	    <%= link_to "Unsubscribe",
+	    subscription_path(@subscription),
+	    remote: true,
+	    method: :delete %>
+	</li>
+    <% else %>
+	<li>
+	    <%= link_to "Subscribe",
+	    subscriptions_path(feed_id: @feed.id),
+	    remote: true,
+	    method: :post %>
+	</li>
     <% end %>
     <li class="divider show-for-small-only"></li>
     <li class="active show-for-medium-up">
