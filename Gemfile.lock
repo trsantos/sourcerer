@@ -49,7 +49,7 @@ GEM
     astrolabe (1.3.1)
       parser (~> 2.2)
     bcrypt (3.1.10)
-    browser (1.0.1)
+    browser (1.1.0)
     builder (3.2.2)
     byebug (8.2.1)
     coffee-rails (4.1.1)
