@@ -8,6 +8,7 @@ gem 'bcrypt'
 gem 'coffee-rails'
 gem 'jbuilder'
 gem 'jquery-rails'
+gem 'pg'
 gem 'sass-rails'
 gem 'sdoc', group: :doc
 gem 'turbolinks'
@@ -28,7 +29,6 @@ group :development, :test do
   gem 'faker'
   # gem 'rack-mini-profiler'
   gem 'rubocop', require: false
-  gem 'sqlite3'
 end
 
 group :development do
@@ -40,7 +40,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'puma'
   gem 'rails_12factor'
 end

@@ -37,7 +37,7 @@ class Feed < ActiveRecord::Base
       update_feed_attributes fj_feed
     end
   rescue => e
-    puts e
+    puts id, e
     retry
   end
 
@@ -177,9 +177,10 @@ class Feed < ActiveRecord::Base
     elsif (img.include? 'googleusercontent.com') ||
           (img.include? 'blogspot.com')
       img.sub! 's72-c', 's640'
+    end
 
     # special cases for included feeds
-    elsif img.include? 'assets.rollingstone.com'
+    if img.include? 'assets.rollingstone.com'
       img.sub!('small_square', 'medium_rect')
       img.sub!('100x100', '720x405')
     elsif img.include? 'images.adsttc.com' # Archdaily
