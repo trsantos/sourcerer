@@ -160,6 +160,7 @@ class Feed < ActiveRecord::Base
     require 'open-uri'
     doc = Nokogiri::HTML(open(URI.escape(url.strip.split(/#/).first)))
     img = doc.css("meta[property='og:image']").first
+    return if img.ends_with? 'i/blank.jpg' # Wordpress
     img.attributes['content'].value
   rescue
     nil
