@@ -221,10 +221,6 @@ class Feed < ActiveRecord::Base
   end
 
   def delayed_update
-    if Rails.env.production?
-      delay.update
-    else
-      update
-    end
+    delay.update
   end
 end
