@@ -222,7 +222,7 @@ $fh-height: 50px;
     }
     article img {
 	border-radius: 2px;
-	border: 1px solid rgba(0, 0, 0, 0.2) !important;
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -318,11 +318,11 @@ $fh-height: 50px;
     article {
 	.small-thumb {
 	    float: left;
-	    max-width: 164px;
-	    max-height: 92px;
+	    max-width: 150px;
+	    max-height: 100px;
 	    margin-right: 15px;
 	    overflow: hidden;
-	    border: 1px solid rgba(0, 0, 0, 0.2);
+	    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
 	}
 	.description {
 	    max-height: 4.8rem;
