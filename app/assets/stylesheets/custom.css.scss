@@ -170,11 +170,11 @@ $fh-height: 50px;
 		color: #666;
 	    }
 	}
-	.small-thumb-container, .big-thumb-container {
+	.thumb {
 	    margin-top: 5px;
 	    margin-bottom: 10px;
 	}
-	.small-thumb-container, .big-thumb-container img {
+	.thumb, .thumb img {
 	    border-radius: 2px;
 	}
 	.description {
@@ -316,10 +316,10 @@ $fh-height: 50px;
 	margin-bottom: 0px;
     }
     article {
-	.small-thumb-container {
+	.small-thumb {
 	    float: left;
-	    max-width: 150px;
-	    max-height: 100px;
+	    max-width: 164px;
+	    max-height: 92px;
 	    margin-right: 15px;
 	    overflow: hidden;
 	    border: 1px solid rgba(0, 0, 0, 0.2);

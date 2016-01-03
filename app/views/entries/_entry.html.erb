@@ -3,37 +3,25 @@
     <header>
 	<h5 class="<%= 'old' if old? entry, @last_visit %>">
 	    <strong>
-		<%= link_to sanitize(entry.title), entry.url, class: "entry-title", target: "_blank" %>
+		<%= link_to sanitize(entry.title), entry.url, class: 'entry-title', target: '_blank' %>
 	    </strong>
 	</h5>
     </header>
     <div class="row">
-	<% if @feed.has_only_images %>
-	    <div class="small-12 columns big-thumb-container">
-		<a href="<%= entry.url %>" target="_blank">
-		    <%= image_tag entry.image, id: "img#{id}" %>
-		</a>
-	    </div>
-	<% else %>
+	<div class="small-12 columns">
 	    <% if entry.image %>
-		<div class="small-12 columns">
-		    <div class="small-thumb-container">
-			<a href="<%= entry.url %>" target="_blank">
-			    <%= image_tag entry.image, id: "img#{id}" %>
-			</a>
+		<a href="<%= entry.url %>" target="_blank">
+		    <div class="thumb <%= 'small-thumb' unless @feed.has_only_images %>">
+			<%= image_tag entry.image, id: "img#{id}" %>
 		    </div>
-		    <p class="description">
-			<%= strip_tags entry.description %>
-		    </p>
-		</div>
-	    <% elsif !entry.description.blank? %>
-		<div class="small-12 columns">
-		    <p class="description">
-			<%= strip_tags entry.description %>
-		    </p>
-		</div>
+		</a>
 	    <% end %>
-	<% end %>
+	    <% if entry.description %>
+		<p class="description">
+		    <%= strip_tags entry.description %>
+		</p>
+	    <% end %>
+	</div>
     </div>
     <p class="timestamp">
 	<%= time_ago_in_words(entry.pub_date).capitalize %> ago
