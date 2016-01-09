@@ -17,7 +17,11 @@ module FeedsHelper
 
   def favicon_for(url)
     uri = URI.parse url
-    return 'dummy' if (uri.host == 'www.pcgamer.com') || (uri.host == 'www.maximumpc.com')
+    if (uri.host == 'www.pcgamer.com') ||
+       (uri.host == 'www.maximumpc.com') ||
+       (uri.host == 'www.engadget.com')
+      return 'dummy'
+    end
     uri.scheme + '://' + uri.host + '/favicon.ico'
   rescue
     ' '
