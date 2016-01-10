@@ -128,12 +128,11 @@ class Feed < ActiveRecord::Base
   end
 
   def find_image(entry, desc)
-    feed_image = entry.image || image_from_description(desc)
-    process_image filter_img(feed_image) || og_image(entry.url)
+    process_image entry.image || image_from_description(desc)
   end
 
   def process_image(img)
-    return if img.nil?
+    return if bad_image?(img)
     hacks parse_image img
   end
 
@@ -156,70 +155,24 @@ class Feed < ActiveRecord::Base
     nil
   end
 
-  def og_image(url)
-    require 'open-uri'
-    doc = Nokogiri::HTML(open(URI.escape(url.strip.split(/#/).first)))
-    img = doc.css("meta[property='og:image']").first
-    img = img.attributes['content'].value
-    return if img.ends_with? 'i/blank.jpg' # Wordpress
-    img
-  rescue
-    nil
-  end
-
   def hacks(img)
-    # general
     if img.include? 'wordpress.com'
       img.sub!(/\?.*/, '')
       img += '?w=800'
-    elsif (img.include? 'img.youtube.com') ||
-          (img.include? 'i.ytimg.com')
+    elsif (img.include? 'img.youtube.com') || (img.include? 'i.ytimg.com')
       img.sub! '/default', '/hqdefault'
     elsif (img.include? 'googleusercontent.com') ||
           (img.include? 'blogspot.com')
       img.sub! 's72-c', 's640'
     end
-
-    # special cases for included feeds
-    if img.include? 'assets.rollingstone.com'
-      img.sub!('small_square', 'medium_rect')
-      img.sub!('100x100', '720x405')
-    elsif img.include? 'images.adsttc.com' # Archdaily
-      img.sub!('medium_', 'large_')
-    elsif img.include? 'i.onionstatic.com' # Avclub
-      img.sub!('565.', '1200.')
-    elsif img.include? 'imagesmtv-a.akamaihd.net' #  MTV
-      img.sub!('width=150&height=150', 'width=800&height=500')
-    elsif img.include? 'www.billboard.com'
-      img.sub!('promo_225', 'promo_650')
-    elsif img.include? 'static.nfl.com'
-      img.sub!('_thumbnail_200_150', '')
-    elsif img.include? 'cbsistatic.com' # CNET
-      img.sub!('thumbnail/300x230/', '')
-    elsif img.include? 'livescience.com'
-      img.sub!('i00', 'original')
-    elsif img.include? 'eurogamer.net'
-      img.sub!(/.jpg.*/, '.jpg')
-    end
-
     img
   end
 
-  def filter_img(img)
-    if (img.nil?) ||
-       (img.include? 'feedburner.com') ||
-       (img.include? 'feedsportal.com') ||
-       (img.include? '/comments/') || # Wordpress
-       (feed_url.include? 'avclub.com') ||
-       (feed_url.include? 'bbci.co.uk') ||
-       (feed_url.include? 'bleacherreport.com') ||
-       (feed_url.include? 'cnn.com') ||
-       (feed_url.include? 'gamespot.com') ||
-       (feed_url.include? 'huffingtonpost.com') ||
-       (feed_url.include? 'nationalgeographic.com')
-      return
-    end
-    img
+  def bad_image?(img)
+    (img.nil?) ||
+      (img.include? 'feedburner.com') ||
+      (img.include? 'feedsportal.com') ||
+      (img.include? '/comments/') # Wordpress
   end
 
   def delayed_update
