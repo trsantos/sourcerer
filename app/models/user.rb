@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :remember_token, :reset_token
   before_save :downcase_email
+  after_create :set_expiration_date
 
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -115,6 +116,10 @@ class User < ActiveRecord::Base
   # Converts email to all lower-case.
   def downcase_email
     self.email = email.downcase
+  end
+
+  def set_expiration_date
+    update_attribute(:expiration_date, 2.weeks.from_now)
   end
 
   def updated_sub
