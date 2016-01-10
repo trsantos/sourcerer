@@ -22,6 +22,7 @@ gem 'foundation-rails'
 gem 'jquery-turbolinks'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
 gem 'paypal-sdk-rest'
+gem 'puma'
 gem 'thread'
 
 group :development, :test do
@@ -40,6 +41,5 @@ group :test do
 end
 
 group :production do
-  gem 'puma'
   gem 'rails_12factor'
 end
