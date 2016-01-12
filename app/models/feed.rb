@@ -29,7 +29,6 @@ class Feed < ActiveRecord::Base
   end
 
   def update
-    puts id
     fj_feed = fetch_and_parse
     return if fj_feed.is_a? Integer
     transaction do
