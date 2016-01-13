@@ -12,9 +12,13 @@
  *
  *= require_tree .
  *= require_self
- *= require foundation_and_overrides
-
  */
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+$topbar-bg-color: #30343F;
+$topbar-dropdown-bg: $topbar-bg-color;
+$topbar-dropdown-link-bg: $topbar-bg-color;
+$topbar-dropdown-link-bg-hover: scale-color($topbar-bg-color, $lightness: -14%);
+$topbar-link-bg-hover: scale-color($topbar-bg-color, $lightness: -14%);
+@import "foundation_and_overrides";
