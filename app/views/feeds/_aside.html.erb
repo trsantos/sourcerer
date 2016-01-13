@@ -9,8 +9,7 @@
 	    <% end %>
 	    <% if @feed.description %>
 		<p id="aside-description"><%= strip_tags @feed.description %></p>
-	    <% end %>
-	    <% unless @feed.logo or @feed.description %>
+	    <% else %>
 		<p id="aside-title"><%= sub_title @feed %></p>
 	    <% end %>
 	    <div id="resources">
