@@ -73,6 +73,6 @@ class SubscriptionsController < ApplicationController
   def correct_user
     @subscription = Subscription.find(params[:id])
     @user = User.find(@subscription.user_id)
-    redirect_to root_url unless current_user?(@user) || current_user.admin?
+    redirect_to root_url unless current_user == @user
   end
 end

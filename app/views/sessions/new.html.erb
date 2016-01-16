@@ -10,7 +10,7 @@
 	    <h3>Welcome back</h3>
 	</header>
 
-	<%= form_for(:session, url: login_path) do |f| %>
+	<%= form_for(:session) do |f| %>
 	    <%= f.label :email %>
 	    <%= f.email_field :email %>
 

@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151220190918) do
+ActiveRecord::Schema.define(version: 20160116155529) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20151220190918) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "entries", force: :cascade do |t|
     t.string   "title"
@@ -40,8 +43,8 @@ ActiveRecord::Schema.define(version: 20151220190918) do
     t.string   "image"
   end
 
-  add_index "entries", ["feed_id"], name: "index_entries_on_feed_id"
-  add_index "entries", ["title"], name: "index_entries_on_title"
+  add_index "entries", ["feed_id"], name: "index_entries_on_feed_id", using: :btree
+  add_index "entries", ["title"], name: "index_entries_on_title", using: :btree
 
   create_table "feeds", force: :cascade do |t|
     t.string   "title"
@@ -56,8 +59,8 @@ ActiveRecord::Schema.define(version: 20151220190918) do
     t.boolean  "fetching",        default: true
   end
 
-  add_index "feeds", ["feed_url"], name: "index_feeds_on_feed_url", unique: true
-  add_index "feeds", ["topic_id"], name: "index_feeds_on_topic_id"
+  add_index "feeds", ["feed_url"], name: "index_feeds_on_feed_url", unique: true, using: :btree
+  add_index "feeds", ["topic_id"], name: "index_feeds_on_topic_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
@@ -72,11 +75,11 @@ ActiveRecord::Schema.define(version: 20151220190918) do
     t.integer  "topic_id"
   end
 
-  add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id"
-  add_index "subscriptions", ["topic_id"], name: "index_subscriptions_on_topic_id"
-  add_index "subscriptions", ["updated"], name: "index_subscriptions_on_updated"
-  add_index "subscriptions", ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
+  add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id", using: :btree
+  add_index "subscriptions", ["topic_id"], name: "index_subscriptions_on_topic_id", using: :btree
+  add_index "subscriptions", ["updated"], name: "index_subscriptions_on_updated", using: :btree
+  add_index "subscriptions", ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true, using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
@@ -89,8 +92,8 @@ ActiveRecord::Schema.define(version: 20151220190918) do
     t.integer "user_id"
   end
 
-  add_index "topics_users", ["topic_id"], name: "index_topics_users_on_topic_id"
-  add_index "topics_users", ["user_id"], name: "index_topics_users_on_user_id"
+  add_index "topics_users", ["topic_id"], name: "index_topics_users_on_topic_id", using: :btree
+  add_index "topics_users", ["user_id"], name: "index_topics_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -98,14 +101,13 @@ ActiveRecord::Schema.define(version: 20151220190918) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
-    t.string   "remember_digest"
-    t.boolean  "admin",             default: false
-    t.string   "reset_digest"
-    t.datetime "reset_sent_at"
     t.string   "paypal_payment_id"
     t.datetime "expiration_date"
+    t.string   "auth_token"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

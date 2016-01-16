@@ -1,11 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_no_authentication, only: [:new, :create]
   before_action :logged_in_user, except: [:new, :create]
   before_action :correct_user,   only: [:show, :edit, :update, :destroy]
-  before_action :admin_user,     only: [:destroy, :index]
-
-  def index
-    @users = User.all
-  end
 
   def show
     @user = User.find(params[:id])
@@ -13,10 +9,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    if logged_in?
-      flash[:info] = 'Already logged in.'
-      redirect_to edit_user_path current_user
-    end
     @user = User.new
   end
 
@@ -67,12 +59,7 @@ class UsersController < ApplicationController
   # Confirms the correct user.
   def correct_user
     @user = User.find(params[:id])
-    redirect_to edit_user_path current_user unless current_user?(@user)
-  end
-
-  # Confirms an admin user.
-  def admin_user
-    redirect_to(root_url) unless current_user.admin?
+    redirect_to root_url unless current_user == @user
   end
 
   # Used when updating topics

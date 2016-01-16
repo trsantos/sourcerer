@@ -12,11 +12,6 @@ module ApplicationHelper
     params[:controller] == 'feeds' && params[:action] == 'show'
   end
 
-  def in_auth?
-    (params[:controller] == 'users' && params[:action] == 'new') ||
-      (params[:controller] == 'sessions' && params[:action] == 'new')
-  end
-
   def process_url(url)
     return nil if url.blank?
     url = url.strip
