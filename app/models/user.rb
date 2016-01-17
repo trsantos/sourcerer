@@ -86,8 +86,8 @@ class User < ActiveRecord::Base
   end
 
   def updated_sub
-    subscriptions.where(updated: true)
-      .order(starred: :desc, visited_at: :asc).first
+    subscriptions
+      .where(updated: true).order(starred: :desc, visited_at: :asc).first
   end
 
   def random_sub
