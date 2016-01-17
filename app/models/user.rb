@@ -68,10 +68,12 @@ class User < ActiveRecord::Base
   end
 
   def next_feed
-    sub = updated_sub || random_sub
-    sub.feed
-  rescue
-    self
+    if subscriptions.any?
+      sub = updated_sub || random_sub
+      sub.feed
+    else
+      self
+    end
   end
 
   private

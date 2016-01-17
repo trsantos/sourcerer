@@ -42,29 +42,17 @@ class FeedsController < ApplicationController
 
   def no_updated_feeds_left
     return unless @subscription
-    if @user.subscriptions.exists?(updated: true)
-      update_feed @user.next_feed
-    else
-      flash.now[:info] =
-        'You have no updated feeds right now. Check back later!'
-    end
+    return if @user.subscriptions.exists?(updated: true)
+    flash.now[:info] = 'You have no updated feeds right now. Check back later!'
   end
 
   def mark_as_read
     @subscription = @user.subscriptions.find_by(feed_id: params[:id])
     @last_visit = @subscription.visited_at
     if @subscription.updated?
-      update_feed @subscription.feed
-      return if @subscription.feed.fetching
       @subscription.update_attributes(visited_at: Time.current, updated: false)
     end
   rescue
     nil
-  end
-
-  def update_feed(feed)
-    return if feed.fetching || (feed.updated_at > 1.hour.ago)
-    feed.update_attribute(:fetching, true)
-    feed.delay.update
   end
 end
