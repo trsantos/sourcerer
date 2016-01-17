@@ -55,6 +55,7 @@ class FeedsController < ApplicationController
     @last_visit = @subscription.visited_at
     if @subscription.updated?
       update_feed @subscription.feed
+      return if @subscription.feed.fetching
       @subscription.update_attributes(visited_at: Time.current, updated: false)
     end
   rescue
