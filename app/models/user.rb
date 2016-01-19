@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :entries, through: :feeds
 
   before_create { generate_token(:auth_token) }
-  before_save :set_expiration_date
+  before_create :set_expiration_date
   before_save :downcase_email
 
   validates :name,  presence: true
