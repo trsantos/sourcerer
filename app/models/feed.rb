@@ -175,6 +175,6 @@ class Feed < ActiveRecord::Base
   end
 
   def delayed_update
-    delay.update
+    FeedUpdateJob.perform_later(id)
   end
 end
