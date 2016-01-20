@@ -5,8 +5,9 @@ class SubscriptionsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @subscriptions = current_user.subscriptions
-                     .includes(:feed).order(updated: :desc, starred: :desc)
+    @subscriptions =
+      current_user
+      .subscriptions.includes(:feed).order(updated: :desc, starred: :desc)
   end
 
   def create
