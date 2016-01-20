@@ -10,11 +10,11 @@
     <div class="row">
 	<div class="small-12 columns">
 	    <% if entry.image %>
-		<a href="<%= entry.url %>" target="_blank">
-		    <div class="thumb <%= 'small-thumb' unless @feed.has_only_images %>">
+		<div class="thumb <%= 'small-thumb' unless @feed.has_only_images %>">
+		    <a href="<%= entry.url %>" target="_blank">
 			<%= image_tag entry.image, id: "img#{id}" %>
-		    </div>
-		</a>
+		    </a>
+		</div>
 	    <% end %>
 	    <% if entry.description %>
 		<p class="description">
