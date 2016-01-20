@@ -168,7 +168,7 @@ class Feed < ActiveRecord::Base
   end
 
   def bad_image?(img)
-    (img.nil?) ||
+    img.nil? ||
       (img.include? 'feedburner.com') ||
       (img.include? 'feedsportal.com') ||
       (img.include? '/comments/') # Wordpress
