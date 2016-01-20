@@ -37,6 +37,6 @@
     <% end %>
     <li class="divider show-for-small-only"></li>
     <li class="active show-for-medium-up">
-	<%= link_to "Next feed", @next_feed %>
+	<%= link_to "Next feed", @next_feed || @user.next_feed %>
     </li>
 </div>
