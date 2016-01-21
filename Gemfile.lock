@@ -110,6 +110,7 @@ GEM
     multi_json (1.11.2)
     multipart-post (2.0.0)
     netrc (0.11.0)
+    newrelic_rpm (3.14.1.311)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
     parser (2.3.0.1)
@@ -220,6 +221,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-turbolinks
+  newrelic_rpm
   opml_saw!
   paypal-sdk-rest
   pg
