@@ -23,7 +23,6 @@ gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
 gem 'paypal-sdk-rest'
 gem 'puma'
 gem 'sidekiq'
-gem 'thread'
 
 group :development, :test do
   gem 'byebug'
