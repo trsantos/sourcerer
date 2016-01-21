@@ -15,7 +15,6 @@ gem 'turbolinks'
 gem 'uglifier'
 
 gem 'browser'
-gem 'delayed_job_active_record'
 gem 'feedjira'
 gem 'font-awesome-sass'
 gem 'foundation-rails', '< 6'
@@ -23,6 +22,7 @@ gem 'jquery-turbolinks'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
 gem 'paypal-sdk-rest'
 gem 'puma'
+gem 'sidekiq'
 gem 'thread'
 
 group :development, :test do

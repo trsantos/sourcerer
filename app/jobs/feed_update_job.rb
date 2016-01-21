@@ -1,5 +1,5 @@
 class FeedUpdateJob < ActiveJob::Base
-  queue_as :default
+  queue_as :low
 
   def perform(feed)
     feed.update

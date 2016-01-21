@@ -16,16 +16,10 @@ class Feed < ActiveRecord::Base
     10
   end
 
-  def self.update_all_feeds(pool_size = 10)
-    require 'thread/pool'
-    pool = Thread.pool(pool_size)
+  def self.update_all_feeds
     Feed.find_each do |f|
-      pool.process do
-        f.update
-        ActiveRecord::Base.connection.close
-      end
+      FeedUpdateJob.perform_later f
     end
-    pool.shutdown
   end
 
   def update
@@ -175,6 +169,6 @@ class Feed < ActiveRecord::Base
   end
 
   def delayed_update
-    FeedUpdateJob.perform_later(self)
+    FeedUpdateJob.set(queue: :critical).perform_later(self)
   end
 end
