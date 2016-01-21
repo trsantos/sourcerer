@@ -29,9 +29,6 @@ class Feed < ActiveRecord::Base
       update_entries fj_feed
       update_feed_attributes fj_feed
     end
-  rescue => e
-    puts id, e
-    retry
   end
 
   def only_images?
