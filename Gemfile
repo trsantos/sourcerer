@@ -21,6 +21,7 @@ gem 'foundation-rails', '< 6'
 gem 'jquery-turbolinks'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
 gem 'paypal-sdk-rest'
+gem 'platform-api'
 gem 'puma'
 gem 'sidekiq'
 
