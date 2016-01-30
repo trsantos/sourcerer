@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
   resources :feeds
-  resources :opml
+  resources :opml, only: [:new, :create]
   resources :password_resets
   resources :sessions
   resources :subscriptions
