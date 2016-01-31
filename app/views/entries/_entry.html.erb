@@ -16,7 +16,7 @@
 		    </a>
 		</div>
 	    <% end %>
-	    <% if entry.description %>
+	    <% unless entry.description.blank? %>
 		<p class="description">
 		    <%= strip_tags entry.description %>
 		</p>
