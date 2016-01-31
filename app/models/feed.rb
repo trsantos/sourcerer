@@ -69,10 +69,11 @@ class Feed < ActiveRecord::Base
   end
 
   def update_entries(fj_feed)
+    old_entries_count = entries.count
     fj_feed.entries.first(Feed.entries_per_feed).reverse_each do |fj_entry|
       insert_or_update_entry fj_entry
     end
-    return unless entries.count > Feed.entries_per_feed
+    return unless entries.count > old_entries_count
     discard_old_entries
     mark_subscriptions_as_updated
   end
