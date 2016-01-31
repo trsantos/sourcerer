@@ -2,6 +2,7 @@ class OpmlController < ApplicationController
   include ApplicationHelper
 
   before_action :logged_in_user
+  before_action :check_for_opml_file, only: [:create]
 
   def new
   end
@@ -17,6 +18,9 @@ class OpmlController < ApplicationController
     end
     flash[:primary] = 'OPML file imported. Happy reading!'
     redirect_to user.next_feed
+  rescue
+    flash[:alert] = 'The was a problem with the OPML file import.'
+    render 'new'
   end
 
   def export
@@ -34,5 +38,13 @@ class OpmlController < ApplicationController
     f += "</opml>\n"
     f.gsub! '&', '&amp;'
     send_data f, filename: 'sourcerer.opml'
+  end
+
+  private
+
+  def check_for_opml_file
+    return if params[:opml].present?
+    flash[:alert] = 'Please, select the OPML file that you want to import.'
+    render 'new'
   end
 end
