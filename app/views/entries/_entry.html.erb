@@ -1,7 +1,7 @@
 <% id = entry.id.to_s %>
 <article>
     <header>
-	<h5 class="<%= 'old' if old? entry, @last_visit %>">
+	<h5 class="<%= 'old' if old? entry %>">
 	    <strong>
 		<%= link_to sanitize(entry.title), entry.url, class: 'entry-title', target: '_blank' %>
 	    </strong>

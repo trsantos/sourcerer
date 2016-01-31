@@ -13,9 +13,7 @@ class SubscriptionsController < ApplicationController
   def create
     @feed = Feed.find(params[:feed_id])
     @user = current_user
-    @subscription = @user.subscriptions.create(feed_id: @feed.id,
-                                               visited_at: Time.current,
-                                               updated: false)
+    @subscription = @user.subscriptions.create(feed_id: @feed.id)
     respond_to do |format|
       format.html { redirect_to @feed }
       format.js
@@ -46,6 +44,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def next
+    mark_last_feed_as_read if params[:last_sub]
     redirect_to current_user.next_feed
   end
 
@@ -75,5 +74,13 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
     @user = User.find(@subscription.user_id)
     redirect_to root_url unless current_user == @user
+  end
+
+  def mark_last_feed_as_read
+    sub = Subscription.find(params[:last_sub])
+    return unless sub.updated?
+    sub.update_attributes(visited_at: Time.current, updated: false)
+  rescue
+    nil
   end
 end

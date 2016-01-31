@@ -4,7 +4,7 @@ class FeedsController < ApplicationController
   before_action :logged_in_user
   before_action :set_user
   before_action :expiration_date
-  before_action :mark_as_read, only: [:show]
+  before_action :set_subscription, only: [:show]
   before_action :no_updated_feeds_left, only: [:show]
 
   def index
@@ -13,7 +13,6 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Feed.find(params[:id])
-    @next_feed = @user.next_feed
     @entries = @feed.entries.order(updated_at: :desc) unless @feed.fetching
   end
 
@@ -41,20 +40,14 @@ class FeedsController < ApplicationController
     redirect_to billing_expired_path
   end
 
+  def set_subscription
+    @subscription = @user.subscriptions.find_by(feed_id: params[:id])
+  end
+
   def no_updated_feeds_left
     return unless @subscription
     return if @user.subscriptions.exists?(updated: true)
     flash.now[:primary] =
       'You have no updated feeds right now. Check back later!'
-  end
-
-  def mark_as_read
-    @subscription = @user.subscriptions.find_by(feed_id: params[:id])
-    @last_visit = @subscription.visited_at
-    if @subscription.updated?
-      @subscription.update_attributes(visited_at: Time.current, updated: false)
-    end
-  rescue
-    nil
   end
 end

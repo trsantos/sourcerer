@@ -1,7 +1,6 @@
 module EntriesHelper
-  def old?(entry, last_visit)
-    return if Rails.env.development?
-    entry.created_at < last_visit
+  def old?(entry)
+    entry.created_at < @subscription.visited_at
   rescue
     false
   end
