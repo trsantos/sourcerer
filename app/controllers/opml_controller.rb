@@ -19,7 +19,7 @@ class OpmlController < ApplicationController
     flash[:primary] = 'OPML file imported. Happy reading!'
     redirect_to user.next_feed
   rescue
-    flash[:alert] = 'The was a problem with the OPML file import.'
+    flash.now[:alert] = 'The was a problem with the OPML file import.'
     render 'new'
   end
 
@@ -44,7 +44,7 @@ class OpmlController < ApplicationController
 
   def check_for_opml_file
     return if params[:opml].present?
-    flash[:alert] = 'Please, select the OPML file that you want to import.'
+    flash.now[:alert] = 'Please, select the OPML file that you want to import.'
     render 'new'
   end
 end
