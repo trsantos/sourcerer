@@ -1,10 +1,11 @@
 <% provide(:title, 'Your subscriptions') %>
 
 <div class="row simple-container">
-    <div class="medium-9 medium-centered columns box">
+    <div class="small-11 medium-9 small-centered columns box">
 
 	<header>
-	    <h3>Your subscriptions [<%= current_user.subscriptions.where(updated: true).count %> updated, <%= current_user.subscriptions.count %> total]</h3>
+	    <h3>Your subscriptions</h3>
+	    <h5>[<%= current_user.subscriptions.where(updated: true).count %> updated, <%= current_user.subscriptions.count %> total]</h5>
 	</header>
 
 	<ul class="feeds no-bullet">

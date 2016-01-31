@@ -1,18 +1,18 @@
 <% provide(:title, 'Sign up') %>
 
 <div class="logo-wrap">
-    <%= link_to image_tag('logo_dark.png'), root_url %>
+    <%= link_to image_tag('logo_white.png'), root_url %>
 </div>
 
 <div class="row simple-container">
-    <div class="medium-5 medium-centered columns box">
+    <div class="small-11 medium-5 columns small-centered box auth-box">
 	<header>
 	    <h3>Create your account</h3>
 	</header>
 
 	<%= form_for(@user) do |f| %>
 	    <%= render 'fields', f: f %>
-	    <%= f.submit "Sign up", class: "button radius expand", data: { disable_with: "Please wait..." } %>
+	    <%= f.submit "Sign up", class: "button radius expanded", data: { disable_with: "Please wait..." } %>
 	<% end %>
 
 	<p class="text-center">Already use Sourcerer? <%= link_to 'Log in', login_path %></p>

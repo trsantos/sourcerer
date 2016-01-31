@@ -1,63 +1,89 @@
 /* Constants */
-$home-bg-color: #10141F;
-$bg-color: #EEE;
+$bg-color: #F0F0F0;
 $box-color: white;
-// $fh-color: #121B22; // old color
 $fh-color: #20242F;
+$fh-height: 55px;
 $fh-hover: #292D36;
-$fh-height: 50px;
+$home-bg-color: #10141F;
+$text-color: #0A0A0A;
 
-// Small screens
-/* Define mobile styles */
+/* Small and up */
 @media only screen {
-    html.turbolinks-progress-bar::before {
-	# background-color: red !important;
+    body {
+	background: white !important;
+    }
+    #main-nav-padding {
+	height: 40px;
+    }
+    .top-bar #logo img {
+	height: 17px;
+	margin-bottom: 2px;
+    }
+    .top-bar .menu li a, .top-bar-title a {
+	color: white !important;
+    }
+    .top-bar li a:not(.button):hover {
+	background-color: $fh-hover;
+    }
+    .dark-page {
+	background-color: $home-bg-color !important;
+	height: 100%;
+    }
+    .top-bar {
+	box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.4);
+	z-index: 1;
+    }
+    .is-drilldown {
+	width: 100%;
+    }
+    .fixed {
+	position: fixed;
+	width: 100%;
+    }
+    .top-bar-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-overflow: '…       ';
+	white-space: nowrap;
+	color: white;
     }
     #homepage {
-	# height: 100%;
-	background-color: $home-bg-color;
 	#top {
 	    color: white;
 	    header {
-		padding-top: 15px;
+		padding-top: 0.625rem;
 		#logo {
-		    height: 45px;
+		    height: 41px;
+		}
+		#login-button {
+		    color: white;
+		    transition: 0.25s ease-out 0s, color 0.25s ease-out 0s;
 		}
 	    }
 	    .tagline {
-		color: white;
+		font-size: 2rem;
 		margin: 30px 0px 50px 0px;
 	    }
 	    #price-info {
-		margin-bottom: 60px;
+		margin-bottom: 50px;
 	    }
 	}
 	#screenshot {
-	    width: 390px;
-	    margin: auto;
-	    max-width: 100%;
-	    padding: 0 0.9375rem;
 	    margin-bottom: 50px;
 	    img {
 		box-shadow: 0px 0px 30px black;
-		border-radius: 3px;
+		border-radius: 2px;
 	    }
 	}
 	.main-features {
 	    text-align: center;
-	    background-color: $home-bg-color;
 	    background-color: white;
-	    .row {
-		background-color: white;
-		color: $fh-color;
-	    }
+	    color: $home-bg-color;
 	    i {
 		padding-top: 20px;
+		padding-bottom: 10px;
 		font-size: 50px;
 	    }
-	}
-	.screenshots {
-	    color: white;
 	}
 	footer {
 	    padding-top: 20px;
@@ -66,29 +92,40 @@ $fh-height: 50px;
 		font-size: small;
 	    }
 	}
-	.home-heading {
-	    text-align: center;
-	    text-transform: uppercase;
-	    padding: 5px 0px;
-	    border-bottom: 1px dotted gray;
-	    margin-bottom: 0px;
-	}
+    }
+    .radius {
+	border-radius: 2px !important;
+    }
+    .callout {
+	margin: 0 !important;
+	font-size: small;
+    }
+    .box .callout {
+	margin-bottom: 0.5rem !important;
     }
     .logo-wrap {
-	padding: 15px;
+	padding-top: 45px;
 	text-align: center;
 	img {
 	    height: 50px;
 	}
     }
     .simple-container {
-	padding-top: 10px;
+	padding: 15px 0px;
 	header {
 	    text-align: center;
 	}
-    }
-    #nav-sep {
-	height: 45px;
+	.box {
+	    ul {
+		margin-bottom: 0px;
+	    }
+	}
+	.auth-box {
+	    background-color: white;
+	    border-radius: 2px;
+	    padding: 15px;
+	    margin: 30px auto;
+	}
     }
     .alert-box {
 	margin-bottom: 0px !important;
@@ -97,7 +134,7 @@ $fh-height: 50px;
     .users li, .feeds li, article {
 	border-bottom: 1px dotted gray;
 	.entry-title, a {
-	    color: #222;
+	    color: $text-color;
 	}
 	&:last-child {
 	    border-width: 0px !important;
@@ -115,41 +152,14 @@ $fh-height: 50px;
     #combined-header {
 	box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.4);
     }
-    .top-bar {
-	h1 a {
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    white-space: nowrap;
-	}
-	#logo {
-	    img {
-		height: 17px;
-	    }
-	}
-	#feed-title {
-	    font-size: large;
-	}
-	.dropdown {
-	    .parent-link {
-		display: none !important;
-	    }
-	    .back h5 a:before {
-		content: "⬅ ";
-	    }
-	}
-	.divider {
-	    border-top: 1px solid #393D46 !important;
-	}
-    }
     #favicon {
 	height: 18px;
 	width: 18px;
 	padding: 1px;
 	background-color: white;
-	margin-bottom: 4px;
-    }
-    #feeds-show-container {
-	margin-bottom: 50px;
+	margin-bottom: 3px;
+	margin-right: 5px;
+	margin-left: 2px;
     }
     article {
 	padding-top: 10px;
@@ -205,114 +215,117 @@ $fh-height: 50px;
 	    margin-bottom: 3px;
 	}
     }
+    .top-bar .menu li a {
+	font-size: small;
+    }
 }
 
-/* max-width 640px, mobile-only styles, use when QAing mobile issues */
-@media only screen and (max-width: 40em) {
-    header {
-	.button {
-	    padding: 14px 16px;
-	}
-    }
+/* Small only */
+@media only screen and (max-width: 39.9375em) {
     article img {
 	border-radius: 2px;
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
     }
+    .top-bar-right {
+	padding-top: 0.5rem;
+    }
+    .top-bar .menu li {
+	border-bottom: 1px solid #393D46;
+	&:last-child {
+	    border-width: 0px !important;
+	}
+    }
+    #feeds-show-container {
+	margin-bottom: 41px;
+    }
 }
 
-
-// Medium screens
-/* min-width 641px, medium screens */
-@media only screen and (min-width: 40.063em) {
+/* Medium and up */
+@media only screen and (min-width: 40em) {
+    .medium-horizontal .is-dropdown-submenu {
+	top: 100%;
+	left: 0 !important;
+    }
+    #user-menu a::after {
+	border-width: 5px;
+	border-style: solid solid inset inset;
+	border-color: #2199e8 transparent transparent;
+	margin-top: 7px;
+	margin-right: -9px;
+    }
+    .top-bar .button {
+	transition: unset;
+    }
+    #feed-nav-padding {
+	height: 55px;
+    }
     #homepage {
 	#top {
 	    header {
 		#logo {
-		    height: 50px;
+		    height: 46px;
+		}
+		#login-button {
+		    padding: 1em 2em;
 		}
 	    }
-	}
-	#screenshot {
-	    width: 830px;
 	}
 	footer {
 	    padding-top: 40px;
 	    padding-bottom: 20px;
 	}
     }
-    .logo-wrap {
-	padding: 30px;
-	margin-bottom: -75px;
-    }
-    #fs-fh-sep {
-	height: 50px;
-    }
-    #neg-nav-sep {
-	/* 75 - 30 = 45px */
-	margin-top: -60px;
-    }
-    .simple-container {
-	padding: 75px 0px !important;
-	align-items: center;
-	.box {
-	    border: 1px solid lightgray;
-	    padding: 15px;
-	    border-radius: 3px;
-	    ul {
-		margin-bottom: 0px;
-	    }
-	}
-    }
-    .main-fs {
-	padding-top: 95px;
-    }
     .top-bar {
-	h1 a {
-	    max-width: 400px;
-	}
-	a:hover {
-	    background-color: $fh-hover;
-	}
-    }
-    #app-header .right {
-	margin-right: -10px;
-    }
-    #feed-header {
-	background-color: $fh-color;
-	.top-bar {
-	    background-color: $fh-color;
-	}
-	section ul {
-	    li:not(.active) a {
-		background-color: $fh-color;
+	padding: 0 !important;
+	height: 40px;
+	.top-bar-title {
+	    max-width: 430px;
+	    line-height: 40px;
+	    a {
+		padding: 12px 16px;
 		&:hover {
-		    background-color: $fh-hover;
+		    background: $fh-hover;
 		}
 	    }
 	}
-    }
-    #feed-header {
-	h1 {
-	    line-height: $fh-height;
-	    #feed-title {
-		font-size: x-large;
+	.top-bar-right {
+	    .menu li a {
+		line-height: 18px;
 	    }
 	}
-	height: $fh-height;
-	.top-bar {
-	    height: inherit;
-	}
-	section ul a {
-	    line-height: $fh-height;
-	}
     }
-    #feeds-show-container {
-	margin-bottom: 0px;
+    #feed-header {
+	box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.4);
+	z-index: 1;
+	background: $fh-color;
+	height: $fh-height;
+	.top-bar-title {
+	    font-size: x-large;
+	    line-height: $fh-height;
+	    a {
+		padding: 14px;
+	    }
+	}
+	.top-bar-right {
+	    padding-top: 10px;
+	    .menu li a {
+		line-height: 1;
+	    }
+	}
+	a:not(.button) {
+	    background: $fh-color;
+	    &:hover {
+		background: $fh-hover;
+	    }
+	}
+	.button {
+	    border: 0;
+	}
     }
     article {
 	.small-thumb {
 	    float: left;
-	    max-width: 150px;
+	    max-width: 140px;
 	    max-height: 90px;
 	    margin-right: 15px;
 	    overflow: hidden;
@@ -320,51 +333,31 @@ $fh-height: 50px;
 	}
 	.description {
 	    max-height: 4.8rem;
-	    #max-height: 100%;
 	}
     }
 }
 
-/* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
-@media only screen and (min-width: 40.063em) and (max-width: 64em) { }
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    #feed-header .top-bar-right {
+	padding-right: 10px;
+    }
+}
 
-
-// Large screens
-/* min-width 1025px, large screens */
-@media only screen and (min-width: 64.063em) {
+/* Large and up */
+@media only screen and (min-width: 64em) {
     #homepage {
 	#top {
 	    header {
 		padding-top: 40px;
 	    }
 	}
-	#screenshot {
-	    width: 1070px;
-	}
-	.main-features {
-	    .row {
-		width: 930px;
-	    }
-	    .first-row {
-		border-radius: 3px 3px 0px 0px;
-	    }
-	    .last-row {
-		border-radius: 0px 0px 3px 3px;
-	    }
-	}
     }
-    #fs-top-sep {
-	height: 15px;
-    }
-    #fs-bottom-sep {
-	height: 15px;
+    .top-bar-title {
+	max-width: 640px !important;
     }
     body {
 	background-color: $bg-color !important;
-    }
-    .box, {
-	background-color: $box-color;
-	border-radius: 2px;
     }
     .section-heading {
 	border-bottom: 1px dotted gray;
@@ -373,16 +366,11 @@ $fh-height: 50px;
 	padding: 10px 0px 5px;
 	margin: 0px;
     }
-    .top-bar {
-	h1 a {
-	    max-width: 600px;
-	}
-    }
     aside {
 	#feed-logo {
 	    img {
 		margin-top: 13px;
-		max-height: 60px;
+		max-height: 55px;
 		padding: 3px;
 		background-color: white;
 		border-radius: 2px;
@@ -397,27 +385,31 @@ $fh-height: 50px;
 	}
 	p, a {
 	    font-size: small;
-	    color: #222;
+	    color: $text-color;
 	    margin-bottom: 0px;
 	}
 	.aside-sep {
 	    height: 20px;
 	}
     }
+    article {
+	.small-thumb {
+	    max-width: 140px;
+	    max-height: 100px;
+	}
+    }
+    #feeds-show-container {
+	padding: 15px 0px;
+    }
+    .box {
+	background-color: white;
+	border-radius: 2px;
+    }
+    .simple-container .box {
+	padding: 15px;
+	border: 1px solid #ddd;
+    }
 }
 
-/* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
-@media only screen and (min-width: 64.063em) and (max-width: 90em) { }
-
-
-// XLarge screens
-/* min-width 1441px, xlarge screens */
-@media only screen and (min-width: 90.063em) { }
-
-/* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
-@media only screen and (min-width: 90.063em) and (max-width: 120em) { }
-
-
-// XXLarge screens
-/* min-width 1921px, xxlarge screens */
-@media only screen and (min-width: 120.063em) { }
+/* Large only */
+@media only screen and (min-width: 64em) and (max-width: 74.9375em) {}

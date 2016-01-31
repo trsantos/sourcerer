@@ -1,11 +1,11 @@
 <% provide(:title, "Log in") %>
 
 <div class="logo-wrap">
-    <%= link_to image_tag('logo_dark.png'), root_url %>
+    <%= link_to image_tag('logo_white.png'), root_url %>
 </div>
 
 <div class="row simple-container">
-    <div class="medium-5 medium-centered columns box">
+    <div class="small-11 medium-5 columns small-centered box auth-box">
 	<header>
 	    <h3>Welcome back</h3>
 	</header>
@@ -17,12 +17,10 @@
 	    <%= f.label :password %>
 	    <%= f.password_field :password %>
 
-	    <%= f.label :remember_me do %>
-		<%= f.check_box :remember_me %>
-		Remember me
-	    <% end %>
+	    <%= f.check_box :remember_me %>
+	    <%= f.label :remember_me %>
 
-	    <%= f.submit "Log in", class: "button radius expand", data: { disable_with: "Please wait..." } %>
+	    <%= f.submit "Log in", class: "button radius expanded", data: { disable_with: "Please wait..." } %>
 	<% end %>
 
 	<div class="text-center">

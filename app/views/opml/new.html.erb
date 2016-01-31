@@ -1,14 +1,14 @@
 <% provide(:title, "Import OPML") %>
 
 <div class="row simple-container">
-    <div class="medium-7 medium-centered columns box">
+    <div class="small-11 medium-7 small-centered columns box">
 	<header>
 	    <h3>Import OPML</h3>
 	</header>
 
 	<%= form_for(:opml , url: opml_index_path) do |f| %>
 	    <%= f.file_field :opml_file %>
-	    <%= f.submit "Submit", class: "button radius expand", data: { disable_with: "Please wait..." } %>
+	    <%= f.submit "Submit", class: "button radius expanded", data: { disable_with: "Please wait..." } %>
 	<% end %>
     </div>
 </div>

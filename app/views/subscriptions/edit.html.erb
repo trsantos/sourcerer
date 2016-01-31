@@ -1,7 +1,7 @@
 <% provide(:title, "Edit subscription") %>
 
 <div class="row simple-container">
-    <div class="medium-7 medium-centered columns box">
+    <div class="small-11 medium-7 small-centered columns box">
 	<header>
 	    <h3>Feed settings</h3>
 	</header>
@@ -13,7 +13,7 @@
 	    <%= f.label :site_url %>
 	    <%= f.text_field :site_url, value: @subscription.site_url || @subscription.feed.site_url, placeholder: @subscription.feed.site_url %>
 
-	    <%= f.submit "Save changes", class: "button radius expand", data: { disable_with: "Please wait..." } %>
+	    <%= f.submit "Save changes", class: "button radius expanded", data: { disable_with: "Please wait..." } %>
 	<% end %>
     </div>
 </div>

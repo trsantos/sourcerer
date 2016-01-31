@@ -1,7 +1,7 @@
 <% provide(:title, @user.name) %>
 
 <div class="row simple-container">
-    <div class="medium-7 medium-centered columns box">
+    <div class="small-11 medium-7 small-centered columns box">
 	<header>
 	    <h3>Topics</h3>
 	</header>
@@ -15,7 +15,7 @@
 		    <%= f.label t.name, t.name %>
 		</div>
 	    <% end %>
-	    <%= f.submit "Save Topics", class: "button radius expand", id: "topics-button", data: { disable_with: "Please wait..." } %>
+	    <%= f.submit "Save Topics", class: "button radius expanded", id: "topics-button", data: { disable_with: "Please wait..." } %>
 	<% end %>
 
 	<p><%= icon 'feed' %><em> You can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>

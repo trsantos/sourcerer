@@ -3,47 +3,49 @@
 	<header>
 	    <div class="row">
 		<div class="columns">
-		    <%= image_tag 'logo_white.png', id: 'logo', class: 'left' %>
-		    <%= link_to "Log in", login_path, class: "button secondary right radius" %>
+		    <%= image_tag 'logo_white.png', id: 'logo', class: 'float-left' %>
+		    <%= link_to "Log in", login_path, id: 'login-button', class: "button hollow float-right radius" %>
 		</div>
 	    </div>
 	</header>
 	<div class="row">
 	    <div class="columns">
-		<h2 class="tagline text-center">Never miss what is important to you.</h2>
+		<h1 class="tagline text-center">Never miss what is important to you.</h1>
 	    </div>
 	</div>
 	<div class="row">
 	    <div class="medium-5 medium-centered large-4 columns">
-		<%= link_to "Sign up", signup_path, class: "button expand radius" %>
+		<%= link_to "Sign up", signup_path, class: "button large expanded radius" %>
 		<p id="price-info" class="text-center">Free for 14 days. $10/year after that.</p>
 	    </div>
 	</div>
     </section>
 
     <section id="screenshot">
-	<%= image_tag 'ss-large.png', class: "show-for-large-up" %>
-	<%= image_tag 'ss-medium.png', class: "show-for-medium-only" %>
-	<%= image_tag 'ss-small.png', class: "show-for-small-only" %>
+	<div class="row">
+	    <div class="columns">
+		<%= image_tag 'ss-large.png', class: "show-for-large float-center" %>
+		<%= image_tag 'ss-medium.png', class: "show-for-medium-only float-center" %>
+		<%= image_tag 'ss-small.png', class: "show-for-small-only float-center" %>
+	    </div>
+	</div>
     </section>
 
     <section class="main-features">
-	<div class="row first-row">
-	    <div class="medium-6 columns">
+	<div class="row small-up-1 medium-up-2">
+	    <div class="column">
 		<%= icon 'newspaper-o' %>
 		<p>Get updated on your favorite websites, blogs, comics and more. Subscribe to anything with an RSS feed.</p>
 	    </div>
-	    <div class="medium-6 columns">
+	    <div class="column">
 		<%= icon 'magic' %>
 		<p>Hear from all your sources, no matter their quantity. You won't see the same high-volume feeds again and again.</p>
 	    </div>
-	</div>
-	<div class="row last-row">
-	    <div class="medium-6 columns">
+	    <div class="column">
 		<%= icon 'star' %>
 		<p>Star any must-read sources you have. When updated, these will be shown before everything else.</p>
 	    </div>
-	    <div class="medium-6 columns">
+	    <div class="column">
 		<%= icon 'desktop' %>
 		<%= icon 'tablet' %>
 		<%= icon 'mobile' %>

@@ -1,4 +1,4 @@
-<div id="feed_controls">
+<ul id="feed-controls" class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
     <% if @subscription %>
 	<% if @subscription.starred %>
 	    <li>
@@ -16,11 +16,9 @@
 		title: "Starred feeds will be displayed first when updated. This is for your must-reads." %>
 	    </li>
 	<% end %>
-	<li class="divider show-for-small-only"></li>
 	<li>
 	    <%= link_to "Edit", edit_subscription_path(@subscription) %>
 	</li>
-	<li class="divider show-for-small-only"></li>
 	<li>
 	    <%= link_to "Unsubscribe",
 	    subscription_path(@subscription),
@@ -35,8 +33,16 @@
 	    method: :post %>
 	</li>
     <% end %>
-    <li class="divider show-for-small-only"></li>
-    <li class="active show-for-medium-up">
-	<%= link_to "Next feed", @next_feed || @user.next_feed %>
+    <li class="show-for-medium">
+	<%= link_to "Next feed", @next_feed || @user.next_feed, class: 'button' %>
     </li>
-</div>
+    <li class="show-for-small-only">
+	<%= link_to current_user.name.split.first, '#' %>
+	<ul class="menu vertical">
+	    <li><%= link_to "Subscriptions", subscriptions_path %></li>
+	    <li><%= link_to "Topics", current_user %></li>
+	    <li><%= link_to "Account", edit_user_path(current_user) %></li>
+	    <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+	</ul>
+    </li>
+</ul>

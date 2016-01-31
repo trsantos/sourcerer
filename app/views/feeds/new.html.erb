@@ -1,7 +1,7 @@
 <% provide(:title, "New feed") %>
 
 <div class="row simple-container">
-    <div class="medium-7 medium-centered columns box">
+    <div class="small-11 medium-7 small-centered columns box">
 	<header>
 	    <h3>New feed</h3>
 	</header>
@@ -9,13 +9,13 @@
 	<%= form_for(:feed, url: feeds_path) do |f| %>
 	    <%= f.label :feed %>
 	    <%= f.text_field :feed_url, placeholder: 'Paste a feed URL here', autofocus: true %>
-	    <%= f.submit "Submit", class: "button radius expand", data: { disable_with: "Please wait..." } %>
+	    <%= f.submit "Submit", class: "button radius expanded", data: { disable_with: "Please wait..." } %>
 	<% end %>
 
 	<section class="tips">
 	    <p><%= icon 'wikipedia-w' %><em> Take a look at Wikipedia's article about <%= link_to 'Web Feeds', 'https://en.wikipedia.org/wiki/Web_feed', target: '_blank' %>.</em></p>
 	    <% if browser.firefox? %>
-		<p><%= icon 'firefox', style: 'margin-right: 6px' %><em> <%= link_to 'Add Sourcerer', '#', id: 'firefox' %> as a Feed Reader for Firefox.</em></p>
+		<p><%= icon 'firefox', style: 'margin: 0px 3px' %><em> <%= link_to 'Add Sourcerer', '#', id: 'firefox' %> as a Feed Reader for Firefox.</em></p>
 		<script>
 		 var ff = document.getElementById("firefox");
 		 ff.onclick = function () {

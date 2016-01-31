@@ -22,8 +22,8 @@ class BillingController < ApplicationController
     @total = amount.total
     @currency = amount.currency
   rescue
-    flash[:info] = 'Could not retrieve payment info from Paypal. Don\'t worry,
- you have not been charged.'
+    flash[:primary] = 'Could not retrieve payment info from Paypal.'\
+                      'Don\'t worry, you have not been charged.'
     redirect_to root_url
   end
 
@@ -92,7 +92,7 @@ class BillingController < ApplicationController
 
   def expiration_date_check
     return if Time.current > current_user.expiration_date - 2.weeks
-    flash[:info] = 'Too early to talk about money :)'
+    flash[:primary] = 'Too early to talk about money :)'
     redirect_to root_url
   end
 end

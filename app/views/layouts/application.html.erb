@@ -1,34 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-	<meta charset="utf-8"/>
+	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><%= full_title(yield(:title)) %></title>
 	<%= stylesheet_link_tag 'application' %>
-	<%= javascript_include_tag 'vendor/modernizr' %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<%= csrf_meta_tags %>
 	<%= favicon_link_tag %>
     </head>
-    <body>
+    <body class="<%= 'dark-page' unless logged_in? %>">
 	<% if logged_in? %>
-	    <header id="combined-header" class="contain-to-grid fixed">
-		<%= render 'layouts/nav' %>
-		<%= render 'feeds/header' if in_feeds_show %>
-	    </header>
-	    <div id="nav-sep"></div>
-	    <% if in_feeds_show %>
-		<div id="fs-fh-sep"></div>
-	    <% end %>
+	    <%= render 'layouts/nav' %>
 	<% end %>
 	<% flash.each do |message_type, message| %>
-	    <div data-alert class="alert-box <%= message_type %>">
+	    <div class="text-center callout <%= message_type %>">
 		<%= message %>
-		<%= link_to '×', '#', class: 'close' %>
 	    </div>
-	<% end %>
-	<% if logged_in? && !in_feeds_show %>
-	    <div id="neg-nav-sep"></div>
 	<% end %>
 	<%= yield %>
     </body>

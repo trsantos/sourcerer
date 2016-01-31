@@ -1,7 +1,7 @@
 <% provide(:title, "Account") %>
 
 <div class="row simple-container">
-    <div class="medium-7 medium-centered columns box">
+    <div class="small-11 medium-7 small-centered columns box">
 	<header>
 	    <h3>Your account</h3>
 	</header>
@@ -15,7 +15,7 @@
 	    <%= f.label :email %>
 	    <%= f.email_field :email %>
 
-	    <%= f.submit "Save changes", class: "button radius expand", data: { disable_with: "Please wait..." } %>
+	    <%= f.submit "Save changes", class: "button radius expanded", data: { disable_with: "Please wait..." } %>
 	<% end %>
 	<p data-no-turbolink>
 	    <strong>Subscription end date:</strong> <%= @user.expiration_date.to_date.to_formatted_s(:long) %><br>

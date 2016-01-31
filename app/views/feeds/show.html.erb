@@ -1,10 +1,8 @@
 <% provide(:title, @feed.title) %>
 
-<div id="fs-top-sep"></div>
-
 <div id="feeds-show-container" class="row">
     <%= render 'aside' %>
-    <div class="box medium-10 medium-centered large-9 large-uncentered columns">
+    <div class="medium-10 medium-offset-1 large-9 large-uncentered columns end box">
 	<% if @feed.fetching %>
 	    <p style="margin-top: 1.25rem"><%= icon 'refresh', class: 'fa-spin', style: 'margin-right: 5px' %> Please wait...</p>
             <script>
@@ -15,7 +13,7 @@
             </script>
 	<% else %>
 	    <% if @feed.entries.any? %>
-		<p id="whats-new" class="show-for-large-up section-heading">What's new</p>
+		<p id="whats-new" class="show-for-large section-heading">What's new</p>
 		<%= render @entries %>
 	    <% else %>
 		<p style="margin-top: 1.25rem">There are no articles for this feed.</p>
@@ -24,9 +22,7 @@
     </div>
 </div>
 
-<div id="fs-bottom-sep"></div>
-
-<%= link_to "Next feed", @next_feed, class: "show-for-small-only button expand", id: "next" %>
+<%= link_to "Next feed", @next_feed, class: "show-for-small-only button expanded", id: "next" %>
 
 <script>
  var logo = document.getElementById("logo-img");
