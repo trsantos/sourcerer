@@ -32,10 +32,12 @@
 		    <span class="float-right" data-responsive-toggle="responsive-menu-2" data-hide-for="medium">
 			<span class="menu-icon" data-toggle></span>
 		    </span>
-		    <a href="<%= sub_url(@feed) %>" id="feed-title" target="_blank">
-			<img id="favicon" src="<%= favicon_for(sub_url(@feed)) %>"/>
-			<%= sub_title(@feed) %>
-		    </a>
+		    <% unless @feed.fetching %>
+			<a href="<%= sub_url(@feed) %>" id="feed-title" target="_blank">
+			    <img id="favicon" src="<%= favicon_for(sub_url(@feed)) %>"/>
+			    <%= sub_title(@feed) %>
+			</a>
+		    <% end %>
 		</div>
 		<div id="responsive-menu-2">
 		    <div class="top-bar-right">
