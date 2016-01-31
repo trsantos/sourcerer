@@ -44,7 +44,8 @@ class FeedsController < ApplicationController
   def no_updated_feeds_left
     return unless @subscription
     return if @user.subscriptions.exists?(updated: true)
-    flash.now[:primary] = 'You have no updated feeds right now. Check back later!'
+    flash.now[:primary] =
+      'You have no updated feeds right now. Check back later!'
   end
 
   def mark_as_read
