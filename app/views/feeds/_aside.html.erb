@@ -31,3 +31,17 @@
 	<% end %>
     </div>
 </aside>
+
+<script>
+ var logo = document.getElementById("logo-img");
+ if (logo) {
+     logo.onerror = function() {
+	 logo.style.display = "none";
+     };
+     logo.onload = function() {
+	 if (logo.width < 20) {
+	     logo.style.display = "none";
+	 }
+     }
+ }
+</script>
