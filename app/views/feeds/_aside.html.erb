@@ -4,7 +4,7 @@
 	    <p class="section-heading">Feed info</p>
 	    <% if @feed.logo %>
 		<div id="feed-logo">
-		    <img id="logo-img" src="<%= @feed.logo %>"/>
+		    <%= image_tag @feed.logo, id: 'logo-img' %>
 		</div>
 	    <% end %>
 	    <% if @feed.description %>
