@@ -8,7 +8,7 @@ class BillingController < ApplicationController
   end
 
   def checkout
-    @payment = PayPal::SDK::REST::Payment.new(payment_details_without_item_list(params[:br]))
+    @payment = PayPal::SDK::REST::Payment.new(payment_details(params[:br]))
     @payment.create
     redirect_to @payment.links.find { |l| l.rel == 'approval_url' }.href
   end
