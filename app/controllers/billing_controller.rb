@@ -8,7 +8,9 @@ class BillingController < ApplicationController
   end
 
   def checkout
-    @payment = PayPal::SDK::REST::Payment.new(payment_details(params[:br]))
+    @payment = PayPal::SDK::REST::Payment
+               .new(payment_details(params[:br])
+                     .merge(experience_profile_id: fetch_experience_profile_id))
     @payment.create
     redirect_to @payment.links.find { |l| l.rel == 'approval_url' }.href
   end
@@ -39,7 +41,7 @@ class BillingController < ApplicationController
   private
 
   def payment_details(br)
-    pc = br ? %w(40 BRL) : %w(10 USD)
+    pc = br ? %w(1 BRL) : %w(1 USD)
     { intent: 'sale',
       payer: { payment_method: 'paypal' },
       redirect_urls: { return_url: billing_confirm_url,
@@ -49,16 +51,6 @@ class BillingController < ApplicationController
                                             name: 'Sourcerer (1 year)',
                                             price: pc[0],
                                             currency: pc[1]] } }] }
-  end
-
-  def payment_details_without_item_list(br)
-    pc = br ? %w(4 BRL) : %w(1 USD)
-    { intent: 'sale',
-      payer: { payment_method: 'paypal' },
-      redirect_urls: { return_url: billing_confirm_url,
-                       cancel_url: billing_expired_url },
-      transactions: [{ amount: { total: pc[0], currency: pc[1] },
-                       description: 'Sourcerer (1 year)' }] }
   end
 
   def web_profile_details
