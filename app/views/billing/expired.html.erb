@@ -18,7 +18,9 @@
 
 	<p>Looks good? Then click the button to begin the check out with Paypal. When you come back, you'll get a chance to review everything before the actual payment.</p>
 
-	<%= link_to image_tag('//www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png'), billing_checkout_path, class: 'paypal-button', 'data-no-turbolink': true %>
+	<%#= link_to image_tag('//www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png'), billing_checkout_path, class: 'paypal-button', 'data-no-turbolink': true %>
+
+	<%= link_to 'Checkout with PayPal', billing_checkout_path, class: 'button float-center', 'data-no-turbolink': true %>
 
 	<p><%= image_tag 'brazil.png', id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', billing_checkout_path(br: true), 'data-no-turbolink': true %> to pay in BRL.</p>
     </div>

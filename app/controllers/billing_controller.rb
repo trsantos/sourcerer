@@ -8,10 +8,7 @@ class BillingController < ApplicationController
   end
 
   def checkout
-    # should this be defined as a constant elsewhere?
-    @payment = PayPal::SDK::REST::Payment
-               .new(payment_details(params[:br])
-                     .merge(experience_profile_id: fetch_experience_profile_id))
+    @payment = PayPal::SDK::REST::Payment.new(payment_details_without_item_list(params[:br]))
     @payment.create
     redirect_to @payment.links.find { |l| l.rel == 'approval_url' }.href
   end
@@ -55,7 +52,7 @@ class BillingController < ApplicationController
   end
 
   def payment_details_without_item_list(br)
-    pc = br ? %w(40 BRL) : %w(10 USD)
+    pc = br ? %w(4 BRL) : %w(1 USD)
     { intent: 'sale',
       payer: { payment_method: 'paypal' },
       redirect_urls: { return_url: billing_confirm_url,
@@ -91,6 +88,7 @@ class BillingController < ApplicationController
   end
 
   def expiration_date_check
+    return
     return if Time.current > current_user.expiration_date - 2.weeks
     flash[:primary] = 'Too early to talk about money :)'
     redirect_to root_url
