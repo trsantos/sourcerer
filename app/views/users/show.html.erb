@@ -9,12 +9,14 @@
 	<p>Tell me what you like:</p>
 
 	<%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
-	    <% Topic.all.order(:name).each do |t| %>
-		<div class="medium-6 columns">
-		    <%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
-		    <%= f.label t.name, t.name %>
-		</div>
-	    <% end %>
+	    <div class="row medium-up-2">
+		<% Topic.all.order(:name).each do |t| %>
+		    <div class="column">
+			<%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
+			<%= f.label t.name, t.name %>
+		    </div>
+		<% end %>
+	    </div>
 	    <%= f.submit "Save Topics", class: "button radius expanded", id: "topics-button", data: { disable_with: "Please wait..." } %>
 	<% end %>
 
