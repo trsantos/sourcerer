@@ -88,7 +88,7 @@ GEM
       multi_json (>= 1.9.2)
       netrc
     i18n (0.7.0)
-    jbuilder (2.4.0)
+    jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.1.0)
@@ -157,7 +157,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (10.5.0)
-    rdoc (4.2.1)
+    rdoc (4.2.2)
+      json (~> 1.4)
     redis (3.2.2)
     rubocop (0.37.0)
       parser (>= 2.3.0.2, < 3.0)
