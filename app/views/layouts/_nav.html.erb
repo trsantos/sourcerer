@@ -57,8 +57,7 @@
     <script>
      var favicon = document.getElementById("favicon");
      favicon.onerror = function() {
-	 favicon.setAttribute("src", "<%= google_favicon @feed %>");
-	 favicon.onerror = null;
+	 favicon.setAttribute("src", "<%= image_path 'feed-icon.png' %>");
      }
     </script>
 <% end %>
