@@ -86,10 +86,13 @@ $text-color: #0A0A0A;
 	    }
 	}
 	footer {
-	    padding-top: 20px;
+	    padding: 20px 0px;
 	    color: white;
 	    p {
 		font-size: small;
+	    }
+	    a {
+		color: inherit;
 	    }
 	}
     }
@@ -271,8 +274,7 @@ $text-color: #0A0A0A;
 	    }
 	}
 	footer {
-	    padding-top: 40px;
-	    padding-bottom: 20px;
+	    padding: 40px 0px;
 	}
     }
     .top-bar {
