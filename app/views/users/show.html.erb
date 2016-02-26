@@ -23,22 +23,3 @@
 	<p><%= icon 'feed' %><em> You can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>
     </div>
 </div>
-
-
-<div class="row simple-container">
-    <div class="small-11 medium-7 small-centered columns box">
-	<header>
-	    <h3>Hello, <%= @user.name.split.first %></h3>
-	</header>
-
-	<p>For starters, you can follow some popular sites by clicking the button below:</p>
-
-	<%= form_for :user, url: %>
-
-	<%= link_to 'Follow popular websites', '#', class: 'button radius expanded' %>
-
-	<p>Alternatively, you can import your own feeds if coming from another reader:</p>
-
-	<%= link_to 'Import OPML file', new_opml_path, class: 'button secondary radius expanded' %>
-    </div>
-</div>
