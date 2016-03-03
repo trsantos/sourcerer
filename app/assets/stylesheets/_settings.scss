@@ -43,6 +43,7 @@
 
 // 1. Global
 // ---------
+
 $global-font-size: 100%;
 $global-width: rem-calc(960);
 $global-lineheight: 1.5;
@@ -84,7 +85,7 @@ $breakpoint-classes: (small medium large);
 
 $grid-row-width: $global-width;
 $grid-column-count: 12;
-$grid-column-responsive-gutter: (
+$grid-column-gutter: (
   small: 20px,
   medium: 30px,
 );
@@ -542,6 +543,6 @@ $tooltip-radius: $global-radius;
 // -----------
 
 $topbar-padding: 0.5rem;
-///$topbar-background: $light-gray;
+//$topbar-background: $light-gray;
 $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;

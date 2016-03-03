@@ -46,6 +46,7 @@ $text-color: #0A0A0A;
 	text-overflow: '…         ';
 	white-space: nowrap;
 	color: white;
+	width: 100%;
     }
     #homepage {
 	#top {
@@ -241,21 +242,15 @@ $text-color: #0A0A0A;
     #feeds-show-container {
 	margin-bottom: 41px;
     }
+    .top-bar .show-for-medium {
+	// Do not display 'next feed' inside the menu
+	// Foundation 6.2 bug?
+	display: none !important;
+    }
 }
 
 /* Medium and up */
 @media only screen and (min-width: 40em) {
-    .medium-horizontal .is-dropdown-submenu {
-	top: 100%;
-	left: 0 !important;
-    }
-    #user-menu a::after {
-	border-width: 5px;
-	border-style: solid solid inset inset;
-	border-color: #2199e8 transparent transparent;
-	margin-top: 7px;
-	margin-right: -9px;
-    }
     .top-bar .button {
 	transition: unset;
     }
