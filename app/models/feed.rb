@@ -4,7 +4,6 @@ class Feed < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include ApplicationHelper
 
-  belongs_to :topic
   has_many :subscriptions, dependent: :delete_all
   has_many :users, through: :subscriptions
   has_many :entries, dependent: :delete_all

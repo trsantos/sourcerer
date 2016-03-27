@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :users do
     member do
-      patch 'update_topics'
+      patch 'follow_top_sites'
     end
   end
   resources :feeds

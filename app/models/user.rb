@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_and_belongs_to_many :topics
   has_many :subscriptions, dependent: :delete_all
   has_many :feeds, through: :subscriptions
   has_many :entries, through: :feeds
@@ -31,10 +30,9 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver_later
   end
 
-  def follow(feed, options = {})
+  def follow(feed)
     return if following? feed
-    subscriptions.create(feed_id: feed.id,
-                         topic: options[:topic])
+    subscriptions.create(feed_id: feed.id)
   end
 
   def unfollow(feed)
@@ -44,25 +42,6 @@ class User < ActiveRecord::Base
 
   def following?(feed)
     feeds.include?(feed)
-  end
-
-  def follow_topic(topic)
-    topics.append topic unless topics.include? topic
-    topic.feeds.each do |f|
-      follow(f, topic: topic)
-    end
-  end
-
-  def unfollow_topic(topic)
-    topics.delete topic
-    topic.feeds.each do |f|
-      s = subscriptions.find_by(feed_id: f.id)
-      s.destroy if s && (s.topic == topic)
-    end
-  end
-
-  def following_topic?(topic)
-    topics.include?(topic)
   end
 
   def next_feed

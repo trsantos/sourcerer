@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @topics = Topic.all
   end
 
   def new
@@ -38,14 +37,12 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
-  def update_topics
+  def follow_top_sites
     user = current_user
-    params[:topic].each do |t, v|
-      t = Topic.find_by(name: t)
-      user.unfollow_topic(t) if v == '0'
-      user.follow_topic(t) if v == '1'
+    top_sites.shuffle.each do |s|
+      user.subscriptions.find_or_create_by(feed: Feed.find_or_create_by(feed_url: s))
     end
-    set_flash_message
+    flash[:primary] = 'Ok, done! Happy reading.'
     redirect_to user.next_feed
   end
 
@@ -62,14 +59,48 @@ class UsersController < ApplicationController
     redirect_to root_url unless current_user == @user
   end
 
-  # Used when updating topics
-  def set_flash_message
-    if current_user.subscriptions.any?
-      flash[:primary] = 'Ok, done! Happy reading.'
-    else
-      flash[:alert] = 'Sourcerer is useful only if you subscribe to some '\
-                      'feeds. Please, choose some topics or import an OPML'\
-                      "file, if you're coming from another reader."
-    end
+  def top_sites
+    [
+      'http://news.yahoo.com/rss/',
+      'https://en.wikipedia.org/w/api.php?action=featuredfeed&feed=featured&feedformat=atom',
+      'https://www.reddit.com/.rss',
+      'http://feeds.feedburner.com/ImgurGallery?format=xml',
+      'http://rss.cnn.com/rss/edition.rss',
+      'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
+      'http://rss.msn.com/en-us/',
+      'http://sports.espn.go.com/espn/rss/news',
+      'http://www.huffingtonpost.com/feeds/news.xml',
+      'https://discover.wordpress.com/feed/',
+      'http://www.buzzfeed.com/index.xml',
+      'http://www.aol.com/amp-proxy/api/v1/rss.xml',
+      'http://feeds.washingtonpost.com/rss/homepage',
+      'http://feeds.feedburner.com/foxnews/latest',
+      'http://fandom.wikia.com/feed',
+      'http://rssfeeds.usatoday.com/usatoday-NewsTopStories',
+      'http://www.forbes.com/real-time/feed2/',
+      'http://www.cnet.com/rss/all/',
+      'http://www.vice.com/rss',
+      'http://www.dailymail.co.uk/home/index.rss',
+      'http://patch.com/feeds',
+      'http://conservativetribune.com/feed/',
+      'http://feeds2.feedburner.com/businessinsider',
+      'http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC',
+      'http://feeds.bbci.co.uk/news/rss.xml',
+      'http://www.worldlifestyle.com/feed',
+      'http://feeds.gawker.com/gizmodo/full',
+      'http://bleacherreport.com/articles/feed',
+      'http://feeds.nbcnews.com/feeds/topstories',
+      'http://www.theguardian.com/international/rss',
+      'https://flickr.tumblr.com/rss',
+      'http://www.wsj.com/xml/rss/3_7014.xml',
+      'http://feeds.abcnews.com/abcnews/topstories',
+      'http://www.npr.org/rss/rss.php?id=1001',
+      'http://feeds.feedburner.com/DrudgeReportFeed',
+      'https://vimeo.com/channels/staffpicks/videos/rss',
+      'http://www.nfl.com/rss/rsslanding?searchString=home',
+      'http://www.cbsnews.com/latest/rss/main',
+      'http://feeds.people.com/people/headlines',
+      'http://feeds.gawker.com/lifehacker/full'
+    ]
   end
 end

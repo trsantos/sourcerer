@@ -3,23 +3,17 @@
 <div class="row simple-container">
     <div class="small-11 medium-7 small-centered columns box">
 	<header>
-	    <h3>Topics</h3>
+	    <h3>Hello, <%= @user.name.split.first %></h3>
 	</header>
 
-	<p>Tell me what you like:</p>
+	<p>For starters, you can follow some popular sites by clicking the button below:</p>
 
-	<%= form_for :topic, url: update_topics_user_path, method: "patch" do |f| %>
-	    <div class="row medium-up-2">
-		<% Topic.all.order(:name).each do |t| %>
-		    <div class="column">
-			<%= f.check_box t.name, { checked: @user.following_topic?(t) } %>
-			<%= f.label t.name, t.name %>
-		    </div>
-		<% end %>
-	    </div>
-	    <%= f.submit "Save Topics", class: "button radius expanded", id: "topics-button", data: { disable_with: "Please wait..." } %>
+	<%= form_for :user, url: follow_top_sites_user_path, method: 'patch' do |f| %>
+	    <%= f.submit 'Follow popular websites', class: 'button radius expanded', data: { disable_with: 'Please wait...' } %>
 	<% end %>
 
-	<p><%= icon 'feed' %><em> You can also <%= link_to "import an OPML file", new_opml_path %>.</em></p>
+	<p>Alternatively, you can import your own feeds if coming from another reader:</p>
+
+	<%= link_to 'Import OPML file', new_opml_path, class: 'button secondary radius expanded' %>
     </div>
 </div>
