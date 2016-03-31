@@ -121,7 +121,7 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     parser (2.3.0.7)
       ast (~> 2.2)
-    paypal-sdk-rest (1.4.3)
+    paypal-sdk-rest (1.4.4)
       multi_json (~> 1.0)
       uuidtools (~> 2.1)
       xml-simple
