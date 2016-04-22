@@ -289,6 +289,13 @@ $text-color: #0A0A0A;
 	    .menu li a {
 		line-height: 18px;
 	    }
+	    .submenu {
+		border: 1px solid #50545F;
+		box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.6);
+	    }
+	    .is-active > a {
+		background-color: $fh-hover;
+	    }
 	}
     }
     #feed-header {
