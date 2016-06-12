@@ -7,10 +7,6 @@ class FeedsController < ApplicationController
   before_action :set_subscription, only: [:show]
   before_action :no_updated_feeds_left, only: [:show]
 
-  def index
-    @feeds = Feed.order(title: :asc).all
-  end
-
   def show
     @feed = Feed.find(params[:id])
     @entries = @feed.entries.order(pub_date: :desc) unless @feed.fetching
