@@ -6,13 +6,13 @@
 	    <h3>Hello, <%= @user.name.split.first %></h3>
 	</header>
 
-	<p>For starters, you can follow some popular sites by clicking the button below:</p>
+	<p>If this is your first time with a feed reader, you can begin by following a list of popular sites:</p>
 
 	<%= form_for :user, url: follow_top_sites_user_path, method: 'patch' do |f| %>
 	    <%= f.submit 'Follow popular websites', class: 'button radius expanded', data: { disable_with: 'Please wait...' } %>
 	<% end %>
 
-	<p>Alternatively, you can import your own feeds if coming from another reader:</p>
+	<p>Otherwise, you can import your own feed list:</p>
 
 	<%= link_to 'Import OPML file', new_opml_path, class: 'button secondary radius expanded' %>
     </div>
