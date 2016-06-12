@@ -41,7 +41,7 @@ class BillingController < ApplicationController
   private
 
   def payment_details(br)
-    pc = br ? %w(60 BRL) : %w(15 USD)
+    pc = br ? %w(60 BRL) : %w(20 USD)
     { intent: 'sale',
       payer: { payment_method: 'paypal' },
       redirect_urls: { return_url: billing_confirm_url,
@@ -80,7 +80,6 @@ class BillingController < ApplicationController
   end
 
   def expiration_date_check
-    return
     return if Time.current > current_user.expiration_date - 2.weeks
     flash[:primary] = 'Too early to talk about money :)'
     redirect_to root_url
