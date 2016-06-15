@@ -122,7 +122,7 @@ GEM
       pkg-config (~> 1.1.7)
     parser (2.3.1.2)
       ast (~> 2.2)
-    paypal-sdk-rest (1.4.5)
+    paypal-sdk-rest (1.4.6)
       multi_json (~> 1.0)
       uuidtools (~> 2.1)
       xml-simple
@@ -214,7 +214,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.0.5)
     uuidtools (2.1.5)
-    web-console (3.2.0)
+    web-console (3.2.1)
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
