@@ -15,9 +15,7 @@ module ApplicationHelper
   def process_url(url)
     return nil if url.blank?
     url = url.strip
-    unless url.start_with?('http:') || url.start_with?('https:')
-      url = 'http://' + url
-    end
+    url = 'http://' + url unless url.start_with?('http:', 'https:')
     url
   end
 end
