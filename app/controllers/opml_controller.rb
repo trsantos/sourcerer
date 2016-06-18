@@ -29,7 +29,7 @@ class OpmlController < ApplicationController
         "  <body>\n"
     current_user.subscriptions.each do |s|
       f += '    <outline type="rss" text="' + s.feed.title.to_s +
-           '" xmlUrl="' + s.feed.feed_url + '"/>\n'
+           '" xmlUrl="' + s.feed.feed_url + "\"/>\n"
     end
     f += "  </body>\n" \
          "</opml>\n"
