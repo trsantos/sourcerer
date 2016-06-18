@@ -3,9 +3,9 @@ class FeedsController < ApplicationController
 
   before_action :logged_in_user
   before_action :set_user
-  before_action :expiration_date
+  before_action :check_expiration_date
   before_action :set_subscription, only: [:show]
-  before_action :no_updated_feeds_left, only: [:show]
+  before_action :unread_feeds, only: [:show]
 
   def show
     @feed = Feed.find(params[:id])
@@ -31,7 +31,7 @@ class FeedsController < ApplicationController
     @user.touch
   end
 
-  def expiration_date
+  def check_expiration_date
     return unless Time.current > @user.expiration_date
     redirect_to billing_expired_path
   end
@@ -40,7 +40,7 @@ class FeedsController < ApplicationController
     @subscription = @user.subscriptions.find_by(feed_id: params[:id])
   end
 
-  def no_updated_feeds_left
+  def unread_feeds
     return unless @subscription
     return if @user.subscriptions.exists?(updated: true)
     flash.now[:primary] =

@@ -40,7 +40,9 @@ class UsersController < ApplicationController
   def follow_top_sites
     user = current_user
     top_sites.shuffle.each do |s|
-      user.subscriptions.find_or_create_by(feed: Feed.find_or_create_by(feed_url: s))
+      user
+        .subscriptions
+        .find_or_create_by(feed: Feed.find_or_create_by(feed_url: s))
     end
     flash[:primary] = 'Ok, done! Happy reading.'
     redirect_to user.next_feed
