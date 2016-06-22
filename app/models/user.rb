@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   end
 
   def updated_sub
-    old_updated_sub || new_updated_sub
+    old_updated_sub || any_updated_sub
   end
 
   def old_updated_sub
@@ -75,10 +75,9 @@ class User < ActiveRecord::Base
       .order(starred: :desc, visited_at: :asc).first
   end
 
-  def new_updated_sub
+  def any_updated_sub
     subscriptions
       .where(updated: true)
-      .where('visited_at >= ?', 1.day.ago)
       .order(starred: :desc, visited_at: :asc).first
   end
 
