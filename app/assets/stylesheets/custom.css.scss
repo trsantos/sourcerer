@@ -1,5 +1,5 @@
 /* Constants */
-$bg-color: #EEE;
+$bg-color: #FBFBFB;
 $box-color: white;
 $fh-color: #20242F;
 $fh-height: 55px;
@@ -136,7 +136,7 @@ $text-color: #0A0A0A;
 	text-align: center;
     }
     .users li, .feeds li, article {
-	border-bottom: 1px dotted gray;
+	border-bottom: 1px dotted lightgray;
 	.entry-title, a {
 	    color: $text-color;
 	}
@@ -364,7 +364,7 @@ $text-color: #0A0A0A;
 	background-color: $bg-color !important;
     }
     .section-heading {
-	border-bottom: 1px dotted gray;
+	border-bottom: 1px dotted lightgray;
 	font-size: small;
 	text-transform: uppercase;
 	padding: 10px 0px 5px;
@@ -378,6 +378,7 @@ $text-color: #0A0A0A;
 		padding: 3px;
 		background-color: white;
 		border-radius: 2px;
+		box-shadow: 0px 0px 2px lightgray;
 	    }
 	}
 	#aside-description, #aside-title, #aside-sub {
@@ -402,6 +403,7 @@ $text-color: #0A0A0A;
     .box {
 	background-color: white;
 	border-radius: 2px;
+	box-shadow: 0px 0px 2px lightgray;
     }
     .simple-container .box {
 	padding: 15px;
