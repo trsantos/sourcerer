@@ -378,7 +378,6 @@ $text-color: #0A0A0A;
 		padding: 3px;
 		background-color: white;
 		border-radius: 2px;
-		box-shadow: 0px 0px 2px lightgray;
 	    }
 	}
 	#aside-description, #aside-title, #aside-sub {
@@ -403,10 +402,12 @@ $text-color: #0A0A0A;
     .box {
 	background-color: white;
 	border-radius: 2px;
-	box-shadow: 0px 0px 2px lightgray;
     }
     .simple-container .box {
 	padding: 15px;
+    }
+    .box, #feed-logo {
+	box-shadow: 0px 0px 2px #ddd;
     }
 }
 
