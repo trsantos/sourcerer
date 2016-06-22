@@ -15,7 +15,7 @@
 		    <li>
 			<%= link_to current_user.name.split.first, '#' %>
 			<ul class="vertical menu">
-			    <li><%= link_to "Start", current_user %></li>
+			    <li><%= link_to "Setup", current_user %></li>
 			    <li><%= link_to "Feedback", feedback_path %></li>
 			    <li><%= link_to "Account", edit_user_path(current_user) %></li>
 			    <li><%= link_to "Log out", logout_path, method: "delete" %></li>

@@ -40,7 +40,7 @@
 	<%= link_to current_user.name.split.first, '#' %>
 	<ul class="menu vertical">
 	    <li><%= link_to "Subscriptions", subscriptions_path %></li>
-	    <li><%= link_to "Start", current_user %></li>
+	    <li><%= link_to "Setup", current_user %></li>
 	    <li><%= link_to "Account", edit_user_path(current_user) %></li>
 	    <li><%= link_to "Log out", logout_path, method: "delete" %></li>
 	</ul>
