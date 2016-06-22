@@ -5,9 +5,13 @@ class SubscriptionsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
+    user = current_user
+    if user.subscriptions.empty?
+      flash[:primary] = 'You are not subscribed to any feeds yet.'
+      redirect_to user
+    end
     @subscriptions =
-      current_user
-      .subscriptions.includes(:feed).order(starred: :desc, updated: :desc)
+      user.subscriptions.includes(:feed).order(starred: :desc, updated: :desc)
   end
 
   def create

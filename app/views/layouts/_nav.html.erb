@@ -11,7 +11,9 @@
 		<ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
 		    <li class="show-for-small-only"><%= link_to "Back to reading", next_path %></li>
 		    <li><%= link_to "New feed", new_feed_path %></li>
-		    <li><%= link_to "Subscriptions", subscriptions_path %></li>
+		    <% if current_user.subscriptions.any? %>
+			<li><%= link_to "Subscriptions", subscriptions_path %></li>
+		    <% end %>
 		    <li>
 			<%= link_to current_user.name.split.first, '#' %>
 			<ul class="vertical menu">
