@@ -212,7 +212,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.0.5)
+    unicode-display_width (1.1.0)
     uuidtools (2.1.5)
     web-console (3.3.0)
       activemodel (>= 4.2)
