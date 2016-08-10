@@ -1,4 +1,4 @@
-class FeedUpdateJob < ActiveJob::Base
+class FeedUpdateJob < ApplicationJob
   queue_as :low
 
   def perform(feed)

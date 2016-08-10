@@ -6,10 +6,7 @@
 	<% if @feed.fetching %>
 	    <p style="margin-top: 1.25rem"><%= icon 'refresh', class: 'fa-spin', style: 'margin-right: 5px' %> Please wait...</p>
             <script>
-             window.setTimeout(function () {
-                 Turbolinks.enableProgressBar(false);
-                 Turbolinks.visit();
-             }, 2000 );
+             window.setTimeout(() => { Turbolinks.visit(); }, 2000 );
             </script>
 	<% else %>
 	    <% if @feed.entries.any? %>

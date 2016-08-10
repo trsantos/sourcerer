@@ -11,14 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
 //= require_tree .
 
-$(function(){
-    Turbolinks.enableProgressBar();
-    Turbolinks.pagesCached(0);
+document.addEventListener("turbolinks:load", function() {
     $(document).foundation();
-});
+})

@@ -12,6 +12,10 @@ $text-color: #0A0A0A;
     body {
 	background: white !important;
     }
+    .turbolinks-progress-bar {
+	height: 5px;
+	background-color: yellow;
+    }
     #main-nav-padding {
 	height: 40px;
     }

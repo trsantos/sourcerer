@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-class Feed < ActiveRecord::Base
+class Feed < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
   include ApplicationHelper
 

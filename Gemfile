@@ -18,7 +18,6 @@ gem 'browser'
 gem 'feedjira'
 gem 'font-awesome-sass'
 gem 'foundation-rails'
-gem 'jquery-turbolinks'
 gem 'opml_saw', git: 'git://github.com/feedbin/opml_saw.git', branch: 'master'
 gem 'paypal-sdk-rest'
 gem 'platform-api'
@@ -29,7 +28,6 @@ group :development, :test do
   gem 'byebug'
   gem 'faker'
   # gem 'rack-mini-profiler'
-  gem 'rubocop', require: false
 end
 
 group :development do
