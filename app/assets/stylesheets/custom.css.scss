@@ -300,6 +300,9 @@ $text-color: #0A0A0A;
 	    .is-active > a {
 		background-color: $fh-hover;
 	    }
+	    .is-dropdown-submenu {
+		min-width: 120px;
+	    }
 	}
     }
     #feed-header {
