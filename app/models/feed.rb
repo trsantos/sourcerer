@@ -10,7 +10,7 @@ class Feed < ApplicationRecord
   after_create :delayed_update
 
   def self.entries_per_feed
-    10
+    15
   end
 
   def self.update_all_feeds
