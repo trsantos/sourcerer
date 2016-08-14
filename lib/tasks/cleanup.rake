@@ -4,6 +4,8 @@ task cleanup_feeds: :environment do
     f.destroy if f.users.empty? && f.created_at < 1.week.ago
   end
   User.find_each do |u|
-    u.destroy if u.updated_at < 1.month.ago
+    if u.updated_at < 1.month.ago && user.expiration_date < Time.current
+      u.destroy
+    end
   end
 end
