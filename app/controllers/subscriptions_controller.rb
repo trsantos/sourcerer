@@ -48,11 +48,6 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def next
-    mark_last_feed_as_read if params[:last_sub]
-    redirect_to current_user.next_feed
-  end
-
   private
 
   def sub_params
@@ -79,13 +74,5 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
     @user = User.find(@subscription.user_id)
     redirect_to root_url unless current_user == @user
-  end
-
-  def mark_last_feed_as_read
-    sub = Subscription.find(params[:last_sub])
-    return unless sub.updated?
-    sub.update_attributes(visited_at: Time.current, updated: false)
-  rescue
-    nil
   end
 end

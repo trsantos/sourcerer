@@ -1,3 +1,6 @@
 $("#feed-controls").html("<%= escape_javascript(render('feeds/controls')) %>");
-$("#next").attr('href', '<%= next_path(last_sub: @subscription) %>');
+if (<%= @user.subscriptions.any? %>)
+    $("#next").attr('href', '<%= feed_path(@user.next_feed(@feed), last_sub: @subscription) %>');
+else
+    $("#next").attr('href', '<%= @user %>');
 $(document).foundation();

@@ -20,6 +20,5 @@ Rails.application.routes.draw do
   get 'billing/checkout' => 'billing#checkout'
   get 'billing/confirm' => 'billing#confirm'
   get 'billing/finalize' => 'billing#finalize'
-  get 'next' => 'subscriptions#next'
   get 'opml/export' => 'opml#export'
 end
