@@ -18,7 +18,8 @@ class SubscriptionsController < ApplicationController
     @feed = Feed.find(params[:feed_id])
     @user = current_user
     @subscription = @user.subscriptions.create(feed_id: @feed.id,
-                                               visited_at: Time.current)
+                                               visited_at: Time.current,
+                                               updated: false)
     respond_to do |format|
       format.html { redirect_to @feed }
       format.js
