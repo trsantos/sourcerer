@@ -24,7 +24,3 @@
 <% else %>
     <%= link_to "Setup", @user, class: "show-for-small-only button expanded", id: "next" %>
 <% end %>
-
-<script>
- history.replaceState({ turbolinks: true }, null, '<%= url_for @feed %>');
-</script>
