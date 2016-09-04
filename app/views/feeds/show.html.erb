@@ -19,8 +19,4 @@
     </div>
 </div>
 
-<% if @user.subscriptions.any? %>
-    <%= link_to "Next feed", feed_path(@user.next_feed(@feed), last_sub: @subscription), class: "show-for-small-only button expanded", id: "next" %>
-<% else %>
-    <%= link_to "Setup", @user, class: "show-for-small-only button expanded", id: "next" %>
-<% end %>
+<%= link_to "Next feed", next_path(last_sub: @subscription), class: "show-for-small-only button expanded", id: "next" %>

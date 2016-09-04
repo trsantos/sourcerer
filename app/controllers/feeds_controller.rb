@@ -8,7 +8,6 @@ class FeedsController < ApplicationController
   before_action :unread_feeds, only: [:show]
 
   def show
-    mark_last_feed_as_read if params[:last_sub]
     @feed = Feed.find(params[:id])
     @entries = @feed.entries.order(pub_date: :desc) unless @feed.fetching
   end
@@ -46,13 +45,5 @@ class FeedsController < ApplicationController
     return if @user.subscriptions.exists?(updated: true)
     flash.now[:primary] =
       'You have no updated feeds right now. Check back later!'
-  end
-
-  def mark_last_feed_as_read
-    sub = Subscription.find(params[:last_sub])
-    return unless sub.updated?
-    sub.update_attributes(visited_at: Time.current, updated: false)
-  rescue
-    nil
   end
 end

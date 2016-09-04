@@ -34,11 +34,7 @@
 	</li>
     <% end %>
     <li class="show-for-medium">
-	<% if @user.subscriptions.any? %>
-	    <%= link_to "Next feed", feed_path(@user.next_feed(@feed), last_sub: @subscription), class: 'button' %>
-	<% else %>
-	    <%= link_to "Setup", @user, class: 'button' %>
-	<% end %>
+	<%= link_to "Next feed", next_path(last_sub: @subscription), class: 'button' %>
     </li>
     <li class="show-for-small-only">
 	<%= link_to current_user.name.split.first, '#' %>

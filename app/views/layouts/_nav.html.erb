@@ -4,12 +4,12 @@
 	    <span class="float-right" data-responsive-toggle="responsive-menu-1" data-hide-for="medium">
 		<span class="menu-icon" data-toggle></span>
 	    </span>
-	    <%= link_to image_tag('logo_nav.png'), @feed || current_user.next_feed, id: 'logo' %>
+	    <%= link_to image_tag('logo_nav.png'), next_path, id: 'logo' %>
 	</div>
 	<div id="responsive-menu-1">
 	    <div class="top-bar-right">
 		<ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
-		    <li class="show-for-small-only"><%= link_to "Back to reading", current_user.next_feed %></li>
+		    <li class="show-for-small-only"><%= link_to "Back to reading", next_path %></li>
 		    <li><%= link_to "New feed", new_feed_path %></li>
 		    <% if current_user.subscriptions.any? %>
 			<li><%= link_to "Subscriptions", subscriptions_path %></li>
