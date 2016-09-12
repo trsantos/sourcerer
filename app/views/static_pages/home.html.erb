@@ -24,9 +24,12 @@
     <section id="screenshot">
 	<div class="row">
 	    <div class="columns">
-		<%= image_tag 'ss-large.png', class: "show-for-large float-center" %>
-		<%= image_tag 'ss-medium.png', class: "show-for-medium-only float-center" %>
-		<%= image_tag 'ss-small.png', class: "show-for-small-only float-center" %>
+		<picture class="float-center">
+		    <source srcset="<%= image_path 'ss-large.png' %>" media="(min-width: 64em)">
+		    <source srcset="<%= image_path 'ss-medium.png' %>" media="(min-width: 40em)">
+		    <source srcset="<%= image_path 'ss-small.png' %>">
+		    <img src="<%= image_path 'ss-large.png' %>">
+		</picture>
 	    </div>
 	</div>
     </section>
