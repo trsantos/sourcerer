@@ -63,48 +63,49 @@ class UsersController < ApplicationController
     redirect_to root_url unless current_user == @user
   end
 
+  # TODO: Move this into the DB. Should not be part of the controller
   def top_sites
     [
       'http://news.yahoo.com/rss/',
       'https://en.wikipedia.org/w/api.php?action=featuredfeed&feed=featured&feedformat=atom',
       'https://www.reddit.com/.rss',
+      'http://blog.instagram.com/rss',
       'http://feeds.feedburner.com/ImgurGallery?format=xml',
+      'http://www.espn.com/espn/rss/news',
+      'http://rss.msn.com/en-us/',
       'http://rss.cnn.com/rss/edition.rss',
       'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
-      'http://rss.msn.com/en-us/',
-      'http://sports.espn.go.com/espn/rss/news',
-      'http://www.huffingtonpost.com/feeds/news.xml',
+      'http://www.huffingtonpost.com/feeds/index.xml', # 10
       'https://discover.wordpress.com/feed/',
-      'http://www.buzzfeed.com/index.xml',
-      'http://www.aol.com/amp-proxy/api/v1/rss.xml',
       'http://feeds.washingtonpost.com/rss/homepage',
+      'http://www.aol.com/amp-proxy/api/v1/rss.xml',
       'http://feeds.feedburner.com/foxnews/latest',
+      'http://www.buzzfeed.com/index.xml',
       'http://fandom.wikia.com/feed',
-      'http://rssfeeds.usatoday.com/usatoday-NewsTopStories',
-      'http://www.forbes.com/real-time/feed2/',
-      'http://www.cnet.com/rss/all/',
-      'http://www.vice.com/rss',
-      'http://www.dailymail.co.uk/home/index.rss',
-      'http://patch.com/feeds',
       'http://conservativetribune.com/feed/',
-      'http://feeds2.feedburner.com/businessinsider',
-      'http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC',
-      'http://feeds.bbci.co.uk/news/rss.xml',
-      'http://www.worldlifestyle.com/feed',
-      'http://feeds.gawker.com/gizmodo/full',
-      'http://bleacherreport.com/articles/feed',
-      'http://feeds.nbcnews.com/feeds/topstories',
-      'http://www.theguardian.com/international/rss',
-      'https://flickr.tumblr.com/rss',
-      'http://www.wsj.com/xml/rss/3_7014.xml',
-      'http://feeds.abcnews.com/abcnews/topstories',
-      'http://www.npr.org/rss/rss.php?id=1001',
-      'http://feeds.feedburner.com/DrudgeReportFeed',
-      'https://vimeo.com/channels/staffpicks/videos/rss',
+      'http://rssfeeds.usatoday.com/usatoday-newstopstories&x=1',
+      'http://www.cnet.com/rss/all/',
+      'http://www.forbes.com/real-time/feed2/', # 20
       'http://www.nfl.com/rss/rsslanding?searchString=home',
-      'http://www.cbsnews.com/latest/rss/main',
-      'http://feeds.people.com/people/headlines',
-      'http://feeds.gawker.com/lifehacker/full'
+      'http://www.dailymail.co.uk/home/index.rss',
+      'http://feeds.bbci.co.uk/news/rss.xml',
+      'https://vimeo.com/channels/staffpicks/videos/rss',
+      'http://www.vice.com/rss',
+      'http://scribol.com/feed/',
+      'http://detonate.com/feed/',
+      'http://www.worldlifestyle.com/feed',
+      'http://www.cbssports.com/partners/feeds/rss/home_news',
+      'http://feeds.feedburner.com/DrudgeReportFeed', # 30
+      'http://patch.com/feeds',
+      'http://bleacherreport.com/articles/feed',
+      'http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC',
+      'http://www.wsj.com/xml/rss/3_7014.xml',
+      'http://backend.deviantart.com/rss.xml',
+      'http://feeds.gawker.com/gizmodo/full',
+      'http://feeds.nbcnews.com/feeds/topstories',
+      'http://www.westernjournalism.com/feed/',
+      'http://www.theguardian.com/international/rss',
+      'http://www.npr.org/rss/rss.php?id=1001' # 40
     ]
   end
 end
