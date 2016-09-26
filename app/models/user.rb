@@ -65,17 +65,6 @@ class User < ApplicationRecord
   end
 
   def updated_sub
-    old_updated_sub || any_updated_sub
-  end
-
-  def old_updated_sub
-    subscriptions
-      .where(updated: true)
-      .where('visited_at < ?', 1.day.ago)
-      .order(starred: :desc, visited_at: :asc).first
-  end
-
-  def any_updated_sub
     subscriptions
       .where(updated: true)
       .order(starred: :desc, visited_at: :asc).first
