@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326233322) do
+ActiveRecord::Schema.define(version: 20161002124647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +24,9 @@ ActiveRecord::Schema.define(version: 20160326233322) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "image"
+    t.index ["feed_id"], name: "index_entries_on_feed_id", using: :btree
+    t.index ["title"], name: "index_entries_on_title", using: :btree
   end
-
-  add_index "entries", ["feed_id"], name: "index_entries_on_feed_id", using: :btree
-  add_index "entries", ["title"], name: "index_entries_on_title", using: :btree
 
   create_table "feeds", force: :cascade do |t|
     t.string   "title"
@@ -40,9 +38,9 @@ ActiveRecord::Schema.define(version: 20160326233322) do
     t.text     "description"
     t.boolean  "has_only_images"
     t.boolean  "fetching",        default: true
+    t.boolean  "top_site"
+    t.index ["feed_url"], name: "index_feeds_on_feed_url", unique: true, using: :btree
   end
-
-  add_index "feeds", ["feed_url"], name: "index_feeds_on_feed_url", unique: true, using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
@@ -54,12 +52,11 @@ ActiveRecord::Schema.define(version: 20160326233322) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "updated",    default: true
+    t.index ["feed_id"], name: "index_subscriptions_on_feed_id", using: :btree
+    t.index ["updated"], name: "index_subscriptions_on_updated", using: :btree
+    t.index ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
-
-  add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id", using: :btree
-  add_index "subscriptions", ["updated"], name: "index_subscriptions_on_updated", using: :btree
-  add_index "subscriptions", ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true, using: :btree
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -72,9 +69,8 @@ ActiveRecord::Schema.define(version: 20160326233322) do
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
-
-  add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
