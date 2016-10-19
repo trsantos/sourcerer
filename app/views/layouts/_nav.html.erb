@@ -8,7 +8,7 @@
 	</div>
 	<div id="responsive-menu-1">
 	    <div class="top-bar-right">
-		<ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
+		<ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown" data-disable-hover="true" data-click-open="true">
 		    <li class="show-for-small-only"><%= link_to "Back to reading", root_url %></li>
 		    <li><%= link_to "New feed", new_feed_path %></li>
 		    <% if current_user.subscriptions.any? %>
