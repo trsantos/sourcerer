@@ -11,7 +11,7 @@ class SubscriptionsController < ApplicationController
       redirect_to user
     end
     @subscriptions =
-      user.subscriptions.includes(:feed).order(starred: :desc, updated: :desc)
+      user.subscriptions.includes(:feed).order(updated: :desc, starred: :desc)
   end
 
   def create
