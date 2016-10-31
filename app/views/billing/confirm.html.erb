@@ -10,6 +10,6 @@
 	<strong>New subscription end date: </strong><%= new_expiration_date %><br/>
 	<br/>
 
-	<%= link_to 'Confirm payment', billing_finalize_path(params), class: 'button radius expanded', 'data-no-turbolink': true %>
+	<%= link_to 'Confirm payment', billing_finalize_path(params.permit(:paymentId, :token, :PayerId)), class: 'button radius expanded', 'data-no-turbolink': true %>
     </div>
 </div>

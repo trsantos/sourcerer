@@ -21,7 +21,7 @@ class BillingController < ApplicationController
     @total = amount.total
     @currency = amount.currency
   rescue
-    flash[:primary] = 'Could not retrieve payment info from Paypal.'\
+    flash[:primary] = 'Could not retrieve payment info from Paypal. '\
                       'Don\'t worry, you have not been charged.'
     redirect_to root_url
   end
