@@ -6,7 +6,7 @@
 	    <h3>New feed</h3>
 	</header>
 
-	<%= form_for(:feed, url: feeds_path) do |f| %>
+	<%= form_for(Feed.new) do |f| %>
 	    <%= f.label :feed %>
 	    <%= f.text_field :feed_url, placeholder: 'Paste a feed URL here', autofocus: true %>
 	    <%= f.submit "Submit", class: "button radius expanded", data: { disable_with: "Please wait..." } %>
