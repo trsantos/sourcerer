@@ -1,4 +1,4 @@
-module BillingHelper
+module PaymentsHelper
   def new_expiration_time
     [Time.current, current_user.expiration_date].max + 1.year
   end

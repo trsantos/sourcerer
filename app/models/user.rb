@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :subscriptions, dependent: :delete_all
   has_many :feeds, through: :subscriptions
   has_many :entries, through: :feeds
+  has_many :payments
 
   before_create { generate_token(:auth_token) }
   before_create :set_expiration_date

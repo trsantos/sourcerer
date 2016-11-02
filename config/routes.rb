@@ -16,10 +16,7 @@ Rails.application.routes.draw do
   resources :password_resets
   resources :sessions
   resources :subscriptions
-  get 'billing/expired' => 'billing#expired'
-  get 'billing/checkout' => 'billing#checkout'
-  get 'billing/confirm' => 'billing#confirm'
-  get 'billing/finalize' => 'billing#finalize'
+  resources :payments
   get 'opml/export' => 'opml#export'
   post 'next' => 'subscriptions#next'
 end

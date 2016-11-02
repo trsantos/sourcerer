@@ -1,13 +1,13 @@
-class BillingController < ApplicationController
-  include BillingHelper
+class PaymentsController < ApplicationController
+  include PaymentsHelper
 
   before_action :logged_in_user
-  before_action :expiration_date_check
 
-  def expired
+  def new
   end
 
-  def checkout
+  def create
+    @user = current_user
     @payment = PayPal::SDK::REST::Payment
                .new(payment_details(params[:br])
                      .merge(experience_profile_id: fetch_experience_profile_id))
@@ -15,37 +15,34 @@ class BillingController < ApplicationController
     redirect_to @payment.links.find { |l| l.rel == 'approval_url' }.href
   end
 
-  def confirm
-    payment = PayPal::SDK::REST::Payment.find(params['paymentId'])
-    amount = payment.transactions.first.amount
-    @total = amount.total
-    @currency = amount.currency
+  def show
+    @payment = Payment.find(params[:id])
+    @total, @currency = payment_values
   rescue
     flash[:primary] = 'Could not retrieve payment info from Paypal. '\
                       'Don\'t worry, you have not been charged.'
     redirect_to root_url
   end
 
-  def finalize
+  def update
     if execute_payment
       extend_expiration_date
       flash[:success] =
-        'Your\'re now subscribed to 1 year of Sourcerer. Thank you!'
-      redirect_to current_user.next_feed
+        'Your\'ve just subscribed to 1 more year of Sourcerer. Thank you!'
     else
       flash[:alert] = 'An error ocurred while executing payment.'
-      redirect_to root_url
     end
+    redirect_to root_url
   end
 
   private
 
   def payment_details(br)
-    pc = br ? %w(30 BRL) : %w(10 USD)
+    pc = br ? %w(60 BRL) : %w(20 USD)
     { intent: 'sale',
       payer: { payment_method: 'paypal' },
-      redirect_urls: { return_url: billing_confirm_url,
-                       cancel_url: billing_expired_url },
+      redirect_urls: { return_url: payment_url(@user.payments.create),
+                       cancel_url: new_payment_url },
       transactions: [{ amount: { total: pc[0], currency: pc[1] },
                        item_list: { items: [quantity: '1',
                                             name: 'Sourcerer (1 year)',
@@ -68,20 +65,25 @@ class BillingController < ApplicationController
   end
 
   def execute_payment
-    @payment = PayPal::SDK::REST::Payment.find(params['paymentId'])
-    return @payment.execute(payer_id: params['PayerID'])
+    payment = PayPal::SDK::REST::Payment.find(params['paymentId'])
+    return payment.execute(payer_id: params['PayerID'])
   rescue
     false
   end
 
   def extend_expiration_date
-    current_user.update_attributes(paypal_payment_id: params['paymentId'],
-                                   expiration_date: new_expiration_time)
+    params[:executed] = true
+    current_user.update_attribute(:expiration_date, new_expiration_time)
+    Payment.find(params[:id]).update_attributes(payment_params)
   end
 
-  def expiration_date_check
-    return if Time.current > current_user.expiration_date - 2.weeks
-    flash[:primary] = 'Too early to talk about money :)'
-    redirect_to root_url
+  def payment_values
+    amount = PayPal::SDK::REST::Payment
+             .find(params['paymentId']).transactions.first.amount
+    [amount.total, amount.currency]
+  end
+
+  def payment_params
+    params.permit(:paymentId, :token, :PayerID, :executed)
   end
 end

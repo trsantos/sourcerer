@@ -20,12 +20,12 @@
 	    </div>
 	</section>
 	<% if Time.current > current_user.expiration_date - 2.weeks %>
-	    <section id="billing">
+	    <section id="payment">
 		<div class="aside-sep"></div>
 		<p class="section-heading">Important</p>
 		<div id="aside-sub">
 		    <p>Your subscription is about to end.</p>
-		    <strong><%= link_to 'Renew it now', billing_expired_path %></strong>
+		    <strong><%= link_to 'Renew it now', new_payment_path %></strong>
 		</div>
 	    </section>
 	<% end %>

@@ -33,7 +33,7 @@ class FeedsController < ApplicationController
 
   def check_expiration_date
     return unless Time.current > @user.expiration_date
-    redirect_to billing_expired_path
+    redirect_to new_payment_path
   end
 
   def set_subscription

@@ -1,4 +1,4 @@
-<div class="row billing-container simple-container">
+<div class="row payment-container simple-container">
     <div class="small-11 medium-7 small-centered columns box">
 	<header>
 	    <h3>We're almost done!</h3>
@@ -10,6 +10,8 @@
 	<strong>New subscription end date: </strong><%= new_expiration_date %><br/>
 	<br/>
 
-	<%= link_to 'Confirm payment', billing_finalize_path(params.permit(:paymentId, :token, :PayerId)), class: 'button radius expanded', 'data-no-turbolink': true %>
+	<%= form_for @payment, url: payment_path(params.permit(:paymentId, :token, :PayerID)) do |f| %>
+	    <%= f.submit 'Confirm payment', class: "button radius expanded", data: { disable_with: "Please wait..." } %>
+	<% end %>
     </div>
 </div>

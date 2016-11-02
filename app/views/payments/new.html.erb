@@ -1,6 +1,6 @@
 <% expiration_date = current_user.expiration_date %>
 
-<div class="row billing-container simple-container">
+<div class="row payment-container simple-container">
     <div class="small-11 medium-7 small-centered columns box">
 	<header>
 	    <h3>Subscription renewal</h3>
@@ -12,16 +12,16 @@
 	    <p>Oops. Your subscription to Sourcerer expired <%= time_ago_in_words expiration_date %> ago.</p>
 	<% end %>
 
-	<p>But for <strong>$10</strong> you'll be able to continue using the app for <strong>one more year</strong>, until <%= new_expiration_date %>.</p>
+	<p>But for <strong>$20</strong> you'll be able to continue using the app for <strong>one more year</strong>, until <%= new_expiration_date %>.</p>
 
 	<p>There will be no auto renewal and thus no surprises in the future.</p>
 
 	<p>Looks good? Then click the button to begin the check out with Paypal. When you come back, you'll get a chance to review everything before the actual payment.</p>
 
-	<%#= link_to image_tag('//www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png'), billing_checkout_path, class: 'paypal-button', 'data-no-turbolink': true %>
+	<%= form_for(Payment.new) do |f| %>
+	    <%= f.submit 'Checkout with PayPal', class: 'button radius expanded', data: { disable_with: 'Please wait...' } %>
+	<% end %>
 
-	<%= link_to 'Checkout with PayPal', billing_checkout_path, class: 'button float-center', 'data-no-turbolink': true %>
-
-	<p><%= image_tag 'brazil.png', id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', billing_checkout_path(br: true), 'data-no-turbolink': true %> to pay in BRL.</p>
+	<p><%= image_tag 'brazil.png', id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', payments_path(br: true), method: 'post' %> to pay in BRL.</p>
     </div>
 </div>
