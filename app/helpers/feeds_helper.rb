@@ -21,4 +21,9 @@ module FeedsHelper
   rescue
     image_path 'feed-icon.png'
   end
+
+  def show_payment_aside?
+    @user.feeds.count > Payment.feed_limit &&
+      Time.current > @user.expiration_date - Payment.trial_duration
+  end
 end

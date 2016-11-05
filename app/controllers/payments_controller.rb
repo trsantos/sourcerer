@@ -38,16 +38,24 @@ class PaymentsController < ApplicationController
   private
 
   def payment_details(br)
-    pc = br ? %w(60 BRL) : %w(20 USD)
+    currency, price = currency_price(br)
     { intent: 'sale',
       payer: { payment_method: 'paypal' },
       redirect_urls: { return_url: payment_url(@user.payments.create),
                        cancel_url: new_payment_url },
-      transactions: [{ amount: { total: pc[0], currency: pc[1] },
+      transactions: [{ amount: { total: price, currency: currency },
                        item_list: { items: [quantity: '1',
                                             name: 'Sourcerer (1 year)',
-                                            price: pc[0],
-                                            currency: pc[1]] } }] }
+                                            price: price,
+                                            currency: currency] } }] }
+  end
+
+  def currency_price(br)
+    if br
+      ['BRL', Payment.price * 3.23]
+    else
+      ['USD', Payment.price]
+    end
   end
 
   def web_profile_details

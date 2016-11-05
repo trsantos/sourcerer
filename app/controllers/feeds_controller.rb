@@ -32,7 +32,8 @@ class FeedsController < ApplicationController
   end
 
   def check_expiration_date
-    return unless Time.current > @user.expiration_date
+    return unless @user.feeds.count > Payment.feed_limit &&
+                  Time.current > @user.expiration_date
     redirect_to new_payment_path
   end
 

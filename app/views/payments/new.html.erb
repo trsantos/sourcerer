@@ -1,4 +1,5 @@
 <% expiration_date = current_user.expiration_date %>
+<% expired = Time.current > expiration_date %>
 
 <div class="row payment-container simple-container">
     <div class="small-11 medium-7 small-centered columns box">
@@ -6,22 +7,22 @@
 	    <h3>Subscription renewal</h3>
 	</header>
 
-	<% if Time.current < expiration_date %>
-	    <p>Your subscription to Sourcerer will expire in <%= distance_of_time_in_words_to_now expiration_date %>.</p>
+	<% if expired %>
+	    <p>Your subscription to Sourcerer expired <%= time_ago_in_words expiration_date %> ago.</p>
 	<% else %>
-	    <p>Oops. Your subscription to Sourcerer expired <%= time_ago_in_words expiration_date %> ago.</p>
+	    <p>Your subscription to Sourcerer will expire in <%= distance_of_time_in_words_to_now expiration_date %>.</p>
 	<% end %>
 
-	<p>But for <strong>$20</strong> you'll be able to continue using the app for <strong>one more year</strong>, until <%= new_expiration_date %>.</p>
+	<p>If you want to keep using the app for one more year, please consider the pricing information below and proceed to the checkout.</p>
 
-	<p>There will be no auto renewal and thus no surprises in the future.</p>
-
-	<p>Looks good? Then click the button to begin the check out with Paypal. When you come back, you'll get a chance to review everything before the actual payment.</p>
+	<strong>Price: </strong>$<%= Payment.price %><br/>
+	<strong>New end date: </strong><%= new_expiration_date %><br/>
+	<br/>
 
 	<%= form_for(Payment.new) do |f| %>
 	    <%= f.submit 'Checkout with PayPal', class: 'button radius expanded', data: { disable_with: 'Please wait...' } %>
 	<% end %>
 
-	<p><%= image_tag 'brazil.png', id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', payments_path(br: true), method: 'post' %> to pay in BRL.</p>
+	<p><%= image_tag 'brazil.png', id: 'br-flag' %> Brazilian users, please use <%= link_to 'this link', payments_path(br: true), method: 'post' %> to pay in Reais.</p>
     </div>
 </div>

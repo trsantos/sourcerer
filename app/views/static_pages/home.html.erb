@@ -15,8 +15,7 @@
 	</div>
 	<div class="row">
 	    <div class="medium-5 medium-centered large-4 columns">
-		<%= link_to "Sign up", signup_path, class: "button large expanded radius" %>
-		<p id="price-info" class="text-center">Free for 14 days. $20/year after that.</p>
+		<%= link_to "Get started for free", signup_path, class: "button large expanded radius" %>
 	    </div>
 	</div>
     </section>
@@ -53,6 +52,20 @@
 		<%= icon 'tablet' %>
 		<%= icon 'mobile' %>
 		<p>Read on the go. Sourcerer works on all your devices. No app to install, just visit the website.</p>
+	    </div>
+	</div>
+    </section>
+
+    <section id="pricing">
+	<div class="row text-center">
+	    <div class="column">
+		<header>
+		    <h4>Pricing</h2>
+		</header>
+		<ul class="no-bullet">
+		    <li><strong>Free:</strong> follow up to <%= Payment.feed_limit %> feeds.</li>
+		    <li><strong>$<%= Payment.price %> / year:</strong> unlimited feeds, pay after <%= Payment.trial_duration.to_i/60/60/24 %>-day trial.</li>
+		</ul>
 	    </div>
 	</div>
     </section>

@@ -62,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def set_expiration_date
-    self.expiration_date = 2.weeks.from_now
+    self.expiration_date = Payment.trial_duration.from_now
   end
 
   def updated_sub

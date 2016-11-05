@@ -19,7 +19,7 @@
 		</strong>
 	    </div>
 	</section>
-	<% if Time.current > current_user.expiration_date - 2.weeks %>
+	<% if show_payment_aside? %>
 	    <section id="payment">
 		<div class="aside-sep"></div>
 		<p class="section-heading">Important</p>

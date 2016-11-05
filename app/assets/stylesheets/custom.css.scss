@@ -55,6 +55,7 @@ $text-color: #0A0A0A;
     #homepage {
 	#top {
 	    color: white;
+	    padding-bottom: 40px;
 	    header {
 		padding-top: 0.625rem;
 		#logo {
@@ -68,9 +69,6 @@ $text-color: #0A0A0A;
 	    .tagline {
 		font-size: 2rem;
 		margin: 30px 0px 50px 0px;
-	    }
-	    #price-info {
-		margin-bottom: 50px;
 	    }
 	}
 	#screenshot {
@@ -89,6 +87,11 @@ $text-color: #0A0A0A;
 		padding-bottom: 10px;
 		font-size: 50px;
 	    }
+	}
+	#pricing {
+	    background-color: $fh-color;
+	    color: white;
+	    padding-top: 20px;
 	}
 	footer {
 	    padding: 20px 0px;
@@ -272,6 +275,9 @@ $text-color: #0A0A0A;
 		}
 	    }
 	}
+	#pricing {
+	    padding-bottom: 10px;
+	}
 	footer {
 	    padding: 40px 0px;
 	}
@@ -362,6 +368,9 @@ $text-color: #0A0A0A;
 	    header {
 		padding-top: 40px;
 	    }
+	}
+	#screenshot {
+	    margin-bottom: 60px;
 	}
     }
     .top-bar-title {
