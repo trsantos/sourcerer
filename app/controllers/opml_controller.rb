@@ -3,36 +3,30 @@ class OpmlController < ApplicationController
 
   before_action :logged_in_user
   before_action :check_for_opml_file, only: [:create]
+  before_action :set_user, only: [:create]
   before_action :set_opml, only: [:create]
 
   def new
   end
 
   def create
-    user = current_user
-    @opml.feeds.each do |f|
-      new_feed = Feed.find_or_create_by(feed_url: process_url(f[:xml_url]))
-      user.follow(new_feed)
+    @opml.body.outlines.each do |f|
+      new_feed = Feed.find_or_create_by(feed_url: process_url(f.xml_url.to_s))
+      @user.follow new_feed
     end
     flash[:primary] = 'OPML file imported. Happy reading!'
-    redirect_to user.next_feed
+    redirect_to @user.next_feed
   rescue
     flash.now[:alert] = 'The was a problem with the OPML file import.'
     render 'new'
   end
 
   def export
-    f = "<opml version=\"2.0\">\n" \
-        "  <head>\n" \
-        "    <title>OPML from Sourcerer</title>\n" \
-        "  </head>\n" \
-        "  <body>\n"
+    f = export_opml_head
     current_user.subscriptions.each do |s|
-      f += '    <outline type="rss" text="' + s.feed.title.to_s +
-           '" xmlUrl="' + s.feed.feed_url + "\"/>\n"
+      f += export_sub_entry(s)
     end
-    f += "  </body>\n" \
-         "</opml>\n"
+    f += export_tail
     f.gsub! '&', '&amp;'
     send_data f, filename: 'sourcerer.opml'
   end
@@ -45,8 +39,30 @@ class OpmlController < ApplicationController
     render 'new'
   end
 
+  def set_user
+    @user = current_user
+  end
+
   def set_opml
     contents = params[:opml][:opml_file].read
-    @opml = OpmlSaw::Parser.new(contents).parse
+    @opml = Feedjira::Feed.parse contents
+  end
+
+  def export_head
+    "<opml version=\"2.0\">\n" \
+    "  <head>\n" \
+    "    <title>OPML from Sourcerer</title>\n" \
+    "  </head>\n" \
+    "  <body>\n"
+  end
+
+  def export_sub_entry(s)
+    '    <outline type="rss" text="' + s.feed.title.to_s +
+      '" xmlUrl="' + s.feed.feed_url + "\"/>\n"
+  end
+
+  def export_tail
+    "  </body>\n" \
+    "</opml>\n"
   end
 end
