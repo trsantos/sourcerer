@@ -1,5 +1,5 @@
 desc 'Delete unused feeds and inactive users'
-task cleanup_feeds: :environment do
+task cleanup: :environment do
   Feed.find_each do |f|
     f.destroy if f.users.empty? && f.created_at < 1.week.ago && !f.top_site?
   end
