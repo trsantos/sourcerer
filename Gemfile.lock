@@ -47,6 +47,7 @@ GEM
     browser (2.3.0)
     builder (3.2.2)
     byebug (9.0.6)
+    chronic (0.10.2)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -203,6 +204,8 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    whenever (0.9.7)
+      chronic (>= 0.6.3)
     xml-simple (1.1.5)
 
 PLATFORMS
@@ -233,6 +236,7 @@ DEPENDENCIES
   turbolinks
   uglifier
   web-console
+  whenever
 
 RUBY VERSION
    ruby 2.3.1p112

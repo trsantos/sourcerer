@@ -23,6 +23,7 @@ gem 'paypal-sdk-rest'
 gem 'platform-api'
 gem 'puma'
 gem 'sidekiq'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug'
