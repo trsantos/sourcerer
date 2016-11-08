@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
   def follow(feed)
     return if following? feed
-    subscriptions.create(feed_id: feed.id)
+    subscriptions.create(feed: feed, visited_at: 100.years.ago)
   end
 
   def unfollow(feed)
