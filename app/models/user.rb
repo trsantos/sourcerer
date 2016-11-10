@@ -28,7 +28,7 @@ class User < ApplicationRecord
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.current
     save!
-    UserMailer.password_reset(self).deliver_later
+    UserMailer.password_reset(self).deliver_later(queue: :default)
   end
 
   def follow(feed)
