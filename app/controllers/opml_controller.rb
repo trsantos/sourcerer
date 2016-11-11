@@ -12,7 +12,7 @@ class OpmlController < ApplicationController
   def create
     @opml.body.outlines.each do |f|
       feed = Feed.find_or_create_by(feed_url: f.xml_url.to_s)
-      @user.subscriptions.create(feed: feed)
+      @user.subscriptions.find_or_create_by(feed: feed)
     end
     flash[:primary] = 'OPML file imported. Happy reading!'
     redirect_to @user.next_feed
