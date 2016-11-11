@@ -17,8 +17,7 @@ class SubscriptionsController < ApplicationController
   def create
     @feed = Feed.find(params[:feed_id])
     @user = current_user
-    @subscription = @user.subscriptions.create(feed: @feed,
-                                               visited_at: 200.years.ago)
+    @subscription = @user.subscriptions.create(feed: @feed)
     respond_to do |format|
       format.html { redirect_to @feed }
       format.js

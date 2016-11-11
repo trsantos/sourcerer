@@ -31,11 +31,6 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_later(queue: :default)
   end
 
-  def follow(feed)
-    return if following? feed
-    subscriptions.create(feed: feed, visited_at: 100.years.ago)
-  end
-
   def unfollow(feed)
     s = subscriptions.find_by(feed_id: feed.id)
     s.destroy if s
