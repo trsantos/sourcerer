@@ -18,5 +18,4 @@ Rails.application.routes.draw do
   resources :subscriptions
   resources :payments
   get 'opml/export' => 'opml#export'
-  post 'next' => 'subscriptions#next'
 end

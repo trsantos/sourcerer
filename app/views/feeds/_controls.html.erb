@@ -34,7 +34,7 @@
 	</li>
     <% end %>
     <li class="show-for-medium">
-	<%= link_to 'Next feed', next_path(last_sub: @subscription), class: 'button', method: 'post', accesskey: 'n' %>
+	<%= link_to 'Next feed', current_user.next_feed(@feed), class: 'button', accesskey: 'n' %>
     </li>
     <li class="show-for-small-only">
 	<%= link_to current_user.name.split.first, '#' %>
