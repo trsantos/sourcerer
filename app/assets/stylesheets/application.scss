@@ -12,11 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+
  */
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
-
-$topbar-background: #30343F;
-@import "foundation_and_overrides";
-@include foundation-menu-icon;
