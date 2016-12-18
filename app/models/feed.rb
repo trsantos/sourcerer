@@ -48,11 +48,17 @@ class Feed < ApplicationRecord
   def update_feed_attributes(fj_feed)
     update_attributes(title: fj_feed.title,
                       site_url: process_url(fj_feed.url),
-                      description: fj_feed.description,
+                      description: find_feed_description(fj_feed),
                       logo: check_feed_logo(fj_feed.logo),
                       has_only_images: only_images?,
                       fetching: false,
                       updated_at: Time.current)
+  end
+
+  def find_feed_description(fj_feed)
+    fj_feed.description
+  rescue
+    nil
   end
 
   def check_feed_logo(logo)
