@@ -1,3 +1,3 @@
 $("#feed-controls").html("<%= escape_javascript(render('feeds/controls')) %>");
-$("#next").attr('href', '<%= current_user.next_feed %>');
+$("#next").attr('href', '<%= next_path(last_sub: @subscription) %>');
 $(document).foundation();

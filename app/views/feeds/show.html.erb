@@ -19,4 +19,4 @@
     </div>
 </div>
 
-<%= link_to 'Next feed', current_user.next_feed(@feed), class: 'show-for-small-only button expanded', id: 'next' %>
+<%= link_to 'Next feed', next_path(last_sub: @subscription), class: 'show-for-small-only button expanded', id: 'next', method: 'post' %>

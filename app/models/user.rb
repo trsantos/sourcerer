@@ -40,8 +40,7 @@ class User < ApplicationRecord
     feeds.include?(feed)
   end
 
-  def next_feed(current_feed = nil)
-    @feed = current_feed
+  def next_feed
     if subscriptions.any?
       sub = updated_sub || random_sub
       sub.feed
@@ -64,7 +63,6 @@ class User < ApplicationRecord
   def updated_sub
     subscriptions
       .where(updated: true)
-      .where.not(feed: @feed)
       .order(starred: :desc, visited_at: :asc).first
   end
 

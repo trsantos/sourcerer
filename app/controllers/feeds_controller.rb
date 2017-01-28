@@ -6,7 +6,6 @@ class FeedsController < ApplicationController
   before_action :check_expiration_date
   before_action :set_subscription, only: [:show]
   before_action :unread_feeds, only: [:show]
-  after_action :mark_feed_as_read, only: [:show]
 
   def show
     @feed = Feed.find(params[:id])
@@ -40,13 +39,6 @@ class FeedsController < ApplicationController
 
   def set_subscription
     @subscription = @user.subscriptions.find_by(feed_id: params[:id])
-  end
-
-  def mark_feed_as_read
-    return unless @subscription.updated?
-    @subscription.update_attributes(visited_at: Time.current, updated: false)
-  rescue
-    nil
   end
 
   def unread_feeds
