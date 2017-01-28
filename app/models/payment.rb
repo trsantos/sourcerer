@@ -10,6 +10,6 @@ class Payment < ApplicationRecord
   end
 
   def self.feed_limit
-    100
+    50
   end
 end
