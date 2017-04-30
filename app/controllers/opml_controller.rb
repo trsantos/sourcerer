@@ -22,7 +22,7 @@ class OpmlController < ApplicationController
   end
 
   def export
-    f = export_opml_head
+    f = export_head
     current_user.subscriptions.each do |s|
       f += export_sub_entry(s)
     end
