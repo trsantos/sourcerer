@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   def next_feed
     if subscriptions.any?
-      sub = updated_sub || random_sub
+      sub = random_updated_sub || random_sub
       sub.feed
     else
       self
@@ -64,6 +64,12 @@ class User < ApplicationRecord
     subscriptions
       .where(updated: true)
       .order(starred: :desc, visited_at: :asc).first
+  end
+
+  def random_updated_sub
+    subscriptions
+      .where(updated: true)
+      .order(starred: :desc, 'RANDOM()').take
   end
 
   def random_sub
