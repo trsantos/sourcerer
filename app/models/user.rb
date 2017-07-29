@@ -69,7 +69,7 @@ class User < ApplicationRecord
   def random_updated_sub
     subscriptions
       .where(updated: true)
-      .order(starred: :desc, 'RANDOM()').take
+      .order(starred: :desc).order('RANDOM()').take
   end
 
   def random_sub
