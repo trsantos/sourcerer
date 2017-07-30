@@ -20,7 +20,6 @@ gem 'feedjira-opml'
 gem 'font-awesome-sass'
 gem 'foundation-rails'
 gem 'paypal-sdk-rest'
-gem 'platform-api'
 gem 'puma'
 gem 'sidekiq'
 
