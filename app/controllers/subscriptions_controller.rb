@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   include ApplicationHelper
 
   before_action :logged_in_user
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: %i[edit update destroy]
 
   def index
     user = current_user
@@ -11,8 +11,7 @@ class SubscriptionsController < ApplicationController
       redirect_to user
     end
     @subscriptions =
-      user.subscriptions.includes(:feed).order(updated: :desc, starred: :desc,
-                                               visited_at: :asc)
+      user.subscriptions.includes(:feed).order(updated: :desc, starred: :desc)
   end
 
   def create
@@ -25,8 +24,7 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     set_update_params
