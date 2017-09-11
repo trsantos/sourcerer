@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
   def home
-    redirect_to current_user.next_feed if logged_in?
+    return unless logged_in?
+    cookies[:check_for_updated_subs] = true
+    redirect_to current_user.next_feed
   end
 
   def feedback

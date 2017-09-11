@@ -8,6 +8,7 @@ class FeedsController < ApplicationController
   before_action :unread_feeds, only: [:show]
 
   def show
+    cookies.delete :check_for_updated_subs
     @feed = Feed.find(params[:id])
     @entries = @feed.entries.order(pub_date: :desc) unless @feed.fetching
   end
@@ -43,6 +44,7 @@ class FeedsController < ApplicationController
 
   def unread_feeds
     return unless @subscription
+    return unless cookies[:check_for_updated_subs]
     return if @user.subscriptions.exists?(updated: true)
     flash.now[:primary] =
       'You have no updated feeds right now. Check back later!'

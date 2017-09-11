@@ -49,6 +49,7 @@ class SubscriptionsController < ApplicationController
 
   def next
     mark_last_feed_as_read if params[:last_sub]
+    cookies[:check_for_updated_subs] = true
     redirect_to current_user.next_feed
   end
 
