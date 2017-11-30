@@ -42,7 +42,11 @@ class User < ApplicationRecord
 
   def next_feed
     if subscriptions.any?
-      sub = updated_sub || random_sub
+      if (rand(100) < 50)
+        sub = updated_sub
+      else
+        sub = random_sub
+      end
       sub.feed
     else
       self
