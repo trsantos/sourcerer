@@ -75,19 +75,9 @@ class User < ApplicationRecord
   end
 
   def random_updated_sub
-    random_starred_sub || random_unstarred_sub
-  end
-
-  def random_starred_sub
     subscriptions
-      .where(updated: true, starred: true)
-      .order('RANDOM()').take
-  end
-
-  def random_unstarred_sub
-    subscriptions
-      .where(updated: true, starred: false)
-      .order('RANDOM()').take
+      .where(updated: true)
+      .order(starred: desc).order('RANDOM()').take
   end
 
   def random_sub
