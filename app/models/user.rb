@@ -12,9 +12,9 @@ class User < ApplicationRecord
 
   validates :name,  presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true,
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
+  validates :email,
+            presence: true, format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }, allow_blank: true
 
   def generate_token(column)
@@ -42,11 +42,7 @@ class User < ApplicationRecord
 
   def next_feed
     if subscriptions.any?
-      if (rand(100) < 50)
-        sub = updated_sub
-      else
-        sub = random_sub
-      end
+      sub = next_updated_sub || random_sub
       sub.feed
     else
       self
@@ -64,10 +60,34 @@ class User < ApplicationRecord
     self.expiration_date = Payment.trial_duration.from_now
   end
 
+  def next_updated_sub
+    if rand(100) < 50
+      updated_sub
+    else
+      random_updated_sub
+    end
+  end
+
   def updated_sub
     subscriptions
       .where(updated: true)
       .order(starred: :desc, visited_at: :asc).first
+  end
+
+  def random_updated_sub
+    random_starred_sub || random_unstarred_sub
+  end
+
+  def random_starred_sub
+    subscriptions
+      .where(updated: true, starred: true)
+      .order('RANDOM()').take
+  end
+
+  def random_unstarred_sub
+    subscriptions
+      .where(updated: true, starred: false)
+      .order('RANDOM()').take
   end
 
   def random_sub
