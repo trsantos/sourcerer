@@ -10,7 +10,9 @@ class SubscriptionsController < ApplicationController
       flash[:primary] = 'You are not subscribed to any feeds yet.'
       redirect_to user
     end
-    @subscriptions = user.subscriptions.includes(:feed).order(starred: :desc)
+    @subscriptions = user.subscriptions.includes(:feed).order(
+      updated: :desc, starred: :desc, visited_at: :asc
+    )
   end
 
   def create

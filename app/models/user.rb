@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   def next_feed
     if subscriptions.any?
-      sub = next_updated_sub || random_sub
+      sub = updated_sub || random_sub
       sub.feed
     else
       self
@@ -60,24 +60,10 @@ class User < ApplicationRecord
     self.expiration_date = Payment.trial_duration.from_now
   end
 
-  def next_updated_sub
-    if rand(100) < 50
-      updated_sub
-    else
-      random_updated_sub
-    end
-  end
-
   def updated_sub
     subscriptions
       .where(updated: true)
       .order(starred: :desc, visited_at: :asc).first
-  end
-
-  def random_updated_sub
-    subscriptions
-      .where(updated: true)
-      .order(starred: :desc).order('RANDOM()').take
   end
 
   def random_sub
