@@ -13,9 +13,9 @@
 	<% end %>
 
 	<section class="tips">
-	    <p><%= icon 'wikipedia-w', class: 'fa-fw' %><em> Take a look at Wikipedia's article about <%= link_to 'Web Feeds', 'https://en.wikipedia.org/wiki/Web_feed', target: '_blank' %>.</em></p>
+	    <p><%= icon 'fab', 'wikipedia-w', class: 'fa-fw' %><em> Take a look at Wikipedia's article about <%= link_to 'Web Feeds', 'https://en.wikipedia.org/wiki/Web_feed', target: '_blank' %>.</em></p>
 	    <% if browser.firefox? %>
-		<p><%= icon 'firefox', class: 'fa-fw' %><em> <%= link_to 'Add Sourcerer', '#', id: 'firefox' %> as a Feed Reader for Firefox.</em></p>
+		<p><%= icon 'fab', 'firefox', class: 'fa-fw' %><em> <%= link_to 'Add Sourcerer', '#', id: 'firefox' %> as a Feed Reader for Firefox.</em></p>
 		<script>
 		 var ff = document.getElementById("firefox");
 		 ff.onclick = function () {

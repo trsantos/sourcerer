@@ -4,7 +4,7 @@
     <%= render 'aside' %>
     <div class="large-9 large-uncentered columns end box">
 	<% if @feed.fetching %>
-	    <p style="margin-top: 1.25rem"><%= icon 'refresh', class: 'fa-spin', style: 'margin-right: 5px' %> Please wait...</p>
+	    <p style="margin-top: 1.25rem"><%= icon 'fas', 'sync', class: 'fa-spin', style: 'margin-right: 5px' %> Please wait...</p>
             <script>
              window.setTimeout(() => { Turbolinks.visit(); }, 1000);
             </script>
