@@ -10,7 +10,7 @@ class Feed < ApplicationRecord
   after_create :delayed_update
 
   def self.entries_per_feed
-    10
+    5
   end
 
   def self.update_all_feeds
@@ -114,6 +114,7 @@ class Feed < ApplicationRecord
 
     Feedjira::Feed.add_common_feed_element(:url, as: :logo, ancestor: :image)
     Feedjira::Feed.add_common_feed_element(:logo, as: :logo)
+    #Feedjira.logger.level = Logger::FATAL
   end
 
   def find_date(pub_date)
